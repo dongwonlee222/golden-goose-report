@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>황금거위 광고 매출 및 성과 보고서</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg: #f6f4ef;
+      --paper: #fffdf8;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #ddd6c8;
+      --accent: #b45309;
+      --accent-soft: #fef3c7;
+      --good: #166534;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      background:
+        radial-gradient(circle at top left, #fff4d6 0, transparent 28%),
+        linear-gradient(180deg, #f7f3ea 0%, #f2ede3 100%);
+      color: var(--text);
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      line-height: 1.65;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 18px 50px rgba(31, 41, 55, 0.08);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 34px;
+      line-height: 1.2;
+    }
+
+    .lead {
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .page-nav {
+      position: sticky;
+      top: 16px;
+      z-index: 30;
+      display: flex;
+      gap: 10px;
+      margin: 0 0 24px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 253, 248, 0.92);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 24px rgba(31, 41, 55, 0.06);
+    }
+
+    .page-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .page-link:hover {
+      border-color: #e3c88d;
+      background: #fff8eb;
+    }
+
+    .page-block + .page-block {
+      margin-top: 56px;
+      padding-top: 12px;
+      border-top: 1px dashed #e6dccd;
+    }
+
+    .section-period {
+      display: inline-block;
+      margin: 0 0 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #faf6ee;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    h2 {
+      margin: 36px 0 6px;
+      font-size: 22px;
+      line-height: 1.3;
+    }
+
+    h3 {
+      margin: 28px 0 6px;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin: 6px 0 8px;
+    }
+
+    .card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .with-tip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: #fff7e8;
+      border: 1px solid #ead7b0;
+      color: #92400e;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: help;
+      flex: 0 0 auto;
+    }
+
+    .tooltip::after {
+      content: attr(data-tip);
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 10px);
+      transform: translateX(-50%);
+      min-width: 220px;
+      max-width: 280px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(31, 41, 55, 0.96);
+      color: #fff;
+      font-size: 12px;
+      line-height: 1.45;
+      text-align: left;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease;
+      z-index: 20;
+      white-space: normal;
+    }
+
+    .tooltip:hover::after {
+      opacity: 1;
+    }
+
+    .value {
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .sub {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    th,
+    td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid #eee7db;
+      font-size: 14px;
+      vertical-align: top;
+    }
+
+    th {
+      background: #faf6ee;
+      font-weight: 700;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .chart-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 18px;
+      margin-top: 14px;
+    }
+
+    .chart-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .chart-title {
+      margin: 0 0 12px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .chart-sub {
+      margin: -4px 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .legend span::before {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-right: 6px;
+      border-radius: 999px;
+      vertical-align: -1px;
+    }
+
+    .line-legend::before {
+      background: #b45309;
+    }
+
+    .au-legend::before {
+      background: #2563eb;
+    }
+
+    .av-legend::before {
+      background: #059669;
+    }
+
+    .rewarded-legend::before {
+      background: #d97706;
+    }
+
+    .interstitial-legend::before {
+      background: #92400e;
+    }
+
+    .banner-legend::before {
+      background: #fbbf24;
+    }
+
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 14px;
+    }
+
+    .insight-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .metric-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .metric-name {
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .metric-note {
+      color: var(--muted);
+      font-size: 12px;
+      text-align: right;
+    }
+
+    .rank-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .rank-row {
+      display: grid;
+      grid-template-columns: 88px 1fr 52px;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .rank-label {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .rank-track {
+      position: relative;
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: #f3efe6;
+      overflow: hidden;
+    }
+
+    .rank-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      border-radius: 999px;
+    }
+
+    .rank-value {
+      color: var(--muted);
+      font-size: 12px;
+      text-align: right;
+      font-weight: 700;
+    }
+
+    .network-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 14px;
+    }
+
+    .network-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .network-row {
+      display: grid;
+      grid-template-columns: 160px 1fr 76px;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .network-row + .network-row {
+      margin-top: 10px;
+    }
+
+    .network-label {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .network-track {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: #f3efe6;
+      overflow: hidden;
+    }
+
+    .network-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #d97706 0%, #92400e 100%);
+    }
+
+    .network-value {
+      text-align: right;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .retention-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 14px;
+    }
+
+    .retention-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .note {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-left: 4px solid var(--accent);
+      background: #fff8eb;
+      border-radius: 12px;
+      color: #4b5563;
+    }
+
+    .highlight-note {
+      margin-top: 12px;
+      margin-bottom: 16px;
+      padding: 18px 20px;
+      border: 1px solid #f3d9a6;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #fff7e8 0%, #fffdf7 100%);
+      box-shadow: 0 10px 24px rgba(180, 83, 9, 0.08);
+    }
+
+    .highlight-note strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #92400e;
+      font-size: 14px;
+      letter-spacing: 0.01em;
+    }
+
+    details {
+      margin-top: 10px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 18px;
+      font-weight: 800;
+      background: #faf6ee;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .summary-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .summary-arrow {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--accent);
+      font-size: 14px;
+      line-height: 1;
+      transition: transform 0.18s ease;
+    }
+
+    details[open] .summary-arrow {
+      transform: rotate(180deg);
+    }
+
+    .details-body {
+      padding: 0 16px 16px;
+    }
+
+    ul {
+      margin: 12px 0 0;
+      padding-left: 20px;
+    }
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    .good {
+      color: var(--good);
+      font-weight: 700;
+    }
+
+    .axis-label {
+      font-size: 11px;
+      fill: #6b7280;
+    }
+
+    .axis-line {
+      stroke: #d6d3d1;
+      stroke-width: 1;
+    }
+
+    .line-path {
+      fill: none;
+      stroke: #b45309;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .au-path {
+      fill: none;
+      stroke: #2563eb;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .av-path {
+      fill: none;
+      stroke: #059669;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .point {
+      fill: #b45309;
+    }
+
+    .bar-rewarded {
+      fill: #d97706;
+      background-color: #d97706;
+    }
+
+    .bar-interstitial {
+      fill: #92400e;
+      background-color: #92400e;
+    }
+
+    .bar-banner {
+      fill: #fbbf24;
+      background-color: #fbbf24;
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        padding: 24px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .value {
+        font-size: 22px;
+      }
+
+      th,
+      td {
+        padding: 10px 12px;
+        font-size: 13px;
+      }
+
+      .page-nav {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .chart-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .insight-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .network-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .network-row {
+        grid-template-columns: 120px 1fr 68px;
+      }
+
+      .retention-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="page-nav" aria-label="페이지 이동">
+      <a class="page-link" href="#report-page">1. 광고 성과 리포트</a>
+      <a class="page-link" href="./ad_revenue_simulation.html">2. 매출 시뮬레이션</a>
+    </nav>
+
+    <section id="report-page" class="page-block">
+    <div class="eyebrow">Section 1</div>
+    <h1>황금거위 광고 매출 및 성과 보고서</h1>
+    <p class="lead">
+      2026년 3월 광고 성과는 월 누적 기준과 최근 1주일 포맷별 성과로 나누어 정리할 수 있습니다.
+    </p>
+
+    <h2>전체 광고 성과</h2>
+    <p class="lead" style="margin-bottom: 12px;">
+      Interstitial, Banner, Rewarded를 합산한 전체 광고 성과 기준입니다.
+    </p>
+
+    <h3>3월 광고 성과</h3>
+    <div class="section-period">기간: 2026.03.01 ~ 2026.03.25 / 환율 기준: 1 USD = 1,450원</div>
+    <div class="grid">
+      <section class="card">
+        <div class="label">총 광고 매출</div>
+        <div class="value">US$732.95</div>
+        <div class="sub">약 1,062,778원</div>
+      </section>
+      <section class="card">
+        <div class="label">총 요청수</div>
+        <div class="value">429,782건</div>
+        <div class="sub">3월 누적</div>
+      </section>
+      <section class="card">
+        <div class="label">총 노출수</div>
+        <div class="value">322,234건</div>
+        <div class="sub">3월 누적</div>
+      </section>
+      <section class="card">
+        <div class="label">평균 Fill Rate</div>
+        <div class="value">95.77%</div>
+        <div class="sub">월 평균</div>
+      </section>
+      <section class="card">
+        <div class="label">평균 eCPM</div>
+        <div class="value">US$2.27</div>
+        <div class="sub">월 평균</div>
+      </section>
+    </div>
+
+    <h3>최근 1주 광고 성과</h3>
+    <div class="section-period">기간: 2026.03.18 ~ 2026.03.24 / 환율 기준: 1 USD = 1,450원</div>
+    <div class="grid">
+      <section class="card">
+        <div class="label">총 광고 매출</div>
+        <div class="value">US$317.66</div>
+        <div class="sub">약 460,607원</div>
+      </section>
+      <section class="card">
+        <div class="label">총 요청수</div>
+        <div class="value">179,027건</div>
+        <div class="sub">주간 합계</div>
+      </section>
+      <section class="card">
+        <div class="label">총 노출수</div>
+        <div class="value">128,879건</div>
+        <div class="sub">주간 합계</div>
+      </section>
+      <section class="card">
+        <div class="label">평균 Fill Rate</div>
+        <div class="value">96.70%</div>
+        <div class="sub">주간 평균</div>
+      </section>
+      <section class="card">
+        <div class="label">평균 eCPM</div>
+        <div class="value">US$2.46</div>
+        <div class="sub">주간 평균</div>
+      </section>
+    </div>
+
+    <h3>그래프 요약</h3>
+    <div class="chart-grid">
+      <section class="chart-card">
+        <h3 class="chart-title">일자별 광고 매출 추이</h3>
+        <p class="chart-sub">2026.03.01 ~ 2026.03.25, 단위: USD</p>
+        <svg viewBox="0 0 700 280" width="100%" role="img" aria-label="일자별 광고 매출 추이 그래프">
+          <line x1="54" y1="30" x2="54" y2="230" class="axis-line"></line>
+          <line x1="54" y1="230" x2="660" y2="230" class="axis-line"></line>
+          <line x1="54" y1="60" x2="660" y2="60" class="axis-line" style="stroke-dasharray:4 4;"></line>
+          <line x1="54" y1="110" x2="660" y2="110" class="axis-line" style="stroke-dasharray:4 4;"></line>
+          <line x1="54" y1="160" x2="660" y2="160" class="axis-line" style="stroke-dasharray:4 4;"></line>
+          <path class="line-path" d="M 74.0 186.1 L 97.8 167.1 L 121.7 190.0 L 145.5 190.4 L 169.3 200.0 L 193.2 187.4 L 217.0 178.4 L 240.8 176.6 L 264.7 188.6 L 288.5 180.9 L 312.3 185.8 L 336.2 188.9 L 360.0 187.3 L 383.8 188.8 L 407.7 159.0 L 431.5 102.9 L 455.3 89.3 L 479.2 34.0 L 503.0 43.2 L 526.8 62.5 L 550.7 82.3 L 574.5 85.2 L 598.3 87.3 L 622.2 72.2 L 646.0 77.2"></path>
+          <circle class="point" cx="74.0" cy="186.1" r="3"></circle>
+          <circle class="point" cx="97.8" cy="167.1" r="3"></circle>
+          <circle class="point" cx="121.7" cy="190.0" r="3"></circle>
+          <circle class="point" cx="145.5" cy="190.4" r="3"></circle>
+          <circle class="point" cx="169.3" cy="200.0" r="4"></circle>
+          <circle class="point" cx="193.2" cy="187.4" r="3"></circle>
+          <circle class="point" cx="217.0" cy="178.4" r="3"></circle>
+          <circle class="point" cx="240.8" cy="176.6" r="3"></circle>
+          <circle class="point" cx="264.7" cy="188.6" r="3"></circle>
+          <circle class="point" cx="288.5" cy="180.9" r="3"></circle>
+          <circle class="point" cx="312.3" cy="185.8" r="3"></circle>
+          <circle class="point" cx="336.2" cy="188.9" r="3"></circle>
+          <circle class="point" cx="360.0" cy="187.3" r="3"></circle>
+          <circle class="point" cx="383.8" cy="188.8" r="3"></circle>
+          <circle class="point" cx="407.7" cy="159.0" r="3"></circle>
+          <circle class="point" cx="431.5" cy="102.9" r="3"></circle>
+          <circle class="point" cx="455.3" cy="89.3" r="3"></circle>
+          <circle class="point" cx="479.2" cy="34.0" r="4"></circle>
+          <circle class="point" cx="503.0" cy="43.2" r="3"></circle>
+          <circle class="point" cx="526.8" cy="62.5" r="3"></circle>
+          <circle class="point" cx="550.7" cy="82.3" r="3"></circle>
+          <circle class="point" cx="574.5" cy="85.2" r="3"></circle>
+          <circle class="point" cx="598.3" cy="87.3" r="3"></circle>
+          <circle class="point" cx="622.2" cy="72.2" r="3"></circle>
+          <circle class="point" cx="646.0" cy="77.2" r="3"></circle>
+          <text x="132" y="220" class="axis-label">US$16.02</text>
+          <text x="132" y="236" class="axis-label">03.05</text>
+          <text x="491" y="24" class="axis-label">US$52.60</text>
+          <text x="491" y="40" class="axis-label">03.18</text>
+          <text x="18" y="34" class="axis-label">53</text>
+          <text x="18" y="64" class="axis-label">50</text>
+          <text x="18" y="114" class="axis-label">47</text>
+          <text x="18" y="164" class="axis-label">44</text>
+          <text x="18" y="214" class="axis-label">16</text>
+          <text x="62" y="252" class="axis-label">03.01</text>
+          <text x="157" y="252" class="axis-label">03.05</text>
+          <text x="277" y="252" class="axis-label">03.10</text>
+          <text x="396" y="252" class="axis-label">03.15</text>
+          <text x="515" y="252" class="axis-label">03.20</text>
+          <text x="634" y="252" class="axis-label">03.25</text>
+        </svg>
+        <div class="legend">
+          <span class="line-legend">일자별 총 광고 매출</span>
+        </div>
+        <div class="note" style="margin-top: 14px;">
+          <strong>연관성 점검</strong><br />
+          매출은 eCPM보다 <strong>요청수·노출수</strong>와 더 강하게 움직였습니다.
+          이번 구간은 단가 개선도 있었지만, 실제 매출 확대에는 <strong>노출 증가</strong> 영향이 더 컸습니다.
+          따라서 성과 개선을 위해서는 eCPM 관리와 함께 <strong>노출 볼륨 확대</strong>가 더 중요합니다.
+        </div>
+      </section>
+
+      <section class="chart-card">
+        <h3 class="chart-title">광고 유형별 매출 비교</h3>
+        <p class="chart-sub">2026.03.01 ~ 2026.03.25, 단위: USD</p>
+        <svg viewBox="0 0 420 280" width="100%" role="img" aria-label="광고 유형별 매출 비교 그래프">
+          <line x1="52" y1="20" x2="52" y2="230" class="axis-line"></line>
+          <line x1="52" y1="230" x2="380" y2="230" class="axis-line"></line>
+          <line x1="52" y1="60" x2="380" y2="60" class="axis-line" style="stroke-dasharray:4 4;"></line>
+          <line x1="52" y1="110" x2="380" y2="110" class="axis-line" style="stroke-dasharray:4 4;"></line>
+          <line x1="52" y1="160" x2="380" y2="160" class="axis-line" style="stroke-dasharray:4 4;"></line>
+          <rect x="80" y="203" width="56" height="27" rx="8" class="bar-rewarded"></rect>
+          <rect x="186" y="30" width="56" height="200" rx="8" class="bar-interstitial"></rect>
+          <rect x="292" y="198" width="56" height="32" rx="8" class="bar-banner"></rect>
+          <text x="83" y="248" class="axis-label">Rewarded</text>
+          <text x="182" y="248" class="axis-label">Interstitial</text>
+          <text x="305" y="248" class="axis-label">Banner</text>
+          <text x="88" y="195" class="axis-label">76.36</text>
+          <text x="189" y="22" class="axis-label">565.90</text>
+          <text x="304" y="190" class="axis-label">90.70</text>
+        </svg>
+        <div class="legend">
+          <span class="rewarded-legend">Rewarded</span>
+          <span class="interstitial-legend">Interstitial</span>
+          <span class="banner-legend">Banner</span>
+        </div>
+        <div class="note" style="margin-top: 14px;">
+          <strong>연관성 점검</strong><br />
+          Rewarded는 단가가 높지만 노출이 적고, Interstitial은 단가가 조금 낮아도 노출이 많아 매출이 가장 크게 형성되었습니다.
+          즉, 광고 유형별 매출 차이도 결국 <strong>노출 볼륨</strong>이 더 크게 좌우한 것으로 볼 수 있습니다.
+        </div>
+      </section>
+
+    </div>
+
+    <h3>일자별 광고 매출</h3>
+    <div class="section-period">기간: 2026.03.18 ~ 2026.03.25 / 환율 기준: 1 USD = 1,450원</div>
+    <details>
+      <summary>
+        <span class="summary-label">일자별 광고 매출 펼쳐보기</span>
+        <span class="summary-arrow">▼</span>
+      </summary>
+      <div class="details-body">
+        <table>
+          <thead>
+            <tr>
+              <th>날짜</th>
+              <th>매출(USD)</th>
+              <th>매출(원)</th>
+              <th>eCPM(USD)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>2026.03.01</td><td>US$19.08</td><td>27,666원</td><td>US$1.65</td></tr>
+            <tr><td>2026.03.02</td><td>US$23.28</td><td>33,756원</td><td>US$1.98</td></tr>
+            <tr><td>2026.03.03</td><td>US$18.23</td><td>26,434원</td><td>US$1.86</td></tr>
+            <tr><td>2026.03.04</td><td>US$18.14</td><td>26,303원</td><td>US$2.03</td></tr>
+            <tr><td>2026.03.05</td><td>US$16.02</td><td>23,229원</td><td>US$1.86</td></tr>
+            <tr><td>2026.03.06</td><td>US$18.79</td><td>27,246원</td><td>US$1.99</td></tr>
+            <tr><td>2026.03.07</td><td>US$20.77</td><td>30,117원</td><td>US$2.13</td></tr>
+            <tr><td>2026.03.08</td><td>US$21.18</td><td>30,711원</td><td>US$2.06</td></tr>
+            <tr><td>2026.03.09</td><td>US$18.53</td><td>26,869원</td><td>US$1.91</td></tr>
+            <tr><td>2026.03.10</td><td>US$20.22</td><td>29,319원</td><td>US$2.02</td></tr>
+            <tr><td>2026.03.11</td><td>US$19.15</td><td>27,768원</td><td>US$1.81</td></tr>
+            <tr><td>2026.03.12</td><td>US$18.46</td><td>26,767원</td><td>US$1.88</td></tr>
+            <tr><td>2026.03.13</td><td>US$18.82</td><td>27,289원</td><td>US$2.33</td></tr>
+            <tr><td>2026.03.14</td><td>US$18.49</td><td>26,811원</td><td>US$2.16</td></tr>
+            <tr><td>2026.03.15</td><td>US$25.06</td><td>36,337원</td><td>US$2.41</td></tr>
+            <tr><td>2026.03.16</td><td>US$37.41</td><td>54,245원</td><td>US$2.84</td></tr>
+            <tr><td>2026.03.17</td><td>US$40.41</td><td>58,595원</td><td>US$2.69</td></tr>
+            <tr><td>2026.03.18</td><td>US$52.60</td><td>76,270원</td><td>US$2.80</td></tr>
+            <tr><td>2026.03.19</td><td>US$50.57</td><td>73,327원</td><td>US$2.59</td></tr>
+            <tr><td>2026.03.20</td><td>US$46.33</td><td>67,179원</td><td>US$2.47</td></tr>
+            <tr><td>2026.03.21</td><td>US$41.95</td><td>60,828원</td><td>US$2.45</td></tr>
+            <tr><td>2026.03.22</td><td>US$41.32</td><td>59,914원</td><td>US$2.32</td></tr>
+            <tr><td>2026.03.23</td><td>US$40.85</td><td>59,233원</td><td>US$2.15</td></tr>
+            <tr><td>2026.03.24</td><td>US$44.19</td><td>64,076원</td><td>US$2.47</td></tr>
+            <tr><td>2026.03.25</td><td>US$43.09</td><td>62,481원</td><td>US$2.42</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <h2>광고 유형별 성과</h2>
+    <div class="highlight-note">
+      <strong>주요 인사이트</strong>
+      3월 1일~25일 기준으로 Rewarded 광고는 eCPM 기준 수익성이 가장 높게 확인되었으나, 실제 노출수는 Interstitial 대비 크게 낮아 총매출 기여도는 제한적으로 나타났다.
+      반면 Interstitial은 eCPM은 Rewarded보다 낮지만 노출 볼륨이 훨씬 커 전체 광고 매출의 핵심 기여 포맷으로 확인된다.
+    </div>
+    <div class="section-period">기간: 2026.03.01 ~ 2026.03.25 / 기준: 광고 유형별 월간 집계</div>
+    <div class="insight-grid">
+      <section class="insight-card">
+        <div class="metric-head">
+          <div class="metric-name">매출 비중</div>
+          <div class="metric-note">총 매출 US$732.96 기준</div>
+        </div>
+        <div class="rank-list">
+          <div class="rank-row">
+            <div class="rank-label">Interstitial</div>
+            <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:77.2%"></div></div>
+            <div class="rank-value">77.2%</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">Banner</div>
+            <div class="rank-track"><div class="rank-fill bar-banner" style="width:12.4%"></div></div>
+            <div class="rank-value">12.4%</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">Rewarded</div>
+            <div class="rank-track"><div class="rank-fill bar-rewarded" style="width:10.4%"></div></div>
+            <div class="rank-value">10.4%</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="insight-card">
+        <div class="metric-head">
+          <div class="metric-name">수익성 비교</div>
+          <div class="metric-note">평균 eCPM 기준</div>
+        </div>
+        <div class="rank-list">
+          <div class="rank-row">
+            <div class="rank-label">Rewarded</div>
+            <div class="rank-track"><div class="rank-fill bar-rewarded" style="width:100%"></div></div>
+            <div class="rank-value">US$4.83</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">Interstitial</div>
+            <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:82.8%"></div></div>
+            <div class="rank-value">US$4.00</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">Banner</div>
+            <div class="rank-track"><div class="rank-fill bar-banner" style="width:11.4%"></div></div>
+            <div class="rank-value">US$0.55</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="insight-card">
+        <div class="metric-head">
+          <div class="metric-name">반응률 비교</div>
+          <div class="metric-note">CTR 기준</div>
+        </div>
+        <div class="rank-list">
+          <div class="rank-row">
+            <div class="rank-label">Rewarded</div>
+            <div class="rank-track"><div class="rank-fill bar-rewarded" style="width:100%"></div></div>
+            <div class="rank-value">16.34%</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">Interstitial</div>
+            <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:69.8%"></div></div>
+            <div class="rank-value">11.40%</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">Banner</div>
+            <div class="rank-track"><div class="rank-fill bar-banner" style="width:9.7%"></div></div>
+            <div class="rank-value">1.58%</div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="note">
+      <strong>연관성 점검</strong><br />
+      광고 유형별 매출 차이는 eCPM만으로 설명되지 않습니다. Rewarded는 eCPM이 가장 높지만 노출수는 <strong>15,815</strong>로 Interstitial의 <strong>141,415</strong> 대비 크게 낮습니다.
+      반대로 Interstitial은 eCPM이 Rewarded보다 다소 낮아도 노출 볼륨이 약 <strong>9배</strong> 크기 때문에 총매출이 가장 크게 형성됩니다.
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>광고 유형</th>
+          <th>총 매출</th>
+          <th>평균 eCPM</th>
+          <th>총 요청수</th>
+          <th>총 노출수</th>
+          <th>평균 Match Rate</th>
+          <th>평균 Show Rate</th>
+          <th>평균 CTR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Rewarded</td>
+          <td>US$76.36 / 110,722원</td>
+          <td>US$4.83</td>
+          <td>395,310건</td>
+          <td>15,815건</td>
+          <td>-</td>
+          <td>-</td>
+          <td>16.34%</td>
+        </tr>
+        <tr>
+          <td>Interstitial</td>
+          <td>US$565.90 / 820,555원</td>
+          <td>US$4.00</td>
+          <td>3,584,264건</td>
+          <td>141,415건</td>
+          <td>-</td>
+          <td>-</td>
+          <td>11.40%</td>
+        </tr>
+        <tr>
+          <td>Banner</td>
+          <td>US$90.70 / 131,515원</td>
+          <td>US$0.55</td>
+          <td>751,448건</td>
+          <td>165,004건</td>
+          <td>-</td>
+          <td>-</td>
+          <td>1.58%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>해석</strong><br />
+      광고 유형별 성과는 단가와 볼륨을 함께 봐야 해석이 가능합니다.
+      Rewarded는 효율 지표가 가장 좋고, Interstitial은 실제 매출 기여가 가장 크며, Banner는 상시 노출형 보조 포맷으로 보는 해석이 적절합니다.
+    </div>
+
+    <h2>광고 네트워크별 성과</h2>
+    <div class="section-period">기준: admob-report.csv 집계 / 기간: 2026.03.01 ~ 2026.03.25 추정</div>
+    <div class="network-grid">
+      <section class="network-card">
+        <div class="metric-head">
+          <div class="metric-name">매출 기여 상위 네트워크</div>
+          <div class="metric-note">총 매출 US$732.96 기준</div>
+        </div>
+        <div class="network-row">
+          <div class="network-label">AdMob / Interstitial</div>
+          <div class="network-track"><div class="network-fill" style="width:33.0%"></div></div>
+          <div class="network-value">33.0%</div>
+        </div>
+        <div class="network-row">
+          <div class="network-label">Meta AN / Interstitial</div>
+          <div class="network-track"><div class="network-fill" style="width:23.2%"></div></div>
+          <div class="network-value">23.2%</div>
+        </div>
+        <div class="network-row">
+          <div class="network-label">AdMob / Banner</div>
+          <div class="network-track"><div class="network-fill" style="width:10.6%"></div></div>
+          <div class="network-value">10.6%</div>
+        </div>
+        <div class="network-row">
+          <div class="network-label">AdMob / Rewarded</div>
+          <div class="network-track"><div class="network-fill" style="width:6.9%"></div></div>
+          <div class="network-value">6.9%</div>
+        </div>
+        <div class="network-row">
+          <div class="network-label">DT Exchange / Interstitial</div>
+          <div class="network-track"><div class="network-fill" style="width:5.2%"></div></div>
+          <div class="network-value">5.2%</div>
+        </div>
+      </section>
+
+      <section class="network-card">
+        <div class="metric-head">
+          <div class="metric-name">수익성 비교</div>
+          <div class="metric-note">eCPM 기준</div>
+        </div>
+        <div class="network-row">
+          <div class="network-label">Mintegral / Rewarded</div>
+          <div class="network-track"><div class="network-fill" style="width:100%"></div></div>
+          <div class="network-value">US$8.18</div>
+        </div>
+        <div class="network-row">
+          <div class="network-label">InMobi / Interstitial</div>
+          <div class="network-track"><div class="network-fill" style="width:78.9%"></div></div>
+          <div class="network-value">US$6.45</div>
+        </div>
+        <div class="network-row">
+          <div class="network-label">DT Exchange / Interstitial</div>
+          <div class="network-track"><div class="network-fill" style="width:77.4%"></div></div>
+          <div class="network-value">US$6.33</div>
+        </div>
+        <div class="network-row">
+          <div class="network-label">Mintegral / Interstitial</div>
+          <div class="network-track"><div class="network-fill" style="width:72.8%"></div></div>
+          <div class="network-value">US$5.95</div>
+        </div>
+        <div class="network-row">
+          <div class="network-label">Unity Ads / Interstitial</div>
+          <div class="network-track"><div class="network-fill" style="width:72.5%"></div></div>
+          <div class="network-value">US$5.93</div>
+        </div>
+      </section>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>광고 네트워크</th>
+          <th>광고 유형</th>
+          <th>총 매출</th>
+          <th>매출 비중</th>
+          <th>노출수</th>
+          <th>eCPM</th>
+          <th>CTR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>AdMob Network</td>
+          <td>Interstitial</td>
+          <td>US$242.17 / 351,147원</td>
+          <td>33.0%</td>
+          <td>71,035</td>
+          <td>US$3.41</td>
+          <td>4.08%</td>
+        </tr>
+        <tr>
+          <td>Meta Audience Network(입찰)</td>
+          <td>Interstitial</td>
+          <td>US$170.26 / 246,877원</td>
+          <td>23.2%</td>
+          <td>32,788</td>
+          <td>US$5.19</td>
+          <td>0.00%</td>
+        </tr>
+        <tr>
+          <td>AdMob Network</td>
+          <td>Banner</td>
+          <td>US$77.55 / 112,448원</td>
+          <td>10.6%</td>
+          <td>143,727</td>
+          <td>US$0.54</td>
+          <td>1.68%</td>
+        </tr>
+        <tr>
+          <td>AdMob Network</td>
+          <td>Rewarded</td>
+          <td>US$50.31 / 72,950원</td>
+          <td>6.9%</td>
+          <td>11,049</td>
+          <td>US$4.55</td>
+          <td>10.43%</td>
+        </tr>
+        <tr>
+          <td>DT Exchange</td>
+          <td>Interstitial</td>
+          <td>US$37.81 / 54,825원</td>
+          <td>5.2%</td>
+          <td>5,975</td>
+          <td>US$6.33</td>
+          <td>59.18%</td>
+        </tr>
+        <tr>
+          <td>Pangle(입찰)</td>
+          <td>Interstitial</td>
+          <td>US$33.05 / 47,923원</td>
+          <td>4.5%</td>
+          <td>11,964</td>
+          <td>US$2.76</td>
+          <td>18.95%</td>
+        </tr>
+        <tr>
+          <td>InMobi (SDK)(입찰)</td>
+          <td>Interstitial</td>
+          <td>US$21.39 / 31,016원</td>
+          <td>2.9%</td>
+          <td>7,658</td>
+          <td>US$2.79</td>
+          <td>38.04%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>추천 해석</strong><br />
+      광고 네트워크는 합산보다 `네트워크 + 광고 유형` 단위로 볼 때 해석이 더 명확합니다. 현재 데이터 기준으로는 고eCPM 네트워크가 일부 존재함에도 실제 매출과 노출은 `AdMob / Interstitial`에 가장 많이 집중되어 있습니다.
+      따라서 현재 광고 운영 구조는 최고 단가 네트워크 최적화보다는 `AdMob / Interstitial`이 우선적으로 선택되는 안정적 볼륨 확보 구조에 가까운지 점검해보는 것을 추천합니다.
+    </div>
+
+    <h2>외부 광고 집행비용 분석</h2>
+    <div class="section-period">기간: 광고비 데이터 존재 일자 및 주차 기준, 안드로이드 전면형 기준</div>
+    <div class="grid">
+      <section class="card">
+        <div class="label">일자별 광고비-매출 상관</div>
+        <div class="value">0.39</div>
+        <div class="sub">직접 연관성은 중간 수준</div>
+      </section>
+      <section class="card">
+        <div class="label">일자별 광고비-신규가입 상관</div>
+        <div class="value">0.78</div>
+        <div class="sub">신규가입과 더 강한 연관</div>
+      </section>
+      <section class="card">
+        <div class="label">주간 광고비-매출 상관</div>
+        <div class="value">0.94</div>
+        <div class="sub">주간 단위에서 관계 뚜렷</div>
+      </section>
+      <section class="card">
+        <div class="label">주간 광고비-신규가입 상관</div>
+        <div class="value">0.90</div>
+        <div class="sub">집행 효과가 유입으로 연결</div>
+      </section>
+      <section class="card">
+        <div class="label">주간 ROAS 최고</div>
+        <div class="value">2.93</div>
+        <div class="sub">2026.03.15 주차</div>
+      </section>
+      <section class="card">
+        <div class="label">주간 ROAS 최저</div>
+        <div class="value">1.08</div>
+        <div class="sub">2026.03.22 주차</div>
+      </section>
+    </div>
+    <div class="retention-grid">
+      <section class="retention-card">
+        <h3 class="chart-title">광고비 연관성 비교</h3>
+        <p class="chart-sub">상관계수 기준</p>
+        <div class="rank-list">
+          <div class="rank-row">
+            <div class="rank-label">일자별 신규가입</div>
+            <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:78%"></div></div>
+            <div class="rank-value">0.78</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">주간 매출</div>
+            <div class="rank-track"><div class="rank-fill bar-rewarded" style="width:94%"></div></div>
+            <div class="rank-value">0.94</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">주간 신규가입</div>
+            <div class="rank-track"><div class="rank-fill bar-banner" style="width:90%"></div></div>
+            <div class="rank-value">0.90</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">일자별 매출</div>
+            <div class="rank-track"><div class="rank-fill bar-banner" style="width:39%"></div></div>
+            <div class="rank-value">0.39</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="retention-card">
+        <h3 class="chart-title">주간 ROAS 비교</h3>
+        <p class="chart-sub">주간 추정매출 / 주간 광고집행비용, 1보다 크면 같은 주차 광고비를 매출로 1차 회수한 상태</p>
+        <div class="rank-list">
+          <div class="rank-row">
+            <div class="rank-label">2026.01.18</div>
+            <div class="rank-track"><div class="rank-fill bar-rewarded" style="width:72.5%"></div></div>
+            <div class="rank-value">4.73</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">2026.01.25</div>
+            <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:52.0%"></div></div>
+            <div class="rank-value">3.39</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">2026.03.15</div>
+            <div class="rank-track"><div class="rank-fill bar-banner" style="width:44.8%"></div></div>
+            <div class="rank-value">2.93</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">2026.03.08</div>
+            <div class="rank-track"><div class="rank-fill bar-banner" style="width:22.6%"></div></div>
+            <div class="rank-value">1.48</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">2026.03.22</div>
+            <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:16.5%"></div></div>
+            <div class="rank-value">1.08</div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="highlight-note">
+      <strong>핵심 해석</strong>
+      광고비의 1차 효과는 <strong>당일 매출</strong>보다 <strong>신규가입과 유입 볼륨 확대</strong>에서 먼저 나타납니다.<br />
+      실제 수익화 효과는 <strong>주간 매출</strong>과 <strong>D7/D30 Ads LTV</strong>에서 확인하는 것이 더 적절합니다.
+    </div>
+    <div class="note">
+      <strong>요약</strong><br />
+      일자별 기준으로는 광고비와 매출의 직접 상관이 제한적이지만, 광고비와 <strong>신규가입 상관(0.78)</strong>은 높게 확인됩니다. 반면 <strong>주간 광고비-매출 상관(0.94)</strong>은 크게 올라가므로, 외부 광고 효율은 <strong>당일 매출</strong>이 아니라 <strong>신규가입 확보 → 잔존 유지 → D7/D30 Ads LTV 회수</strong> 흐름으로 판단하는 것이 더 정확합니다. 따라서 집행 효율 평가는 단기 매출보다 <strong>주간 ROAS</strong>와 <strong>코호트 LTV</strong>를 함께 보는 구조를 추천합니다.
+    </div>
+
+    <h2>유저 트래픽 및 광고 시청 지표</h2>
+    <div class="section-period">기간: 2026.03.01 ~ 2026.03.25</div>
+    <div class="grid">
+      <section class="card">
+        <div class="label">
+          <span class="with-tip">
+            평균 활성 사용자 수(AU)
+            <span class="tooltip" data-tip="활성 사용자 수(AU)는 앱을 연 순 사용자 수입니다. 날짜별 집계에서는 일일 활성 사용자 수(DAU)와 같은 의미로 해석할 수 있습니다.">?</span>
+          </span>
+        </div>
+        <div class="value">659명</div>
+        <div class="sub">일 평균</div>
+      </section>
+      <section class="card">
+        <div class="label">
+          <span class="with-tip">
+            평균 광고 조회자 수(AV)
+            <span class="tooltip" data-tip="광고 조회자 수(AV)는 해당 일자에 광고를 1회 이상 본 순 사용자 수입니다.">?</span>
+          </span>
+        </div>
+        <div class="value">639명</div>
+        <div class="sub">일 평균</div>
+      </section>
+      <section class="card">
+        <div class="label">광고 조회자 비율</div>
+        <div class="value">95.57%</div>
+        <div class="sub">AU 대비 광고 조회자 비율</div>
+      </section>
+      <section class="card">
+        <div class="label">
+          <span class="with-tip">
+            ARPDAU
+            <span class="tooltip" data-tip="ARPDAU는 일간 활성 사용자 1명당 평균 광고 매출입니다. 계산식은 광고 매출 ÷ DAU(AU)입니다.">?</span>
+          </span>
+        </div>
+        <div class="value">US$0.036</div>
+        <div class="sub">약 52.7원</div>
+      </section>
+      <section class="card">
+        <div class="label">
+          <span class="with-tip">
+            ARPU
+            <span class="tooltip" data-tip="ARPU는 전체 유저 1명당 평균 수익입니다. 현재 값은 AdMob의 지난 30일 총 전체 ARPU 기준입니다.">?</span>
+          </span>
+        </div>
+        <div class="value">US$0.242</div>
+        <div class="sub">약 351원</div>
+      </section>
+      <section class="card">
+        <div class="label">활성 사용자당 노출수</div>
+        <div class="value">17.88회</div>
+        <div class="sub">일 평균</div>
+      </section>
+      <section class="card">
+        <div class="label">광고 조회자당 노출수</div>
+        <div class="value">18.62회</div>
+        <div class="sub">일 평균</div>
+      </section>
+    </div>
+    <div class="chart-grid" style="margin-top: 10px;">
+      <section class="chart-card">
+        <h3 class="chart-title">AU / AV 일자별 추이</h3>
+        <p class="chart-sub">2026.03.01 ~ 2026.03.23, 단위: 사용자 수</p>
+        <svg viewBox="0 0 700 280" width="100%" role="img" aria-label="AU AV 일자별 추이 그래프">
+          <line x1="54" y1="30" x2="54" y2="230" class="axis-line"></line>
+          <line x1="54" y1="230" x2="660" y2="230" class="axis-line"></line>
+          <line x1="54" y1="60" x2="660" y2="60" class="axis-line" style="stroke-dasharray:4 4;"></line>
+          <line x1="54" y1="110" x2="660" y2="110" class="axis-line" style="stroke-dasharray:4 4;"></line>
+          <line x1="54" y1="160" x2="660" y2="160" class="axis-line" style="stroke-dasharray:4 4;"></line>
+          <path class="au-path" d="M 74.0 195.8 L 100.0 193.4 L 126.0 194.2 L 152.0 198.0 L 178.0 199.6 L 204.0 197.4 L 230.0 200.0 L 256.0 196.4 L 282.0 199.4 L 308.0 198.8 L 334.0 196.8 L 360.0 195.4 L 386.0 194.0 L 412.0 189.7 L 438.0 160.6 L 464.0 117.9 L 490.0 98.6 L 516.0 51.3 L 542.0 34.0 L 568.0 64.2 L 594.0 75.0 L 620.0 69.0 L 646.0 78.5"></path>
+          <path class="av-path" d="M 74.0 196.2 L 100.0 191.7 L 126.0 195.3 L 152.0 196.7 L 178.0 199.6 L 204.0 197.8 L 230.0 200.0 L 256.0 196.9 L 282.0 199.1 L 308.0 199.1 L 334.0 195.8 L 360.0 194.2 L 386.0 196.0 L 412.0 191.7 L 438.0 163.2 L 464.0 123.5 L 490.0 97.8 L 516.0 51.6 L 542.0 34.0 L 568.0 57.4 L 594.0 69.0 L 620.0 61.7 L 646.0 67.5"></path>
+          <text x="531" y="24" class="axis-label">AU 1,290</text>
+          <text x="531" y="40" class="axis-label">AV 1,192</text>
+          <text x="219" y="220" class="axis-label">AU 465</text>
+          <text x="219" y="236" class="axis-label">AV 448</text>
+          <text x="18" y="34" class="axis-label">1,300</text>
+          <text x="18" y="64" class="axis-label">1,100</text>
+          <text x="18" y="114" class="axis-label">900</text>
+          <text x="18" y="164" class="axis-label">700</text>
+          <text x="18" y="214" class="axis-label">450</text>
+          <text x="62" y="252" class="axis-label">03.01</text>
+          <text x="157" y="252" class="axis-label">03.05</text>
+          <text x="277" y="252" class="axis-label">03.10</text>
+          <text x="396" y="252" class="axis-label">03.15</text>
+          <text x="515" y="252" class="axis-label">03.20</text>
+          <text x="634" y="252" class="axis-label">03.23</text>
+        </svg>
+        <div class="legend">
+          <span class="au-legend">AU</span>
+          <span class="av-legend">AV</span>
+        </div>
+      </section>
+    </div>
+    <div class="note">
+      <strong>요약</strong><br />
+      광고 매출은 활성 사용자 수(<strong>0.98</strong>), 광고 조회자 수(<strong>0.98</strong>), 리워드를 받은 사용자 수(<strong>0.98</strong>)와 매우 강하게 연결되어 있습니다.
+      즉, 이 구간의 매출 확대는 단순 단가보다 <strong>광고를 실제로 보는 유저 수</strong>를 늘리는 것이 더 핵심입니다.
+    </div>
+
+    <h2>리텐션 및 Ads LTV</h2>
+    <div class="section-period">기간: 2026.03 설치 코호트 기준</div>
+    <div class="highlight-note">
+      <strong>쉽게 보면</strong>
+      설치 후 하루 뒤에는 약 <strong>48%</strong>가 남고, 7일 뒤에는 약 <strong>25%</strong>, 30일 뒤에는 약 <strong>7.6%</strong>가 남습니다.
+      반대로 Ads LTV는 시간이 지날수록 <strong>US$0.070 → US$0.149 → US$0.277</strong>로 누적되어, 오래 남는 유저일수록 광고 매출 기여가 커지는 구조입니다.
+    </div>
+    <div class="highlight-note">
+      <strong>핵심 결론</strong>
+      현재 Ads LTV 흐름을 보면 유저는 최소 <strong>D7</strong>까지 유지되어야 광고 매출 기여가 본격화되며, <strong>D30</strong>까지 유지되는 유저에서 장기 수익성이 더 크게 확대되는 구조로 해석됩니다.
+      실제로 Ads LTV는 <strong>D7 US$0.149(약 215원)</strong>에서 <strong>D30 US$0.277(약 401원)</strong>로 증가해, D30 유지 유저의 광고 기준 가치는 D7 대비 약 <strong>1.86배</strong>, 약 <strong>85.9%</strong> 더 높습니다.
+    </div>
+    <div class="grid">
+      <section class="card">
+        <div class="label">D1 리텐션</div>
+        <div class="value">48.09%</div>
+        <div class="sub">가중 평균</div>
+      </section>
+      <section class="card">
+        <div class="label">D7 리텐션</div>
+        <div class="value">25.35%</div>
+        <div class="sub">가중 평균</div>
+      </section>
+      <section class="card">
+        <div class="label">D30 리텐션</div>
+        <div class="value">7.58%</div>
+        <div class="sub">성숙 코호트 2개 기준</div>
+      </section>
+      <section class="card">
+        <div class="label">D1 Ads LTV</div>
+        <div class="value">US$0.070</div>
+        <div class="sub">약 101원</div>
+      </section>
+      <section class="card">
+        <div class="label">D7 Ads LTV</div>
+        <div class="value">US$0.149</div>
+        <div class="sub">약 215원</div>
+      </section>
+      <section class="card">
+        <div class="label">D30 Ads LTV</div>
+        <div class="value">US$0.277</div>
+        <div class="sub">약 401원</div>
+      </section>
+    </div>
+    <div class="retention-grid">
+      <section class="retention-card">
+        <h3 class="chart-title">리텐션 흐름</h3>
+        <p class="chart-sub">D1 → D7 → D30 유지율</p>
+        <div class="rank-list">
+          <div class="rank-row">
+            <div class="rank-label">D1</div>
+            <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:48.1%"></div></div>
+            <div class="rank-value">48.09%</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">D7</div>
+            <div class="rank-track"><div class="rank-fill bar-banner" style="width:25.4%"></div></div>
+            <div class="rank-value">25.35%</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">D30</div>
+            <div class="rank-track"><div class="rank-fill bar-rewarded" style="width:7.6%"></div></div>
+            <div class="rank-value">7.58%</div>
+          </div>
+        </div>
+        <div class="note" style="margin-top: 14px;">
+          <strong>해석</strong><br />
+          유저가 시간이 지날수록 빠르게 줄어드는 구조입니다. 따라서 장기 매출을 키우려면 신규 유입보다 <strong>D1과 D7 유지율 개선</strong>이 먼저 중요합니다.
+        </div>
+      </section>
+
+      <section class="retention-card">
+        <h3 class="chart-title">Ads LTV 누적 흐름</h3>
+        <p class="chart-sub">설치 후 경과일 기준 광고 LTV</p>
+        <div class="rank-list">
+          <div class="rank-row">
+            <div class="rank-label">D1</div>
+            <div class="rank-track"><div class="rank-fill bar-banner" style="width:25.3%"></div></div>
+            <div class="rank-value">US$0.070</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">D7</div>
+            <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:53.8%"></div></div>
+            <div class="rank-value">US$0.149</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">D30</div>
+            <div class="rank-track"><div class="rank-fill bar-rewarded" style="width:100%"></div></div>
+            <div class="rank-value">US$0.277</div>
+          </div>
+        </div>
+        <div class="note" style="margin-top: 14px;">
+          <strong>해석</strong><br />
+          유저가 오래 남을수록 Ads LTV는 계속 누적됩니다. 즉, <strong>리텐션 개선이 곧 광고 매출 확대</strong>로 이어지는 구조입니다.
+        </div>
+      </section>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>설치 코호트 예시</th>
+          <th>D1 유지율</th>
+          <th>D7 유지율</th>
+          <th>D1 Ads LTV</th>
+          <th>D7 Ads LTV</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2026.03.01 설치</td>
+          <td>44.44%</td>
+          <td>14.81%</td>
+          <td>US$0.054</td>
+          <td>US$0.080</td>
+        </tr>
+        <tr>
+          <td>2026.03.10 설치</td>
+          <td>28.57%</td>
+          <td>28.57%</td>
+          <td>US$0.039</td>
+          <td>US$0.075</td>
+        </tr>
+        <tr>
+          <td>2026.03.18 설치</td>
+          <td>52.81%</td>
+          <td>33.93%</td>
+          <td>US$0.064</td>
+          <td>US$0.145</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <strong>요약</strong><br />
+      최근 코호트로 갈수록 D1과 D7 유지율이 상대적으로 개선된 구간이 확인됩니다. 특히 2026.03.18 설치 코호트는 D1 <strong>52.81%</strong>, D7 <strong>33.93%</strong>로 비교적 강한 잔존을 보였고, Ads LTV도 빠르게 누적되고 있습니다.
+    </div>
+
+    <h2>OS별 성과</h2>
+    <div class="section-period">기간: 2026.03 기준</div>
+    <div class="insight-grid">
+      <section class="insight-card">
+        <div class="metric-head">
+          <div class="metric-name">매출 비중</div>
+          <div class="metric-note">총 매출 US$809.89 기준</div>
+        </div>
+        <div class="rank-list">
+          <div class="rank-row">
+            <div class="rank-label">Android</div>
+            <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:85.8%"></div></div>
+            <div class="rank-value">85.8%</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">iOS</div>
+            <div class="rank-track"><div class="rank-fill bar-banner" style="width:14.2%"></div></div>
+            <div class="rank-value">14.2%</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="insight-card">
+        <div class="metric-head">
+          <div class="metric-name">수익성 비교</div>
+          <div class="metric-note">eCPM 기준</div>
+        </div>
+        <div class="rank-list">
+          <div class="rank-row">
+            <div class="rank-label">iOS</div>
+            <div class="rank-track"><div class="rank-fill bar-banner" style="width:100%"></div></div>
+            <div class="rank-value">US$3.41</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">Android</div>
+            <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:59.2%"></div></div>
+            <div class="rank-value">US$2.02</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="insight-card">
+        <div class="metric-head">
+          <div class="metric-name">노출 비중</div>
+          <div class="metric-note">총 노출수 377,343 기준</div>
+        </div>
+        <div class="rank-list">
+          <div class="rank-row">
+            <div class="rank-label">Android</div>
+            <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:91.0%"></div></div>
+            <div class="rank-value">91.0%</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">iOS</div>
+            <div class="rank-track"><div class="rank-fill bar-banner" style="width:9.0%"></div></div>
+            <div class="rank-value">9.0%</div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>OS</th>
+          <th>총 매출</th>
+          <th>매출 비중</th>
+          <th>노출수</th>
+          <th>노출 비중</th>
+          <th>eCPM</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Android</td>
+          <td>US$694.70 / 1,007,315원</td>
+          <td>85.8%</td>
+          <td>343,559</td>
+          <td>91.0%</td>
+          <td>US$2.02</td>
+        </tr>
+        <tr>
+          <td>iOS</td>
+          <td>US$115.19 / 167,026원</td>
+          <td>14.2%</td>
+          <td>33,784</td>
+          <td>9.0%</td>
+          <td>US$3.41</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <strong>요약</strong><br />
+      Android가 전체 매출과 노출의 대부분을 차지해 현재 광고 매출의 중심축 역할을 하고 있습니다.
+      반면 iOS는 볼륨은 작지만 eCPM이 더 높아, 단가 측면에서는 더 효율적인 구조로 해석할 수 있습니다.
+    </div>
+
+    <h2>국가별 성과</h2>
+    <div class="section-period">기간: 2026.03 기준</div>
+    <div class="insight-grid">
+      <section class="insight-card">
+        <div class="metric-head">
+          <div class="metric-name">매출 비중</div>
+          <div class="metric-note">총 매출 US$809.88 기준</div>
+        </div>
+        <div class="rank-list">
+          <div class="rank-row">
+            <div class="rank-label">대한민국</div>
+            <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:99.8%"></div></div>
+            <div class="rank-value">99.8%</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">호주</div>
+            <div class="rank-track"><div class="rank-fill bar-banner" style="width:0.1%"></div></div>
+            <div class="rank-value">0.09%</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">일본</div>
+            <div class="rank-track"><div class="rank-fill bar-rewarded" style="width:0.1%"></div></div>
+            <div class="rank-value">0.05%</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="insight-card">
+        <div class="metric-head">
+          <div class="metric-name">국가별 수익성 비교</div>
+          <div class="metric-note">유의미 매출 국가 기준 eCPM</div>
+        </div>
+        <div class="rank-list">
+          <div class="rank-row">
+            <div class="rank-label">호주</div>
+            <div class="rank-track"><div class="rank-fill bar-banner" style="width:100%"></div></div>
+            <div class="rank-value">US$12.26</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">일본</div>
+            <div class="rank-track"><div class="rank-fill bar-rewarded" style="width:34.7%"></div></div>
+            <div class="rank-value">US$4.26</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">대한민국</div>
+            <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:17.5%"></div></div>
+            <div class="rank-value">US$2.15</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="insight-card">
+        <div class="metric-head">
+          <div class="metric-name">노출 비중</div>
+          <div class="metric-note">총 노출수 377,343 기준</div>
+        </div>
+        <div class="rank-list">
+          <div class="rank-row">
+            <div class="rank-label">대한민국</div>
+            <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:99.8%"></div></div>
+            <div class="rank-value">99.8%</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">호주</div>
+            <div class="rank-track"><div class="rank-fill bar-banner" style="width:0.1%"></div></div>
+            <div class="rank-value">0.02%</div>
+          </div>
+          <div class="rank-row">
+            <div class="rank-label">일본</div>
+            <div class="rank-track"><div class="rank-fill bar-rewarded" style="width:0.1%"></div></div>
+            <div class="rank-value">0.03%</div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>국가</th>
+          <th>총 매출</th>
+          <th>매출 비중</th>
+          <th>노출수</th>
+          <th>eCPM</th>
+          <th>CTR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>대한민국</td>
+          <td>US$808.26 / 1,171,977원</td>
+          <td>99.8%</td>
+          <td>376,506</td>
+          <td>US$2.15</td>
+          <td>6.44%</td>
+        </tr>
+        <tr>
+          <td>오스트레일리아</td>
+          <td>US$0.76 / 1,102원</td>
+          <td>0.09%</td>
+          <td>62</td>
+          <td>US$12.26</td>
+          <td>1.61%</td>
+        </tr>
+        <tr>
+          <td>일본</td>
+          <td>US$0.43 / 624원</td>
+          <td>0.05%</td>
+          <td>101</td>
+          <td>US$4.26</td>
+          <td>0.99%</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <strong>요약</strong><br />
+      현재 광고 매출과 노출은 사실상 <strong>대한민국</strong>에 거의 전부 집중되어 있습니다. 다른 국가의 eCPM은 일부 높게 보이지만 표본이 매우 작아, 국가별 최적화보다 우선은 국내 트래픽과 광고 효율 개선에 집중하는 해석이 적절합니다.
+    </div>
+
+    <h2>확인 가능 범위</h2>
+    <ul>
+      <li><span class="good">확인 가능</span>: 일/주/월 광고 매출, 요청수, 노출수, Fill Rate, eCPM, 광고 유형별 성과, 광고 네트워크별 성과, 외부 광고 집행비용과 매출/신규가입 연관성, OS별 성과, 국가별 성과, ARPDAU, ARPU, 광고 조회자 비율, D1/D7/D30 리텐션, Ads LTV</li>
+      <li>아직 미확인: 채널별 외부 광고 집행비용 상세, CAC, 정의가 더 필요한 퍼널 이벤트</li>
+    </ul>
+    </section>
+  </main>
+</body>
+</html>

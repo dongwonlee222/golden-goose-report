@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>황금거위 매출 시뮬레이션</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg: #f6f4ef;
+      --paper: #fffdf8;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #ddd6c8;
+      --accent: #b45309;
+      --accent-soft: #fef3c7;
+      --good: #166534;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      background:
+        radial-gradient(circle at top left, #fff4d6 0, transparent 28%),
+        linear-gradient(180deg, #f7f3ea 0%, #f2ede3 100%);
+      color: var(--text);
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      line-height: 1.65;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 18px 50px rgba(31, 41, 55, 0.08);
+    }
+
+    .page-nav {
+      position: sticky;
+      top: 16px;
+      z-index: 30;
+      display: flex;
+      gap: 10px;
+      margin: 0 0 24px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 253, 248, 0.92);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 24px rgba(31, 41, 55, 0.06);
+    }
+
+    .page-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .page-link:hover {
+      border-color: #e3c88d;
+      background: #fff8eb;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 34px;
+      line-height: 1.2;
+    }
+
+    h2 {
+      margin: 36px 0 6px;
+      font-size: 22px;
+      line-height: 1.3;
+    }
+
+    h3 {
+      margin: 28px 0 6px;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .lead {
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .section-period {
+      display: inline-block;
+      margin: 0 0 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #faf6ee;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin: 6px 0 8px;
+    }
+
+    .card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .value {
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .sub {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .retention-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 14px;
+    }
+
+    .retention-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .chart-title {
+      margin: 0 0 12px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .chart-sub {
+      margin: -4px 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .rank-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .rank-row {
+      display: grid;
+      grid-template-columns: 92px 1fr 84px;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .rank-label {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .rank-track {
+      position: relative;
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: #f3efe6;
+      overflow: hidden;
+    }
+
+    .rank-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      border-radius: 999px;
+    }
+
+    .rank-value {
+      color: var(--muted);
+      font-size: 12px;
+      text-align: right;
+      font-weight: 700;
+    }
+
+    .bar-rewarded {
+      fill: #d97706;
+      background-color: #d97706;
+    }
+
+    .bar-interstitial {
+      fill: #92400e;
+      background-color: #92400e;
+    }
+
+    .bar-banner {
+      fill: #fbbf24;
+      background-color: #fbbf24;
+    }
+
+    .highlight-note {
+      margin-top: 12px;
+      margin-bottom: 16px;
+      padding: 18px 20px;
+      border: 1px solid #f3d9a6;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #fff7e8 0%, #fffdf7 100%);
+      box-shadow: 0 10px 24px rgba(180, 83, 9, 0.08);
+    }
+
+    .highlight-note strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #92400e;
+      font-size: 14px;
+      letter-spacing: 0.01em;
+    }
+
+    .note {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-left: 4px solid var(--accent);
+      background: #fff8eb;
+      border-radius: 12px;
+      color: #4b5563;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    th,
+    td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid #eee7db;
+      font-size: 14px;
+      vertical-align: top;
+    }
+
+    th {
+      background: #faf6ee;
+      font-weight: 700;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    @media (max-width: 860px) {
+      .retention-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        padding: 24px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .value {
+        font-size: 22px;
+      }
+
+      th,
+      td {
+        padding: 10px 12px;
+        font-size: 13px;
+      }
+
+      .page-nav {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="page-nav" aria-label="페이지 이동">
+      <a class="page-link" href="./ad_revenue_performance_section.html">1. 광고 성과 리포트</a>
+      <a class="page-link" href="#simulation-page">2. 매출 시뮬레이션</a>
+    </nav>
+
+    <section id="simulation-page">
+      <div class="eyebrow">Section 2</div>
+      <h1>황금거위 매출 시뮬레이션</h1>
+      <p class="lead">
+        현재 확인된 실측치와 회원 확대 가정을 바탕으로, 목표 회원 수까지 필요한 비용과 회수 가능성을 보수적으로 정리한 시뮬레이션입니다.
+      </p>
+
+      <h2>회원 확대 시뮬레이션</h2>
+      <div class="section-period">가정: 현재 회원 5,000명, 목표 회원 50,000명, 회원가입당 획득비용 평균 800원</div>
+      <div class="grid">
+        <section class="card">
+          <div class="label">현재 회원 수</div>
+          <div class="value">5,000명</div>
+          <div class="sub">현재 기준</div>
+        </section>
+        <section class="card">
+          <div class="label">목표 회원 수</div>
+          <div class="value">50,000명</div>
+          <div class="sub">중기 목표</div>
+        </section>
+        <section class="card">
+          <div class="label">추가 확보 필요</div>
+          <div class="value">45,000명</div>
+          <div class="sub">회원가입 기준</div>
+        </section>
+        <section class="card">
+          <div class="label">평균 회원가입 비용</div>
+          <div class="value">800원</div>
+          <div class="sub">외부 60% x 1,000원 + 내부 40% x 500원</div>
+        </section>
+        <section class="card">
+          <div class="label">필요 마케팅비</div>
+          <div class="value">36,000,000원</div>
+          <div class="sub">45,000명 x 800원</div>
+        </section>
+        <section class="card">
+          <div class="label">목표 소요 기간</div>
+          <div class="value">약 4.5개월</div>
+          <div class="sub">공격적 집행, 월 10,000명 회원가입 가정</div>
+        </section>
+      </div>
+
+      <div class="retention-grid">
+        <section class="retention-card">
+          <h3 class="chart-title">회원 확대 속도 시나리오</h3>
+          <p class="chart-sub">목표 회원 50,000명까지 필요한 기간</p>
+          <div class="rank-list">
+            <div class="rank-row">
+              <div class="rank-label">현재 속도</div>
+              <div class="rank-track"><div class="rank-fill bar-banner" style="width:100%"></div></div>
+              <div class="rank-value">18~22개월</div>
+            </div>
+            <div class="rank-row">
+              <div class="rank-label">현실적 확장</div>
+              <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:41%"></div></div>
+              <div class="rank-value">약 9개월</div>
+            </div>
+            <div class="rank-row">
+              <div class="rank-label">공격적 집행</div>
+              <div class="rank-track"><div class="rank-fill bar-rewarded" style="width:21%"></div></div>
+              <div class="rank-value">약 4.5개월</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="retention-card">
+          <h3 class="chart-title">회원 확보 예산 구조</h3>
+          <p class="chart-sub">총 3,600만원 기준</p>
+          <div class="rank-list">
+            <div class="rank-row">
+              <div class="rank-label">외부 광고</div>
+              <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:75%"></div></div>
+              <div class="rank-value">2,700만원</div>
+            </div>
+            <div class="rank-row">
+              <div class="rank-label">내부 바이럴</div>
+              <div class="rank-track"><div class="rank-fill bar-rewarded" style="width:25%"></div></div>
+              <div class="rank-value">900만원</div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="highlight-note">
+        <strong>핵심 결론</strong>
+        현재 회원 5,000명에서 50,000명까지 확대하려면 추가 회원가입 45,000명이 필요하고, 현재 가정 기준 총 <strong>약 3,600만원</strong>의 마케팅비가 필요합니다.<br />
+        우리 운영 기준은 <strong>공격적 집행</strong>이며, 월 회원가입 <strong>10,000명</strong> 수준을 유지하면 목표 회원 50,000명까지 <strong>약 4.5개월</strong>이 필요합니다.
+      </div>
+
+      <h2>수익 회수 시뮬레이션</h2>
+      <div class="section-period">가정: 회원가입당 획득비용 800원, D7 Ads LTV 215원, D30 Ads LTV 401원</div>
+      <div class="grid">
+        <section class="card">
+          <div class="label">회원가입당 획득비용</div>
+          <div class="value">800원</div>
+          <div class="sub">가중 평균 CAC</div>
+        </section>
+        <section class="card">
+          <div class="label">D7 Ads LTV</div>
+          <div class="value">215원</div>
+          <div class="sub">광고 기준 유저 가치</div>
+        </section>
+        <section class="card">
+          <div class="label">D30 Ads LTV</div>
+          <div class="value">401원</div>
+          <div class="sub">광고 기준 장기 가치</div>
+        </section>
+        <section class="card">
+          <div class="label">D30 회수율</div>
+          <div class="value">50.1%</div>
+          <div class="sub">401원 / 800원</div>
+        </section>
+        <section class="card">
+          <div class="label">D30 손익 차이</div>
+          <div class="value">-399원</div>
+          <div class="sub">광고 수익만으로는 미회수</div>
+        </section>
+        <section class="card">
+          <div class="label">판단 포인트</div>
+          <div class="value">CAC ↓ / LTV ↑</div>
+          <div class="sub">둘 중 하나는 반드시 개선 필요</div>
+        </section>
+      </div>
+
+      <div class="retention-grid">
+        <section class="retention-card">
+          <h3 class="chart-title">회원 1명당 회수 구조</h3>
+          <p class="chart-sub">획득비용 800원 대비 광고 기준 회수 수준</p>
+          <div class="rank-list">
+            <div class="rank-row">
+              <div class="rank-label">CAC</div>
+              <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:100%"></div></div>
+              <div class="rank-value">800원</div>
+            </div>
+            <div class="rank-row">
+              <div class="rank-label">D7 LTV</div>
+              <div class="rank-track"><div class="rank-fill bar-banner" style="width:27%"></div></div>
+              <div class="rank-value">215원</div>
+            </div>
+            <div class="rank-row">
+              <div class="rank-label">D30 LTV</div>
+              <div class="rank-track"><div class="rank-fill bar-rewarded" style="width:50%"></div></div>
+              <div class="rank-value">401원</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="retention-card">
+          <h3 class="chart-title">실행 시 가장 중요한 것</h3>
+          <p class="chart-sub">회원 확대보다 함께 관리해야 할 변수</p>
+          <div class="rank-list">
+            <div class="rank-row">
+              <div class="rank-label">회원가입 비용 절감</div>
+              <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:100%"></div></div>
+              <div class="rank-value">최우선</div>
+            </div>
+            <div class="rank-row">
+              <div class="rank-label">D7/D30 리텐션</div>
+              <div class="rank-track"><div class="rank-fill bar-rewarded" style="width:86%"></div></div>
+              <div class="rank-value">매우 중요</div>
+            </div>
+            <div class="rank-row">
+              <div class="rank-label">광고 노출 확대</div>
+              <div class="rank-track"><div class="rank-fill bar-banner" style="width:72%"></div></div>
+              <div class="rank-value">중요</div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>시나리오</th>
+            <th>월 회원가입</th>
+            <th>목표 도달 기간</th>
+            <th>누적 필요 예산</th>
+            <th>핵심 전제</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>공격적 집행</td>
+            <td>월 10,000명</td>
+            <td>약 4.5개월</td>
+            <td>약 3,600만원</td>
+            <td>충분한 집행 여력과 전환율 유지</td>
+          </tr>
+          <tr>
+            <td>현재 속도 유지</td>
+            <td>월 2,000~2,500명</td>
+            <td>18~22개월</td>
+            <td>약 3,600만원</td>
+            <td>현재 가입 추세 유지</td>
+          </tr>
+          <tr>
+            <td>현실적 확장</td>
+            <td>월 5,000명</td>
+            <td>약 9개월</td>
+            <td>약 3,600만원</td>
+            <td>광고 효율과 바이럴 구조 유지</td>
+          </tr>
+          <tr>
+        </tbody>
+      </table>
+
+      <div class="note">
+        <strong>요약</strong><br />
+        회원 수를 10배로 늘리는 것은 가능하지만, 현재 가정 기준으로는 <strong>회원 확보 예산 3,600만원</strong>이 먼저 필요합니다. 더 중요한 점은 현재 <strong>D30 Ads LTV(401원)</strong>가 <strong>획득비용(800원)</strong>보다 낮아, 광고 수익만으로는 아직 완전 회수가 어렵다는 점입니다.
+        따라서 확장 전략은 단순 회원 수 확대보다 <strong>회원가입 비용 절감</strong>, <strong>D7/D30 리텐션 개선</strong>, <strong>광고 노출 및 ARPDAU 개선</strong>을 함께 묶어서 가는 것이 맞습니다.
+      </div>
+    </section>
+  </main>
+</body>
+</html>
