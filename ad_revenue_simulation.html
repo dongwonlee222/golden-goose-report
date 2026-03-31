@@ -5,10 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>황금거위 매출 시뮬레이션</title>
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-
     :root {
       --bg: #f6f4ef;
       --paper: #fffdf8;
@@ -18,11 +14,16 @@
       --accent: #b45309;
       --accent-soft: #fef3c7;
       --good: #166534;
+      --warn: #92400e;
+      --bad: #b91c1c;
+      --rewarded: #d97706;
+      --interstitial: #92400e;
+      --banner: #fbbf24;
+      --offerwall: #0f766e;
+      --cost: #374151;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -36,7 +37,7 @@
     }
 
     .wrap {
-      max-width: 980px;
+      max-width: 1180px;
       margin: 0 auto;
       background: var(--paper);
       border: 1px solid var(--line);
@@ -88,7 +89,6 @@
       color: var(--accent);
       font-size: 13px;
       font-weight: 700;
-      letter-spacing: 0.02em;
     }
 
     h1 {
@@ -98,26 +98,27 @@
     }
 
     h2 {
-      margin: 36px 0 6px;
+      margin: 34px 0 8px;
       font-size: 22px;
       line-height: 1.3;
     }
 
     h3 {
-      margin: 28px 0 6px;
-      font-size: 18px;
+      margin: 0 0 10px;
+      font-size: 17px;
       line-height: 1.35;
     }
 
     .lead {
-      margin: 0 0 28px;
+      margin: 0 0 24px;
       color: var(--muted);
       font-size: 16px;
+      word-break: keep-all;
     }
 
     .section-period {
       display: inline-block;
-      margin: 0 0 8px;
+      margin: 0 0 10px;
       padding: 8px 12px;
       border-radius: 999px;
       background: #faf6ee;
@@ -127,11 +128,149 @@
       font-weight: 700;
     }
 
+    .highlight-note {
+      margin: 14px 0 18px;
+      padding: 18px 20px;
+      border: 1px solid #f3d9a6;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #fff7e8 0%, #fffdf7 100%);
+      box-shadow: 0 10px 24px rgba(180, 83, 9, 0.08);
+      word-break: keep-all;
+    }
+
+    .highlight-note strong {
+      color: var(--warn);
+      margin-right: 6px;
+    }
+
+    .scenario-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 8px 0 18px;
+    }
+
+    .scenario-btn {
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #fff;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .scenario-btn.active {
+      border-color: #e3c88d;
+      background: #fff7e8;
+      color: var(--warn);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: #fff;
+    }
+
+    .input-section + .input-section {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px dashed #e8ded0;
+    }
+
+    .input-section-title {
+      margin: 0 0 12px;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--warn);
+    }
+
+    .field + .field {
+      margin-top: 12px;
+    }
+
+    .field-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .field-head span:last-child {
+      color: var(--warn);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .field input[type="range"] {
+      width: 100%;
+      accent-color: #b45309;
+    }
+
+    .field input[type="number"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      font-size: 14px;
+      background: #fffdf8;
+    }
+
+    .direct-input-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+      margin: 8px 0 10px;
+    }
+
+    .direct-input {
+      width: 120px !important;
+      padding: 8px 10px !important;
+      border-radius: 10px !important;
+      font-size: 13px !important;
+      text-align: right;
+      background: #fff !important;
+    }
+
+    .direct-input-unit {
+      min-width: 28px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .field-note {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .slider-hint {
+      margin-top: 18px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #fff8eb;
+      color: #5b4426;
+      font-size: 13px;
+      word-break: keep-all;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 14px;
-      margin: 6px 0 8px;
+      margin: 0;
     }
 
     .card {
@@ -141,6 +280,54 @@
       background: #fff;
     }
 
+    .wide-card {
+      grid-column: span 2;
+    }
+
+    .full-width-card {
+      grid-column: 1 / -1;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .segmented-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .segmented-toggle button {
+      border: 1px solid rgba(15, 23, 42, 0.12);
+      background: #fff;
+      color: #475569;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 160ms ease;
+    }
+
+    .segmented-toggle button:hover {
+      border-color: #d6a73a;
+      color: #7c5b17;
+    }
+
+    .segmented-toggle button.active {
+      background: #fff8eb;
+      border-color: #e9c46a;
+      color: #8c6411;
+      box-shadow: 0 0 0 1px rgba(233, 196, 106, 0.15) inset;
+    }
+
+    .emphasis-card {
+      background: #fff8eb;
+      border-color: #f1d39a;
+    }
+
     .label {
       color: var(--muted);
       font-size: 13px;
@@ -148,147 +335,205 @@
     }
 
     .value {
-      font-size: 24px;
+      font-size: clamp(20px, 2.2vw, 26px);
       font-weight: 800;
       line-height: 1.2;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+      min-width: 0;
     }
+
+    .value.good { color: var(--good); }
+    .value.bad { color: var(--bad); }
+    .value.warn { color: var(--warn); }
 
     .sub {
       margin-top: 6px;
       color: var(--muted);
       font-size: 13px;
+      word-break: keep-all;
     }
 
-    .retention-grid {
+    .highlight-sub {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid rgba(233, 196, 106, 0.45);
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.35;
+      word-break: keep-all;
+    }
+
+    .highlight-sub.good {
+      color: var(--good);
+      background: rgba(34, 197, 94, 0.08);
+      border-color: rgba(34, 197, 94, 0.22);
+    }
+
+    .highlight-sub.bad {
+      color: var(--bad);
+      background: rgba(220, 38, 38, 0.07);
+      border-color: rgba(220, 38, 38, 0.18);
+    }
+
+    .insight-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .result-section-title {
+      margin: 16px 0 10px;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--warn);
+      letter-spacing: 0.01em;
+    }
+
+    .insight-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    .insight-card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--warn);
+      font-size: 14px;
+    }
+
+    .chart-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
-      margin-top: 14px;
+      margin-top: 16px;
     }
 
-    .retention-card {
+    .chart-card {
       padding: 18px;
       border: 1px solid var(--line);
       border-radius: 18px;
       background: #fff;
-    }
-
-    .chart-title {
-      margin: 0 0 12px;
-      font-size: 16px;
-      font-weight: 800;
-    }
-
-    .chart-sub {
-      margin: -4px 0 14px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .rank-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .rank-row {
-      display: grid;
-      grid-template-columns: 92px 1fr 84px;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .rank-label {
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .rank-track {
-      position: relative;
-      width: 100%;
-      height: 10px;
-      border-radius: 999px;
-      background: #f3efe6;
+      min-width: 0;
       overflow: hidden;
     }
 
-    .rank-fill {
+    .fill-rewarded { background: var(--rewarded); }
+    .fill-interstitial { background: var(--interstitial); }
+    .fill-banner { background: var(--banner); }
+    .fill-offerwall { background: var(--offerwall); }
+    .fill-cost { background: var(--cost); }
+    .fill-profit { background: var(--good); }
+
+    .pie-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      align-items: center;
+      margin-top: 8px;
+      min-width: 0;
+    }
+
+    .donut {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin: 0 auto;
+      border-radius: 50%;
+      background: #f3efe6;
+      max-width: 100%;
+    }
+
+    .donut::after {
+      content: "";
       position: absolute;
-      inset: 0 auto 0 0;
-      border-radius: 999px;
+      inset: 24px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: inset 0 0 0 1px #efe5d7;
     }
 
-    .rank-value {
-      color: var(--muted);
-      font-size: 12px;
-      text-align: right;
-      font-weight: 700;
+    .donut-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      text-align: center;
+      padding: 0 26px;
     }
 
-    .bar-rewarded {
-      fill: #d97706;
-      background-color: #d97706;
-    }
-
-    .bar-interstitial {
-      fill: #92400e;
-      background-color: #92400e;
-    }
-
-    .bar-banner {
-      fill: #fbbf24;
-      background-color: #fbbf24;
-    }
-
-    .highlight-note {
-      margin-top: 12px;
-      margin-bottom: 16px;
-      padding: 18px 20px;
-      border: 1px solid #f3d9a6;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #fff7e8 0%, #fffdf7 100%);
-      box-shadow: 0 10px 24px rgba(180, 83, 9, 0.08);
-    }
-
-    .highlight-note strong {
+    .donut-center strong {
       display: block;
-      margin-bottom: 6px;
-      color: #92400e;
-      font-size: 14px;
-      letter-spacing: 0.01em;
+      color: var(--warn);
+      font-size: 13px;
+      margin-bottom: 4px;
     }
 
-    .coming-soon {
-      margin-bottom: 20px;
-      padding: 16px 18px;
-      border: 1px solid #f3d9a6;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #fff7e8 0%, #fffdf7 100%);
-      color: #92400e;
-      font-size: 14px;
-      font-weight: 700;
+    .donut-center span {
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.35;
+      word-break: keep-all;
     }
 
-    .note {
-      margin-top: 18px;
-      padding: 16px 18px;
-      border-left: 4px solid var(--accent);
-      background: #fff8eb;
+    .legend-list {
+      display: grid;
+      gap: 10px;
+      min-width: 0;
+      margin-top: 4px;
+    }
+
+    .legend-item {
+      display: grid;
+      grid-template-columns: 14px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 12px;
+      border: 1px solid #efe5d7;
       border-radius: 12px;
-      color: #4b5563;
+      background: #fffdf9;
+      min-width: 0;
+    }
+
+    .legend-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+    }
+
+    .legend-name {
+      font-size: 13px;
+      font-weight: 700;
+      min-width: 0;
+      word-break: keep-all;
+    }
+
+    .legend-value {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 700;
+      white-space: nowrap;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 14px;
-      overflow: hidden;
-      border-radius: 16px;
       border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
       background: #fff;
     }
 
-    th,
-    td {
+    th, td {
       padding: 12px 14px;
       text-align: left;
       border-bottom: 1px solid #eee7db;
@@ -301,38 +546,204 @@
       font-weight: 700;
     }
 
-    tr:last-child td {
-      border-bottom: 0;
+    tr:last-child td { border-bottom: 0; }
+
+    .summary-row td {
+      background: #fff8eb;
+      font-weight: 800;
+      color: #7c4a03;
     }
 
-    @media (max-width: 860px) {
-      .retention-grid {
+    .note {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-left: 4px solid var(--accent);
+      background: #fff8eb;
+      border-radius: 12px;
+      color: #4b5563;
+      word-break: keep-all;
+    }
+
+    .timeline-card {
+      margin-top: 18px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .timeline-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: end;
+      margin-bottom: 12px;
+    }
+
+    .timeline-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .mini-pill {
+      padding: 8px 12px;
+      border: 1px solid #efe5d7;
+      border-radius: 999px;
+      background: #fffdf8;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .help-inline {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      margin-left: 6px;
+      border-radius: 999px;
+      border: 1px solid #d8c8ad;
+      background: #fff8eb;
+      color: var(--warn);
+      font-size: 11px;
+      font-weight: 800;
+      cursor: help;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    .help-inline::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 10px);
+      transform: translateX(-50%);
+      width: 260px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #1f2937;
+      color: #fff;
+      font-size: 12px;
+      line-height: 1.5;
+      font-weight: 500;
+      text-align: left;
+      white-space: normal;
+      word-break: keep-all;
+      box-shadow: 0 10px 24px rgba(31, 41, 55, 0.24);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.16s ease, transform 0.16s ease;
+      z-index: 50;
+    }
+
+    .help-inline::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 4px);
+      transform: translateX(-50%);
+      border-width: 6px;
+      border-style: solid;
+      border-color: #1f2937 transparent transparent transparent;
+      opacity: 0;
+      transition: opacity 0.16s ease;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    .help-inline:hover::after,
+    .help-inline:hover::before {
+      opacity: 1;
+    }
+
+    .help-inline:hover::after {
+      transform: translateX(-50%) translateY(-2px);
+    }
+
+    .chart-frame {
+      margin-top: 10px;
+      padding: 12px 12px 8px;
+      border: 1px solid #efe5d7;
+      border-radius: 16px;
+      background: #fffdf9;
+    }
+
+    .chart-caption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      word-break: keep-all;
+    }
+
+    .mau-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .mau-card {
+      padding: 12px 14px;
+      border: 1px solid #efe5d7;
+      border-radius: 12px;
+      background: #fffdf8;
+    }
+
+    .mau-card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--warn);
+      font-size: 12px;
+    }
+
+    .mau-card span {
+      display: block;
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .mau-card small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+      word-break: keep-all;
+    }
+
+    .mau-profit {
+      display: block;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid #efe5d7;
+      color: #7c2d12;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 980px) {
+      .layout,
+      .chart-grid,
+      .insight-row {
         grid-template-columns: 1fr;
       }
     }
 
-    @media (max-width: 640px) {
-      .wrap {
-        padding: 24px;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-
-      .value {
-        font-size: 22px;
-      }
-
-      th,
-      td {
-        padding: 10px 12px;
-        font-size: 13px;
-      }
-
-      .page-nav {
-        flex-direction: column;
-      }
+    @media (max-width: 720px) {
+      .wrap { padding: 24px; }
+      .page-nav { flex-direction: column; }
+      .scenario-row { flex-direction: column; }
+      .pie-layout { grid-template-columns: 1fr; }
+      .donut { width: 170px; height: 170px; }
+      .value { font-size: 22px; }
+      th, td { font-size: 13px; padding: 10px 12px; }
+      .wide-card { grid-column: span 1; }
+      .mau-row { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -346,221 +757,1399 @@
     <section id="simulation-page">
       <div class="eyebrow">Section 2</div>
       <h1>황금거위 매출 시뮬레이션</h1>
-      <div class="coming-soon">매출 시뮬레이션은 현재 준비중입니다.</div>
-      <p class="lead">
-        현재 확인된 실측치와 회원 확대 가정을 바탕으로, 목표 회원 수까지 필요한 비용과 회수 가능성을 보수적으로 정리한 시뮬레이션입니다.
-      </p>
+      <p class="lead">주요 변수 변경에 따라 월 매출, 비용, 순이익과 손익분기 구조를 바로 확인할 수 있는 시뮬레이션입니다.</p>
 
-      <h2>회원 확대 시뮬레이션</h2>
-      <div class="section-period">가정: 현재 회원 5,000명, 목표 회원 50,000명, 회원가입당 획득비용 평균 800원</div>
-      <div class="grid">
-        <section class="card">
-          <div class="label">현재 회원 수</div>
-          <div class="value">5,000명</div>
-          <div class="sub">현재 기준</div>
-        </section>
-        <section class="card">
-          <div class="label">목표 회원 수</div>
-          <div class="value">50,000명</div>
-          <div class="sub">중기 목표</div>
-        </section>
-        <section class="card">
-          <div class="label">추가 확보 필요</div>
-          <div class="value">45,000명</div>
-          <div class="sub">회원가입 기준</div>
-        </section>
-        <section class="card">
-          <div class="label">평균 회원가입 비용</div>
-          <div class="value">800원</div>
-          <div class="sub">외부 60% x 1,000원 + 내부 40% x 500원</div>
-        </section>
-        <section class="card">
-          <div class="label">필요 마케팅비</div>
-          <div class="value">36,000,000원</div>
-          <div class="sub">45,000명 x 800원</div>
-        </section>
-        <section class="card">
-          <div class="label">금 경품 지급 비용</div>
-          <div class="value">월 2,000,000원</div>
-          <div class="sub">0.1g 금 10명 / 주, 1개 약 50,000원 가정</div>
-        </section>
-        <section class="card">
-          <div class="label">목표 소요 기간</div>
-          <div class="value">약 3개월</div>
-          <div class="sub">공격적 집행, 월 15,000명 회원가입 가정</div>
-        </section>
+      <div class="scenario-row">
+        <button class="scenario-btn active" data-scenario="base">기준 시나리오 초기화</button>
       </div>
 
-      <div class="retention-grid">
-        <section class="retention-card">
-          <h3 class="chart-title">회원 확대 속도 시나리오</h3>
-          <p class="chart-sub">목표 회원 50,000명까지 필요한 기간</p>
-          <div class="rank-list">
-            <div class="rank-row">
-              <div class="rank-label">현재 속도</div>
-              <div class="rank-track"><div class="rank-fill bar-banner" style="width:100%"></div></div>
-              <div class="rank-value">18~22개월</div>
+      <div class="layout">
+        <aside class="panel">
+          <h2 style="margin-top:0;">입력값</h2>
+
+          <section class="input-section">
+            <div class="input-section-title">유저 규모</div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>현재 다운로드 수</span>
+                <span id="downloads-value">5,000</span>
+              </div>
+              <input id="downloads" type="range" min="5000" max="500000" step="1000" value="5000" />
             </div>
-            <div class="rank-row">
-              <div class="rank-label">현실적 확장</div>
-              <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:41%"></div></div>
-              <div class="rank-value">약 9개월</div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>현재 DAU</span>
+                <span id="currentDau-value">1,000명</span>
+              </div>
+              <input id="currentDau" type="range" min="100" max="500000" step="100" value="1000" />
+              <div class="field-note">현재 다운로드 수는 현재 DAU보다 항상 크거나 같도록 자동으로 맞춰집니다.</div>
             </div>
-            <div class="rank-row">
-              <div class="rank-label">공격적 집행</div>
-              <div class="rank-track"><div class="rank-fill bar-rewarded" style="width:14%"></div></div>
-              <div class="rank-value">약 3개월</div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>월 목표 다운로드 수 <span class="mini-pill">핵심</span></span>
+                <span id="monthlyDownloads-value">1,000명</span>
+              </div>
+              <input id="monthlyDownloads" type="range" min="100" max="100000" step="100" value="1000" />
             </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>회원가입 전환율 <span class="mini-pill">핵심</span></span>
+                <span id="signupRate-value">90.0%</span>
+              </div>
+              <input id="signupRate" type="range" min="1" max="100" step="1" value="90" />
+            </div>
+
+            <div class="field-note">현재 운영 베이스는 `현재 DAU` 입력값을 사용합니다. 이번 달 추가 유입은 `월 목표 다운로드 수 × 회원가입 전환율`로 계산한 뒤, 그중 실제로 다시 들어와 광고를 보기 시작하는 비율을 반영합니다.</div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>신규 유저 활성화율 입력 방식</span>
+                <span id="retentionMode-value">직접 입력</span>
+              </div>
+              <input id="retentionModeToggle" type="hidden" value="0" />
+              <div class="segmented-toggle" id="retentionModeButtons">
+                <button type="button" class="active" data-mode="0">직접 입력</button>
+                <button type="button" data-mode="1">L1·L7·L30 계산</button>
+              </div>
+              <div class="field-note">직접 입력하거나, 다음날·7일 후·30일 후 다시 오는 비율을 넣어 자동 계산할 수 있습니다.</div>
+            </div>
+
+            <div id="retentionDirectField" class="field">
+              <div class="field-head">
+                <span>신규 유저 수익화 유지율 <span class="mini-pill">핵심</span></span>
+                <span id="retentionFactor-value">33.1%</span>
+              </div>
+              <input id="retentionFactor" type="range" min="1" max="100" step="1" value="33.1" />
+              <div id="retentionDirectSummary" class="field-note">현재 L1 48% · L7 25% · L30 8% 가정의 가중평균은 33.1%입니다. 이 값을 직접 조정해 신규 유저가 실제 활성 유저와 광고 매출로 이어지는 비율을 가정할 수 있습니다.</div>
+            </div>
+
+            <div id="retentionFormulaField" class="field hidden">
+              <div class="field-head">
+                <span>다음날 다시 오는 비율 (L1) <span class="mini-pill">핵심</span></span>
+                <span id="retentionL1-value">48.0%</span>
+              </div>
+              <input id="retentionL1" type="range" min="1" max="100" step="1" value="48" />
+            </div>
+
+            <div id="retentionFormulaField2" class="field hidden">
+              <div class="field-head">
+                <span>7일 후에도 다시 오는 비율 (L7) <span class="mini-pill">핵심</span></span>
+                <span id="retentionL7-value">25.0%</span>
+              </div>
+              <input id="retentionL7" type="range" min="1" max="100" step="1" value="25" />
+            </div>
+
+            <div id="retentionFormulaField3" class="field hidden">
+              <div class="field-head">
+                <span>30일 후에도 다시 오는 비율 (L30) <span class="mini-pill">핵심</span></span>
+                <span id="retentionL30-value">8.0%</span>
+              </div>
+              <input id="retentionL30" type="range" min="1" max="100" step="1" value="8" />
+              <div id="retentionFormulaSummary" class="field-note">신규 유저 활성화율 = L1 50% + L7 30% + L30 20% 가중평균 = 32.9%</div>
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>Rewarded 시청 유저 비율</span>
+                <span id="rewardedUserRate-value">90.0%</span>
+              </div>
+              <input id="rewardedUserRate" type="range" min="1" max="100" step="1" value="90" />
+              <div class="field-note">DAU 중 Rewarded를 하루 1번 이상 보는 유저 비율입니다.</div>
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>Interstitial 노출 유저 비율</span>
+                <span id="interstitialUserRate-value">90.0%</span>
+              </div>
+              <input id="interstitialUserRate" type="range" min="1" max="100" step="1" value="90" />
+              <div class="field-note">DAU 중 Interstitial이 하루 1번 이상 노출되는 유저 비율입니다.</div>
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>Banner 노출 유저 비율</span>
+                <span id="bannerUserRate-value">95.0%</span>
+              </div>
+              <input id="bannerUserRate" type="range" min="1" max="100" step="1" value="95" />
+              <div class="field-note">DAU 중 Banner가 실제로 노출되는 유저 비율입니다.</div>
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>Offerwall 참여 유저 비율</span>
+                <span id="offerwallUserRate-value">10.0%</span>
+              </div>
+              <input id="offerwallUserRate" type="range" min="1" max="100" step="1" value="10" />
+              <div class="field-note">DAU 중 Offerwall을 실제로 이용하는 유저 비율입니다.</div>
+            </div>
+          </section>
+
+          <section class="input-section">
+            <div class="input-section-title">광고 수익</div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>Rewarded eCPM <span class="mini-pill">핵심</span></span>
+                <span id="rewardedEcpm-value">US$8.00</span>
+              </div>
+              <input id="rewardedEcpm" type="range" min="1" max="10" step="0.01" value="8.00" />
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>Interstitial eCPM <span class="mini-pill">핵심</span></span>
+                <span id="interstitialEcpm-value">US$4.00</span>
+              </div>
+              <input id="interstitialEcpm" type="range" min="1" max="10" step="0.01" value="4.00" />
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>Banner eCPM</span>
+                <span id="bannerEcpm-value">US$0.55</span>
+              </div>
+              <input id="bannerEcpm" type="range" min="0.1" max="2" step="0.01" value="0.40" />
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>유저당 일 평균 Rewarded 시청 수 <span class="mini-pill">핵심</span></span>
+                <span id="rewardedViews-value">7.0회</span>
+              </div>
+              <input id="rewardedViews" type="range" min="0" max="10" step="0.1" value="7.0" />
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>유저당 일 평균 Interstitial 노출 수 <span class="mini-pill">핵심</span></span>
+                <span id="interstitialViews-value">5.0회</span>
+              </div>
+              <input id="interstitialViews" type="range" min="0" max="20" step="0.1" value="5.0" />
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>유저당 일 평균 Banner 노출 수</span>
+                <span id="bannerViews-value">10.0회</span>
+              </div>
+              <input id="bannerViews" type="range" min="0" max="25" step="0.1" value="10.0" />
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>유저당 일 평균 Offerwall 완료 수</span>
+                <span id="offerwallCompletions-value">0.2건</span>
+              </div>
+              <input id="offerwallCompletions" type="range" min="0" max="5" step="0.1" value="0.2" />
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>Offerwall 1건당 수익</span>
+                <span id="offerwallRevenuePerCompletion-value">18원</span>
+              </div>
+              <input id="offerwallRevenuePerCompletion" type="range" min="1" max="100" step="1" value="18" />
+              <div class="field-note">Offerwall은 eCPM이 아니라 완료 1건당 수익 기준으로 계산합니다.</div>
+            </div>
+          </section>
+
+          <section class="input-section">
+            <div class="input-section-title">보상 · 비용</div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>Rewarded 1회당 평균 지급 포인트 <span class="mini-pill">핵심</span></span>
+                <span id="pointsPerAd-value">4.0점</span>
+              </div>
+              <input id="pointsPerAd" type="range" min="1" max="15" step="0.1" value="4.0" />
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>Interstitial 1회당 평균 지급 포인트</span>
+                <span id="interstitialPointsPerAd-value">1.5점</span>
+              </div>
+              <input id="interstitialPointsPerAd" type="range" min="0" max="10" step="0.1" value="1.5" />
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>포인트 소멸률</span>
+                <span id="pointBreakageRate-value">30.0%</span>
+              </div>
+              <input id="pointBreakageRate" type="range" min="0" max="100" step="1" value="30" />
+              <div class="field-note">지급됐지만 실제 사용/출금되지 않고 소멸되는 포인트 비율입니다.</div>
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>미디에이션 수수료율</span>
+                <span id="mediationFeeRate-value">20.0%</span>
+              </div>
+              <input id="mediationFeeRate" type="range" min="0" max="50" step="1" value="20" />
+              <div class="field-note">전체 광고 매출에 적용되는 수수료율입니다.</div>
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>회원가입 1명당 획득비용 <span class="mini-pill">핵심</span></span>
+                <span id="cac-value">300원</span>
+              </div>
+              <input id="cac" type="range" min="100" max="3000" step="10" value="300" />
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>주간 금 경품 수량</span>
+                <span id="weeklyGoldCount-value">10개</span>
+              </div>
+              <input id="weeklyGoldCount" type="range" min="0" max="50" step="1" value="10" />
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>금 경품 1개 단가</span>
+                <span id="goldUnitPrice-value">50,000원</span>
+              </div>
+              <input id="goldUnitPrice" type="range" min="10000" max="100000" step="1000" value="50000" />
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>환율</span>
+                <span id="usdKrw-value">1,450원</span>
+              </div>
+              <input id="usdKrw" type="range" min="1200" max="1700" step="10" value="1450" />
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>기준 월 서버운영비</span>
+                <span id="serverCost-value">500,000원</span>
+              </div>
+              <input id="serverCost" type="range" min="0" max="5000000" step="50000" value="500000" />
+              <div class="field-note">현재 DAU 규모를 기준으로 계산하는 기본 서버운영비입니다. 예상 DAU가 늘어나면 완만하게 증가합니다.</div>
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>기준 월 리소스 비용</span>
+                <span id="resourceCost-value">300,000원</span>
+              </div>
+              <input id="resourceCost" type="range" min="0" max="5000000" step="50000" value="300000" />
+              <div class="field-note">현재 DAU 규모를 기준으로 계산하는 기본 리소스 비용입니다. 예상 DAU가 늘어나면 완만하게 증가합니다.</div>
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>기준 월 인력 비용</span>
+                <span id="personnelCost-value">5,000,000원</span>
+              </div>
+              <input id="personnelCost" type="range" min="0" max="20000000" step="100000" value="5000000" />
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>현재 DAU 초과 3천명당 추가 인력비</span>
+                <span id="personnelStepCost-value">1,000,000원</span>
+              </div>
+              <input id="personnelStepCost" type="range" min="0" max="5000000" step="100000" value="1000000" />
+              <div class="field-note">현재 사용자 규모를 초과한 인원에 대해서만 1만명 단위로 추가되는 인력비입니다.</div>
+            </div>
+          </section>
+
+          <div class="slider-hint">`핵심` 표시가 붙은 값이 순수익에 직접 영향이 큰 변수입니다. 특히 `월 목표 다운로드 수`, `회원가입 전환율`, `신규 유저 수익화 유지율`, `Rewarded/Interstitial eCPM`, `유저당 일 평균 시청 수`, `회원가입 1명당 획득비용`, `포인트 지급량` 변화가 순수익을 가장 크게 움직입니다.</div>
+        </aside>
+
+        <section class="panel">
+          <h2 style="margin-top:0;">손익 시뮬레이션 결과</h2>
+          <div class="sub" style="margin:6px 0 18px;">현재 입력값 기준으로 이번 달 예상 손익과, 이후 누적 손익 흐름을 함께 보여줍니다.</div>
+
+          <section class="timeline-card" style="margin-top: 0;">
+            <div class="timeline-head">
+              <div>
+                <h3 style="margin:0;">누적 손익 흐름</h3>
+                <div class="sub" style="margin-top:4px;">현재 DAU를 시작점으로 두고, 월 목표 다운로드에서 전환된 신규 유저가 매달 추가된다고 가정했을 때 월별 순수익과 누적 손익이 어떻게 바뀌는지 보여줍니다.</div>
+              </div>
+              <div class="timeline-meta">
+                <span id="breakevenMonthPill" class="mini-pill">손익분기: 미도달</span>
+                <span id="simulationBasePill" class="mini-pill">계산 기준: 현재 DAU + 신규 DAU 누적</span>
+              </div>
+            </div>
+            <div class="chart-frame">
+              <svg id="profitTimelineChart" viewBox="0 0 900 320" width="100%" height="320" aria-label="월별 순수익 및 누적 손익 그래프"></svg>
+            </div>
+            <div class="chart-caption">막대는 누적 손익, 선은 각 월의 순수익입니다. 즉 현재까지 쌓인 전체 손익과, 매달 실제로 남는 돈의 흐름을 같이 보는 그래프입니다.</div>
+            <div class="mau-row">
+              <div class="mau-card">
+                <strong>1개월 예상 DAU</strong>
+                <span id="mauMonth1">0명</span>
+                <small>현재 DAU + 1개월 신규 반영 기준</small>
+                <div id="profitMonth1" class="mau-profit">순수익 0원</div>
+                <div id="adCostMonth1" class="sub">해당 월 외부 광고비 0원</div>
+              </div>
+              <div class="mau-card">
+                <strong>3개월 예상 DAU</strong>
+                <span id="mauMonth3">0명</span>
+                <small>현재 DAU + 3개월 신규 반영 기준</small>
+                <div id="profitMonth3" class="mau-profit">순수익 0원</div>
+                <div id="adCostMonth3" class="sub">해당 월 외부 광고비 0원</div>
+              </div>
+              <div class="mau-card">
+                <strong>6개월 예상 DAU</strong>
+                <span id="mauMonth6">0명</span>
+                <small>현재 DAU + 6개월 신규 반영 기준</small>
+                <div id="profitMonth6" class="mau-profit">순수익 0원</div>
+                <div id="adCostMonth6" class="sub">해당 월 외부 광고비 0원</div>
+              </div>
+              <div class="mau-card">
+                <strong>12개월 예상 DAU</strong>
+                <span id="mauMonth12">0명</span>
+                <small>현재 DAU + 12개월 신규 반영 기준</small>
+                <div id="profitMonth12" class="mau-profit">순수익 0원</div>
+                <div id="adCostMonth12" class="sub">해당 월 외부 광고비 0원</div>
+              </div>
+            </div>
+          </section>
+
+          <div class="chart-grid">
+            <section class="chart-card">
+              <h3>광고 유형별 매출 비중</h3>
+              <div class="pie-layout">
+                <div id="revenueDonut" class="donut">
+                  <div class="donut-center">
+                    <strong>총 월 매출</strong>
+                    <span id="revenueDonutCenter">0원</span>
+                  </div>
+                </div>
+                <div class="legend-list">
+                  <div class="legend-item">
+                    <span class="legend-dot fill-rewarded"></span>
+                    <span class="legend-name">Rewarded</span>
+                    <span id="rewardedBarValue" class="legend-value">0%</span>
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-dot fill-interstitial"></span>
+                    <span class="legend-name">Interstitial</span>
+                    <span id="interstitialBarValue" class="legend-value">0%</span>
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-dot fill-banner"></span>
+                    <span class="legend-name">Banner</span>
+                    <span id="bannerBarValue" class="legend-value">0%</span>
+                  </div>
+                  <div class="legend-item">
+                    <span class="legend-dot fill-offerwall"></span>
+                    <span class="legend-name">Offerwall</span>
+                    <span id="offerwallBarValue" class="legend-value">0%</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="chart-card">
+              <h3>비용 구성 비중</h3>
+              <div class="pie-layout">
+                <div id="costDonut" class="donut">
+                  <div class="donut-center">
+                    <strong>총 월 비용</strong>
+                    <span id="costDonutCenter">0원</span>
+                  </div>
+                </div>
+                <div id="costLegendList" class="legend-list">
+                  <div class="legend-item" data-legend-id="marketing">
+                    <span class="legend-dot fill-cost"></span>
+                    <span class="legend-name">마케팅비</span>
+                    <span id="marketingBarValue" class="legend-value">0%</span>
+                  </div>
+                  <div class="legend-item" data-legend-id="mediation">
+                    <span class="legend-dot" style="background:#0f172a;"></span>
+                    <span class="legend-name">미디에이션 수수료</span>
+                    <span id="mediationBarValue" class="legend-value">0%</span>
+                  </div>
+                  <div class="legend-item" data-legend-id="points">
+                    <span class="legend-dot fill-rewarded"></span>
+                    <span class="legend-name">Rewarded 보상비</span>
+                    <span id="pointsBarValue" class="legend-value">0%</span>
+                  </div>
+                  <div class="legend-item" data-legend-id="interstitialPoints">
+                    <span class="legend-dot" style="background:#7c3aed;"></span>
+                    <span class="legend-name">Interstitial 보상비</span>
+                    <span id="interstitialPointsBarValue" class="legend-value">0%</span>
+                  </div>
+                  <div class="legend-item" data-legend-id="gold">
+                    <span class="legend-dot fill-banner"></span>
+                    <span class="legend-name">금 경품 비용</span>
+                    <span id="goldBarValue" class="legend-value">0%</span>
+                  </div>
+                  <div class="legend-item" data-legend-id="server">
+                    <span class="legend-dot fill-interstitial"></span>
+                    <span class="legend-name">서버운영비</span>
+                    <span id="serverBarValue" class="legend-value">0%</span>
+                  </div>
+                  <div class="legend-item" data-legend-id="resource">
+                    <span class="legend-dot" style="background:#8b5e34;"></span>
+                    <span class="legend-name">리소스 비용</span>
+                    <span id="resourceBarValue" class="legend-value">0%</span>
+                  </div>
+                  <div class="legend-item" data-legend-id="personnel">
+                    <span class="legend-dot" style="background:#111827;"></span>
+                    <span class="legend-name">인력 비용</span>
+                    <span id="personnelBarValue" class="legend-value">0%</span>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
-        </section>
 
-        <section class="retention-card">
-          <h3 class="chart-title">회원 확보 예산 구조</h3>
-          <p class="chart-sub">총 3,600만원 기준</p>
-          <div class="rank-list">
-            <div class="rank-row">
-              <div class="rank-label">외부 광고</div>
-              <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:75%"></div></div>
-              <div class="rank-value">2,700만원</div>
-            </div>
-            <div class="rank-row">
-              <div class="rank-label">내부 바이럴</div>
-              <div class="rank-track"><div class="rank-fill bar-rewarded" style="width:25%"></div></div>
-              <div class="rank-value">900만원</div>
-            </div>
+          <div class="result-section-title">이번 달 손익 요약</div>
+          <div class="grid">
+            <section class="card">
+              <div class="label">월 예상 매출</div>
+              <div id="monthlyRevenue" class="value">0원</div>
+              <div class="sub">이번 달 광고 매출 합계</div>
+            </section>
+            <section class="card">
+              <div class="label">월 예상 총비용</div>
+              <div id="monthlyCost" class="value">0원</div>
+              <div class="sub">이번 달 총지출 합계</div>
+            </section>
+            <section class="card">
+              <div class="label">월 예상 순이익</div>
+              <div id="monthlyProfit" class="value">0원</div>
+              <div id="monthlyProfitSub" class="sub">이번 달 손익 결과</div>
+            </section>
           </div>
-        </section>
-      </div>
 
-      <div class="highlight-note">
-        <strong>핵심 결론</strong>
-        현재 회원 5,000명에서 50,000명까지 확대하려면 추가 회원가입 45,000명이 필요하고, 현재 가정 기준 총 <strong>약 3,600만원</strong>의 마케팅비가 필요합니다.<br />
-        여기에 실물 경품 비용으로 <strong>월 200만원</strong>이 추가로 들어가며, 우리 운영 기준은 <strong>공격적 집행</strong>, 목표기간 <strong>3개월</strong>, 월 회원가입 <strong>15,000명</strong> 수준입니다.
-      </div>
-
-      <h2>수익 회수 시뮬레이션</h2>
-      <div class="section-period">가정: 회원가입당 획득비용 800원, D7 Ads LTV 215원, D30 Ads LTV 401원</div>
-      <div class="grid">
-        <section class="card">
-          <div class="label">회원가입당 획득비용</div>
-          <div class="value">800원</div>
-          <div class="sub">가중 평균 CAC</div>
-        </section>
-        <section class="card">
-          <div class="label">D7 Ads LTV</div>
-          <div class="value">215원</div>
-          <div class="sub">광고 기준 유저 가치</div>
-        </section>
-        <section class="card">
-          <div class="label">D30 Ads LTV</div>
-          <div class="value">401원</div>
-          <div class="sub">광고 기준 장기 가치</div>
-        </section>
-        <section class="card">
-          <div class="label">D30 회수율</div>
-          <div class="value">50.1%</div>
-          <div class="sub">401원 / 800원</div>
-        </section>
-        <section class="card">
-          <div class="label">D30 손익 차이</div>
-          <div class="value">-399원</div>
-          <div class="sub">광고 수익만으로는 미회수</div>
-        </section>
-        <section class="card">
-          <div class="label">판단 포인트</div>
-          <div class="value">CAC ↓ / LTV ↑</div>
-          <div class="sub">둘 중 하나는 반드시 개선 필요</div>
-        </section>
-      </div>
-
-      <div class="retention-grid">
-        <section class="retention-card">
-          <h3 class="chart-title">회원 1명당 회수 구조</h3>
-          <p class="chart-sub">획득비용 800원 대비 광고 기준 회수 수준</p>
-          <div class="rank-list">
-            <div class="rank-row">
-              <div class="rank-label">CAC</div>
-              <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:100%"></div></div>
-              <div class="rank-value">800원</div>
-            </div>
-            <div class="rank-row">
-              <div class="rank-label">D7 LTV</div>
-              <div class="rank-track"><div class="rank-fill bar-banner" style="width:27%"></div></div>
-              <div class="rank-value">215원</div>
-            </div>
-            <div class="rank-row">
-              <div class="rank-label">D30 LTV</div>
-              <div class="rank-track"><div class="rank-fill bar-rewarded" style="width:50%"></div></div>
-              <div class="rank-value">401원</div>
-            </div>
+          <div class="result-section-title">이번 달 반영 규모</div>
+          <div class="grid">
+            <section class="card">
+              <div class="label">총 반영 다운로드 수</div>
+              <div id="totalDownloadsSummary" class="value">0명</div>
+              <div class="sub">현재 다운로드 + 월 목표 다운로드</div>
+            </section>
+            <section class="card">
+              <div class="label">총 반영 회원가입 수</div>
+              <div id="totalSignupsSummary" class="value">0명</div>
+              <div class="sub">현재 회원가입 + 월 목표 회원가입</div>
+            </section>
+            <section class="card emphasis-card">
+              <div class="label">예상 DAU</div>
+              <div id="dauCount" class="value">0명</div>
+              <div id="dauSplitCount" class="sub">현재 DAU + 신규 유지율 반영 DAU 기준</div>
+            </section>
+            <section class="card full-width-card">
+              <div class="label">신규 유저 수익화 유지율</div>
+              <div id="retentionSummary" class="value">0%</div>
+              <div id="retentionSummarySub" class="sub">신규 회원이 다시 들어와 광고를 보기 시작하는 비율입니다.</div>
+            </section>
+            <section class="card full-width-card">
+              <div class="label">손익분기 CAC</div>
+              <div id="breakevenCac" class="value">손익분기 CAC 0원 &lt; 실제 CAC 0원</div>
+              <div id="breakevenCacSub" class="sub">현재 매출 구조를 기준으로, 회원가입 1명을 데려오는 데 최대 얼마까지 써야 적자가 아닌지 보는 값입니다.</div>
+              <div id="breakevenCacDrivers" class="sub">월 매출, 보상비, 경품비, 운영비, 월 목표 회원가입 수가 바뀌면 함께 달라집니다.</div>
+            </section>
+            <section class="card full-width-card emphasis-card">
+              <div class="label">광고 LTV vs 실제 CVC</div>
+              <div id="ltvCvcCompare" class="value">광고 LTV 401원 &gt; 실제 CVC 0원</div>
+              <div id="ltvCvcSub" class="sub">광고 LTV는 신규 유저 1명이 이번 달 기준으로 벌어오는 평균 광고 가치이고, 실제 CVC는 유저 1명을 데려오는 실제 비용입니다.</div>
+              <div id="netLtvCompare" class="highlight-sub">비용 차감 후 신규 1명당 순기여(LTV) 0원</div>
+              <div id="netLtvCostBreakdown" class="sub">차감 비용: 수수료 0원 · 보상비 0원 · 경품비 0원 · 운영비 0원</div>
+            </section>
           </div>
-        </section>
 
-        <section class="retention-card">
-          <h3 class="chart-title">실행 시 가장 중요한 것</h3>
-          <p class="chart-sub">회원 확대보다 함께 관리해야 할 변수</p>
-          <div class="rank-list">
-            <div class="rank-row">
-              <div class="rank-label">회원가입 비용 절감</div>
-              <div class="rank-track"><div class="rank-fill bar-interstitial" style="width:100%"></div></div>
-              <div class="rank-value">최우선</div>
-            </div>
-            <div class="rank-row">
-              <div class="rank-label">D7/D30 리텐션</div>
-              <div class="rank-track"><div class="rank-fill bar-rewarded" style="width:86%"></div></div>
-              <div class="rank-value">매우 중요</div>
-            </div>
-            <div class="rank-row">
-              <div class="rank-label">광고 노출 확대</div>
-              <div class="rank-track"><div class="rank-fill bar-banner" style="width:72%"></div></div>
-              <div class="rank-value">중요</div>
-            </div>
+          <div class="result-section-title">이번 달 예상 광고 실행량</div>
+          <div class="grid" style="margin-top: 0;">
+            <section class="card">
+              <div class="label">Rewarded 예상 노출수</div>
+              <div id="rewardedImpressionsSummary" class="value">0회</div>
+              <div id="rewardedImpressionsSub" class="sub">매출 계산에 반영되는 월간 노출</div>
+            </section>
+            <section class="card">
+              <div class="label">Interstitial 예상 노출수</div>
+              <div id="interstitialImpressionsSummary" class="value">0회</div>
+              <div id="interstitialImpressionsSub" class="sub">매출 계산에 반영되는 월간 노출</div>
+            </section>
+            <section class="card">
+              <div class="label">Banner 예상 노출수</div>
+              <div id="bannerImpressionsSummary" class="value">0회</div>
+              <div id="bannerImpressionsSub" class="sub">매출 계산에 반영되는 월간 노출</div>
+            </section>
+            <section class="card">
+              <div class="label">Offerwall 예상 완료수</div>
+              <div id="offerwallCompletionsSummary" class="value">0건</div>
+              <div id="offerwallCompletionsSub" class="sub">매출 계산에 반영되는 월간 완료</div>
+            </section>
           </div>
+
+          <div class="insight-row">
+            <section class="insight-card">
+              <strong>핵심 변수</strong>
+              <div id="topLeverText">-</div>
+            </section>
+            <section class="insight-card">
+              <strong>현재 판단</strong>
+              <div id="profitStatusText">-</div>
+            </section>
+            <section class="insight-card">
+              <strong>권장 액션</strong>
+              <div id="actionText">-</div>
+            </section>
+          </div>
+
+          <div class="note"><strong>순수익에 영향 큰 변수</strong><br />직접 영향이 큰 변수는 `월 목표 다운로드 수`, `회원가입 전환율`, `신규 유저 수익화 유지율`, `Rewarded/Interstitial eCPM`, `Rewarded/Interstitial 평균 노출 수`, `CAC`, `보상 포인트`, `미디에이션 수수료율`입니다. 특히 `신규 유저 수익화 유지율`은 신규 회원이 실제 활성 유저와 광고 노출로 얼마나 연결되는지를 바꾸는 변수입니다.</div>
+
+          <h2>매출 계산 상세</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>항목</th>
+                <th>값</th>
+                <th>계산식</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Rewarded 월 노출</td>
+                <td id="detailRewardedImpressions">-</td>
+                <td>Rewarded 시청 유저 × 일 평균 시청 수 × 30일</td>
+              </tr>
+              <tr>
+                <td>Interstitial 월 노출</td>
+                <td id="detailInterstitialImpressions">-</td>
+                <td>Interstitial 노출 유저 × 일 평균 노출 수 × 30일</td>
+              </tr>
+              <tr>
+                <td>Banner 월 노출</td>
+                <td id="detailBannerImpressions">-</td>
+                <td>Banner 노출 유저 × 일 평균 노출 수 × 30일</td>
+              </tr>
+              <tr>
+                <td>Offerwall 월 완료 수</td>
+                <td id="detailOfferwallCompletions">-</td>
+                <td>Offerwall 참여 유저 × 일 평균 완료 수 × 30일</td>
+              </tr>
+              <tr>
+                <td>Rewarded 월 매출</td>
+                <td id="detailRewardedRevenue">-</td>
+                <td>Rewarded 월 노출 ÷ 1000 × Rewarded eCPM × 환율</td>
+              </tr>
+              <tr>
+                <td>Interstitial 월 매출</td>
+                <td id="detailInterstitialRevenue">-</td>
+                <td>Interstitial 월 노출 ÷ 1000 × Interstitial eCPM × 환율</td>
+              </tr>
+              <tr>
+                <td>Banner 월 매출</td>
+                <td id="detailBannerRevenue">-</td>
+                <td>Banner 월 노출 ÷ 1000 × Banner eCPM × 환율</td>
+              </tr>
+              <tr>
+                <td>Offerwall 월 매출</td>
+                <td id="detailOfferwallRevenue">-</td>
+                <td>Offerwall 월 완료 수 × Offerwall 1건당 수익</td>
+              </tr>
+              <tr class="summary-row">
+                <td>총 월 매출</td>
+                <td id="detailTotalRevenue">-</td>
+                <td>Rewarded + Interstitial + Banner + Offerwall 월 매출</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2 style="margin-top: 24px;">비용 계산 상세</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>항목</th>
+                <th>값</th>
+                <th>계산식</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>미디에이션 수수료</td>
+                <td id="detailMediationCost">-</td>
+                <td>총 월 매출 × 미디에이션 수수료율</td>
+              </tr>
+              <tr>
+                <td>Rewarded 보상비</td>
+                <td id="detailPointsCost">-</td>
+                <td>Rewarded 월 노출 × 1회당 지급 포인트 × (1 - 포인트 소멸률)</td>
+              </tr>
+              <tr>
+                <td>Interstitial 보상비</td>
+                <td id="detailInterstitialPointsCost">-</td>
+                <td>Interstitial 월 노출 × 1회당 지급 포인트 × (1 - 포인트 소멸률)</td>
+              </tr>
+              <tr>
+                <td>금 경품 비용</td>
+                <td id="detailGoldCost">-</td>
+                <td>주간 금 경품 수량 × 금 단가 × 4주</td>
+              </tr>
+              <tr>
+                <td>마케팅비</td>
+                <td id="detailMarketingCost">-</td>
+                <td>월 목표 회원가입 수 × 회원가입 1명당 획득비용</td>
+              </tr>
+                <tr>
+                  <td>서버운영비</td>
+                  <td id="detailServerCost">-</td>
+                  <td>기준 월 서버운영비 + 현재 DAU 초과 1천명당 기본비의 10% 추가</td>
+                </tr>
+                <tr>
+                  <td>리소스 비용</td>
+                  <td id="detailResourceCost">-</td>
+                  <td>기준 월 리소스 비용 + 현재 DAU 초과 1천명당 기본비의 10% 추가</td>
+                </tr>
+              <tr>
+                <td>인력 비용</td>
+                <td id="detailPersonnelCost">-</td>
+                  <td>기준 월 인력 비용 + 현재 DAU 초과 3천명당 추가 인력비</td>
+              </tr>
+              <tr class="summary-row">
+                <td>총 월 비용</td>
+                <td id="detailTotalCost">-</td>
+                <td>마케팅비 + 미디에이션 수수료 + Rewarded/Interstitial 보상비 + 금 경품 + 운영비</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="note"><strong>다음 구현 포인트</strong><br />현재 MVP는 주요 변수를 움직였을 때 월 손익 구조가 어떻게 바뀌는지 빠르게 보는 용도입니다. 다음 단계에서는 입력값 저장, 시나리오 비교, 엑셀 계산식 1:1 검증, 민감도 분석 그래프를 붙이면 됩니다.</div>
         </section>
-      </div>
-
-      <table>
-        <thead>
-          <tr>
-            <th>시나리오</th>
-            <th>월 회원가입</th>
-            <th>목표 도달 기간</th>
-            <th>누적 필요 예산</th>
-            <th>핵심 전제</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>공격적 집행</td>
-            <td>월 15,000명</td>
-            <td>약 3개월</td>
-            <td>약 3,600만원</td>
-            <td>충분한 집행 여력과 전환율 유지</td>
-          </tr>
-          <tr>
-            <td>현재 속도 유지</td>
-            <td>월 2,000~2,500명</td>
-            <td>18~22개월</td>
-            <td>약 3,600만원</td>
-            <td>현재 가입 추세 유지</td>
-          </tr>
-          <tr>
-            <td>현실적 확장</td>
-            <td>월 5,000명</td>
-            <td>약 9개월</td>
-            <td>약 3,600만원</td>
-            <td>광고 효율과 바이럴 구조 유지</td>
-          </tr>
-          <tr>
-        </tbody>
-      </table>
-
-      <div class="note">
-        <strong>요약</strong><br />
-        회원 수를 10배로 늘리는 것은 가능하지만, 현재 가정 기준으로는 <strong>회원 확보 예산 3,600만원</strong>이 먼저 필요합니다. 여기에 <strong>금 경품 비용 월 200만원</strong>도 별도로 반영해야 합니다. 더 중요한 점은 현재 <strong>D30 Ads LTV(401원)</strong>가 <strong>획득비용(800원)</strong>보다 낮아, 광고 수익만으로는 아직 완전 회수가 어렵다는 점입니다.
-        따라서 확장 전략은 단순 회원 수 확대보다 <strong>회원가입 비용 절감</strong>, <strong>D7/D30 리텐션 개선</strong>, <strong>광고 노출 및 ARPDAU 개선</strong>을 함께 묶어서 가는 것이 맞습니다.
       </div>
     </section>
   </main>
+
+  <script>
+    const presets = {
+      base: {
+        downloads: 5000,
+        currentDau: 1000,
+        monthlyDownloads: 1000,
+        signupRate: 90,
+        retentionModeToggle: 0,
+        retentionFactor: 33.1,
+        retentionL1: 48,
+        retentionL7: 25,
+        retentionL30: 8,
+        rewardedUserRate: 90,
+        interstitialUserRate: 90,
+        bannerUserRate: 95,
+        offerwallUserRate: 10,
+        rewardedEcpm: 8.0,
+        interstitialEcpm: 4.00,
+        bannerEcpm: 0.4,
+        rewardedViews: 7.0,
+        interstitialViews: 5.0,
+        bannerViews: 10.0,
+        offerwallCompletions: 0.2,
+        offerwallRevenuePerCompletion: 18,
+        pointsPerAd: 4.0,
+        interstitialPointsPerAd: 1.5,
+        pointBreakageRate: 30,
+        mediationFeeRate: 20,
+        cac: 300,
+        weeklyGoldCount: 10,
+        goldUnitPrice: 50000,
+        usdKrw: 1450,
+        serverCost: 500000,
+        resourceCost: 300000,
+        personnelCost: 5000000,
+        personnelStepCost: 1000000
+      }
+    };
+
+    const sliderIds = [
+      "downloads", "currentDau", "monthlyDownloads", "signupRate", "retentionModeToggle", "retentionFactor", "retentionL1", "retentionL7", "retentionL30", "rewardedUserRate", "interstitialUserRate", "bannerUserRate", "offerwallUserRate",
+      "rewardedEcpm", "interstitialEcpm", "bannerEcpm",
+      "rewardedViews", "interstitialViews", "bannerViews", "offerwallCompletions", "offerwallRevenuePerCompletion",
+      "pointsPerAd", "interstitialPointsPerAd", "pointBreakageRate", "mediationFeeRate", "cac", "weeklyGoldCount", "goldUnitPrice", "usdKrw",
+      "serverCost", "resourceCost", "personnelCost", "personnelStepCost"
+    ];
+
+    const formatNumber = (value) => Math.round(value).toLocaleString("ko-KR");
+    const formatMoney = (value) => `${Math.round(value).toLocaleString("ko-KR")}원`;
+    const formatUsd = (value) => `US$${value.toFixed(2)}`;
+    const formatPercent = (value) => `${value.toFixed(1)}%`;
+    const setText = (id, text) => {
+      const element = document.getElementById(id);
+      if (!element) return;
+      element.textContent = text;
+    };
+    const buildDonut = (parts) => {
+      const total = parts.reduce((sum, part) => sum + part.value, 0);
+      if (total <= 0) return "#f3efe6";
+      let current = 0;
+      const slices = parts.map((part) => {
+        const start = current;
+        const angle = (part.value / total) * 360;
+        current += angle;
+        return `${part.color} ${start.toFixed(2)}deg ${current.toFixed(2)}deg`;
+      });
+      return `conic-gradient(${slices.join(", ")})`;
+    };
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+    const formatCompactMoney = (value) => {
+      const abs = Math.abs(value);
+      if (abs >= 100000000) return `${(value / 100000000).toFixed(1)}억`;
+      if (abs >= 10000) return `${Math.round(value / 10000).toLocaleString("ko-KR")}만원`;
+      return formatMoney(value);
+    };
+    const getActivationRatePercent = (values) => {
+      if (+values.retentionModeToggle === 1) {
+        return (+values.retentionL1 * 0.5) + (+values.retentionL7 * 0.3) + (+values.retentionL30 * 0.2);
+      }
+      return +values.retentionFactor;
+    };
+    function syncRetentionModeUI(values) {
+      const mode = +values.retentionModeToggle;
+      const directField = document.getElementById("retentionDirectField");
+      const formulaField = document.getElementById("retentionFormulaField");
+      const formulaField2 = document.getElementById("retentionFormulaField2");
+      const formulaField3 = document.getElementById("retentionFormulaField3");
+      const modeValue = document.getElementById("retentionMode-value");
+      const modeButtons = document.querySelectorAll("#retentionModeButtons button");
+      if (directField) directField.classList.toggle("hidden", mode === 1);
+      if (formulaField) formulaField.classList.toggle("hidden", mode !== 1);
+      if (formulaField2) formulaField2.classList.toggle("hidden", mode !== 1);
+      if (formulaField3) formulaField3.classList.toggle("hidden", mode !== 1);
+      if (modeValue) modeValue.textContent = mode === 1 ? "L1·L7·L30로 계산" : "직접 입력";
+      modeButtons.forEach((button) => {
+        button.classList.toggle("active", +button.dataset.mode === mode);
+      });
+    }
+    const getUnitLabel = (id) => {
+      if (["downloads", "currentDau", "monthlyDownloads"].includes(id)) return "명";
+      if (id === "retentionModeToggle") return "";
+      if (["signupRate", "retentionFactor", "rewardedUserRate", "interstitialUserRate", "bannerUserRate", "offerwallUserRate", "pointBreakageRate", "mediationFeeRate"].includes(id)) return "%";
+      if (["retentionL1", "retentionL7", "retentionL30"].includes(id)) return "%";
+      if (["rewardedEcpm", "interstitialEcpm", "bannerEcpm"].includes(id)) return "USD";
+      if (["rewardedViews", "interstitialViews", "bannerViews"].includes(id)) return "회";
+      if (id === "offerwallCompletions") return "건";
+      if (["pointsPerAd", "interstitialPointsPerAd"].includes(id)) return "점";
+      if (id === "weeklyGoldCount") return "개";
+      return "원";
+    };
+    function enforceDownloadDauConstraint(changedId = "") {
+      const downloads = document.getElementById("downloads");
+      const currentDau = document.getElementById("currentDau");
+      if (!downloads || !currentDau) return;
+
+      let downloadsValue = +downloads.value;
+      let currentDauValue = +currentDau.value;
+
+      if (changedId === "currentDau" && currentDauValue > downloadsValue) {
+        downloadsValue = currentDauValue;
+        downloads.value = String(downloadsValue);
+      } else if (changedId === "downloads" && downloadsValue < currentDauValue) {
+        currentDauValue = downloadsValue;
+        currentDau.value = String(currentDauValue);
+      } else if (downloadsValue < currentDauValue) {
+        downloadsValue = currentDauValue;
+        downloads.value = String(downloadsValue);
+      }
+    }
+    function syncDirectInputs() {
+      sliderIds.forEach((id) => {
+        const directInput = document.getElementById(`${id}-direct`);
+        const slider = document.getElementById(id);
+        if (!directInput || !slider) return;
+        directInput.value = slider.value;
+      });
+    }
+    function setupDirectInputs() {
+      sliderIds.forEach((id) => {
+        const slider = document.getElementById(id);
+        const field = slider?.closest(".field");
+        if (!slider || !field || slider.type === "hidden" || document.getElementById(`${id}-direct`)) return;
+
+        const row = document.createElement("div");
+        row.className = "direct-input-row";
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.inputMode = "decimal";
+        input.id = `${id}-direct`;
+        input.className = "direct-input";
+        input.min = slider.min;
+        input.max = slider.max;
+        input.step = slider.step || "1";
+        input.value = slider.value;
+
+        const unit = document.createElement("span");
+        unit.className = "direct-input-unit";
+        unit.textContent = getUnitLabel(id);
+
+        const commitDirectInput = () => {
+          if (input.value.trim() === "") {
+            input.value = slider.value;
+            return;
+          }
+          const min = Number(slider.min);
+          const max = Number(slider.max);
+          const step = Number(slider.step || 1);
+          const raw = Number(input.value.replace(/,/g, ""));
+          if (Number.isNaN(raw)) {
+            input.value = slider.value;
+            return;
+          }
+          const snapped = Math.round(clamp(raw, min, max) / step) * step;
+          slider.value = clamp(snapped, min, max);
+          enforceDownloadDauConstraint(id);
+          syncLabels();
+          syncDirectInputs();
+          calculate();
+        };
+
+        input.addEventListener("focus", () => input.select());
+        input.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            commitDirectInput();
+            input.blur();
+          }
+        });
+        input.addEventListener("blur", commitDirectInput);
+
+        row.appendChild(input);
+        row.appendChild(unit);
+        slider.insertAdjacentElement("beforebegin", row);
+      });
+    }
+
+    function setupRetentionModeToggle() {
+      const hiddenInput = document.getElementById("retentionModeToggle");
+      const buttons = document.querySelectorAll("#retentionModeButtons button");
+      if (!hiddenInput || !buttons.length) return;
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          hiddenInput.value = button.dataset.mode;
+          syncLabels();
+          syncDirectInputs();
+          calculate();
+        });
+      });
+    }
+    function appendHelpIcon(target, text) {
+      if (!target || !text || target.querySelector(".help-inline")) return;
+      const icon = document.createElement("span");
+      icon.className = "help-inline";
+      icon.textContent = "?";
+      icon.setAttribute("data-tooltip", text);
+      icon.setAttribute("aria-label", text);
+      target.appendChild(icon);
+    }
+    function setupHelpTooltips() {
+      const fieldHelp = {
+        downloads: "현재까지 확보된 다운로드 수입니다. 현재 회원가입 수 계산의 시작값으로 쓰이며, 총 반영 다운로드 수와 총 반영 회원가입 수에 영향을 줍니다.",
+        currentDau: "현재 운영 중인 일 평균 활성 유저 수입니다. 값을 올리면 Rewarded·Interstitial·Banner 예상 노출수와 매출이 함께 증가하고, 운영비도 DAU 기준으로 같이 증가합니다.",
+        monthlyDownloads: "이번 달 추가로 확보하려는 다운로드 수입니다. 값을 올리면 월 목표 회원가입 수, 신규 활성 유저, 예상 DAU, 광고 노출수, 매출, 마케팅비가 함께 바뀝니다.",
+        signupRate: "다운로드가 실제 회원가입으로 이어지는 비율입니다. 값을 올리면 월 목표 회원가입 수와 신규 활성 유저가 늘어나 매출이 커질 수 있습니다.",
+        retentionModeToggle: "신규 유저 활성화율을 직접 입력할지, L1·L7·L30 재방문 비율의 가중평균으로 계산할지 선택하는 스위치입니다. 가중평균은 이번 달 매출에 더 빨리 영향을 주는 L1에 더 큰 비중을 두기 위해 L1 50%, L7 30%, L30 20%를 사용합니다.",
+        retentionFactor: "신규 유저가 다시 들어와 광고를 보기 시작하는 흐름을 하나로 단순화한 값입니다. 값을 올리면 신규 활성 유저와 예상 DAU가 늘어나 광고 노출수와 매출이 함께 증가합니다. 현재 기본값 33.1%는 L1 48%, L7 25%, L30 8%를 L1 50%, L7 30%, L30 20% 가중평균으로 계산한 값입니다.",
+        retentionL1: "다운로드 후 회원가입한 신규 유저 중 다음날 다시 오는 비율입니다.",
+        retentionL7: "신규 유저 중 7일 후에도 다시 오는 비율입니다.",
+        retentionL30: "신규 유저 중 30일 후에도 다시 오는 비율입니다.",
+        rewardedUserRate: "예상 DAU 중 Rewarded를 실제로 보는 유저 비율입니다. 값을 올리면 Rewarded 노출수와 Rewarded 매출·보상비가 함께 증가합니다.",
+        interstitialUserRate: "예상 DAU 중 Interstitial이 실제로 노출되는 유저 비율입니다. 값을 올리면 Interstitial 노출수와 Interstitial 매출·보상비가 함께 증가합니다.",
+        bannerUserRate: "예상 DAU 중 Banner가 실제로 노출되는 유저 비율입니다. 값을 올리면 Banner 노출수와 Banner 매출이 증가합니다.",
+        offerwallUserRate: "예상 DAU 중 Offerwall에 참여하는 유저 비율입니다. 값을 올리면 Offerwall 완료 수와 Offerwall 매출이 증가합니다.",
+        rewardedEcpm: "Rewarded 광고 1,000회 노출당 평균 수익입니다. 값을 올리면 Rewarded 매출이 바로 증가합니다.",
+        interstitialEcpm: "Interstitial 광고 1,000회 노출당 평균 수익입니다. 값을 올리면 Interstitial 매출이 바로 증가합니다.",
+        bannerEcpm: "Banner 광고 1,000회 노출당 평균 수익입니다. 값을 올리면 Banner 매출이 증가합니다.",
+        rewardedViews: "Rewarded를 보는 유저 1명이 하루에 평균 몇 번 시청하는지입니다. 값을 올리면 Rewarded 노출수·매출·보상비가 함께 증가합니다.",
+        interstitialViews: "Interstitial이 노출되는 유저 1명에게 하루 평균 몇 번 뜨는지입니다. 값을 올리면 Interstitial 노출수·매출·보상비가 함께 증가합니다.",
+        bannerViews: "Banner가 노출되는 유저 1명에게 하루 평균 몇 번 보이는지입니다. 값을 올리면 Banner 노출수와 매출이 증가합니다.",
+        offerwallCompletions: "Offerwall 참여 유저 1명이 하루 평균 몇 건 완료하는지입니다. 값을 올리면 Offerwall 완료 수와 매출이 증가합니다.",
+        offerwallRevenuePerCompletion: "Offerwall 1건 완료당 수익입니다. 값을 올리면 Offerwall 매출이 증가합니다.",
+        pointsPerAd: "Rewarded 1회 시청 시 평균 지급 포인트입니다. 값을 올리면 Rewarded 보상비가 증가해 순이익이 줄어듭니다.",
+        interstitialPointsPerAd: "Interstitial 1회 노출/완료 시 평균 지급 포인트입니다. 값을 올리면 Interstitial 보상비가 증가합니다.",
+        pointBreakageRate: "지급된 포인트 중 실제 사용되지 않고 소멸되는 비율입니다. 값을 올리면 실제 포인트 비용이 줄어듭니다.",
+        mediationFeeRate: "Rewarded·Interstitial·Banner 광고 매출에 적용되는 미디에이션 수수료율입니다. Offerwall은 별도로 30% 수수료가 고정 반영됩니다. 값을 올리면 일반 광고 수수료가 커지고 순이익이 줄어듭니다.",
+        cac: "회원가입 1명 확보에 드는 비용입니다. 값을 올리면 마케팅비가 커지고 순이익과 손익분기 CAC가 나빠집니다.",
+        weeklyGoldCount: "주간 금 경품 지급 수량입니다. 값을 올리면 금 경품 비용이 증가합니다.",
+        goldUnitPrice: "금 경품 1개당 단가입니다. 값을 올리면 금 경품 비용이 증가합니다.",
+        usdKrw: "광고 매출을 원화로 환산하는 환율입니다. 값을 올리면 USD 기반 광고 매출이 원화 기준으로 커집니다.",
+        serverCost: "현재 DAU 기준 기본 월 서버운영비입니다. 예상 DAU가 현재 DAU보다 1천명 늘어날 때마다 기본비의 10%씩 추가됩니다.",
+        resourceCost: "현재 DAU 기준 기본 월 리소스 비용입니다. 예상 DAU가 현재 DAU보다 1천명 늘어날 때마다 기본비의 10%씩 추가됩니다.",
+        personnelCost: "현재 DAU 기준 기본 월 인력 비용입니다. 여기에 예상 DAU 증가분에 따른 추가 인력비가 붙습니다.",
+        personnelStepCost: "예상 DAU가 현재 DAU보다 3천명 늘어날 때 추가로 붙는 인력 비용입니다. 값을 올리면 장기 비용 증가 폭이 커집니다."
+      };
+
+      Object.entries(fieldHelp).forEach(([id, text]) => {
+        const slider = document.getElementById(id);
+        const label = slider?.closest(".field")?.querySelector(".field-head span:first-child");
+        appendHelpIcon(label, text);
+      });
+
+      const resultHelp = {
+        monthlyRevenue: "Rewarded·Interstitial·Banner·Offerwall 월 매출을 모두 더한 값입니다.",
+        monthlyCost: "마케팅비, 일반 광고 수수료, Offerwall 수수료, Rewarded/Interstitial 보상비, 금 경품, 서버·리소스·인력 비용을 모두 합한 값입니다.",
+        monthlyProfit: "월 예상 매출에서 월 예상 총비용을 뺀 결과입니다. 플러스면 흑자, 마이너스면 적자입니다.",
+        totalDownloadsSummary: "현재 다운로드 수와 월 목표 다운로드 수를 합친 값입니다.",
+        totalSignupsSummary: "현재 다운로드 수와 월 목표 다운로드 수에 회원가입 전환율을 적용해 계산한 총 회원가입 수입니다.",
+        dauCount: "현재 DAU와 신규 유저 수익화 유지율을 반영한 신규 DAU를 더한 값입니다. 광고 노출수와 매출 계산의 기준이 됩니다.",
+        retentionSummary: "월 목표 다운로드로 유입된 신규 회원 중 실제로 다시 들어와 광고를 보기 시작하는 비율입니다. 직접 입력하거나 L1·L7·L30의 가중평균으로 계산할 수 있습니다. 가중평균은 L1 50%, L7 30%, L30 20%를 사용합니다.",
+        breakevenCac: "현재 구조에서 회원가입 1명당 감당 가능한 최대 획득비용입니다. 광고 매출에서 보상비, 수수료, 경품비, 운영비를 제외하고 남는 금액을 월 목표 회원가입 수로 나눈 값입니다.",
+        ltvCvcCompare: "광고 LTV는 신규 유저 1명이 이번 달 기준으로 추가로 벌어오는 평균 광고 가치입니다. 실제 CVC는 유저 1명을 데려오는 실제 비용입니다."
+      };
+
+      Object.entries(resultHelp).forEach(([valueId, text]) => {
+        const value = document.getElementById(valueId);
+        const label = value?.previousElementSibling;
+        appendHelpIcon(label, text);
+      });
+    }
+    function renderProfitTimeline(currentSignups, monthlyTargetSignups, values) {
+      const svg = document.getElementById("profitTimelineChart");
+      const months = Array.from({ length: 12 }, (_, index) => index + 1);
+      const referenceCurrentDau = 1000;
+      const currentDauBase = values.currentDau;
+      const activationRate = getActivationRatePercent(values) / 100;
+      const monthlyProfits = months.map((month) => {
+        const targetDau = (monthlyTargetSignups * month) * activationRate;
+        const dauCount = currentDauBase + targetDau;
+        const rewardedUsers = dauCount * (values.rewardedUserRate / 100);
+        const interstitialUsers = dauCount * (values.interstitialUserRate / 100);
+        const bannerUsers = dauCount * (values.bannerUserRate / 100);
+        const offerwallUsers = dauCount * (values.offerwallUserRate / 100);
+
+        const rewardedMonthlyImpressions = rewardedUsers * values.rewardedViews * 30;
+        const interstitialMonthlyImpressions = interstitialUsers * values.interstitialViews * 30;
+        const bannerMonthlyImpressions = bannerUsers * values.bannerViews * 30;
+        const offerwallMonthlyCompletions = offerwallUsers * values.offerwallCompletions * 30;
+
+        const rewardedRevenue = (rewardedMonthlyImpressions / 1000) * values.rewardedEcpm * values.usdKrw;
+        const interstitialRevenue = (interstitialMonthlyImpressions / 1000) * values.interstitialEcpm * values.usdKrw;
+        const bannerRevenue = (bannerMonthlyImpressions / 1000) * values.bannerEcpm * values.usdKrw;
+        const offerwallRevenue = offerwallMonthlyCompletions * values.offerwallRevenuePerCompletion;
+        const adRevenue = rewardedRevenue + interstitialRevenue + bannerRevenue;
+        const totalRevenue = adRevenue + offerwallRevenue;
+        const mediationCost = (adRevenue * (values.mediationFeeRate / 100)) + (offerwallRevenue * 0.3);
+        const pointCostMultiplier = 1 - (values.pointBreakageRate / 100);
+        const rewardedPointsCost = rewardedMonthlyImpressions * values.pointsPerAd * pointCostMultiplier;
+        const interstitialPointsCost = interstitialMonthlyImpressions * values.interstitialPointsPerAd * pointCostMultiplier;
+        const goldCost = values.weeklyGoldCount * values.goldUnitPrice * 4;
+        const marketingCost = monthlyTargetSignups * values.cac;
+        const extraDau = Math.max(dauCount - currentDauBase, 0);
+        const serverStepUnits = extraDau / 1000;
+        const resourceStepUnits = extraDau / 1000;
+        const scaledServerCost = values.serverCost + (serverStepUnits * values.serverCost * 0.1);
+        const scaledResourceCost = values.resourceCost + (resourceStepUnits * values.resourceCost * 0.1);
+        const personnelStepUnits = extraDau / 3000;
+        const scaledPersonnelCost = values.personnelCost + (personnelStepUnits * values.personnelStepCost);
+        const fixedCost = scaledServerCost + scaledResourceCost + scaledPersonnelCost;
+        const totalCost = mediationCost + rewardedPointsCost + interstitialPointsCost + goldCost + marketingCost + fixedCost;
+        return totalRevenue - totalCost;
+      });
+      const monthlyAdCosts = months.map(() => monthlyTargetSignups * values.cac);
+      const cumulativeProfits = monthlyProfits.reduce((acc, value) => {
+        const prev = acc.length ? acc[acc.length - 1] : 0;
+        acc.push(prev + value);
+        return acc;
+      }, []);
+
+      const allValues = [...monthlyProfits, ...cumulativeProfits, 0];
+      const minVal = Math.min(...allValues);
+      const maxVal = Math.max(...allValues);
+      const range = Math.max(maxVal - minVal, 1);
+
+      const width = 900;
+      const height = 320;
+      const left = 56;
+      const right = 24;
+      const top = 24;
+      const bottom = 46;
+      const chartWidth = width - left - right;
+      const chartHeight = height - top - bottom;
+      const stepX = chartWidth / months.length;
+      const barWidth = stepX * 0.56;
+      const yFor = (value) => top + ((maxVal - value) / range) * chartHeight;
+      const zeroY = yFor(0);
+
+      const barRects = cumulativeProfits.map((value, index) => {
+        const x = left + index * stepX + (stepX - barWidth) / 2;
+        const y = value >= 0 ? yFor(value) : zeroY;
+        const h = Math.abs(zeroY - yFor(value));
+        const fill = value >= 0 ? "#d97706" : "#b91c1c";
+        return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barWidth.toFixed(1)}" height="${Math.max(h, 1).toFixed(1)}" rx="8" fill="${fill}" opacity="0.82" />`;
+      }).join("");
+
+      const cumulativePoints = monthlyProfits.map((value, index) => {
+        const x = left + index * stepX + stepX / 2;
+        const y = yFor(value);
+        return `${x.toFixed(1)},${y.toFixed(1)}`;
+      }).join(" ");
+
+      const cumulativeDots = monthlyProfits.map((value, index) => {
+        const x = left + index * stepX + stepX / 2;
+        const y = yFor(value);
+        return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4" fill="#111827" />`;
+      }).join("");
+
+      const monthLabels = months.map((month, index) => {
+        const x = left + index * stepX + stepX / 2;
+        return `
+          <text x="${x.toFixed(1)}" y="${height - 24}" text-anchor="middle" font-size="12" fill="#6b7280">${month}M</text>
+          <text x="${x.toFixed(1)}" y="${height - 8}" text-anchor="middle" font-size="10" fill="#9ca3af">${formatCompactMoney(monthlyProfits[index])}</text>
+        `;
+      }).join("");
+
+      const yLabels = [maxVal, 0, minVal].map((value) => {
+        const y = yFor(value);
+        return `
+          <line x1="${left}" y1="${y.toFixed(1)}" x2="${width - right}" y2="${y.toFixed(1)}" stroke="#efe5d7" stroke-dasharray="4 4" />
+          <text x="${left - 10}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-size="11" fill="#6b7280">${formatCompactMoney(value)}</text>
+        `;
+      }).join("");
+
+      const breakEvenMonth = cumulativeProfits.findIndex((value) => value >= 0);
+      const breakEvenText = breakEvenMonth >= 0 ? `${breakEvenMonth + 1}개월차 예상` : "12개월 내 미도달";
+      setText("breakevenMonthPill", `손익분기: ${breakEvenText}`);
+      setText("simulationBasePill", `계산 기준: 현재 DAU ${formatNumber(currentDauBase)}명 + 신규 유저 활성화율 ${formatPercent(getActivationRatePercent(values))} 반영`);
+      setText("mauMonth1", `${formatNumber(currentDauBase + (monthlyTargetSignups * 1 * activationRate))}명`);
+      setText("mauMonth3", `${formatNumber(currentDauBase + (monthlyTargetSignups * 3 * activationRate))}명`);
+      setText("mauMonth6", `${formatNumber(currentDauBase + (monthlyTargetSignups * 6 * activationRate))}명`);
+      setText("mauMonth12", `${formatNumber(currentDauBase + (monthlyTargetSignups * 12 * activationRate))}명`);
+      setText("profitMonth1", `순수익 ${formatMoney(monthlyProfits[0])}`);
+      setText("profitMonth3", `순수익 ${formatMoney(monthlyProfits[2])}`);
+      setText("profitMonth6", `순수익 ${formatMoney(monthlyProfits[5])}`);
+      setText("profitMonth12", `순수익 ${formatMoney(monthlyProfits[11])}`);
+      setText("adCostMonth1", `해당 월 외부 광고비 ${formatMoney(monthlyAdCosts[0])}`);
+      setText("adCostMonth3", `해당 월 외부 광고비 ${formatMoney(monthlyAdCosts[2])}`);
+      setText("adCostMonth6", `해당 월 외부 광고비 ${formatMoney(monthlyAdCosts[5])}`);
+      setText("adCostMonth12", `해당 월 외부 광고비 ${formatMoney(monthlyAdCosts[11])}`);
+
+      let breakMarker = "";
+      if (breakEvenMonth >= 0) {
+        const x = left + breakEvenMonth * stepX + stepX / 2;
+        breakMarker = `
+          <line x1="${x.toFixed(1)}" y1="${top}" x2="${x.toFixed(1)}" y2="${height - bottom}" stroke="#166534" stroke-width="2" stroke-dasharray="6 6" />
+          <text x="${(x + 6).toFixed(1)}" y="${top + 14}" font-size="11" fill="#166534" font-weight="700">${breakEvenMonth + 1}개월차</text>
+        `;
+      }
+
+      svg.innerHTML = `
+        <rect x="0" y="0" width="${width}" height="${height}" fill="#fffdf9" rx="16" />
+        ${yLabels}
+        <line x1="${left}" y1="${zeroY.toFixed(1)}" x2="${width - right}" y2="${zeroY.toFixed(1)}" stroke="#bca88a" stroke-width="1.4" />
+        ${barRects}
+        <polyline points="${cumulativePoints}" fill="none" stroke="#111827" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" />
+        ${cumulativeDots}
+        ${breakMarker}
+        ${monthLabels}
+      `;
+    }
+
+    function syncLabels() {
+      const values = {};
+      sliderIds.forEach((id) => { values[id] = +document.getElementById(id).value; });
+      const activationRate = getActivationRatePercent(values);
+      syncRetentionModeUI(values);
+      setText("downloads-value", `${formatNumber(+downloads.value)}명`);
+      setText("currentDau-value", `${formatNumber(+currentDau.value)}명`);
+      setText("monthlyDownloads-value", `${formatNumber(+monthlyDownloads.value)}명`);
+      setText("signupRate-value", `${(+signupRate.value).toFixed(1)}%`);
+      setText("retentionFactor-value", `${(+retentionFactor.value).toFixed(1)}%`);
+      setText("retentionL1-value", `${(+retentionL1.value).toFixed(1)}%`);
+      setText("retentionL7-value", `${(+retentionL7.value).toFixed(1)}%`);
+      setText("retentionL30-value", `${(+retentionL30.value).toFixed(1)}%`);
+      setText("retentionFormulaSummary", `신규 유저 활성화율 = L1 ${(+retentionL1.value).toFixed(1)}% × 50% + L7 ${(+retentionL7.value).toFixed(1)}% × 30% + L30 ${(+retentionL30.value).toFixed(1)}% × 20% 가중평균 = ${activationRate.toFixed(1)}%`);
+      setText("retentionDirectSummary", `현재 L1 ${(+retentionL1.value).toFixed(1)}% · L7 ${(+retentionL7.value).toFixed(1)}% · L30 ${(+retentionL30.value).toFixed(1)}% 가정의 가중평균은 ${activationRate.toFixed(1)}%입니다. 이 값을 직접 조정해 신규 유저가 실제 활성 유저와 광고 매출로 이어지는 비율을 가정할 수 있습니다.`);
+      setText("rewardedUserRate-value", `${(+rewardedUserRate.value).toFixed(1)}%`);
+      setText("interstitialUserRate-value", `${(+interstitialUserRate.value).toFixed(1)}%`);
+      setText("bannerUserRate-value", `${(+bannerUserRate.value).toFixed(1)}%`);
+      setText("offerwallUserRate-value", `${(+offerwallUserRate.value).toFixed(1)}%`);
+      setText("rewardedEcpm-value", formatUsd(+rewardedEcpm.value));
+      setText("interstitialEcpm-value", formatUsd(+interstitialEcpm.value));
+      setText("bannerEcpm-value", formatUsd(+bannerEcpm.value));
+      setText("rewardedViews-value", `${(+rewardedViews.value).toFixed(1)}회`);
+      setText("interstitialViews-value", `${(+interstitialViews.value).toFixed(1)}회`);
+      setText("bannerViews-value", `${(+bannerViews.value).toFixed(1)}회`);
+      setText("offerwallCompletions-value", `${(+offerwallCompletions.value).toFixed(1)}건`);
+      setText("offerwallRevenuePerCompletion-value", formatMoney(+offerwallRevenuePerCompletion.value));
+      setText("pointsPerAd-value", `${(+pointsPerAd.value).toFixed(1)}점`);
+      setText("interstitialPointsPerAd-value", `${(+interstitialPointsPerAd.value).toFixed(1)}점`);
+      setText("pointBreakageRate-value", `${(+pointBreakageRate.value).toFixed(1)}%`);
+      setText("mediationFeeRate-value", `${(+mediationFeeRate.value).toFixed(1)}%`);
+      setText("cac-value", formatMoney(+cac.value));
+      setText("weeklyGoldCount-value", `${formatNumber(+weeklyGoldCount.value)}개`);
+      setText("goldUnitPrice-value", formatMoney(+goldUnitPrice.value));
+      setText("usdKrw-value", formatMoney(+usdKrw.value));
+      setText("serverCost-value", formatMoney(+serverCost.value));
+      setText("resourceCost-value", formatMoney(+resourceCost.value));
+      setText("personnelCost-value", formatMoney(+personnelCost.value));
+      setText("personnelStepCost-value", formatMoney(+personnelStepCost.value));
+    }
+
+    function calculate() {
+      const values = {};
+      sliderIds.forEach((id) => { values[id] = +document.getElementById(id).value; });
+
+      const currentDownloads = values.downloads;
+      const currentDauBase = values.currentDau;
+      const monthlyDownloads = values.monthlyDownloads;
+      const totalDownloads = currentDownloads + monthlyDownloads;
+      const currentSignups = currentDownloads * (values.signupRate / 100);
+      const targetSignups = monthlyDownloads * (values.signupRate / 100);
+      const totalSignups = currentSignups + targetSignups;
+      const newUserMauRate = getActivationRatePercent(values) / 100;
+      const currentDau = currentDauBase;
+      const targetDau = targetSignups * newUserMauRate;
+      const dauCount = currentDauBase + targetDau;
+      const rewardedUsers = dauCount * (values.rewardedUserRate / 100);
+      const interstitialUsers = dauCount * (values.interstitialUserRate / 100);
+      const bannerUsers = dauCount * (values.bannerUserRate / 100);
+      const offerwallUsers = dauCount * (values.offerwallUserRate / 100);
+
+      const rewardedDailyImpressions = rewardedUsers * values.rewardedViews;
+      const interstitialDailyImpressions = interstitialUsers * values.interstitialViews;
+      const bannerDailyImpressions = bannerUsers * values.bannerViews;
+      const offerwallDailyCompletions = offerwallUsers * values.offerwallCompletions;
+
+      const rewardedMonthlyImpressions = rewardedDailyImpressions * 30;
+      const interstitialMonthlyImpressions = interstitialDailyImpressions * 30;
+      const bannerMonthlyImpressions = bannerDailyImpressions * 30;
+      const offerwallMonthlyCompletions = offerwallDailyCompletions * 30;
+
+      const rewardedRevenue = (rewardedMonthlyImpressions / 1000) * values.rewardedEcpm * values.usdKrw;
+      const interstitialRevenue = (interstitialMonthlyImpressions / 1000) * values.interstitialEcpm * values.usdKrw;
+      const bannerRevenue = (bannerMonthlyImpressions / 1000) * values.bannerEcpm * values.usdKrw;
+      const offerwallRevenue = offerwallMonthlyCompletions * values.offerwallRevenuePerCompletion;
+      const adRevenue = rewardedRevenue + interstitialRevenue + bannerRevenue;
+      const totalRevenue = adRevenue + offerwallRevenue;
+
+      const baseRewardedUsers = currentDauBase * (values.rewardedUserRate / 100);
+      const baseInterstitialUsers = currentDauBase * (values.interstitialUserRate / 100);
+      const baseBannerUsers = currentDauBase * (values.bannerUserRate / 100);
+      const baseOfferwallUsers = currentDauBase * (values.offerwallUserRate / 100);
+      const baseRewardedRevenue = ((baseRewardedUsers * values.rewardedViews * 30) / 1000) * values.rewardedEcpm * values.usdKrw;
+      const baseInterstitialRevenue = ((baseInterstitialUsers * values.interstitialViews * 30) / 1000) * values.interstitialEcpm * values.usdKrw;
+      const baseBannerRevenue = ((baseBannerUsers * values.bannerViews * 30) / 1000) * values.bannerEcpm * values.usdKrw;
+      const baseOfferwallRevenue = (baseOfferwallUsers * values.offerwallCompletions * 30) * values.offerwallRevenuePerCompletion;
+      const baseAdRevenue = baseRewardedRevenue + baseInterstitialRevenue + baseBannerRevenue;
+      const baseRevenue = baseAdRevenue + baseOfferwallRevenue;
+      const incrementalRevenue = Math.max(totalRevenue - baseRevenue, 0);
+      const incrementalAdRevenue = Math.max(adRevenue - baseAdRevenue, 0);
+      const incrementalOfferwallRevenue = Math.max(offerwallRevenue - baseOfferwallRevenue, 0);
+
+      const mediationCost = (adRevenue * (values.mediationFeeRate / 100)) + (offerwallRevenue * 0.3);
+      const pointCostMultiplier = 1 - (values.pointBreakageRate / 100);
+      const pointsCost = rewardedMonthlyImpressions * values.pointsPerAd * pointCostMultiplier;
+      const interstitialPointsCost = interstitialMonthlyImpressions * values.interstitialPointsPerAd * pointCostMultiplier;
+      const basePointsCost = (baseRewardedUsers * values.rewardedViews * 30) * values.pointsPerAd * pointCostMultiplier;
+      const baseInterstitialPointsCost = (baseInterstitialUsers * values.interstitialViews * 30) * values.interstitialPointsPerAd * pointCostMultiplier;
+      const goldCost = values.weeklyGoldCount * values.goldUnitPrice * 4;
+      const marketingCost = targetSignups * values.cac;
+      const actualCac = targetSignups > 0 ? marketingCost / targetSignups : 0;
+      const extraDau = Math.max(dauCount - currentDauBase, 0);
+      const serverStepUnits = extraDau / 1000;
+      const resourceStepUnits = extraDau / 1000;
+      const serverCost = values.serverCost + (serverStepUnits * values.serverCost * 0.1);
+      const resourceCost = values.resourceCost + (resourceStepUnits * values.resourceCost * 0.1);
+      const personnelStepUnits = extraDau / 3000;
+      const personnelCost = values.personnelCost + (personnelStepUnits * values.personnelStepCost);
+      const incrementalMediationCost = (incrementalAdRevenue * (values.mediationFeeRate / 100)) + (incrementalOfferwallRevenue * 0.3);
+      const incrementalPointsCost = Math.max(pointsCost - basePointsCost, 0);
+      const incrementalInterstitialPointsCost = Math.max(interstitialPointsCost - baseInterstitialPointsCost, 0);
+      const baseServerCost = values.serverCost;
+      const baseResourceCost = values.resourceCost;
+      const basePersonnelCost = values.personnelCost;
+      const incrementalServerCost = Math.max(serverCost - baseServerCost, 0);
+      const incrementalResourceCost = Math.max(resourceCost - baseResourceCost, 0);
+      const incrementalPersonnelCost = Math.max(personnelCost - basePersonnelCost, 0);
+      const incrementalGoldCost = targetSignups > 0 ? goldCost : 0;
+      const netLtv = targetSignups > 0 ? (incrementalRevenue - incrementalMediationCost - incrementalPointsCost - incrementalInterstitialPointsCost - goldCost - incrementalServerCost - incrementalResourceCost - incrementalPersonnelCost) / targetSignups : 0;
+      const totalCost = mediationCost + pointsCost + interstitialPointsCost + goldCost + marketingCost + serverCost + resourceCost + personnelCost;
+      const profit = totalRevenue - totalCost;
+      const breakevenCac = targetSignups > 0 ? (totalRevenue - mediationCost - pointsCost - interstitialPointsCost - goldCost - serverCost - resourceCost - personnelCost) / targetSignups : 0;
+      const clampedBreakevenCac = Math.max(breakevenCac, 0);
+      const breakevenComparator = clampedBreakevenCac === actualCac ? "=" : (clampedBreakevenCac < actualCac ? "<" : ">");
+      const adLtv = targetSignups > 0 ? incrementalRevenue / targetSignups : 0;
+      const ltvComparator = adLtv === actualCac ? "=" : (adLtv < actualCac ? "<" : ">");
+
+      setText("monthlyRevenue", formatMoney(totalRevenue));
+      setText("monthlyCost", formatMoney(totalCost));
+      setText("monthlyProfit", formatMoney(profit));
+      setText("monthlyProfitSub", profit >= 0 ? "현재 입력값 기준 흑자 구조" : "현재 입력값 기준 적자 구조");
+      document.getElementById("monthlyProfit").className = `value ${profit >= 0 ? "good" : "bad"}`;
+      setText("breakevenCac", `손익분기 CAC ${formatMoney(clampedBreakevenCac)} ${breakevenComparator} 실제 CAC ${formatMoney(actualCac)}`);
+      if (breakevenCac <= 0) {
+        setText("breakevenCacSub", "현재는 광고 매출보다 비용이 더 커서 유료 획득비를 감당하기 어려운 상태입니다.");
+      } else {
+        setText("breakevenCacSub", `현재 구조에서는 회원가입 1명당 ${formatMoney(breakevenCac)} 이하로 유입시키면 적자가 아닐 가능성이 높습니다.`);
+      }
+      setText("ltvCvcCompare", `광고 LTV ${formatMoney(adLtv)} ${ltvComparator} 실제 CVC ${formatMoney(actualCac)}`);
+      setText("ltvCvcSub", adLtv >= actualCac ? "현재 기준으로는 신규 유저 1명이 벌어오는 광고 가치가 획득비용보다 커서, 장기적으로는 회수 가능성이 있는 구조입니다." : "현재 기준으로는 신규 유저 1명이 벌어오는 광고 가치보다 획득비용이 더 커서, 장기적으로도 회수가 어려운 구조입니다.");
+      setText("netLtvCompare", `비용 차감 후 신규 1명당 순기여 ${formatMoney(netLtv)}`);
+      document.getElementById("netLtvCompare").classList.remove("good", "bad");
+      document.getElementById("netLtvCompare").classList.add(netLtv >= 0 ? "good" : "bad");
+      setText("netLtvCostBreakdown", `차감 비용: 수수료 ${formatMoney(incrementalMediationCost)} · 보상비 ${formatMoney(incrementalPointsCost + incrementalInterstitialPointsCost)} · 경품비 ${formatMoney(incrementalGoldCost)} · 운영비 ${formatMoney(incrementalServerCost + incrementalResourceCost + incrementalPersonnelCost)}`);
+      setText("totalDownloadsSummary", `${formatNumber(totalDownloads)}명`);
+      setText("totalSignupsSummary", `${formatNumber(totalSignups)}명`);
+      setText("retentionSummary", `${getActivationRatePercent(values).toFixed(1)}%`);
+      setText("retentionSummarySub", +values.retentionModeToggle === 1
+        ? "다음날·7일 후·30일 후 다시 오는 비율을 L1 50%, L7 30%, L30 20% 가중평균으로 반영한 값입니다."
+        : "신규 회원이 다시 들어와 광고를 보기 시작하는 비율을 직접 입력한 값입니다.");
+      setText("dauCount", `${formatNumber(dauCount)}명`);
+      setText("dauSplitCount", `현재 DAU ${formatNumber(currentDauBase)}명 · 신규 DAU ${formatNumber(targetDau)}명 기준`);
+      setText("revenueDonutCenter", formatMoney(totalRevenue));
+      setText("costDonutCenter", formatMoney(totalCost));
+      setText("rewardedImpressionsSummary", `${formatNumber(rewardedMonthlyImpressions)}회`);
+      setText("rewardedImpressionsSub", `일 ${formatNumber(rewardedDailyImpressions)}회 · 월 ${formatNumber(rewardedMonthlyImpressions)}회`);
+      setText("interstitialImpressionsSummary", `${formatNumber(interstitialMonthlyImpressions)}회`);
+      setText("interstitialImpressionsSub", `일 ${formatNumber(interstitialDailyImpressions)}회 · 월 ${formatNumber(interstitialMonthlyImpressions)}회`);
+      setText("bannerImpressionsSummary", `${formatNumber(bannerMonthlyImpressions)}회`);
+      setText("bannerImpressionsSub", `일 ${formatNumber(bannerDailyImpressions)}회 · 월 ${formatNumber(bannerMonthlyImpressions)}회`);
+      setText("offerwallCompletionsSummary", `${formatNumber(offerwallMonthlyCompletions)}건`);
+      setText("offerwallCompletionsSub", `일 ${formatNumber(offerwallDailyCompletions)}건 · 월 ${formatNumber(offerwallMonthlyCompletions)}건`);
+
+      const revenueParts = [
+        { id: "rewarded", value: rewardedRevenue },
+        { id: "interstitial", value: interstitialRevenue },
+        { id: "banner", value: bannerRevenue },
+        { id: "offerwall", value: offerwallRevenue }
+      ];
+      revenueParts.forEach((part) => {
+        const pct = totalRevenue > 0 ? (part.value / totalRevenue) * 100 : 0;
+        setText(`${part.id}BarValue`, `${pct.toFixed(1)}%`);
+      });
+      document.getElementById("revenueDonut").style.background = buildDonut([
+        { value: rewardedRevenue, color: "#d97706" },
+        { value: interstitialRevenue, color: "#92400e" },
+        { value: bannerRevenue, color: "#fbbf24" },
+        { value: offerwallRevenue, color: "#0f766e" }
+      ]);
+
+      const costParts = [
+        { id: "marketing", value: marketingCost },
+        { id: "mediation", value: mediationCost },
+        { id: "points", value: pointsCost },
+        { id: "interstitialPoints", value: interstitialPointsCost },
+        { id: "gold", value: goldCost },
+        { id: "server", value: serverCost },
+        { id: "resource", value: resourceCost },
+        { id: "personnel", value: personnelCost }
+      ];
+      costParts.forEach((part) => {
+        const pct = totalCost > 0 ? (part.value / totalCost) * 100 : 0;
+        setText(`${part.id}BarValue`, `${pct.toFixed(1)}%`);
+      });
+      const costLegendList = document.getElementById("costLegendList");
+      if (costLegendList) {
+        const sortedCostParts = [...costParts].sort((a, b) => b.value - a.value);
+        sortedCostParts.forEach((part) => {
+          const item = costLegendList.querySelector(`[data-legend-id="${part.id}"]`);
+          if (item) costLegendList.appendChild(item);
+        });
+      }
+      document.getElementById("costDonut").style.background = buildDonut([
+        { value: marketingCost, color: "#374151" },
+        { value: mediationCost, color: "#0f172a" },
+        { value: pointsCost, color: "#d97706" },
+        { value: interstitialPointsCost, color: "#7c3aed" },
+        { value: goldCost, color: "#fbbf24" },
+        { value: serverCost, color: "#92400e" },
+        { value: resourceCost, color: "#8b5e34" },
+        { value: personnelCost, color: "#111827" }
+      ]);
+
+      setText("detailRewardedViews", `${values.rewardedViews.toFixed(1)}회`);
+      setText("detailInterstitialViews", `${values.interstitialViews.toFixed(1)}회`);
+      setText("detailBannerViews", `${values.bannerViews.toFixed(1)}회`);
+      setText("detailOfferwallViews", `${values.offerwallCompletions.toFixed(1)}건`);
+      setText("detailRewardedImpressions", `${formatNumber(rewardedMonthlyImpressions)}회`);
+      setText("detailInterstitialImpressions", `${formatNumber(interstitialMonthlyImpressions)}회`);
+      setText("detailBannerImpressions", `${formatNumber(bannerMonthlyImpressions)}회`);
+      setText("detailOfferwallCompletions", `${formatNumber(offerwallMonthlyCompletions)}건`);
+      setText("detailRewardedRevenue", formatMoney(rewardedRevenue));
+      setText("detailInterstitialRevenue", formatMoney(interstitialRevenue));
+      setText("detailBannerRevenue", formatMoney(bannerRevenue));
+      setText("detailOfferwallRevenue", formatMoney(offerwallRevenue));
+      setText("detailTotalRevenue", formatMoney(totalRevenue));
+      setText("detailMediationCost", formatMoney(mediationCost));
+      setText("detailPointsCost", formatMoney(pointsCost));
+      setText("detailInterstitialPointsCost", formatMoney(interstitialPointsCost));
+      setText("detailGoldCost", formatMoney(goldCost));
+      setText("detailMarketingCost", formatMoney(marketingCost));
+      setText("detailServerCost", formatMoney(serverCost));
+      setText("detailResourceCost", formatMoney(resourceCost));
+      setText("detailPersonnelCost", formatMoney(personnelCost));
+      setText("detailTotalCost", formatMoney(totalCost));
+
+      const biggestRevenue = revenueParts.sort((a, b) => b.value - a.value)[0];
+      const biggestCost = costParts.sort((a, b) => b.value - a.value)[0];
+
+      const revenueLabelMap = {
+        rewarded: "Rewarded 매출",
+        interstitial: "Interstitial 매출",
+        banner: "Banner 매출",
+        offerwall: "Offerwall 매출"
+      };
+      const costLabelMap = {
+        marketing: "마케팅비",
+        mediation: "미디에이션 수수료",
+        points: "Rewarded 보상비",
+        interstitialPoints: "Interstitial 보상비",
+        gold: "금 경품 비용",
+        server: "서버운영비",
+        resource: "리소스 비용",
+        personnel: "인력 비용"
+      };
+
+      setText("topLeverText", `현재 구조에서는 ${revenueLabelMap[biggestRevenue.id]}과 ${costLabelMap[biggestCost.id]}이 손익에 가장 크게 영향을 주며, 매출은 결국 실제 노출수 확보에 달려 있습니다.`);
+      setText("profitStatusText", profit >= 0 ? `현재 입력값 기준 월 ${formatMoney(profit)} 흑자입니다.` : `현재 입력값 기준 월 ${formatMoney(Math.abs(profit))} 적자입니다.`);
+
+      let actionText = "";
+      if (profit < 0 && values.cac > breakevenCac) {
+        actionText = "우선 목표 회원가입 수 대비 CAC를 낮추거나 Rewarded/Interstitial eCPM을 높이는 쪽이 가장 효과적입니다.";
+      } else if (profit < 0) {
+        actionText = "광고 유형별 노출 유저 비율과 노출 수를 함께 늘려 월 매출 볼륨을 키우는 것이 좋습니다.";
+      } else {
+        actionText = "현재 구조는 흑자이므로 다음 단계는 리텐션과 LTV를 높여 방어력을 키우는 것이 좋습니다.";
+      }
+      setText("actionText", actionText);
+      renderProfitTimeline(currentSignups, targetSignups, values);
+    }
+
+    function applyPreset(name) {
+      const preset = presets[name];
+      Object.entries(preset).forEach(([key, value]) => {
+        document.getElementById(key).value = value;
+      });
+      enforceDownloadDauConstraint();
+      document.querySelectorAll(".scenario-btn").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.scenario === name);
+      });
+      syncLabels();
+      syncDirectInputs();
+      calculate();
+    }
+
+    sliderIds.forEach((id) => {
+      document.getElementById(id).addEventListener("input", () => {
+        enforceDownloadDauConstraint(id);
+        syncLabels();
+        syncDirectInputs();
+        calculate();
+      });
+    });
+
+    document.querySelectorAll(".scenario-btn").forEach((btn) => {
+      btn.addEventListener("click", () => applyPreset(btn.dataset.scenario));
+    });
+
+    setupDirectInputs();
+    setupRetentionModeToggle();
+    setupHelpTooltips();
+    applyPreset("base");
+  </script>
 </body>
 </html>
