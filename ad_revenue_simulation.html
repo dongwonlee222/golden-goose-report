@@ -1014,18 +1014,11 @@
 
             <div class="field">
               <div class="field-head">
-                <span>주간 금 경품 수량</span>
-                <span id="weeklyGoldCount-value">10개</span>
+                <span>주간 경품 비용</span>
+                <span id="weeklyPrizeCost-value">500,000원</span>
               </div>
-              <input id="weeklyGoldCount" type="range" min="0" max="50" step="1" value="10" />
-            </div>
-
-            <div class="field">
-              <div class="field-head">
-                <span>금 경품 1개 단가</span>
-                <span id="goldUnitPrice-value">50,000원</span>
-              </div>
-              <input id="goldUnitPrice" type="range" min="10000" max="100000" step="1000" value="50000" />
+              <input id="weeklyPrizeCost" type="range" min="0" max="5000000" step="10000" value="500000" />
+              <div class="field-note">주간 기준 경품 지급 총비용입니다. 값을 올리면 월 경품 비용이 함께 증가합니다.</div>
             </div>
 
             <div class="field">
@@ -1193,7 +1186,7 @@
                   </div>
                   <div class="legend-item" data-legend-id="gold">
                     <span class="legend-dot fill-banner"></span>
-                    <span class="legend-name">금 경품 비용</span>
+                    <span class="legend-name">주간 경품 비용</span>
                     <span id="goldBarValue" class="legend-value">0%</span>
                   </div>
                   <div class="legend-item" data-legend-id="server">
@@ -1397,9 +1390,9 @@
                 <td>Interstitial 월 노출 × 1회당 지급 포인트 × (1 - 포인트 소멸률)</td>
               </tr>
               <tr>
-                <td>금 경품 비용</td>
+                <td>주간 경품 비용</td>
                 <td id="detailGoldCost">-</td>
-                <td>주간 금 경품 수량 × 금 단가 × 4주</td>
+                <td>주간 경품 비용 × 4주</td>
               </tr>
               <tr>
                 <td>마케팅비</td>
@@ -1465,8 +1458,7 @@
         mediationFeeRate: 20,
         offerwallFeeRate: 30,
         cac: 300,
-        weeklyGoldCount: 10,
-        goldUnitPrice: 50000,
+        weeklyPrizeCost: 500000,
         usdKrw: 1450,
         serverCost: 500000,
         resourceCost: 300000,
@@ -1479,7 +1471,7 @@
       "downloads", "currentDau", "monthlyDownloads", "signupRate", "retentionModeToggle", "retentionFactor", "retentionL1", "retentionL7", "retentionL30", "rewardedUserRate", "interstitialUserRate", "bannerUserRate", "offerwallUserRate",
       "rewardedEcpm", "interstitialEcpm", "bannerEcpm",
       "rewardedViews", "interstitialViews", "bannerViews", "offerwallCompletions", "offerwallRevenuePerCompletion",
-      "pointsPerAd", "interstitialPointsPerAd", "pointBreakageRate", "mediationFeeRate", "offerwallFeeRate", "cac", "weeklyGoldCount", "goldUnitPrice", "usdKrw",
+      "pointsPerAd", "interstitialPointsPerAd", "pointBreakageRate", "mediationFeeRate", "offerwallFeeRate", "cac", "weeklyPrizeCost", "usdKrw",
       "serverCost", "resourceCost", "personnelCost", "personnelStepCost"
     ];
 
@@ -1543,7 +1535,6 @@
       if (["rewardedViews", "interstitialViews", "bannerViews"].includes(id)) return "회";
       if (id === "offerwallCompletions") return "건";
       if (["pointsPerAd", "interstitialPointsPerAd"].includes(id)) return "점";
-      if (id === "weeklyGoldCount") return "개";
       return "원";
     };
     function enforceDownloadDauConstraint(changedId = "") {
@@ -1685,8 +1676,7 @@
         mediationFeeRate: "Rewarded·Interstitial·Banner 광고 매출에 적용되는 미디에이션 수수료율입니다. 값을 올리면 일반 광고 수수료가 커지고 순이익이 줄어듭니다.",
         offerwallFeeRate: "Offerwall 매출에 적용되는 수수료율입니다. 값을 올리면 Offerwall 순매출이 줄어들고 전체 순이익이 낮아집니다.",
         cac: "회원가입 1명 확보에 드는 비용입니다. 값을 올리면 마케팅비가 커지고 순이익과 손익분기 CAC가 나빠집니다.",
-        weeklyGoldCount: "주간 금 경품 지급 수량입니다. 값을 올리면 금 경품 비용이 증가합니다.",
-        goldUnitPrice: "금 경품 1개당 단가입니다. 값을 올리면 금 경품 비용이 증가합니다.",
+        weeklyPrizeCost: "주간 기준 경품 지급 총비용입니다. 값을 올리면 월 경품 비용이 함께 증가합니다.",
         usdKrw: "광고 매출을 원화로 환산하는 환율입니다. 값을 올리면 USD 기반 광고 매출이 원화 기준으로 커집니다.",
         serverCost: "현재 DAU 기준 기본 월 서버운영비입니다. 예상 DAU가 현재 DAU보다 1천명 늘어날 때마다 기본비의 10%씩 추가됩니다.",
         resourceCost: "현재 DAU 기준 기본 월 리소스 비용입니다. 예상 DAU가 현재 DAU보다 1천명 늘어날 때마다 기본비의 10%씩 추가됩니다.",
@@ -1702,7 +1692,7 @@
 
       const resultHelp = {
         monthlyRevenue: "Rewarded·Interstitial·Banner·Offerwall 월 매출을 모두 더한 값입니다.",
-        monthlyCost: "마케팅비, 일반 광고 수수료, Offerwall 수수료, Rewarded/Interstitial 보상비, 금 경품, 서버·리소스·인력 비용을 모두 합한 값입니다.",
+        monthlyCost: "마케팅비, 일반 광고 수수료, Offerwall 수수료, Rewarded/Interstitial 보상비, 주간 경품 비용, 서버·리소스·인력 비용을 모두 합한 값입니다.",
         monthlyProfit: "월 예상 매출에서 월 예상 총비용을 뺀 결과입니다. 플러스면 흑자, 마이너스면 적자입니다.",
         totalDownloadsSummary: "현재 다운로드 수와 월 목표 다운로드 수를 합친 값입니다.",
         totalSignupsSummary: "현재 다운로드 수와 월 목표 다운로드 수에 회원가입 전환율을 적용해 계산한 총 회원가입 수입니다.",
@@ -1747,7 +1737,7 @@
         const pointCostMultiplier = 1 - (values.pointBreakageRate / 100);
         const rewardedPointsCost = rewardedMonthlyImpressions * values.pointsPerAd * pointCostMultiplier;
         const interstitialPointsCost = interstitialMonthlyImpressions * values.interstitialPointsPerAd * pointCostMultiplier;
-        const goldCost = values.weeklyGoldCount * values.goldUnitPrice * 4;
+        const goldCost = values.weeklyPrizeCost * 4;
         const marketingCost = monthlyTargetSignups * values.cac;
         const extraDau = Math.max(dauCount - currentDauBase, 0);
         const serverStepUnits = extraDau / 1000;
@@ -1892,8 +1882,7 @@
       setText("mediationFeeRate-value", `${(+mediationFeeRate.value).toFixed(1)}%`);
       setText("offerwallFeeRate-value", `${(+offerwallFeeRate.value).toFixed(1)}%`);
       setText("cac-value", formatMoney(+cac.value));
-      setText("weeklyGoldCount-value", `${formatNumber(+weeklyGoldCount.value)}개`);
-      setText("goldUnitPrice-value", formatMoney(+goldUnitPrice.value));
+      setText("weeklyPrizeCost-value", formatMoney(+weeklyPrizeCost.value));
       setText("usdKrw-value", formatMoney(+usdKrw.value));
       setText("serverCost-value", formatMoney(+serverCost.value));
       setText("resourceCost-value", formatMoney(+resourceCost.value));
@@ -1958,7 +1947,7 @@
       const interstitialPointsCost = interstitialMonthlyImpressions * values.interstitialPointsPerAd * pointCostMultiplier;
       const basePointsCost = (baseRewardedUsers * values.rewardedViews * 30) * values.pointsPerAd * pointCostMultiplier;
       const baseInterstitialPointsCost = (baseInterstitialUsers * values.interstitialViews * 30) * values.interstitialPointsPerAd * pointCostMultiplier;
-      const goldCost = values.weeklyGoldCount * values.goldUnitPrice * 4;
+      const goldCost = values.weeklyPrizeCost * 4;
       const marketingCost = targetSignups * values.cac;
       const actualCac = targetSignups > 0 ? marketingCost / targetSignups : 0;
       const extraDau = Math.max(dauCount - currentDauBase, 0);
@@ -2110,7 +2099,7 @@
         mediation: "미디에이션 수수료",
         points: "Rewarded 보상비",
         interstitialPoints: "Interstitial 보상비",
-        gold: "금 경품 비용",
+        gold: "주간 경품 비용",
         server: "서버운영비",
         resource: "리소스 비용",
         personnel: "인력 비용"
