@@ -992,7 +992,16 @@
                 <span id="mediationFeeRate-value">20.0%</span>
               </div>
               <input id="mediationFeeRate" type="range" min="0" max="50" step="1" value="20" />
-              <div class="field-note">전체 광고 매출에 적용되는 수수료율입니다.</div>
+              <div class="field-note">Rewarded·Interstitial·Banner 광고 매출에 적용되는 수수료율입니다.</div>
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>오퍼월 수수료율</span>
+                <span id="offerwallFeeRate-value">30.0%</span>
+              </div>
+              <input id="offerwallFeeRate" type="range" min="0" max="50" step="1" value="30" />
+              <div class="field-note">Offerwall 매출에 별도로 적용되는 수수료율입니다.</div>
             </div>
 
             <div class="field">
@@ -1454,6 +1463,7 @@
         interstitialPointsPerAd: 1.5,
         pointBreakageRate: 30,
         mediationFeeRate: 20,
+        offerwallFeeRate: 30,
         cac: 300,
         weeklyGoldCount: 10,
         goldUnitPrice: 50000,
@@ -1469,7 +1479,7 @@
       "downloads", "currentDau", "monthlyDownloads", "signupRate", "retentionModeToggle", "retentionFactor", "retentionL1", "retentionL7", "retentionL30", "rewardedUserRate", "interstitialUserRate", "bannerUserRate", "offerwallUserRate",
       "rewardedEcpm", "interstitialEcpm", "bannerEcpm",
       "rewardedViews", "interstitialViews", "bannerViews", "offerwallCompletions", "offerwallRevenuePerCompletion",
-      "pointsPerAd", "interstitialPointsPerAd", "pointBreakageRate", "mediationFeeRate", "cac", "weeklyGoldCount", "goldUnitPrice", "usdKrw",
+      "pointsPerAd", "interstitialPointsPerAd", "pointBreakageRate", "mediationFeeRate", "offerwallFeeRate", "cac", "weeklyGoldCount", "goldUnitPrice", "usdKrw",
       "serverCost", "resourceCost", "personnelCost", "personnelStepCost"
     ];
 
@@ -1527,7 +1537,7 @@
     const getUnitLabel = (id) => {
       if (["downloads", "currentDau", "monthlyDownloads"].includes(id)) return "명";
       if (id === "retentionModeToggle") return "";
-      if (["signupRate", "retentionFactor", "rewardedUserRate", "interstitialUserRate", "bannerUserRate", "offerwallUserRate", "pointBreakageRate", "mediationFeeRate"].includes(id)) return "%";
+      if (["signupRate", "retentionFactor", "rewardedUserRate", "interstitialUserRate", "bannerUserRate", "offerwallUserRate", "pointBreakageRate", "mediationFeeRate", "offerwallFeeRate"].includes(id)) return "%";
       if (["retentionL1", "retentionL7", "retentionL30"].includes(id)) return "%";
       if (["rewardedEcpm", "interstitialEcpm", "bannerEcpm"].includes(id)) return "USD";
       if (["rewardedViews", "interstitialViews", "bannerViews"].includes(id)) return "회";
@@ -1672,7 +1682,8 @@
         pointsPerAd: "Rewarded 1회 시청 시 평균 지급 포인트입니다. 값을 올리면 Rewarded 보상비가 증가해 순이익이 줄어듭니다.",
         interstitialPointsPerAd: "Interstitial 1회 노출/완료 시 평균 지급 포인트입니다. 값을 올리면 Interstitial 보상비가 증가합니다.",
         pointBreakageRate: "지급된 포인트 중 실제 사용되지 않고 소멸되는 비율입니다. 값을 올리면 실제 포인트 비용이 줄어듭니다.",
-        mediationFeeRate: "Rewarded·Interstitial·Banner 광고 매출에 적용되는 미디에이션 수수료율입니다. Offerwall은 별도로 30% 수수료가 고정 반영됩니다. 값을 올리면 일반 광고 수수료가 커지고 순이익이 줄어듭니다.",
+        mediationFeeRate: "Rewarded·Interstitial·Banner 광고 매출에 적용되는 미디에이션 수수료율입니다. 값을 올리면 일반 광고 수수료가 커지고 순이익이 줄어듭니다.",
+        offerwallFeeRate: "Offerwall 매출에 적용되는 수수료율입니다. 값을 올리면 Offerwall 순매출이 줄어들고 전체 순이익이 낮아집니다.",
         cac: "회원가입 1명 확보에 드는 비용입니다. 값을 올리면 마케팅비가 커지고 순이익과 손익분기 CAC가 나빠집니다.",
         weeklyGoldCount: "주간 금 경품 지급 수량입니다. 값을 올리면 금 경품 비용이 증가합니다.",
         goldUnitPrice: "금 경품 1개당 단가입니다. 값을 올리면 금 경품 비용이 증가합니다.",
@@ -1732,7 +1743,7 @@
         const offerwallRevenue = offerwallMonthlyCompletions * values.offerwallRevenuePerCompletion;
         const adRevenue = rewardedRevenue + interstitialRevenue + bannerRevenue;
         const totalRevenue = adRevenue + offerwallRevenue;
-        const mediationCost = (adRevenue * (values.mediationFeeRate / 100)) + (offerwallRevenue * 0.3);
+        const mediationCost = (adRevenue * (values.mediationFeeRate / 100)) + (offerwallRevenue * (values.offerwallFeeRate / 100));
         const pointCostMultiplier = 1 - (values.pointBreakageRate / 100);
         const rewardedPointsCost = rewardedMonthlyImpressions * values.pointsPerAd * pointCostMultiplier;
         const interstitialPointsCost = interstitialMonthlyImpressions * values.interstitialPointsPerAd * pointCostMultiplier;
@@ -1879,6 +1890,7 @@
       setText("interstitialPointsPerAd-value", `${(+interstitialPointsPerAd.value).toFixed(1)}점`);
       setText("pointBreakageRate-value", `${(+pointBreakageRate.value).toFixed(1)}%`);
       setText("mediationFeeRate-value", `${(+mediationFeeRate.value).toFixed(1)}%`);
+      setText("offerwallFeeRate-value", `${(+offerwallFeeRate.value).toFixed(1)}%`);
       setText("cac-value", formatMoney(+cac.value));
       setText("weeklyGoldCount-value", `${formatNumber(+weeklyGoldCount.value)}개`);
       setText("goldUnitPrice-value", formatMoney(+goldUnitPrice.value));
@@ -1940,7 +1952,7 @@
       const incrementalAdRevenue = Math.max(adRevenue - baseAdRevenue, 0);
       const incrementalOfferwallRevenue = Math.max(offerwallRevenue - baseOfferwallRevenue, 0);
 
-      const mediationCost = (adRevenue * (values.mediationFeeRate / 100)) + (offerwallRevenue * 0.3);
+      const mediationCost = (adRevenue * (values.mediationFeeRate / 100)) + (offerwallRevenue * (values.offerwallFeeRate / 100));
       const pointCostMultiplier = 1 - (values.pointBreakageRate / 100);
       const pointsCost = rewardedMonthlyImpressions * values.pointsPerAd * pointCostMultiplier;
       const interstitialPointsCost = interstitialMonthlyImpressions * values.interstitialPointsPerAd * pointCostMultiplier;
@@ -1956,7 +1968,7 @@
       const resourceCost = values.resourceCost + (resourceStepUnits * values.resourceCost * 0.1);
       const personnelStepUnits = extraDau / 3000;
       const personnelCost = values.personnelCost + (personnelStepUnits * values.personnelStepCost);
-      const incrementalMediationCost = (incrementalAdRevenue * (values.mediationFeeRate / 100)) + (incrementalOfferwallRevenue * 0.3);
+      const incrementalMediationCost = (incrementalAdRevenue * (values.mediationFeeRate / 100)) + (incrementalOfferwallRevenue * (values.offerwallFeeRate / 100));
       const incrementalPointsCost = Math.max(pointsCost - basePointsCost, 0);
       const incrementalInterstitialPointsCost = Math.max(interstitialPointsCost - baseInterstitialPointsCost, 0);
       const baseServerCost = values.serverCost;
