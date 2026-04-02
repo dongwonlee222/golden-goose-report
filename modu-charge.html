@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>모두의충전 리포트</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      background:
+        radial-gradient(circle at top left, #fff4d6 0, transparent 28%),
+        linear-gradient(180deg, #f7f3ea 0%, #f2ede3 100%);
+      color: #1f2937;
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      background: #fffdf8;
+      border: 1px solid #ddd6c8;
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 18px 50px rgba(31, 41, 55, 0.08);
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: #6b7280;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 34px;
+    }
+
+    .lead {
+      margin: 0 0 28px;
+      color: #6b7280;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      display: block;
+      padding: 22px;
+      border-radius: 18px;
+      border: 1px solid #ddd6c8;
+      background: #fff;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card:hover {
+      border-color: #e3c88d;
+      background: #fff9ef;
+    }
+
+    .title {
+      margin-bottom: 8px;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .desc {
+      color: #6b7280;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <a class="back" href="./">← 서비스 선택으로 돌아가기</a>
+    <h1>모두의충전 리포트</h1>
+    <p class="lead">모두의충전 관련 분석과 시뮬레이션을 한 곳에서 관리하는 진입 페이지입니다.</p>
+
+    <div class="grid">
+      <a class="card" href="./giftcard.html">
+        <div class="title">카카오 상품권 전환 리포트</div>
+        <div class="desc">상품권 전환 회원과 실제 결제 이력을 연결해 핵심 결론, 세그먼트, 사용자 패턴, CPO 요약을 확인할 수 있습니다.</div>
+      </a>
+
+      <a class="card" href="./modu_charge_analysis.html">
+        <div class="title">월별 분석</div>
+        <div class="desc">월별 실적, 설치 전환 비용, 퍼널, 결제 규모, 할인 구조를 함께 보는 1차 분석 페이지입니다.</div>
+      </a>
+
+      <a class="card" href="./modu_charge_economics.html">
+        <div class="title">이코노믹스 분석</div>
+        <div class="desc">CAC, LTV, 충성 고객 비중, 세그먼트별 경제성 차이와 사용 SQL까지 정리한 분석 페이지입니다.</div>
+      </a>
+
+      <a class="card" href="./modu_charge_simulation.html">
+        <div class="title">매출 시뮬레이션</div>
+        <div class="desc">설치, 결제 전환, 객단가, 원가율을 조정해 모두의충전의 월 매출과 수익 구조를 가정할 수 있습니다.</div>
+      </a>
+    </div>
+  </main>
+</body>
+</html>

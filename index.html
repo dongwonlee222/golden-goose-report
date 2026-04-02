@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>서비스 리포트 허브</title>
+  <title>서비스 리포트</title>
   <style>
     body {
       margin: 0;
+      min-height: 100vh;
       padding: 40px 20px;
       background:
         radial-gradient(circle at top left, #fff4d6 0, transparent 28%),
@@ -16,12 +17,12 @@
     }
 
     .wrap {
-      max-width: 880px;
+      max-width: 980px;
       margin: 0 auto;
       background: #fffdf8;
       border: 1px solid #ddd6c8;
-      border-radius: 24px;
-      padding: 40px;
+      border-radius: 28px;
+      padding: 44px;
       box-shadow: 0 18px 50px rgba(31, 41, 55, 0.08);
     }
 
@@ -38,12 +39,12 @@
 
     h1 {
       margin: 0 0 12px;
-      font-size: 34px;
+      font-size: 36px;
       line-height: 1.2;
     }
 
     .lead {
-      margin: 0 0 28px;
+      margin: 0 0 32px;
       color: #6b7280;
       font-size: 16px;
       line-height: 1.7;
@@ -51,75 +52,67 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
     }
 
     .card {
       display: block;
-      padding: 22px;
-      border-radius: 18px;
+      padding: 28px;
+      border-radius: 20px;
       border: 1px solid #ddd6c8;
       background: #fff;
       text-decoration: none;
       color: inherit;
+      transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
     }
 
     .card:hover {
+      transform: translateY(-1px);
       border-color: #e3c88d;
       background: #fff9ef;
     }
 
     .title {
-      margin-bottom: 8px;
-      font-size: 20px;
+      margin-bottom: 10px;
+      font-size: 24px;
       font-weight: 800;
     }
 
     .desc {
       color: #6b7280;
-      font-size: 14px;
-      line-height: 1.6;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 800px) {
+      .wrap {
+        padding: 28px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
   <main class="wrap">
     <div class="eyebrow">Service Reports</div>
-    <h1>서비스 리포트 허브</h1>
+    <h1>서비스별로 리포트를 구분했습니다</h1>
     <p class="lead">
-      황금거위와 모두의충전 리포트를 각각 독립된 페이지로 관리할 수 있도록 정리한 시작 페이지입니다.
+      앞으로 업데이트를 반복하기 쉽도록 리포트 진입 경로를 `황금거위`와 `모두의충전` 두 갈래로 분리했습니다.
     </p>
 
     <div class="grid">
-      <a class="card" href="./giftcard.html">
-        <div class="title">카카오 상품권 전환 리포트</div>
-        <div class="desc">상품권 전환 회원과 실제 결제 이력을 연결해 핵심 결론, 세그먼트, 사용자 패턴, CPO 요약을 확인할 수 있습니다.</div>
+      <a class="card" href="./golden-goose.html">
+        <div class="title">황금거위</div>
+        <div class="desc">광고 성과, 매출 시뮬레이션 등 황금거위 관련 리포트를 한 곳에서 볼 수 있습니다.</div>
       </a>
 
-      <a class="card" href="./ad_revenue_performance_section.html">
-        <div class="title">광고 성과 리포트</div>
-        <div class="desc">광고 매출, 광고 유형별/네트워크별 성과, 유저 지표, 리텐션, OS/국가별 성과를 확인할 수 있습니다.</div>
-      </a>
-
-      <a class="card" href="./ad_revenue_simulation.html">
-        <div class="title">황금거위 매출 시뮬레이션</div>
-        <div class="desc">주요 변수 변경에 따라 월 매출, 비용, 순이익과 손익분기 구조를 바로 확인할 수 있습니다.</div>
-      </a>
-
-      <a class="card" href="./modu_charge_simulation.html">
-        <div class="title">모두의충전 매출 시뮬레이션</div>
-        <div class="desc">월별 엑셀 실적을 기준값으로 두고 설치, 결제 전환, 객단가, 원가율을 조절해 월 매출과 수익 구조를 가정해 볼 수 있습니다.</div>
-      </a>
-
-      <a class="card" href="./modu_charge_economics.html">
-        <div class="title">모두페이 이코노믹스 분석</div>
-        <div class="desc">CAC, LTV, 충성 고객 비중, 세그먼트별 경제성 차이와 사용 SQL까지 함께 정리한 분석 페이지입니다.</div>
-      </a>
-
-      <a class="card" href="./modu_charge_analysis.html">
-        <div class="title">모두의충전 월별 분석</div>
-        <div class="desc">2022년 6월 이후 유효 월별 실적과 구글 애즈 설치 전환 비용을 함께 묶어 퍼널, 결제 규모, 할인 구조를 보는 1차 분석 페이지입니다.</div>
+      <a class="card" href="./modu-charge.html">
+        <div class="title">모두의충전</div>
+        <div class="desc">상품권 전환, 월별 분석, 이코노믹스, 시뮬레이션 등 모두의충전 관련 리포트를 한 곳에서 관리합니다.</div>
       </a>
     </div>
   </main>
