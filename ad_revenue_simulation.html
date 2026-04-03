@@ -1257,9 +1257,9 @@
               <div id="breakevenCacDrivers" class="sub">월 매출, 보상비, 경품비, 운영비, 월 목표 회원가입 수가 바뀌면 함께 달라집니다.</div>
             </section>
             <section class="card full-width-card emphasis-card">
-              <div class="label">광고 LTV vs 실제 CVC</div>
-              <div id="ltvCvcCompare" class="value">광고 LTV 401원 &gt; 실제 CVC 0원</div>
-              <div id="ltvCvcSub" class="sub">광고 LTV는 신규 유저 1명이 이번 달 기준으로 벌어오는 평균 광고 가치이고, 실제 CVC는 유저 1명을 데려오는 실제 비용입니다.</div>
+              <div class="label">광고 LTV vs 실제 CAC</div>
+              <div id="ltvCvcCompare" class="value">광고 LTV 401원 &gt; 실제 CAC 0원</div>
+              <div id="ltvCvcSub" class="sub">광고 LTV는 신규 유저 1명이 이번 달 기준으로 벌어오는 평균 광고 가치이고, 실제 CAC는 유저 1명을 데려오는 실제 비용입니다.</div>
               <div id="netLtvCompare" class="highlight-sub">비용 차감 후 신규 1명당 순기여(LTV) 0원</div>
               <div id="netLtvCostBreakdown" class="sub">차감 비용: 수수료 0원 · 보상비 0원 · 경품비 0원 · 운영비 0원</div>
             </section>
@@ -1699,7 +1699,7 @@
         dauCount: "현재 DAU와 신규 유저 수익화 유지율을 반영한 신규 DAU를 더한 값입니다. 광고 노출수와 매출 계산의 기준이 됩니다.",
         retentionSummary: "월 목표 다운로드로 유입된 신규 회원 중 실제로 다시 들어와 광고를 보기 시작하는 비율입니다. 직접 입력하거나 L1·L7·L30의 가중평균으로 계산할 수 있습니다. 가중평균은 L1 50%, L7 30%, L30 20%를 사용합니다.",
         breakevenCac: "현재 구조에서 회원가입 1명당 감당 가능한 최대 획득비용입니다. 광고 매출에서 보상비, 수수료, 경품비, 운영비를 제외하고 남는 금액을 월 목표 회원가입 수로 나눈 값입니다.",
-        ltvCvcCompare: "광고 LTV는 신규 유저 1명이 이번 달 기준으로 추가로 벌어오는 평균 광고 가치입니다. 실제 CVC는 유저 1명을 데려오는 실제 비용입니다."
+        ltvCvcCompare: "광고 LTV는 신규 유저 1명이 이번 달 기준으로 추가로 벌어오는 평균 광고 가치입니다. 실제 CAC는 유저 1명을 데려오는 실제 비용입니다."
       };
 
       Object.entries(resultHelp).forEach(([valueId, text]) => {
@@ -1987,7 +1987,7 @@
       } else {
         setText("breakevenCacSub", `현재 구조에서는 회원가입 1명당 ${formatMoney(breakevenCac)} 이하로 유입시키면 적자가 아닐 가능성이 높습니다.`);
       }
-      setText("ltvCvcCompare", `광고 LTV ${formatMoney(adLtv)} ${ltvComparator} 실제 CVC ${formatMoney(actualCac)}`);
+      setText("ltvCvcCompare", `광고 LTV ${formatMoney(adLtv)} ${ltvComparator} 실제 CAC ${formatMoney(actualCac)}`);
       setText("ltvCvcSub", adLtv >= actualCac ? "현재 기준으로는 신규 유저 1명이 벌어오는 광고 가치가 획득비용보다 커서, 장기적으로는 회수 가능성이 있는 구조입니다." : "현재 기준으로는 신규 유저 1명이 벌어오는 광고 가치보다 획득비용이 더 커서, 장기적으로도 회수가 어려운 구조입니다.");
       setText("netLtvCompare", `비용 차감 후 신규 1명당 순기여 ${formatMoney(netLtv)}`);
       document.getElementById("netLtvCompare").classList.remove("good", "bad");
