@@ -1,0 +1,2903 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>황금거위 — DAU 고도화 전략 분석 보고서</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --gold: #FFB800;
+      --gold-dark: #CC9200;
+      --gold-light: #FFD54F;
+      --gold-pale: rgba(255,184,0,0.08);
+      --bg: #0d0d0d;
+      --card: #1a1a1a;
+      --card2: #222;
+      --card3: #2a2a2a;
+      --border: #2a2a2a;
+      --text: #e0e0e0;
+      --text-dim: #888;
+      --text-muted: #555;
+      --green: #4CAF50;
+      --red: #F44336;
+      --blue: #2196F3;
+      --purple: #9C27B0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Pretendard', -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    /* ── NAV ───────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1e1e1e;
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      height: 52px;
+      overflow-x: auto;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-logo {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 1px;
+      margin-right: 16px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav a {
+      text-decoration: none;
+      color: var(--text-dim);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .nav a:hover {
+      color: var(--gold);
+      background: var(--gold-pale);
+    }
+
+    /* ── HERO ──────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(255,184,0,0.12) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 40% at 20% 80%, rgba(255,184,0,0.06) 0%, transparent 60%),
+                  var(--bg);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 70% 20%, rgba(255,184,0,0.07) 0%, transparent 40%),
+        radial-gradient(circle at 30% 70%, rgba(204,146,0,0.05) 0%, transparent 35%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      opacity: 0.8;
+    }
+    .hero-logo {
+      font-size: clamp(52px, 9vw, 88px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #FFD54F 0%, #FFB800 40%, #CC9200 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 1;
+      text-shadow: none;
+      filter: drop-shadow(0 0 40px rgba(255,184,0,0.4));
+    }
+    .hero-sub {
+      font-size: clamp(14px, 2.5vw, 18px);
+      color: var(--text-dim);
+      margin-bottom: 48px;
+      letter-spacing: 0.5px;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .hero-meta-item {
+      text-align: center;
+    }
+    .hero-meta-item .val {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .hero-meta-item .lbl {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 4px;
+      letter-spacing: 1px;
+    }
+    .hero-date {
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold-dark), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* ── SECTION ───────────────────────────────── */
+    .section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .section-num {
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      opacity: 0.8;
+    }
+    .section-title {
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .section-desc {
+      color: var(--text-dim);
+      font-size: 14px;
+      margin-bottom: 40px;
+      max-width: 600px;
+    }
+
+    /* ── CARD ──────────────────────────────────── */
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border);
+    }
+    .card2 {
+      background: var(--card2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid #2e2e2e;
+    }
+    .card-gold {
+      background: linear-gradient(135deg, rgba(255,184,0,0.12) 0%, rgba(255,184,0,0.04) 100%);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid rgba(255,184,0,0.25);
+    }
+
+    /* ── GRID UTILS ────────────────────────────── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+    /* ── BADGE ─────────────────────────────────── */
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .badge-gold { background: rgba(255,184,0,0.15); color: var(--gold); border: 1px solid rgba(255,184,0,0.3); }
+    .badge-green { background: rgba(76,175,80,0.15); color: var(--green); border: 1px solid rgba(76,175,80,0.3); }
+    .badge-red { background: rgba(244,67,54,0.15); color: var(--red); border: 1px solid rgba(244,67,54,0.3); }
+    .badge-blue { background: rgba(33,150,243,0.15); color: var(--blue); border: 1px solid rgba(33,150,243,0.3); }
+
+    /* ── SECTION 01: 비즈니스 구조 ─────────────── */
+    .platform-diagram {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: stretch;
+    }
+    .platform-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+    }
+    .platform-side {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .platform-node {
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .node-supply {
+      background: rgba(76,175,80,0.12);
+      border: 1px solid rgba(76,175,80,0.3);
+      color: #81C784;
+    }
+    .node-demand {
+      background: rgba(244,67,54,0.10);
+      border: 1px solid rgba(244,67,54,0.25);
+      color: #EF9A9A;
+    }
+    .node-platform {
+      background: linear-gradient(135deg, rgba(255,184,0,0.2) 0%, rgba(255,184,0,0.08) 100%);
+      border: 2px solid rgba(255,184,0,0.5);
+      color: var(--gold);
+      border-radius: 20px;
+      padding: 28px 20px;
+      text-align: center;
+      position: relative;
+    }
+    .node-platform-logo {
+      font-size: 24px;
+      font-weight: 900;
+      margin-bottom: 6px;
+      background: linear-gradient(135deg, #FFD54F, #FFB800);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .node-platform-loop {
+      font-size: 11px;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-top: 8px;
+    }
+    .node-platform-loop span {
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .platform-arrow {
+      font-size: 18px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+    .revenue-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .revenue-node {
+      background: rgba(33,150,243,0.08);
+      border: 1px solid rgba(33,150,243,0.2);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+      font-size: 12px;
+      color: #90CAF9;
+    }
+    .revenue-node .rv-val {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gold);
+      display: block;
+      margin-top: 4px;
+    }
+
+    /* ── SECTION 02: 서비스 현황 ───────────────── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .info-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .info-card .ic-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .info-card .ic-value {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--gold);
+    }
+    .info-card .ic-sub {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+    .feature-flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .flow-step {
+      flex: 1;
+      padding: 20px 16px;
+      text-align: center;
+      position: relative;
+    }
+    .flow-step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold);
+      font-size: 18px;
+      font-weight: 700;
+      z-index: 1;
+    }
+    .flow-step .fs-icon { font-size: 24px; margin-bottom: 6px; }
+    .flow-step .fs-title { font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 3px; }
+    .flow-step .fs-desc { font-size: 11px; color: var(--text-dim); }
+
+    /* ── SECTION 03: 타임라인 ──────────────────── */
+    .tl-wrapper { position: relative; padding: 8px 0; }
+    .tl-line {
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, #333 10%, #333 90%, transparent);
+      transform: translateX(-50%);
+    }
+    .tl-item {
+      display: grid;
+      grid-template-columns: 1fr 56px 1fr;
+      align-items: center;
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .tl-dot {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FFD54F, #FFB800);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 16px rgba(255,184,0,0.4);
+    }
+    .tl-left {
+      padding-right: 24px;
+      text-align: right;
+    }
+    .tl-right {
+      padding-left: 24px;
+      text-align: left;
+    }
+    .tl-empty {}
+    .tl-year {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+    .tl-desc {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .tl-content {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: inline-block;
+      max-width: 280px;
+    }
+    .tl-left .tl-content { text-align: right; }
+    .tl-right .tl-content { text-align: left; }
+
+    /* ── SECTION 04: 경쟁사 ────────────────────── */
+    .comp-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 13px;
+    }
+    .comp-table th {
+      background: var(--card2);
+      padding: 12px 16px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-dim);
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+    }
+    .comp-table th:first-child { text-align: left; border-radius: 10px 0 0 0; }
+    .comp-table th:last-child { border-radius: 0 10px 0 0; }
+    .comp-table td {
+      padding: 11px 16px;
+      text-align: center;
+      border-bottom: 1px solid #1e1e1e;
+      vertical-align: middle;
+    }
+    .comp-table td:first-child { text-align: left; color: var(--text-dim); font-size: 12px; font-weight: 500; }
+    .comp-table tr:last-child td:first-child { border-radius: 0 0 0 10px; }
+    .comp-table tr:last-child td:last-child { border-radius: 0 0 10px 0; }
+    .comp-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .col-gold { color: var(--gold) !important; font-weight: 700 !important; font-size: 13px !important; }
+    .check-yes { color: var(--green); font-size: 14px; }
+    .check-no { color: var(--text-muted); font-size: 14px; }
+
+    /* ── SECTION 05: 사용자층 ──────────────────── */
+    .matrix-wrap {
+      position: relative;
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      aspect-ratio: 1.4;
+      margin-bottom: 24px;
+    }
+    .matrix-x-label {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+    .matrix-y-label {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+    .matrix-axis-h {
+      position: absolute;
+      left: 40px; right: 40px;
+      top: 50%;
+      height: 1px;
+      background: #2e2e2e;
+    }
+    .matrix-axis-v {
+      position: absolute;
+      top: 40px; bottom: 40px;
+      left: 50%;
+      width: 1px;
+      background: #2e2e2e;
+    }
+    .matrix-quadrant-label {
+      position: absolute;
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+    .matrix-dot {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .matrix-dot-circle {
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin: 0 auto 4px;
+      border: 2px solid rgba(255,184,0,0.4);
+      background: rgba(255,184,0,0.1);
+    }
+    .matrix-dot-label {
+      font-size: 10px;
+      color: var(--text);
+      white-space: nowrap;
+      font-weight: 600;
+    }
+    .matrix-dot-pct {
+      font-size: 9px;
+      color: var(--gold);
+    }
+    .seg-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      transition: border-color 0.2s;
+    }
+    .seg-card:hover { border-color: rgba(255,184,0,0.3); }
+    .seg-icon { font-size: 28px; margin-bottom: 10px; }
+    .seg-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .seg-pct {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .seg-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+    .seg-row-label { color: var(--text-dim); font-size: 11px; flex-shrink: 0; margin-right: 8px; padding-top: 1px; }
+    .seg-row-val { color: var(--text); text-align: right; line-height: 1.4; }
+    .seg-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .seg-tag {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      background: var(--gold-pale);
+      color: var(--gold);
+      border: 1px solid rgba(255,184,0,0.2);
+    }
+
+    /* ── SECTION 06: 수익 구조 ─────────────────── */
+    .revenue-charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .chart-box {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+    }
+    .chart-box-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .chart-box-sub {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-bottom: 20px;
+    }
+    .revenue-issue-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .issue-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    .issue-card .ic-type { font-size: 11px; color: var(--text-dim); margin-bottom: 6px; letter-spacing: 0.5px; }
+    .issue-card .ic-rate { font-size: 20px; font-weight: 800; color: var(--gold); margin-bottom: 4px; }
+    .issue-card .ic-note { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
+    .issue-card .ic-cmp { font-size: 12px; margin-top: 8px; }
+
+    /* ── SECTION 07: DAU 전략 ──────────────────── */
+    .priority-cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+    .p-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: 56px 1fr auto;
+      gap: 20px;
+      align-items: start;
+      transition: border-color 0.2s;
+    }
+    .p-card:hover { border-color: rgba(255,184,0,0.25); }
+    .p-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(255,184,0,0.2), rgba(255,184,0,0.05));
+      border: 1px solid rgba(255,184,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .p-body {}
+    .p-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .p-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; margin-bottom: 10px; }
+    .p-stars { color: var(--gold); font-size: 13px; letter-spacing: 1px; }
+    .p-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .p-right { text-align: right; flex-shrink: 0; min-width: 90px; }
+    .p-period { font-size: 11px; color: var(--text-dim); margin-bottom: 4px; }
+    .p-diff {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+    .diff-low { background: rgba(76,175,80,0.15); color: var(--green); }
+    .diff-mid { background: rgba(255,184,0,0.15); color: var(--gold); }
+    .diff-high { background: rgba(244,67,54,0.15); color: var(--red); }
+    .p-revenue { font-size: 11px; color: var(--text-dim); margin-top: 6px; line-height: 1.5; }
+
+    /* ── SECTION 08: 홈 화면 구조 ─────────────── */
+    .review-highlight {
+      background: linear-gradient(135deg, rgba(255,184,0,0.1) 0%, rgba(255,184,0,0.03) 100%);
+      border: 1px solid rgba(255,184,0,0.25);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .review-reasons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .reason-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    .reason-num {
+      font-size: 28px;
+      font-weight: 900;
+      color: rgba(255,184,0,0.2);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .reason-title { font-size: 13px; font-weight: 700; margin-bottom: 6px; color: var(--gold); }
+    .reason-desc { font-size: 12px; color: var(--text-dim); line-height: 1.6; }
+    .review-stages {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .stage-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .stage-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+    }
+    .stage-num { font-size: 11px; color: var(--text-dim); margin-bottom: 8px; letter-spacing: 1px; }
+    .stage-icon { font-size: 24px; margin-bottom: 8px; }
+    .stage-title { font-size: 14px; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
+    .stage-reward {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255,184,0,0.12);
+      border: 1px solid rgba(255,184,0,0.25);
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .stage-desc { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+
+    .screen-layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 360px) 1fr;
+      gap: 24px;
+      align-items: start;
+      margin-bottom: 24px;
+    }
+    .phone-shot {
+      background: linear-gradient(180deg, #58aee9 0%, #fff0a8 28%, #fff4f5 52%, #ffd7d9 100%);
+      border-radius: 36px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.22);
+      position: relative;
+      overflow: hidden;
+    }
+    .phone-shot img {
+      display: block;
+      width: 100%;
+      border-radius: 28px;
+    }
+    .screen-note-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .screen-note {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+    .screen-note .sn-label {
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .screen-note .sn-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .screen-note .sn-desc {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+    .placement-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .placement-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .placement-card .pc-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .placement-card .pc-copy {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.65;
+    }
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .spec-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .spec-label {
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .spec-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .spec-copy {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .journey-wrap {
+      margin-top: 24px;
+    }
+    .journey-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+    .journey-chart-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+    .journey-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .journey-chip {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-dim);
+      background: #181818;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 10px;
+    }
+    .journey-chip.pain {
+      color: #ff9d9d;
+      border-color: rgba(244,67,54,0.35);
+      background: rgba(244,67,54,0.08);
+    }
+    .journey-chip.reward {
+      color: var(--gold);
+      border-color: rgba(255,184,0,0.35);
+      background: rgba(255,184,0,0.08);
+    }
+    .journey-canvas-wrap {
+      position: relative;
+      height: 220px;
+      margin-bottom: 16px;
+    }
+    .journey-hook-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .journey-hook {
+      background: #181818;
+      border: 1px solid rgba(255,184,0,0.18);
+      border-radius: 14px;
+      padding: 14px 16px;
+    }
+    .journey-hook .jh-label {
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .journey-hook .jh-copy {
+      font-size: 12px;
+      line-height: 1.65;
+      color: var(--text-dim);
+    }
+    .journey-note-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .journey-note {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+    .journey-note .jn-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .journey-note .jn-copy {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .flow-wrap {
+      margin-top: 24px;
+    }
+    .flow-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+    .flow-board {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+    }
+    .flow-board.is-clickable {
+      cursor: zoom-in;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .flow-board.is-clickable:hover {
+      border-color: rgba(255,184,0,0.35);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.18);
+    }
+    .flow-board .mermaid {
+      background: transparent;
+    }
+    .flow-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .flow-row:last-child { margin-bottom: 0; }
+    .flow-node {
+      background: #181818;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.5;
+      min-width: 120px;
+      text-align: center;
+    }
+    .flow-node.primary {
+      border-color: rgba(255,184,0,0.34);
+      background: linear-gradient(135deg, rgba(255,184,0,0.12), rgba(255,184,0,0.03));
+    }
+    .flow-node.alert {
+      border-color: rgba(244,67,54,0.30);
+      background: rgba(244,67,54,0.08);
+    }
+    .flow-arrow {
+      color: var(--gold);
+      font-size: 16px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .flow-note {
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      background: #181818;
+      border: 1px solid rgba(255,184,0,0.18);
+      border-radius: 14px;
+      padding: 14px 16px;
+    }
+    .flow-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 10px;
+      text-align: right;
+      letter-spacing: 0.5px;
+    }
+    .flow-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.78);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 28px;
+    }
+    .flow-modal.is-open { display: flex; }
+    .flow-modal-inner {
+      width: min(1400px, 96vw);
+      max-height: 92vh;
+      background: var(--card);
+      border: 1px solid rgba(255,184,0,0.22);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .flow-modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border);
+      background: #181818;
+    }
+    .flow-modal-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+    }
+    .flow-modal-close {
+      appearance: none;
+      border: 0;
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .flow-modal-body {
+      padding: 18px;
+      overflow: auto;
+    }
+    .flow-modal-body .mermaid {
+      min-width: 1100px;
+    }
+
+    /* ── SECTION 09: 로드맵 ────────────────────── */
+    .roadmap-phases {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .phase-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .phase-card.phase-short::before { background: var(--green); }
+    .phase-card.phase-mid::before { background: var(--gold); }
+    .phase-card.phase-long::before { background: var(--blue); }
+    .phase-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .phase-period {
+      font-size: 11px;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .phase-short .phase-period { color: var(--green); }
+    .phase-mid .phase-period { color: var(--gold); }
+    .phase-long .phase-period { color: var(--blue); }
+    .phase-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+    .phase-items { list-style: none; }
+    .phase-items li {
+      font-size: 13px;
+      color: var(--text-dim);
+      padding: 6px 0;
+      border-bottom: 1px solid #1e1e1e;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .phase-items li:last-child { border-bottom: none; }
+    .phase-items li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .phase-short .phase-items li::before { background: var(--green); }
+    .phase-mid .phase-items li::before { background: var(--gold); }
+    .phase-long .phase-items li::before { background: var(--blue); }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .kpi-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+    .kpi-metric { font-size: 11px; color: var(--text-dim); letter-spacing: 1px; margin-bottom: 8px; }
+    .kpi-now { font-size: 13px; color: var(--text-dim); margin-bottom: 4px; }
+    .kpi-3m { font-size: 18px; font-weight: 700; color: var(--gold-light); margin-bottom: 2px; }
+    .kpi-6m { font-size: 22px; font-weight: 800; color: var(--gold); }
+    .kpi-arrow { font-size: 10px; color: var(--text-muted); margin: 2px 0; }
+
+    /* ── FOOTER ────────────────────────────────── */
+    .footer {
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 2;
+    }
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    /* ── DIVIDER ────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #2a2a2a, transparent);
+      margin: 32px 0;
+    }
+
+    /* ── RESPONSIVE ────────────────────────────── */
+    @media (max-width: 720px) {
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+      .grid-4 { grid-template-columns: 1fr 1fr; }
+      .info-grid { grid-template-columns: 1fr 1fr; }
+      .revenue-charts { grid-template-columns: 1fr; }
+      .revenue-issue-grid { grid-template-columns: 1fr 1fr; }
+      .review-reasons { grid-template-columns: 1fr; }
+      .review-stages { grid-template-columns: 1fr; }
+      .screen-layout { grid-template-columns: 1fr; }
+      .screen-note-grid { grid-template-columns: 1fr; }
+      .placement-grid { grid-template-columns: 1fr; }
+      .spec-grid { grid-template-columns: 1fr; }
+      .journey-hook-row { grid-template-columns: 1fr; }
+      .journey-note-grid { grid-template-columns: 1fr; }
+      .flow-row { flex-direction: column; align-items: stretch; }
+      .flow-arrow { align-self: center; transform: rotate(90deg); }
+      .roadmap-phases { grid-template-columns: 1fr; }
+      .kpi-grid { grid-template-columns: 1fr 1fr; }
+      .platform-row { grid-template-columns: 1fr; gap: 8px; }
+      .p-card { grid-template-columns: 44px 1fr; }
+      .p-right { display: none; }
+      .feature-flow { flex-direction: column; }
+      .flow-step:not(:last-child)::after { content: '↓'; right: auto; left: 50%; bottom: -12px; top: auto; }
+    }
+    @media (max-width: 500px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .tl-item { grid-template-columns: 1fr 40px 1fr; }
+    }
+
+    /* ── CHART CONTAINERS ──────────────────────── */
+    .chart-container { position: relative; }
+
+    /* ── HIGHLIGHT TEXT ────────────────────────── */
+    .hl { color: var(--gold); font-weight: 700; }
+    .hl-green { color: var(--green); font-weight: 600; }
+    .hl-red { color: var(--red); font-weight: 600; }
+
+    /* ── VS SUMMARY ─────────────────────────────── */
+    .vs-summary {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .vs-item {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: var(--text-dim);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .vs-item .vs-label {
+      color: var(--gold);
+      font-weight: 700;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ──────────────────────────────── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-logo">🥚 GOLDEN GOOSE</span>
+    <a href="#section-01">비즈니스구조</a>
+    <a href="#section-02">현황</a>
+    <a href="#section-03">타임라인</a>
+    <a href="#section-04">경쟁사</a>
+    <a href="#section-05">사용자층</a>
+    <a href="#section-06">수익구조</a>
+    <a href="#section-07">DAU전략</a>
+    <a href="#section-08">홈화면</a>
+    <a href="#section-09">로드맵</a>
+  </div>
+</nav>
+
+<!-- ── HERO ────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-eyebrow">Service Analysis Report · 2026.03</div>
+  <h1 class="hero-logo">GOLDEN GOOSE</h1>
+  <p class="hero-sub">DAU 고도화 전략 분석 보고서 — 24K 순금을 주는 리워드 앱의 다음 스텝</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <div class="val">4.9</div>
+      <div class="lbl">앱스토어 평점</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="val">24K</div>
+      <div class="lbl">순금 주간 보상</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="val">10명</div>
+      <div class="lbl">매주 당첨자</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="val">10배</div>
+      <div class="lbl">DAU 성장 목표</div>
+    </div>
+  </div>
+  <div class="hero-date">2026.03.18 인수 완료</div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+</section>
+
+<!-- ── SECTION 01: 비즈니스 구조 ──────────────── -->
+<section class="section" id="section-01">
+  <div class="section-num">SECTION 01</div>
+  <h2 class="section-title">비즈니스 구조</h2>
+  <p class="section-desc">황금거위는 광고주와 사용자를 연결하는 리워드 중개 플랫폼입니다. 광고 참여 → 황금알 → 응모권 → 순금 추첨이 핵심 루프입니다.</p>
+
+  <div class="platform-diagram">
+    <!-- 공급측 -->
+    <div style="display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-bottom: 8px;">
+      <div class="platform-node node-supply" style="display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:11px;color:#81C784;opacity:0.7;letter-spacing:1px;margin-bottom:4px;">SUPPLY</div>
+        <div style="font-size:14px;">📢 TNK Adiscope</div>
+        <div style="font-size:11px;opacity:0.7;">리워드 광고 네트워크 (높은 eCPM 최적화)</div>
+      </div>
+      <div class="platform-node node-supply" style="display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:11px;color:#81C784;opacity:0.7;letter-spacing:1px;margin-bottom:4px;">SUPPLY</div>
+        <div style="font-size:14px;">🎯 TNK 오퍼월</div>
+        <div style="font-size:11px;opacity:0.7;">이벤트 미션 연동 · CPI 과금</div>
+      </div>
+    </div>
+
+    <!-- 중앙 화살표 -->
+    <div style="text-align:center;color:var(--text-muted);font-size:22px;margin:4px 0;">↓</div>
+
+    <!-- 플랫폼 -->
+    <div class="node-platform" style="margin:0 auto;max-width:480px;width:100%;">
+      <div class="node-platform-logo">🥚 황금거위</div>
+      <div style="font-size:13px;font-weight:600;color:var(--gold);margin-bottom:12px;">24K 순금을 주는 앱</div>
+      <div class="node-platform-loop">
+        <span>황금알 수령 (시간마다 자동 지급·총 10개)</span> → <span>참여하기 → 광고 시청 → 포인트(P) 즉시 지급</span> → <span>10개 완료 시 응모권 1장</span> → <span>매주 10명 24K 순금 추첨</span><br/>
+        <span style="color:var(--text-dim);font-size:11px;margin-top:6px;display:block;">TNK 오퍼월 이벤트 미션 · TNK Adiscope 리워드 광고</span>
+      </div>
+    </div>
+
+    <!-- 중앙 화살표 -->
+    <div style="text-align:center;color:var(--text-muted);font-size:22px;margin:4px 0;">↓</div>
+
+    <!-- 수요측 -->
+    <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 8px;">
+      <div class="platform-node node-demand" style="display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:11px;color:#EF9A9A;opacity:0.7;letter-spacing:1px;margin-bottom:4px;">DEMAND</div>
+        <div style="font-size:14px;">👩 40대 여성 / 주부</div>
+        <div style="font-size:11px;opacity:0.7;">순금 로망 + 절약 목적</div>
+      </div>
+      <div class="platform-node node-demand" style="display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:11px;color:#EF9A9A;opacity:0.7;letter-spacing:1px;margin-bottom:4px;">DEMAND</div>
+        <div style="font-size:14px;">💬 생활절약 커뮤니티</div>
+        <div style="font-size:11px;opacity:0.7;">맘카페·카카오채널 유입</div>
+      </div>
+      <div class="platform-node node-demand" style="display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:11px;color:#EF9A9A;opacity:0.7;letter-spacing:1px;margin-bottom:4px;">DEMAND</div>
+        <div style="font-size:14px;">📱 앱테크 유저</div>
+        <div style="font-size:11px;opacity:0.7;">일상 틈새 수익 추구</div>
+      </div>
+      <div class="platform-node node-demand" style="display:flex;flex-direction:column;gap:4px;grid-column:1/-1;">
+        <div style="font-size:11px;color:#EF9A9A;opacity:0.7;letter-spacing:1px;margin-bottom:4px;">DEMAND · VIRAL</div>
+        <div style="font-size:14px;">🤝 친구 초대 바이럴</div>
+        <div style="font-size:11px;opacity:0.7;">초대한 사람·초대받은 사람 각 300P — 유기적 바이럴 확산</div>
+      </div>
+    </div>
+
+    <div class="divider" style="margin: 12px 0;"></div>
+
+    <!-- 수익 구조 하단 -->
+    <div class="revenue-row">
+      <div class="revenue-node">
+        <div>TNK Adiscope</div>
+        <span class="rv-val">eCPM $7~8</span>
+        <div style="font-size:10px;margin-top:2px;opacity:0.7;">리워드 광고 특화 · 높은 단가 보장</div>
+      </div>
+      <div class="revenue-node">
+        <div>TNK 오퍼월</div>
+        <span class="rv-val">이벤트 미션</span>
+        <div style="font-size:10px;margin-top:2px;opacity:0.7;">CPI 과금 · 이벤트 미션 연동</div>
+      </div>
+      <div class="revenue-node">
+        <div>24K 순금 경품비</div>
+        <span class="rv-val">월 ~56만원 (고정)</span>
+        <div style="font-size:10px;margin-top:2px;opacity:0.7;">0.1g 골드바 × 10명 × 4주</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 02: 서비스 현황 ──────────────────── -->
+<section class="section" id="section-02">
+  <div class="section-num">SECTION 02</div>
+  <h2 class="section-title">서비스 현황</h2>
+  <p class="section-desc">2025년 12월 출시, 2026년 3월 18일 인수 완료. 압도적 평점 4.9와 단순한 UX를 바탕으로 인수 후 DAU 고도화를 추진합니다.</p>
+
+  <div class="info-grid" style="margin-bottom:20px;">
+    <div class="info-card">
+      <div class="ic-label">출시</div>
+      <div class="ic-value" style="font-size:18px;">2025. 12</div>
+      <div class="ic-sub">개발사: HEECHANG LEE</div>
+    </div>
+    <div class="info-card">
+      <div class="ic-label">인수 완료</div>
+      <div class="ic-value" style="font-size:16px;">2026. 03. 18</div>
+      <div class="ic-sub">DAU 고도화 목적</div>
+    </div>
+    <div class="info-card">
+      <div class="ic-label">앱스토어 평점</div>
+      <div class="ic-value">⭐ 4.9</div>
+      <div class="ic-sub">업계 최상위 수준</div>
+    </div>
+    <div class="info-card">
+      <div class="ic-label">핵심 보상</div>
+      <div class="ic-value" style="font-size:18px;">24K 순금</div>
+      <div class="ic-sub">매주 10명 당첨</div>
+    </div>
+    <div class="info-card">
+      <div class="ic-label">타겟</div>
+      <div class="ic-value" style="font-size:14px; line-height:1.3;">40대 여성</div>
+      <div class="ic-sub">주부, 생활절약 커뮤니티</div>
+    </div>
+    <div class="info-card" style="border-color:rgba(255,184,0,0.3);background:rgba(255,184,0,0.05);">
+      <div class="ic-label">주간 당첨</div>
+      <div class="ic-value">10명</div>
+      <div class="ic-sub">DAU 10배 성장 목표</div>
+    </div>
+  </div>
+
+  <div class="feature-flow card">
+    <div class="flow-step">
+      <div class="fs-icon">📢</div>
+      <div class="fs-title">광고·미션 참여</div>
+      <div class="fs-desc">하루 3회 지급<br/>총 10개 수령</div>
+    </div>
+    <div class="flow-step">
+      <div class="fs-icon">🥚</div>
+      <div class="fs-title">열기 → 광고 시청</div>
+      <div class="fs-desc">10개 모두 열면<br/>응모권 1장 자동 지급</div>
+    </div>
+    <div class="flow-step">
+      <div class="fs-icon">🎫</div>
+      <div class="fs-title">응모권 획득</div>
+      <div class="fs-desc">응모권으로<br/>주간 추첨 참여</div>
+    </div>
+    <div class="flow-step">
+      <div class="fs-icon">🏆</div>
+      <div class="fs-title">순금 추첨</div>
+      <div class="fs-desc">매주 10명에게<br/>24K 순금 지급</div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+    <div class="card2" style="border-color:rgba(255,184,0,0.2);">
+      <div style="font-size:11px;color:var(--gold);letter-spacing:1px;margin-bottom:6px;">배율 미션</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:4px;">포인트 2·3·4배 이벤트</div>
+      <div style="font-size:12px;color:var(--text-dim);line-height:1.5;">황금알 100개 열면 배율 상승 — 리텐션 핵심 구조</div>
+    </div>
+    <div class="card2" style="border-color:rgba(255,184,0,0.2);">
+      <div style="font-size:11px;color:var(--gold);letter-spacing:1px;margin-bottom:6px;">친구 초대</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:4px;">친구 초대 이벤트</div>
+      <div style="font-size:12px;color:var(--text-dim);line-height:1.5;">초대한 사람·초대받은 사람 각각 300P 지급</div>
+    </div>
+    <div class="card2" style="border-color:rgba(255,184,0,0.2);">
+      <div style="font-size:11px;color:var(--gold);letter-spacing:1px;margin-bottom:6px;">포인트 교환</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:4px;">현금·기프티콘 교환</div>
+      <div style="font-size:12px;color:var(--text-dim);line-height:1.5;">적립 포인트 → 현금 교환 + 기프티콘 교환</div>
+    </div>
+  </div>
+
+  <div class="card" style="background:var(--card2);border:1px solid #FFB80030;padding:20px;margin-top:16px;">
+    <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:12px;">🔄 리텐션 루프 — 포인트 배율 미션</div>
+    <div style="font-size:13px;color:var(--text-dim);line-height:1.8;">
+      황금알 <span style="color:var(--gold);font-weight:700;">100개 열기</span> → 포인트 <span style="color:var(--gold);font-weight:700;">2배</span> 하루 적용<br/>
+      다음 미션 완료 → <span style="color:var(--gold);font-weight:700;">3배</span> → <span style="color:var(--gold);font-weight:700;">4배</span> 순차 상승<br/>
+      <span style="font-size:11px;opacity:0.7;">누적 참여를 유도하는 핵심 리텐션 구조 — 그만두면 배율 리셋</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 03: 타임라인 ─────────────────────── -->
+<section class="section" id="section-03">
+  <div class="section-num">SECTION 03</div>
+  <h2 class="section-title">황금거위 히스토리</h2>
+  <p class="section-desc">출시부터 인수, 고도화까지의 로드맵입니다.</p>
+
+  <div class="tl-wrapper" style="position:relative;">
+    <div class="tl-line"></div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-content">
+          <div class="tl-year">2025. 12</div>
+          <div class="tl-desc">황금거위 출시<br/>24K 순금 추첨 리워드 앱</div>
+        </div>
+      </div>
+      <div class="tl-dot">🚀</div>
+      <div class="tl-empty"></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-empty"></div>
+      <div class="tl-dot">⭐</div>
+      <div class="tl-right">
+        <div class="tl-content">
+          <div class="tl-year">2026. 01</div>
+          <div class="tl-desc">앱스토어 평점 4.9 달성<br/>TNK 오퍼월 이벤트 미션 오픈</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-content">
+          <div class="tl-year">2026. 03. 18</div>
+          <div class="tl-desc">인수 완료<br/>DAU 고도화 착수</div>
+        </div>
+      </div>
+      <div class="tl-dot">💰</div>
+      <div class="tl-empty"></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-empty"></div>
+      <div class="tl-dot">🔄</div>
+      <div class="tl-right">
+        <div class="tl-content">
+          <div class="tl-year">2026. 04 (예정)</div>
+          <div class="tl-desc">고도화 기획 착수<br/>만보기 설계</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-content">
+          <div class="tl-year">2026. 06 (목표)</div>
+          <div class="tl-desc">만보기 신규 출시<br/>DAU 3배 목표</div>
+        </div>
+      </div>
+      <div class="tl-dot">📈</div>
+      <div class="tl-empty"></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-empty"></div>
+      <div class="tl-dot">🎯</div>
+      <div class="tl-right">
+        <div class="tl-content">
+          <div class="tl-year">2026. 12 (목표)</div>
+          <div class="tl-desc">레퍼럴 강화 + 만보기 확장<br/>DAU 10배 목표</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 04: 경쟁사 분석 ──────────────────── -->
+<section class="section" id="section-04">
+  <div class="section-num">SECTION 04</div>
+  <h2 class="section-title">경쟁사 분석</h2>
+  <p class="section-desc">리워드 앱 시장 경쟁 구도 분석. 황금거위는 "실물 순금 보상"이라는 독보적 차별화로 포지셔닝합니다.</p>
+
+  <!-- 레이더 차트 -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;">
+    <div class="chart-box">
+      <div class="chart-box-title">역량 레이더 차트</div>
+      <div class="chart-box-sub">황금거위 vs 경쟁사 6개 항목 비교</div>
+      <div class="chart-container" style="height:280px;">
+        <canvas id="radarChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-box" style="display:flex;flex-direction:column;justify-content:center;gap:14px;">
+      <div class="chart-box-title">포지셔닝 요약</div>
+      <div class="chart-box-sub">각 앱의 핵심 강점</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span style="width:12px;height:12px;border-radius:50%;background:#FFB800;flex-shrink:0;"></span>
+          <div>
+            <div style="font-size:13px;font-weight:700;">황금거위</div>
+            <div style="font-size:11px;color:var(--text-dim);">실물 보상(순금) + 단순 UX — 감성적 차별화 극대화</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span style="width:12px;height:12px;border-radius:50%;background:#4CAF50;flex-shrink:0;"></span>
+          <div>
+            <div style="font-size:13px;font-weight:700;">캐시워크 (MAU 700만+)</div>
+            <div style="font-size:11px;color:var(--text-dim);">광고·만보기 결합 — 최대 규모, 다양한 수익원</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span style="width:12px;height:12px;border-radius:50%;background:#2196F3;flex-shrink:0;"></span>
+          <div>
+            <div style="font-size:13px;font-weight:700;">금캐기 (MAU 200만+)</div>
+            <div style="font-size:11px;color:var(--text-dim);">중년 친화적 UX — 동일 타겟층 경쟁자</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span style="width:12px;height:12px;border-radius:50%;background:#9C27B0;flex-shrink:0;"></span>
+          <div>
+            <div style="font-size:13px;font-weight:700;">돈이돼지 (리뷰 1.1만개)</div>
+            <div style="font-size:11px;color:var(--text-dim);">터치 적립 + 무수수료 출금 — UX 단순함 유사</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span style="width:12px;height:12px;border-radius:50%;background:#FF6B6B;flex-shrink:0;"></span>
+          <div>
+            <div style="font-size:13px;font-weight:700;">캐시는내차지</div>
+            <div style="font-size:11px;color:var(--text-dim);">쿠팡 리워드·퀴즈·브랜드 쿠폰 등 미션 다양성 — 다채널 적립 특화</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 비교표 -->
+  <div class="card" style="padding:0;overflow:hidden;margin-bottom:24px;">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>항목</th>
+          <th class="col-gold">황금거위</th>
+          <th>캐시워크</th>
+          <th>금캐기</th>
+          <th>돈이돼지</th>
+          <th>캐시는내차지</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>평점</td>
+          <td class="col-gold">⭐ 4.9</td>
+          <td>⭐ 4.6</td>
+          <td>⭐ 4.4</td>
+          <td>⭐ 4.7</td>
+          <td>⭐ 4.5</td>
+        </tr>
+        <tr>
+          <td>핵심 보상</td>
+          <td class="col-gold">24K 순금</td>
+          <td>현금/포인트</td>
+          <td>현금/포인트</td>
+          <td>현금 1:1</td>
+          <td>캐시 → 현금</td>
+        </tr>
+        <tr>
+          <td>만보기</td>
+          <td><span class="check-no">❌ 예정</span></td>
+          <td><span class="check-yes">✅</span></td>
+          <td><span class="check-yes">✅</span></td>
+          <td><span class="check-yes">✅</span></td>
+          <td><span class="check-no">❌</span></td>
+        </tr>
+        <tr>
+          <td>광고 보기</td>
+          <td class="col-gold"><span class="check-yes">✅</span></td>
+          <td><span class="check-yes">✅</span></td>
+          <td><span class="check-yes">✅</span></td>
+          <td><span class="check-yes">✅</span></td>
+          <td><span class="check-yes">✅</span></td>
+        </tr>
+        <tr>
+          <td>보너스 캐시(쿠팡)</td>
+          <td class="col-gold"><span class="check-no">❌ 제안</span></td>
+          <td><span class="check-yes">✅</span></td>
+          <td><span class="check-no">❌</span></td>
+          <td><span class="check-no">❌</span></td>
+          <td><span class="check-yes">✅</span> 리워드 쇼핑</td>
+        </tr>
+        <tr>
+          <td>퀴즈 미션</td>
+          <td><span class="check-no">❌</span></td>
+          <td><span class="check-no">❌</span></td>
+          <td><span class="check-no">❌</span></td>
+          <td><span class="check-no">❌</span></td>
+          <td><span class="check-yes">✅</span> 10초 퀴즈</td>
+        </tr>
+        <tr>
+          <td>브랜드 쿠폰</td>
+          <td><span class="check-no">❌</span></td>
+          <td><span class="check-no">❌</span></td>
+          <td><span class="check-no">❌</span></td>
+          <td><span class="check-no">❌</span></td>
+          <td><span class="check-yes">✅</span> GS25 등</td>
+        </tr>
+        <tr>
+          <td>커뮤니티</td>
+          <td><span class="check-no">❌ 예정</span></td>
+          <td><span class="check-yes">✅</span></td>
+          <td><span class="check-no">❌</span></td>
+          <td><span class="check-no">❌</span></td>
+          <td><span class="check-no">❌</span></td>
+        </tr>
+        <tr>
+          <td>실물 보상</td>
+          <td class="col-gold"><span class="check-yes">✅</span> 순금</td>
+          <td><span class="check-no">❌</span></td>
+          <td><span class="check-no">❌</span></td>
+          <td><span class="check-no">❌</span></td>
+          <td><span class="check-no">❌</span></td>
+        </tr>
+        <tr>
+          <td>차별화 포인트</td>
+          <td class="col-gold">순금 추첨</td>
+          <td>최대 MAU</td>
+          <td>중년 친화</td>
+          <td>무수수료</td>
+          <td>미션 다양성</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- vs 한줄 요약 -->
+  <div class="vs-summary">
+    <div class="vs-item">
+      <span class="vs-label">vs 캐시워크</span>
+      <span>기능은 부족하나 "순금"이라는 압도적 후킹으로 초기 유입 우세 — 기능 추가 시 전환 가속 가능</span>
+    </div>
+    <div class="vs-item">
+      <span class="vs-label">vs 금캐기</span>
+      <span>UX 단순함 + 순금 보상으로 동일 타겟층(중년 여성) 공략 우세 — 직접 경쟁 가장 유리</span>
+    </div>
+    <div class="vs-item">
+      <span class="vs-label">vs 돈이돼지</span>
+      <span>둘 다 TNK 오퍼월 보유 — 실물 보상(순금)이라는 감성적 차별화와 포인트 배율 미션으로 리텐션 우세</span>
+    </div>
+    <div class="vs-item">
+      <span class="vs-label">vs 캐시는내차지</span>
+      <span>쿠팡 리워드·퀴즈·브랜드 쿠폰 등 미션 다양성은 열세 — 순금 추첨이라는 감성 후킹과 초단순 UX로 차별화</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 05: 사용자층 ──────────────────────── -->
+<section class="section" id="section-05">
+  <div class="section-num">SECTION 05</div>
+  <h2 class="section-title">사용자층 분석</h2>
+  <p class="section-desc">결제 의향 × 참여 빈도 매트릭스 기반 4개 세그먼트 분석. 순금 드리머와 알뜰 주부가 핵심 타겟입니다.</p>
+
+  <!-- 2x2 매트릭스 -->
+  <div class="matrix-wrap">
+    <div class="matrix-axis-h"></div>
+    <div class="matrix-axis-v"></div>
+    <div class="matrix-x-label">결제 의향 →</div>
+    <div class="matrix-y-label">참여 빈도 ↑</div>
+    <div class="matrix-quadrant-label" style="top:52px;left:52px;">높은참여/낮은결제</div>
+    <div class="matrix-quadrant-label" style="top:52px;right:52px;">높은참여/높은결제</div>
+    <div class="matrix-quadrant-label" style="bottom:24px;left:52px;">낮은참여/낮은결제</div>
+    <div class="matrix-quadrant-label" style="bottom:24px;right:52px;">낮은참여/높은결제</div>
+
+    <!-- 순금 드리머 — 높은참여 / 낮은결제 -->
+    <div class="matrix-dot" style="left:28%;top:22%;">
+      <div class="matrix-dot-circle" style="width:56px;height:56px;">🏆</div>
+      <div class="matrix-dot-label">순금 드리머</div>
+      <div class="matrix-dot-pct">35%</div>
+    </div>
+
+    <!-- 미션 수집가 — 매우높은참여 / 높은결제 -->
+    <div class="matrix-dot" style="left:72%;top:14%;">
+      <div class="matrix-dot-circle" style="width:44px;height:44px;">🎯</div>
+      <div class="matrix-dot-label">미션 수집가</div>
+      <div class="matrix-dot-pct">15%</div>
+    </div>
+
+    <!-- 알뜰 주부 — 높은참여 / 중간결제 -->
+    <div class="matrix-dot" style="left:55%;top:30%;">
+      <div class="matrix-dot-circle" style="width:52px;height:52px;">💰</div>
+      <div class="matrix-dot-label">알뜰 주부</div>
+      <div class="matrix-dot-pct">30%</div>
+    </div>
+
+    <!-- 바이럴러 — 중간참여 / 낮은결제 -->
+    <div class="matrix-dot" style="left:30%;top:58%;">
+      <div class="matrix-dot-circle" style="width:40px;height:40px;">📢</div>
+      <div class="matrix-dot-label">바이럴러</div>
+      <div class="matrix-dot-pct">20%</div>
+    </div>
+  </div>
+
+  <!-- 세그먼트 카드 4개 -->
+  <div class="grid-2">
+    <div class="seg-card">
+      <div class="seg-icon">🏆</div>
+      <div class="seg-title">순금 드리머</div>
+      <div class="seg-pct">35%</div>
+      <div class="seg-row">
+        <span class="seg-row-label">동기</span>
+        <span class="seg-row-val">진짜 금 받고 싶은 로망</span>
+      </div>
+      <div class="seg-row">
+        <span class="seg-row-label">트리거</span>
+        <span class="seg-row-val">실제 당첨 후기 노출</span>
+      </div>
+      <div class="seg-row">
+        <span class="seg-row-label">이탈</span>
+        <span class="seg-row-val">당첨 안 되면 지침</span>
+      </div>
+      <div class="seg-row">
+        <span class="seg-row-label">대체재</span>
+        <span class="seg-row-val">없음 (순금 주는 앱이 없음)</span>
+      </div>
+      <div class="seg-tags">
+        <span class="seg-tag">높은 참여</span>
+        <span class="seg-tag">낮은 결제의향</span>
+        <span class="seg-tag">40대 여성</span>
+      </div>
+    </div>
+
+    <div class="seg-card">
+      <div class="seg-icon">💰</div>
+      <div class="seg-title">알뜰 주부</div>
+      <div class="seg-pct">30%</div>
+      <div class="seg-row">
+        <span class="seg-row-label">동기</span>
+        <span class="seg-row-val">커피값이라도 버는 재미</span>
+      </div>
+      <div class="seg-row">
+        <span class="seg-row-label">트리거</span>
+        <span class="seg-row-val">포인트 배율 미션 + 친구 초대 300P + 기프티콘 교환</span>
+      </div>
+      <div class="seg-row">
+        <span class="seg-row-label">이탈</span>
+        <span class="seg-row-val">10회 채우기 귀찮을 때</span>
+      </div>
+      <div class="seg-row">
+        <span class="seg-row-label">대체재</span>
+        <span class="seg-row-val">캐시워크, 돈이돼지</span>
+      </div>
+      <div class="seg-tags">
+        <span class="seg-tag">높은 참여</span>
+        <span class="seg-tag">중간 결제의향</span>
+        <span class="seg-tag">주부</span>
+      </div>
+    </div>
+
+    <div class="seg-card">
+      <div class="seg-icon">📢</div>
+      <div class="seg-title">바이럴러</div>
+      <div class="seg-pct">20%</div>
+      <div class="seg-row">
+        <span class="seg-row-label">동기</span>
+        <span class="seg-row-val">맘카페/카카오채널에서 발견</span>
+      </div>
+      <div class="seg-row">
+        <span class="seg-row-label">트리거</span>
+        <span class="seg-row-val">지인 추천 + 순금 당첨 후기</span>
+      </div>
+      <div class="seg-row">
+        <span class="seg-row-label">이탈</span>
+        <span class="seg-row-val">앱 잊어버림</span>
+      </div>
+      <div class="seg-row">
+        <span class="seg-row-label">대체재</span>
+        <span class="seg-row-val">다른 앱테크</span>
+      </div>
+      <div class="seg-tags">
+        <span class="seg-tag">중간 참여</span>
+        <span class="seg-tag">낮은 결제의향</span>
+        <span class="seg-tag">바이럴 유입</span>
+      </div>
+    </div>
+
+    <div class="seg-card">
+      <div class="seg-icon">🎯</div>
+      <div class="seg-title">미션 수집가</div>
+      <div class="seg-pct">15%</div>
+      <div class="seg-row">
+        <span class="seg-row-label">동기</span>
+        <span class="seg-row-val">매일 10회 완주 성취감</span>
+      </div>
+      <div class="seg-row">
+        <span class="seg-row-label">트리거</span>
+        <span class="seg-row-val">응모권 누적 = 당첨 확률↑ 심리</span>
+      </div>
+      <div class="seg-row">
+        <span class="seg-row-label">이탈</span>
+        <span class="seg-row-val">미션 단조로움</span>
+      </div>
+      <div class="seg-row">
+        <span class="seg-row-label">대체재</span>
+        <span class="seg-row-val">캐시워크, 캐시는내차지</span>
+      </div>
+      <div class="seg-tags">
+        <span class="seg-tag">매우 높은 참여</span>
+        <span class="seg-tag">높은 결제의향</span>
+        <span class="seg-tag">성취감 중심</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 06: 수익 구조 ────────────────────── -->
+<section class="section" id="section-06">
+  <div class="section-num">SECTION 06</div>
+  <h2 class="section-title">수익 구조</h2>
+  <p class="section-desc">황금거위 수익 구조는 <span class="hl">광고 기반 매출</span>과 <span class="hl">저보상 참여형 액션</span>의 조합으로 보는 것이 적절합니다. 광고 1회 시청 eCPM은 <span class="hl">$6~7</span>, 환율은 <span class="hl">$1 = 1,451원</span> 가정으로 계산하면 광고 1회당 매출은 약 <span class="hl">8.7~10.2원</span> 수준입니다.</p>
+
+  <!-- 도넛 차트 2개 -->
+  <div class="revenue-charts">
+    <div class="chart-box">
+      <div class="chart-box-title">현재 수익 구조</div>
+      <div class="chart-box-sub">핵심은 거위 클릭 광고 수익</div>
+      <div class="chart-container" style="height:220px;">
+        <canvas id="donutCurrent"></canvas>
+      </div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-box-title">목표 수익 구조</div>
+      <div class="chart-box-sub">쿠팡 · 미니게임 · 기존 광고의 조합</div>
+      <div class="chart-container" style="height:220px;">
+        <canvas id="donutTarget"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="padding:0;overflow:hidden;margin-bottom:24px;">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>기능</th>
+          <th>운영 단가 기준</th>
+          <th>고객 보상안</th>
+          <th class="col-gold">설계 원칙</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>광고 1회 시청</td>
+          <td>8.7~10.2원 매출</td>
+          <td class="col-gold">2~3원 권장</td>
+          <td>광고 매출 안에서 직접 역산 가능</td>
+        </tr>
+        <tr>
+          <td>거위 클릭 10회/일</td>
+          <td>87.1~101.6원 매출</td>
+          <td class="col-gold">30원<br/><span style="font-size:11px;color:var(--text-dim);">3원 × 10회</span></td>
+          <td>핵심 수익 루프</td>
+        </tr>
+        <tr>
+          <td>미니게임 3회/일</td>
+          <td>광고 연결 시 26.1~30.5원 매출</td>
+          <td class="col-gold">3원<br/><span style="font-size:11px;color:var(--text-dim);">1원 × 3회</span></td>
+          <td>광고 재시청 전 완충 구간</td>
+        </tr>
+        <tr>
+          <td>보너스 캐시(쿠팡) 1회</td>
+          <td>방문형 제휴<br/><span style="font-size:11px;color:var(--text-dim);">계약 단가 별도</span></td>
+          <td class="col-gold">1원</td>
+          <td>고수익 미션이 아닌 재참여 장치</td>
+        </tr>
+        <tr>
+          <td>일활성 유저 1인 기준 합계</td>
+          <td>광고 매출 중심으로 계산</td>
+          <td class="col-gold">34원 + α</td>
+          <td>쿠팡은 보조 수익, 광고가 메인 수익</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DAU별 수익 바차트 -->
+  <div class="chart-box" style="margin-bottom:24px;">
+    <div class="chart-box-title">기능별 일일 광고 마진 추정</div>
+    <div class="chart-box-sub">광고 eCPM $6~7 기준 · 쿠팡은 방문형 보조 액션으로 별도 정산</div>
+    <div class="chart-container" style="height:200px;">
+      <canvas id="revenueBar"></canvas>
+    </div>
+  </div>
+
+  <!-- 레버리지 설명 -->
+  <div class="revenue-issue-grid">
+    <div class="issue-card">
+      <div class="ic-type">광고 1회 시청</div>
+      <div class="ic-rate">8.7~10.2원</div>
+      <div class="ic-note">eCPM $6~7 가정<br/>광고 1회당 실매출</div>
+    </div>
+    <div class="issue-card">
+      <div class="ic-type">고객 보상 권장</div>
+      <div class="ic-rate">2~3원</div>
+      <div class="ic-note">광고 1회당 지급 권장<br/>대략 매출의 25~35%</div>
+    </div>
+    <div class="issue-card">
+      <div class="ic-type">쿠팡 방문 1회</div>
+      <div class="ic-rate">1원 지급</div>
+      <div class="ic-note">타 플랫폼 유사 수준<br/>재참여용 보조 액션</div>
+    </div>
+  </div>
+
+  <div class="card-gold" style="margin-top:20px;">
+    <div style="font-size:14px;font-weight:700;color:var(--gold);margin-bottom:10px;">수익 구조 설계 원칙</div>
+    <div style="font-size:13px;color:var(--text-dim);line-height:1.8;">
+      황금거위의 메인 수익은 <span class="hl">거위 클릭 광고</span>에서 발생하고, 고객 보상은 그 광고 매출 안에서 역산해야 합니다.<br/>
+      광고 1회당 매출이 8.7~10.2원이므로, 고객 보상은 <span class="hl">2~3원 수준</span>으로 설계하면 마진을 안정적으로 남길 수 있습니다.<br/>
+      미니게임은 독립 수익원이 아니라 <span class="hl">광고 시청과 재시청 사이를 메우는 보조 루프</span>로 보고, 1회 1원 수준의 저보상 구조가 적절합니다.<br/>
+      쿠팡 보너스 캐시는 구매형이 아니라 방문형이므로, <span class="hl">고액 보상 미션이 아니라 1원 단위의 저보상 액션</span>으로 보는 것이 맞습니다.<br/>
+      즉, 수익 구조는 <span class="hl">광고가 메인 수익</span>, 쿠팡/미니게임은 <span class="hl">재참여와 체류시간을 높이는 보조 장치</span>로 설계하는 것이 가장 현실적입니다.<br/>
+      <span style="font-size:11px;opacity:0.75;">환율은 2026년 3월 기준 약 1,451원/$ 가정입니다. 쿠팡 방문형 단가는 계약값이 아닌 운영 구조 기준으로만 해석해야 합니다.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 07: DAU 고도화 기능 우선순위 ──────── -->
+<section class="section" id="section-07">
+  <div class="section-num">SECTION 07</div>
+  <h2 class="section-title">DAU 고도화 기능 우선순위</h2>
+  <p class="section-desc">인수 후 홈 화면 구조와 수익 기반을 기준으로 우선순위를 재정의했습니다. P1은 수익 기반 최적화, P2~P5는 재방문과 신뢰를 강화하는 홈 중심 기능입니다.</p>
+
+  <div class="priority-cards">
+    <!-- P1 -->
+    <div class="p-card">
+      <div class="p-num">P1</div>
+      <div class="p-body">
+        <div class="p-title">미디에이션 최적화</div>
+        <div class="p-desc">인수 후 가장 먼저 손봐야 할 과제입니다. 보상형 광고, 전면 광고, 오퍼월 유입을 미디에이션 기준으로 다시 조정해 <strong>광고 단가와 완주율을 함께 최적화</strong>합니다. 초기 참여 구간은 짧은 광고로 진입장벽을 낮추고, 고수익 구간은 보상형 광고를 집중 배치해 수익성과 이탈률을 동시에 관리하는 방향입니다.</div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <span class="p-stars">★★★★★</span>
+          <span style="font-size:11px;color:var(--text-dim);">DAU 임팩트</span>
+        </div>
+        <div class="p-meta">
+          <span class="badge badge-green">난이도: 낮음</span>
+          <span class="badge badge-gold">기간: 2~3주</span>
+          <span class="badge badge-blue">수익 기반</span>
+        </div>
+      </div>
+      <div class="p-right">
+        <div class="p-period">4월</div>
+        <div class="p-diff diff-low">낮음</div>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="p-card">
+      <div class="p-num">P2</div>
+      <div class="p-body">
+        <div class="p-title" style="display:flex;align-items:center;gap:8px;">보너스 캐시(쿠팡) 신규 도입 <span class="badge badge-gold" style="font-size:10px;">신규</span></div>
+        <div class="p-desc">현재 홈의 거위 클릭과 별도로, <strong>쿠팡 방문 기반 보너스 캐시</strong>를 새로운 참여 축으로 추가합니다. 출석체크나 일 10회 참여와는 분리된 가벼운 보상 진입점으로 설계해, 홈에 들어온 유저가 별도 부담 없이 바로 한 번 더 행동하게 만드는 용도입니다.</div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <span class="p-stars">★★★★★</span>
+          <span style="font-size:11px;color:var(--text-dim);">DAU 임팩트</span>
+        </div>
+        <div class="p-meta">
+          <span class="badge badge-gold">난이도: 중간</span>
+          <span class="badge badge-gold">기간: 4~6주</span>
+          <span class="badge badge-blue">신규 트래픽 축</span>
+        </div>
+      </div>
+      <div class="p-right">
+        <div class="p-period">4월~5월</div>
+        <div class="p-diff diff-mid">중간</div>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="p-card">
+      <div class="p-num">P3</div>
+      <div class="p-body">
+        <div class="p-title">출석/완주형 미션 고도화</div>
+        <div class="p-desc">1일차, 3일차, 5일차, 7일차에 박스를 열어 <strong>캐시와 응모권을 함께 지급</strong>하는 주간 완주형 구조로 강화합니다. 특히 7일차에는 가장 큰 보상을 배치해 단순 출석이 아니라 “매일 참여할수록 순금 당첨 가능성이 커지는” 루프를 명확하게 만들고, 주간 완주율을 높이는 방향입니다.</div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <span class="p-stars">★★★★★</span>
+          <span style="font-size:11px;color:var(--text-dim);">DAU 임팩트</span>
+        </div>
+        <div class="p-meta">
+          <span class="badge badge-gold">난이도: 중간</span>
+          <span class="badge badge-gold">기간: 2~4주</span>
+          <span class="badge badge-blue">주간 완주율 강화</span>
+        </div>
+      </div>
+      <div class="p-right">
+        <div class="p-period">4월~5월</div>
+        <div class="p-diff diff-mid">중간</div>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="p-card">
+      <div class="p-num">P4</div>
+      <div class="p-body">
+        <div class="p-title">미니게임 강화</div>
+        <div class="p-desc">현재 홈의 <strong>금고 열고 캐시받기</strong>, <strong>순발력으로 캐시받기</strong>를 중심으로 짧고 반복 가능한 액션을 강화합니다. 홈에서 바로 참여 가능한 저마찰 콘텐츠라서, 복잡한 신규 기능보다 빠르게 체류시간과 일일 재방문을 늘릴 수 있습니다.</div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <span class="p-stars">★★★★★</span>
+          <span style="font-size:11px;color:var(--text-dim);">DAU 임팩트</span>
+        </div>
+        <div class="p-meta">
+          <span class="badge badge-gold">난이도: 중간</span>
+          <span class="badge badge-gold">기간: 3~4주</span>
+          <span class="badge badge-blue">즉시 참여 기능</span>
+        </div>
+      </div>
+      <div class="p-right">
+        <div class="p-period">5월~6월</div>
+        <div class="p-diff diff-mid">중간</div>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="p-card">
+      <div class="p-num">P5</div>
+      <div class="p-body">
+        <div class="p-title">황금순위</div>
+        <div class="p-desc">무거운 소셜 기능 대신, 홈의 순금 응모 영역과 자연스럽게 연결되는 <strong>경량 정보 카드</strong>로 설계합니다. 전체 누적 지급 현황, 내 이번 주 순위, 최근 황금 당첨 후기를 함께 보여줘 “실제로 당첨자가 나오고 있고, 나도 가능하다”는 기대를 강화하는 역할입니다.</div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <span class="p-stars">★★★★</span>
+          <span style="font-size:11px;color:var(--text-dim);">DAU 임팩트</span>
+        </div>
+        <div class="p-meta">
+          <span class="badge badge-green">난이도: 낮음</span>
+          <span class="badge badge-gold">기간: 2~3주</span>
+          <span class="badge badge-blue">신뢰/목적성 강화</span>
+        </div>
+      </div>
+      <div class="p-right">
+        <div class="p-period">5월</div>
+        <div class="p-diff diff-low">낮음</div>
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="p-card">
+      <div class="p-num">P6</div>
+      <div class="p-body">
+        <div class="p-title">친구초대 / 레퍼럴 강화</div>
+        <div class="p-desc">현재 친구 초대 보상을 더 분명한 레퍼럴 루프로 강화합니다. 순금 당첨 후기와 주간 보상 구조를 공유 포인트로 활용해, 단순 초대 보상에서 나아가 <strong>왜 지금 친구에게 공유해야 하는지</strong>가 보이는 초대 흐름을 만드는 것이 핵심입니다.</div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <span class="p-stars">★★★★</span>
+          <span style="font-size:11px;color:var(--text-dim);">DAU 임팩트</span>
+        </div>
+        <div class="p-meta">
+          <span class="badge badge-gold">난이도: 중간</span>
+          <span class="badge badge-gold">기간: 3~4주</span>
+          <span class="badge badge-blue">바이럴 확대</span>
+        </div>
+      </div>
+      <div class="p-right">
+        <div class="p-period">6월</div>
+        <div class="p-diff diff-mid">중간</div>
+      </div>
+    </div>
+
+    <!-- P7 -->
+    <div class="p-card">
+      <div class="p-num">P7</div>
+      <div class="p-body">
+        <div class="p-title">만보기</div>
+        <div class="p-desc">걷기 기반 적립은 장기적으로 중요한 기능이지만, 현재 홈 구조 기준으로는 앞선 과제 대비 즉효성이 낮습니다. 따라서 미디에이션, 신규 보상 루프, 홈 재방문 기능을 먼저 안정화한 뒤 중장기 확장 기능으로 배치하는 것이 적절합니다.</div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <span class="p-stars">★★★</span>
+          <span style="font-size:11px;color:var(--text-dim);">DAU 임팩트</span>
+        </div>
+        <div class="p-meta">
+          <span class="badge badge-red">난이도: 높음</span>
+          <span class="badge badge-gold">기간: 6~8주</span>
+        </div>
+      </div>
+      <div class="p-right">
+        <div class="p-period">7월~8월</div>
+        <div class="p-diff diff-high">높음</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 버블차트 -->
+  <div class="chart-box">
+    <div class="chart-box-title">임팩트 vs 난이도 버블차트</div>
+    <div class="chart-box-sub">버블 크기 = 예상 수익 기여도</div>
+    <div class="chart-container" style="height:280px;">
+      <canvas id="bubbleChart"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 08: 홈 화면 구조 및 신규 기능 배치 ──── -->
+<section class="section" id="section-08">
+  <div class="section-num">SECTION 08</div>
+  <h2 class="section-title">홈 화면 구조 및 신규 기능 배치</h2>
+  <p class="section-desc">제공해주신 홈 화면 기준으로 현재 구조를 재정리하고, 미디에이션 최적화 이후 어떤 기능을 어디에 붙여야 자연스러운지 정리했습니다.</p>
+
+  <div class="review-highlight">
+    <div style="font-size:22px;font-weight:800;color:var(--gold);margin-bottom:8px;">
+      홈은 이미 단순하고 강합니다 — 그래서 신규 기능도 가볍게 붙어야 합니다
+    </div>
+    <div style="font-size:14px;color:var(--text-dim);line-height:1.7;">
+      현재 황금거위 홈은 거위 클릭, 주간 완주형 보상, 순금 응모, 미니게임, 오퍼월, 친구초대 중심의 참여형 구조입니다.<br/>
+      따라서 신규 기능은 무거운 커뮤니티보다 <span class="hl">수익 최적화 → 추가 진입 포인트 → 주간 완주율 강화 → 경량 정보 기능</span> 순으로 붙는 것이 자연스럽습니다.
+    </div>
+  </div>
+
+  <div class="screen-layout">
+    <div class="phone-shot">
+      <img src="./goldengoose-shared.png" alt="황금거위 홈 화면" />
+    </div>
+
+    <div>
+      <div class="spec-grid">
+        <div class="spec-card">
+          <div class="spec-label">FUNCTION SPEC</div>
+          <div class="spec-title">상단 상태 영역</div>
+          <div class="spec-copy">
+            응모권, 캐시, 출금 버튼을 상단에 고정 노출합니다.<br/>
+            현재 참여 시간은 <span class="hl">9시 → 12시 → 18시</span> 흐름으로 표시하고, 현재 시간대 기준으로 <span class="hl">남은 황금알 / 참여 가능한 황금알</span>을 함께 보여줍니다.
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-label">PUSH TRIGGER</div>
+          <div class="spec-title">시간대별 재진입 푸시</div>
+          <div class="spec-copy">
+            매일 특정 시간에 <span class="hl">황금알이 생성되었다는 푸시</span>를 발송해 유저가 다시 앱에 들어오게 만듭니다.<br/>
+            핵심은 9시, 12시, 18시 같은 참여 가능 시간대를 명확히 각인시켜 <span class="hl">정해진 시간에 반복 접속하는 습관</span>을 만드는 것입니다.<br/>
+            현재는 푸시가 하루 3회 발송되지만 이전 푸시를 다시 볼 수 있는 화면이 없으므로, <span class="hl">추후 개발 항목으로 푸시 히스토리/이전 푸시 보기 기능</span>을 추가하는 것이 필요합니다.
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-label">GOOSE CLICK</div>
+          <div class="spec-title">거위 클릭 기본 루프</div>
+          <div class="spec-copy">
+            황금알은 <span class="hl">9시, 12시, 18시</span>에 자동 지급되며, 하루 최대 10개까지 받을 수 있습니다.<br/>
+            유저는 거위를 클릭해 황금알을 열고 참여하며, <span class="hl">10번 모두 참여 완료 시 응모권</span>이 지급됩니다.
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-label">WEEKLY LOOP</div>
+          <div class="spec-title">주간 미션 참여 보상</div>
+          <div class="spec-copy">
+            <span class="hl">1일차</span> 모두 참여 시 응모권 1개 지급<br/>
+            <span class="hl">3일차</span>까지 모두 참여 시 응모권 2개 지급<br/>
+            <span class="hl">5일차</span>까지 모두 참여 시 보너스 캐시 200 지급<br/>
+            <span class="hl">7일차</span>까지 모두 참여 시 응모권 5개 + 보너스 캐시 200 지급<br/>
+            이 구조는 단순 출석체크가 아니라 주간 완주형 보상 루프로 해석하는 것이 적절합니다.
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-label">BONUS CASH</div>
+          <div class="spec-title">보너스 캐시(쿠팡) 동작</div>
+          <div class="spec-copy">
+            각 시간대별 황금알을 모두 열었을 때 <span class="hl">보너스 캐시</span>가 등장합니다.<br/>
+            유저가 해당 영역을 선택하면 <span class="hl">쿠팡 참여 페이지</span>로 이동하며, 기존 거위 클릭이나 주간 미션과 분리된 별도 보상 액션으로 설계합니다.
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-label">GOLDEN RANKING</div>
+          <div class="spec-title">황금순위 운영 정보</div>
+          <div class="spec-copy">
+            <span class="hl">매주 금요일 9시</span> 회차별 결과를 발표하며, <span class="hl">24K 0.1g</span> 당첨 정보를 노출합니다.<br/>
+            전체 누적 지급 현황, 내 이번 주 순위, 최근 황금 당첨 후기를 함께 보여줘 순금 응모 전 신뢰와 기대를 강화합니다.
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-label">MINI GAME</div>
+          <div class="spec-title">미니게임 구성</div>
+          <div class="spec-copy">
+            가볍게 참여할 수 있는 <span class="hl">가위바위보</span>, <span class="hl">순발력 테스트</span>, <span class="hl">룰렛</span>, <span class="hl">사다리 타기</span> 등을 구성합니다.<br/>
+            짧은 플레이타임 안에 바로 참여와 보상이 이어지도록 설계해, 홈 진입 후 추가 참여율과 재방문 빈도를 높이는 역할을 합니다.
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-label">REVIEW & PROMOTION</div>
+          <div class="spec-title">리뷰 및 홍보 보상</div>
+          <div class="spec-copy">
+            친구에게 <span class="hl">알림톡으로 코드</span>를 보내 가입 후 참여까지 완료한 경우 <span class="hl">500캐시</span>를 즉시 지급합니다.<br/>
+            앱 리뷰 작성이 확인되면 <span class="hl">100캐시</span>를 지급합니다.<br/>
+            레퍼럴과 리뷰 보상은 별도 홍보 축으로 운영해 신규 유입과 신뢰 강화를 동시에 유도합니다.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="journey-wrap">
+    <div class="journey-title">CUSTOMER JOURNEY MAP</div>
+    <div class="journey-chart-card">
+      <div class="journey-chip-row">
+        <span class="journey-chip">황금알 알림 확인</span>
+        <span class="journey-chip">앱 접속</span>
+        <span class="journey-chip">거위 터치</span>
+        <span class="journey-chip">광고 시청</span>
+        <span class="journey-chip pain">황금알 깨지는 시간 대기</span>
+        <span class="journey-chip">황금알 모두 소진</span>
+        <span class="journey-chip reward">보너스 캐시 확인 및 참여</span>
+        <span class="journey-chip reward">1일차 미션 참여 후 응모권 획득</span>
+        <span class="journey-chip">응모권 참여</span>
+        <span class="journey-chip reward">3일차 참여 후 선물 받기</span>
+        <span class="journey-chip reward">5일차 참여 후 선물 받기</span>
+        <span class="journey-chip reward">7일차 참여 후 선물 받기</span>
+      </div>
+
+      <div class="journey-canvas-wrap">
+        <canvas id="ggJourney"></canvas>
+      </div>
+
+        <div class="journey-hook-row">
+          <div class="journey-hook">
+            <div class="jh-label">RE-ENGAGEMENT</div>
+          <div class="jh-copy">광고 시청 후 바로 다음 광고를 붙이는 것이 아니라, 알 깨기 대기시간을 두고 그 사이에 보너스 캐시, 황금순위, 응모권 현황을 보여줘 <span class="hl">다음 시청까지 시간을 확보</span>하는 구조가 필요합니다.</div>
+          </div>
+          <div class="journey-hook">
+            <div class="jh-label">MINI GAME POPUP</div>
+          <div class="jh-copy">1일차 참여 또는 해당 시간대 참여가 모두 종료되면 하단 팝업으로 미니게임을 노출해, 금고 열기·순발력 테스트·룰렛·사다리 타기 등으로 <span class="hl">광고 시청과 재시청 사이를 메우는 완충 구간</span>을 만듭니다.</div>
+          </div>
+        </div>
+    </div>
+
+    <div class="journey-note-grid">
+      <div class="journey-note">
+        <div class="jn-title">광고 후 대기 구간 설계</div>
+        <div class="jn-copy">
+          중요한 점은 유저가 광고를 본 뒤 어느 정도 대기 후 <span class="hl">다시 광고를 보게 만드는 장치</span>가 필요하다는 것입니다.<br/>
+          황금알이 다시 열릴 때까지의 시간을 단순 대기 시간이 아니라, 보너스 캐시, 황금순위, 응모권 현황, 다음 보상까지 남은 시간을 확인하게 하고 <span class="hl">다음 시청까지 시간을 확보</span>하는 구간으로 설계해야 합니다.
+        </div>
+      </div>
+
+      <div class="journey-note">
+        <div class="jn-title">미니게임 하단 팝업 유도</div>
+        <div class="jn-copy">
+          1일차 참여 또는 해당 시간대 참여가 모두 종료되면 <span class="hl">하단 팝업</span>으로 미니게임 참여를 유도합니다.<br/>
+          금고 열기, 순발력 테스트, 룰렛, 사다리 타기 같은 저마찰 액션으로 광고와 광고 사이를 메우고, 앱 내 참여 시간을 높여 계속 참여시키는 구조로 DAU를 끌어올리는 것이 핵심입니다.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-wrap">
+    <div class="flow-title">GOLDEN GOOSE FLOW</div>
+    <div class="flow-board is-clickable" id="flowBoard">
+      <pre class="mermaid">
+flowchart LR
+  A["특정 시간 푸시 발송<br/>9시 / 12시 / 18시"] --> B["앱 접속"]
+  B --> C["상단 상태 확인<br/>응모권 / 캐시 / 출금 / 남은 황금알"]
+  C --> D["거위 터치"]
+  D --> E["광고 시청"]
+  E --> F["황금알 획득"]
+  F --> G{"해당 시간대 황금알<br/>모두 참여했는가?"}
+
+  G -- "아니오" --> D
+  G -- "예" --> H["보너스 캐시 노출"]
+  H --> I["쿠팡 참여 페이지 이동"]
+  I --> J["보너스 캐시 지급"]
+
+  F --> K{"하루 10회<br/>모두 참여했는가?"}
+  K -- "아니오" --> L["알 깨기 대기시간"]
+  L --> M["황금순위 / 다음 보상 / 미니게임 노출"]
+  M --> D
+
+  K -- "예" --> N["응모권 지급"]
+  N --> O["순금 응모 참여"]
+
+  O --> P{"주간 누적 참여일"}
+  P -- "1일차 완료" --> Q["응모권 1개 지급"]
+  P -- "3일차 완료" --> R["응모권 2개 지급"]
+  P -- "5일차 완료" --> S["보너스 캐시 200 지급"]
+  P -- "7일차 완료" --> T["응모권 5개 + 보너스 캐시 200 지급"]
+
+  L --> U["하단 팝업 노출"]
+  U --> V["미니게임 참여<br/>가위바위보 / 순발력 / 룰렛 / 사다리타기"]
+  V --> M
+
+  O --> W["매주 금요일 9시 결과 발표"]
+  W --> X["24K 0.1g 당첨 정보 노출"]
+      </pre>
+
+      <div class="flow-note">
+        핵심은 광고를 한 번 보여주고 끝내는 것이 아니라, <span class="hl">알 깨기 대기시간</span>, <span class="hl">보너스 캐시</span>, <span class="hl">미니게임</span>, <span class="hl">응모권 현황</span>을 이용해 다음 광고 시청까지 시간을 확보하는 것입니다.
+        해당 시간대 참여 또는 1일차 참여가 종료되면 하단 팝업으로 미니게임을 연결해 앱 내 체류시간과 재참여율을 높이고, 최종적으로 DAU를 끌어올리는 구조로 설계합니다.
+      </div>
+      <div class="flow-hint">클릭하면 크게 볼 수 있습니다</div>
+    </div>
+  </div>
+</section>
+
+<div class="flow-modal" id="flowModal" aria-hidden="true">
+  <div class="flow-modal-inner">
+    <div class="flow-modal-head">
+      <div class="flow-modal-title">GOLDEN GOOSE FLOW</div>
+      <button class="flow-modal-close" id="flowModalClose" aria-label="닫기">×</button>
+    </div>
+    <div class="flow-modal-body">
+      <pre class="mermaid">
+flowchart LR
+  A["특정 시간 푸시 발송<br/>9시 / 12시 / 18시"] --> B["앱 접속"]
+  B --> C["상단 상태 확인<br/>응모권 / 캐시 / 출금 / 남은 황금알"]
+  C --> D["거위 터치"]
+  D --> E["광고 시청"]
+  E --> F["황금알 획득"]
+  F --> G{"해당 시간대 황금알<br/>모두 참여했는가?"}
+
+  G -- "아니오" --> D
+  G -- "예" --> H["보너스 캐시 노출"]
+  H --> I["쿠팡 참여 페이지 이동"]
+  I --> J["보너스 캐시 지급"]
+
+  F --> K{"하루 10회<br/>모두 참여했는가?"}
+  K -- "아니오" --> L["알 깨기 대기시간"]
+  L --> M["황금순위 / 다음 보상 / 미니게임 노출"]
+  M --> D
+
+  K -- "예" --> N["응모권 지급"]
+  N --> O["순금 응모 참여"]
+
+  O --> P{"주간 누적 참여일"}
+  P -- "1일차 완료" --> Q["응모권 1개 지급"]
+  P -- "3일차 완료" --> R["응모권 2개 지급"]
+  P -- "5일차 완료" --> S["보너스 캐시 200 지급"]
+  P -- "7일차 완료" --> T["응모권 5개 + 보너스 캐시 200 지급"]
+
+  L --> U["하단 팝업 노출"]
+  U --> V["미니게임 참여<br/>가위바위보 / 순발력 / 룰렛 / 사다리타기"]
+  V --> M
+
+  O --> W["매주 금요일 9시 결과 발표"]
+  W --> X["24K 0.1g 당첨 정보 노출"]
+      </pre>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 09: 3단계 로드맵 ──────────────────── -->
+<section class="section" id="section-09">
+  <div class="section-num">SECTION 09</div>
+  <h2 class="section-title">3단계 성장 로드맵</h2>
+  <p class="section-desc">2026년 4월~12월 인수 후 실행 로드맵입니다. 단기에는 수익 기반과 홈 액션을 정비하고, 이후 바이럴과 습관형 기능으로 확장합니다.</p>
+
+  <div class="roadmap-phases">
+    <div class="phase-card phase-short">
+      <div class="phase-period">단기 · 4월~5월</div>
+      <div class="phase-title">기반 강화</div>
+      <ul class="phase-items">
+        <li>P1 — 미디에이션 최적화 (4월)</li>
+        <li>P2 — 보너스 캐시(쿠팡) 신규 도입 (4월~5월)</li>
+        <li>P3 — 1·3·5·7일차 박스 보상 고도화</li>
+        <li>주간 완주율 및 응모권 획득률 개선</li>
+        <li>홈 진입 후 2차 액션 전환율 상승</li>
+      </ul>
+    </div>
+    <div class="phase-card phase-mid">
+      <div class="phase-period">중기 · 5월~7월</div>
+      <div class="phase-title">기능 확장</div>
+      <ul class="phase-items">
+        <li>P4 — 미니게임 강화 (5월)</li>
+        <li>P5 — 황금순위 노출 (5월)</li>
+        <li>P6 — 친구초대 / 레퍼럴 강화 (6월)</li>
+        <li>추후 개발 — 이전 푸시 보기 / 푸시 히스토리</li>
+        <li>순금 응모 클릭률과 재방문율 개선</li>
+        <li>DAU 5배 목표</li>
+      </ul>
+    </div>
+    <div class="phase-card phase-long">
+      <div class="phase-period">장기 · 8월~12월</div>
+      <div class="phase-title">Lock-in &amp; 성장</div>
+      <ul class="phase-items">
+        <li>P7 — 만보기 출시 (7월~8월)</li>
+        <li>걷기 기반 적립 루프 연결</li>
+        <li>브랜드 스폰서십 유치</li>
+        <li>DAU 10배 목표</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- KPI 목표 -->
+  <div style="font-size:13px;font-weight:700;color:var(--text-dim);margin-bottom:12px;letter-spacing:1px;">KPI 목표 — DAU 성장 트래킹</div>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-metric">DAU 목표</div>
+      <div class="kpi-now">현재 기준</div>
+      <div class="kpi-arrow">↓</div>
+      <div class="kpi-3m">3개월 · 2배</div>
+      <div class="kpi-arrow">↓</div>
+      <div class="kpi-6m">6개월 · 5배</div>
+      <div class="kpi-arrow">↓</div>
+      <div style="font-size:26px;font-weight:900;color:var(--gold);">12개월 · 10배</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-metric">월 순이익 목표</div>
+      <div class="kpi-now">초기 단계</div>
+      <div class="kpi-arrow">↓</div>
+      <div class="kpi-3m">~3,300만원 (DAU 1만)</div>
+      <div class="kpi-arrow">↓</div>
+      <div class="kpi-6m">~1억원 (DAU 3만)</div>
+      <div class="kpi-arrow">↓</div>
+      <div style="font-size:20px;font-weight:900;color:var(--gold);">~3.3억원 (DAU 10만)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-metric">D7 리텐션 목표</div>
+      <div class="kpi-now">현재 ~25%</div>
+      <div class="kpi-arrow">↓</div>
+      <div class="kpi-3m">3개월 · 35%+</div>
+      <div class="kpi-arrow">↓</div>
+      <div class="kpi-6m">6개월 · 42%+</div>
+      <div class="kpi-arrow">↓</div>
+      <div style="font-size:20px;font-weight:900;color:var(--gold);">12개월 · 50%+</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer-logo">🥚 GOLDEN GOOSE</div>
+  <div>DAU 고도화 전략 분석 보고서 · 2026.03.18 인수 완료</div>
+  <div style="margin-top:8px;">개발사: HEECHANG LEE · 앱스토어 평점 4.9 · 24K 순금 주간 10명 당첨</div>
+  <div style="margin-top:4px;color:#333;">"엄마도 쉽게 쓰는 앱" — 실물 보상이 핵심 차별화</div>
+</footer>
+
+<script>
+mermaid.initialize({
+  startOnLoad: true,
+  theme: 'dark',
+  securityLevel: 'loose',
+  themeVariables: {
+    primaryColor: '#2a2a2a',
+    primaryTextColor: '#e0e0e0',
+    primaryBorderColor: '#FFB800',
+    lineColor: '#FFB800',
+    secondaryColor: '#1a1a1a',
+    tertiaryColor: '#181818',
+    background: '#222',
+    mainBkg: '#1a1a1a',
+    secondBkg: '#222',
+    tertiaryBkg: '#181818',
+    edgeLabelBackground: '#0d0d0d',
+    clusterBkg: '#1a1a1a',
+    clusterBorder: '#2a2a2a'
+  },
+  flowchart: {
+    useMaxWidth: true,
+    htmlLabels: true,
+    curve: 'basis'
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  Chart.register(ChartDataLabels);
+
+  // ── 공통 색상 ────────────────────────────────
+  const GOLD = '#FFB800';
+  const GOLD_LIGHT = '#FFD54F';
+  const GOLD_DARK = '#CC9200';
+  const GREEN = '#4CAF50';
+  const BLUE = '#2196F3';
+  const PURPLE = '#9C27B0';
+  const RED = '#F44336';
+  const GRID_COLOR = 'rgba(255,255,255,0.06)';
+  const TEXT_DIM = '#888';
+
+  const defaultFont = {
+    family: "'Pretendard', -apple-system, 'Noto Sans KR', sans-serif"
+  };
+
+  // ── 레이더 차트 (Section 04) ─────────────────
+  new Chart(document.getElementById('radarChart'), {
+    type: 'radar',
+    data: {
+      labels: ['광고수익', '실물보상', '커뮤니티', '쇼핑연동', 'UX단순함'],
+      datasets: [
+        {
+          label: '황금거위',
+          data: [60, 95, 20, 70, 90],
+          borderColor: GOLD,
+          backgroundColor: 'rgba(255,184,0,0.15)',
+          pointBackgroundColor: GOLD,
+          borderWidth: 2,
+          pointRadius: 4,
+        },
+        {
+          label: '캐시워크',
+          data: [90, 10, 60, 50, 55],
+          borderColor: GREEN,
+          backgroundColor: 'rgba(76,175,80,0.08)',
+          pointBackgroundColor: GREEN,
+          borderWidth: 2,
+          pointRadius: 3,
+        },
+        {
+          label: '금캐기',
+          data: [75, 10, 20, 20, 65],
+          borderColor: BLUE,
+          backgroundColor: 'rgba(33,150,243,0.08)',
+          pointBackgroundColor: BLUE,
+          borderWidth: 2,
+          pointRadius: 3,
+        },
+        {
+          label: '돈이돼지',
+          data: [70, 10, 10, 10, 85],
+          borderColor: PURPLE,
+          backgroundColor: 'rgba(156,39,176,0.08)',
+          pointBackgroundColor: PURPLE,
+          borderWidth: 2,
+          pointRadius: 3,
+        },
+        {
+          label: '캐시는내차지',
+          data: [80, 0, 20, 90, 70],
+          borderColor: '#FF6B6B',
+          backgroundColor: 'rgba(255,107,107,0.08)',
+          pointBackgroundColor: '#FF6B6B',
+          borderWidth: 2,
+          pointRadius: 3,
+        },
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { color: TEXT_DIM, font: defaultFont, boxWidth: 10, padding: 12 }
+        },
+        datalabels: { display: false }
+      },
+      scales: {
+        r: {
+          min: 0, max: 100,
+          ticks: { display: false, stepSize: 25 },
+          grid: { color: GRID_COLOR },
+          angleLines: { color: GRID_COLOR },
+          pointLabels: { color: TEXT_DIM, font: { ...defaultFont, size: 11 } }
+        }
+      }
+    }
+  });
+
+  // ── 도넛 — 현재 수익 (Section 06) ───────────
+  new Chart(document.getElementById('donutCurrent'), {
+    type: 'doughnut',
+    data: {
+      labels: ['거위 클릭 광고', '오퍼월', '기타'],
+      datasets: [{
+        data: [75, 20, 5],
+        backgroundColor: [GOLD, '#2196F3', '#555'],
+        borderColor: '#222',
+        borderWidth: 3,
+        hoverOffset: 6,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '60%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { color: TEXT_DIM, font: defaultFont, boxWidth: 10, padding: 10 }
+        },
+        datalabels: {
+          color: '#fff',
+          font: { ...defaultFont, size: 12, weight: '700' },
+          formatter: (v) => v + '%'
+        }
+      }
+    }
+  });
+
+  // ── 도넛 — 목표 수익 (Section 06) ───────────
+  new Chart(document.getElementById('donutTarget'), {
+    type: 'doughnut',
+    data: {
+      labels: ['거위 클릭 광고', '보너스 캐시(쿠팡)', '미니게임 광고', '오퍼월/기타'],
+      datasets: [{
+        data: [50, 20, 15, 15],
+        backgroundColor: [GOLD, PURPLE, BLUE, '#555'],
+        borderColor: '#222',
+        borderWidth: 3,
+        hoverOffset: 6,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '60%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { color: TEXT_DIM, font: defaultFont, boxWidth: 10, padding: 10 }
+        },
+        datalabels: {
+          color: '#fff',
+          font: { ...defaultFont, size: 12, weight: '700' },
+          formatter: (v) => v + '%'
+        }
+      }
+    }
+  });
+
+  // ── 바차트 — DAU별 수익 (Section 06) ─────────
+  new Chart(document.getElementById('revenueBar'), {
+    type: 'bar',
+    data: {
+      labels: ['거위 클릭 10회', '미니게임 3회', '광고 1회당 마진', '쿠팡 보너스캐시'],
+      datasets: [{
+        label: '일일 매출총이익 (원)',
+        data: [64, 24, 7, 1],
+        backgroundColor: [
+          'rgba(255,184,0,0.5)',
+          'rgba(33,150,243,0.65)',
+          'rgba(156,39,176,0.65)',
+          'rgba(255,184,0,0.95)',
+        ],
+        borderColor: GOLD,
+        borderWidth: 1,
+        borderRadius: 8,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        datalabels: {
+          anchor: 'end',
+          align: 'end',
+          color: GOLD_LIGHT,
+          font: { ...defaultFont, size: 12, weight: '700' },
+          formatter: (v) => v + '원'
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: GRID_COLOR },
+          ticks: { color: TEXT_DIM, font: defaultFont }
+        },
+        y: {
+          grid: { color: GRID_COLOR },
+          ticks: {
+            color: TEXT_DIM, font: defaultFont,
+            callback: (v) => v + '원'
+          }
+        }
+      }
+    }
+  });
+
+  // ── 버블차트 — 임팩트 vs 난이도 (Section 07) ─
+  new Chart(document.getElementById('bubbleChart'), {
+    type: 'bubble',
+    data: {
+      datasets: [
+        {
+          label: 'P1 보상형 광고',
+          data: [{ x: 1, y: 5, r: 15 }],
+          backgroundColor: 'rgba(76,175,80,0.6)',
+          borderColor: GREEN,
+        },
+        {
+          label: 'P2 보너스 캐시(쿠팡)',
+          data: [{ x: 2.2, y: 4.8, r: 18 }],
+          backgroundColor: 'rgba(255,107,107,0.6)',
+          borderColor: '#FF6B6B',
+        },
+        {
+          label: 'P3 출석/완주형 미션',
+          data: [{ x: 2, y: 4.9, r: 19 }],
+          backgroundColor: 'rgba(255,184,0,0.6)',
+          borderColor: GOLD,
+        },
+        {
+          label: 'P4 미니게임 강화',
+          data: [{ x: 2.4, y: 4.6, r: 17 }],
+          backgroundColor: 'rgba(33,150,243,0.6)',
+          borderColor: BLUE,
+        },
+        {
+          label: 'P5 황금순위',
+          data: [{ x: 1.4, y: 4.1, r: 13 }],
+          backgroundColor: 'rgba(255,152,0,0.6)',
+          borderColor: '#FF9800',
+        },
+        {
+          label: 'P6 친구초대 / 레퍼럴',
+          data: [{ x: 2.6, y: 4.2, r: 14 }],
+          backgroundColor: 'rgba(156,39,176,0.6)',
+          borderColor: PURPLE,
+        },
+        {
+          label: 'P7 만보기',
+          data: [{ x: 4.2, y: 3.8, r: 16 }],
+          backgroundColor: 'rgba(244,67,54,0.5)',
+          borderColor: RED,
+        },
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { color: TEXT_DIM, font: defaultFont, boxWidth: 10, padding: 10 }
+        },
+        datalabels: { display: false }
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: '← 낮은 난이도 · 높은 난이도 →',
+            color: TEXT_DIM,
+            font: { ...defaultFont, size: 11 }
+          },
+          min: 0, max: 5,
+          grid: { color: GRID_COLOR },
+          ticks: { color: TEXT_DIM, font: defaultFont }
+        },
+        y: {
+          title: {
+            display: true,
+            text: '← 낮은 임팩트 · 높은 임팩트 →',
+            color: TEXT_DIM,
+            font: { ...defaultFont, size: 11 }
+          },
+          min: 0, max: 6,
+          grid: { color: GRID_COLOR },
+          ticks: { color: TEXT_DIM, font: defaultFont }
+        }
+      }
+    }
+  });
+
+  const ggJourneyLabels = ['알림', '앱접속', '거위터치', '광고시청', '대기', '소진', '보너스캐시', '1일차', '응모권참여', '3일차', '5일차', '7일차'];
+  const ggJourneyData = [8, 8.5, 9, 7, 4, 4.5, 6.5, 8, 8.5, 7.8, 8.2, 9.2];
+  const ggJourneyPain = [4, 5];
+  const ggJourneyPointColors = ggJourneyLabels.map((_, i) => ggJourneyPain.includes(i) ? RED : GOLD);
+  const ggJourneyPointRadius = ggJourneyLabels.map((_, i) => ggJourneyPain.includes(i) ? 6 : 4);
+
+  new Chart(document.getElementById('ggJourney'), {
+    type: 'line',
+    data: {
+      labels: ggJourneyLabels,
+      datasets: [{
+        data: ggJourneyData,
+        borderColor: GOLD,
+        backgroundColor: 'rgba(255,184,0,0.10)',
+        borderWidth: 2.5,
+        fill: true,
+        tension: 0.38,
+        pointBackgroundColor: ggJourneyPointColors,
+        pointBorderColor: ggJourneyPointColors,
+        pointRadius: ggJourneyPointRadius,
+        pointHoverRadius: 7
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: c => '참여/동기 강도 ' + c.raw + '/10'
+          }
+        }
+      },
+      scales: {
+        y: {
+          min: 0,
+          max: 10,
+          ticks: { stepSize: 5, color: TEXT_DIM, font: { ...defaultFont, size: 10 } },
+          grid: { color: GRID_COLOR }
+        },
+        x: {
+          ticks: { color: TEXT_DIM, font: { ...defaultFont, size: 10 }, maxRotation: 0 },
+          grid: { display: false }
+        }
+      }
+    }
+  });
+
+  const flowBoard = document.getElementById('flowBoard');
+  const flowModal = document.getElementById('flowModal');
+  const flowModalClose = document.getElementById('flowModalClose');
+
+  if (flowBoard && flowModal && flowModalClose) {
+    flowBoard.addEventListener('click', () => {
+      flowModal.classList.add('is-open');
+      flowModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    });
+
+    const closeFlowModal = () => {
+      flowModal.classList.remove('is-open');
+      flowModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+
+    flowModalClose.addEventListener('click', closeFlowModal);
+    flowModal.addEventListener('click', (e) => {
+      if (e.target === flowModal) closeFlowModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && flowModal.classList.contains('is-open')) {
+        closeFlowModal();
+      }
+    });
+  }
+
+});
+</script>
+</body>
+</html>
