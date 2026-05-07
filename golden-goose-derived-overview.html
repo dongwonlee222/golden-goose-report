@@ -144,9 +144,9 @@
             <div class="kpi-note" style="margin-top:4px;">총액 ₩754,515 − 수수료 ₩150,903 · 558.90 USD · 환율 ₩1,350.00/USD (fallback)</div>
           </div>
           <div style="flex:1; min-width:200px; padding:8px 0 8px 20px;">
-            <div class="kpi-name">순수익 <span style="font-weight:400; font-size:11px; color:var(--muted);">출금 70% 가정</span></div>
-            <div style="font-size:26px; font-weight:700; letter-spacing:-0.03em; margin-top:4px; color:#2d7a69;">₩43,745</div>
-            <div class="kpi-note" style="margin-top:4px;">수익 ₩603,612 − 포인트비용 ₩559,867<br><span style="font-size:12px;">포인트 799,810P 중 30%(239,943P)는 미출금으로 제외</span></div>
+            <div class="kpi-name">순수익</div>
+            <div style="font-size:26px; font-weight:700; letter-spacing:-0.03em; margin-top:4px; color:#dc2626;">₩-196,198</div>
+            <div class="kpi-note" style="margin-top:4px;">수익 ₩603,612 − 포인트비용 ₩799,810</div>
           </div>
         </div>
       </article>
@@ -177,7 +177,7 @@
           <div style="flex:1; min-width:200px; padding:8px 0 8px 20px;">
             <div class="kpi-name">추가 비용 합계</div>
             <div style="font-size:26px; font-weight:700; letter-spacing:-0.03em; margin-top:6px; color:#dc2626;" id="extraCostTotal">₩0</div>
-            <div class="kpi-note" style="margin-top:6px;">순수익 ₩43,745 에서 차감 시<br><span style="font-size:13px; font-weight:700;" id="finalProfit">= ₩43,745</span></div>
+            <div class="kpi-note" style="margin-top:6px;">순수익 ₩-196,198 에서 차감 시<br><span style="font-size:13px; font-weight:700;" id="finalProfit">= ₩-196,198</span></div>
           </div>
         </div>
       </article>
@@ -551,7 +551,7 @@
     })();
 
     (function() {
-      const NET_PROFIT = 43745;
+      const NET_PROFIT = -196198;
       const adInput = document.getElementById("adCostInput");
       const srvInput = document.getElementById("serverCostInput");
       const totalEl = document.getElementById("extraCostTotal");
