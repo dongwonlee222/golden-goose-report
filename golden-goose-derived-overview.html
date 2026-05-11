@@ -160,9 +160,9 @@
               <span style="font-size:20px; font-weight:700;">₩</span>
               <input id="adCostInput" type="number" min="0" step="1000"
                 style="font-size:22px; font-weight:700; width:100%; border:none; border-bottom:2px solid var(--line); background:transparent; color:var(--ink); outline:none; padding:2px 0;"
-                placeholder="0" value="13834">
+                placeholder="0" value="302944">
             </div>
-            <div class="kpi-note" style="margin-top:6px;">Google Ads 04-21 집행 · 노출 3,156 · 전환 33회 · CPA ₩419</div>
+            <div class="kpi-note" style="margin-top:6px;">Google Ads 2026-03-01 ~ 2026-05-08 집행 · 노출 108,027 · 전환 730회 · CPA ₩415</div>
           </div>
           <div style="flex:1; min-width:200px; padding:8px 20px; border-right:1px solid var(--line);">
             <div class="kpi-name">서버비용</div>
@@ -571,11 +571,11 @@
         totalEl.style.color = total > 0 ? "#dc2626" : "var(--muted)";
         finalEl.textContent = "= " + fmt(final);
         finalEl.style.color = final >= 0 ? "#2d7a69" : "#dc2626";
-        localStorage.setItem("gg_ad_cost_v2", ad);
+        localStorage.setItem("gg_ad_cost_v3", ad);
         localStorage.setItem("gg_srv_cost_v2", srv);
       }
 
-      const savedAd = localStorage.getItem("gg_ad_cost_v2");
+      const savedAd = localStorage.getItem("gg_ad_cost_v3");
       const savedSrv = localStorage.getItem("gg_srv_cost_v2");
       if (savedAd !== null) adInput.value = savedAd;
       if (savedSrv !== null) srvInput.value = savedSrv;
