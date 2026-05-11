@@ -670,11 +670,11 @@
         totalEl.style.color = total > 0 ? "#dc2626" : "var(--muted)";
         finalEl.textContent = "= " + fmt(final);
         finalEl.style.color = final >= 0 ? "#2d7a69" : "#dc2626";
-        localStorage.setItem("gg_ad_cost_v3", ad);
+        localStorage.setItem("gg_ad_cost_v4", ad);
         localStorage.setItem("gg_srv_cost_v2", srv);
       }
 
-      const savedAd = localStorage.getItem("gg_ad_cost_v3");
+      const savedAd = localStorage.getItem("gg_ad_cost_v4");
       const savedSrv = localStorage.getItem("gg_srv_cost_v2");
       if (savedAd !== null) adInput.value = savedAd;
       if (savedSrv !== null) srvInput.value = savedSrv;
