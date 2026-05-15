@@ -659,6 +659,7 @@
 
     (function() {
       const NET_PROFIT = -137184;
+      const AD_COST_STORAGE_KEY = "gg_ad_cost_v5_2026-04-18_2026-05-14_616508";
       const adInput = document.getElementById("adCostInput");
       const srvInput = document.getElementById("serverCostInput");
       const totalEl = document.getElementById("extraCostTotal");
@@ -674,11 +675,11 @@
         totalEl.style.color = total > 0 ? "#dc2626" : "var(--muted)";
         finalEl.textContent = "= " + fmt(final);
         finalEl.style.color = final >= 0 ? "#2d7a69" : "#dc2626";
-        localStorage.setItem("gg_ad_cost_v4", ad);
+        localStorage.setItem(AD_COST_STORAGE_KEY, ad);
         localStorage.setItem("gg_srv_cost_v2", srv);
       }
 
-      const savedAd = localStorage.getItem("gg_ad_cost_v4");
+      const savedAd = localStorage.getItem(AD_COST_STORAGE_KEY);
       const savedSrv = localStorage.getItem("gg_srv_cost_v2");
       if (savedAd !== null) adInput.value = savedAd;
       if (savedSrv !== null) srvInput.value = savedSrv;
