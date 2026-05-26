@@ -156,7 +156,7 @@
       </article>
 
       <article class="card span-12" style="padding: 16px 22px;" id="extraCostCard">
-        <div style="font-size:11px; color:var(--muted); margin-bottom:10px; letter-spacing:0.06em;">추가 비용 (2026-04-18 ~ 2026-05-18) <span style="font-size:11px; color:var(--muted);">— 직접 입력, 자동 저장</span></div>
+        <div style="font-size:11px; color:var(--muted); margin-bottom:10px; letter-spacing:0.06em;">추가 비용 (2026-04-05 ~ 2026-05-25) <span style="font-size:11px; color:var(--muted);">— 직접 입력, 자동 저장</span></div>
         <div style="display:flex; align-items:flex-start; gap:0; flex-wrap:wrap;">
           <div style="flex:1; min-width:200px; padding:8px 20px 8px 0; border-right:1px solid var(--line);">
             <div class="kpi-name">광고비용 <span style="font-weight:400; font-size:11px; color:var(--muted);">Google Ads</span></div>
@@ -164,9 +164,9 @@
               <span style="font-size:20px; font-weight:700;">₩</span>
               <input id="adCostInput" type="number" min="0" step="1000"
                 style="font-size:22px; font-weight:700; width:100%; border:none; border-bottom:2px solid var(--line); background:transparent; color:var(--ink); outline:none; padding:2px 0;"
-                placeholder="0" value="828833">
+                placeholder="0" value="1310856">
             </div>
-            <div class="kpi-note" style="margin-top:6px;">Google Ads 2026-04-18 ~ 2026-05-18 집행 · 노출 259,858 · 전환 1,844회 · CPA ₩449</div>
+            <div class="kpi-note" style="margin-top:6px;">Google Ads 2026-04-05 ~ 2026-05-25 집행 · 노출 427,098 · 전환 2,557회 · CPA ₩513</div>
           </div>
           <div style="flex:1; min-width:200px; padding:8px 20px; border-right:1px solid var(--line);">
             <div class="kpi-name">서버비용</div>
@@ -191,27 +191,27 @@
         <div style="display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:12px;">
           <div style="padding:14px; border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,0.72);">
             <div class="kpi-name">Google Ads CPA</div>
-            <div style="font-size:24px; font-weight:800; margin-top:6px;">₩449</div>
-            <div class="kpi-note">전환 1,844건 · 비용 ₩828,833</div>
+            <div style="font-size:24px; font-weight:800; margin-top:6px;">₩513</div>
+            <div class="kpi-note">전환 2,557건 · 비용 ₩1,310,856</div>
           </div>
           <div style="padding:14px; border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,0.72);">
             <div class="kpi-name">운영 가입당 광고비</div>
-            <div style="font-size:24px; font-weight:800; margin-top:6px;">₩334</div>
+            <div style="font-size:24px; font-weight:800; margin-top:6px;">₩528</div>
             <div class="kpi-note">구간 가입 2,485명 기준</div>
           </div>
           <div style="padding:14px; border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,0.72);">
             <div class="kpi-name">전환 / 운영가입</div>
-            <div style="font-size:24px; font-weight:800; margin-top:6px;">74.2%</div>
+            <div style="font-size:24px; font-weight:800; margin-top:6px;">102.9%</div>
             <div class="kpi-note">Google 전환과 앱 가입의 규모 비교</div>
           </div>
           <div style="padding:14px; border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,0.72);">
             <div class="kpi-name">매출 회수율</div>
-            <div style="font-size:24px; font-weight:800; margin-top:6px; color:#2d7a69;">173%</div>
-            <div class="kpi-note">광고수익 ₩1,433,948 − 광고비 = ₩605,115</div>
+            <div style="font-size:24px; font-weight:800; margin-top:6px; color:#2d7a69;">109%</div>
+            <div class="kpi-note">광고수익 ₩1,433,948 − 광고비 = ₩123,092</div>
           </div>
         </div>
         <div class="callout" style="margin-top:12px;">
-          현재 Google Ads 리포트는 2026-04-18 ~ 2026-05-18 날짜별 시계열이고, 운영 데이터 조회 구간은 2026-04-16 ~ 2026-05-25이다. 광고 리포트 전환과 앱 가입 정의가 다를 수 있어 정확한 광고효과 판단은 날짜별 광고비와 가입 source/utm 매칭이 필요하다.
+          현재 Google Ads 리포트는 2026-04-05 ~ 2026-05-25 날짜별 시계열이고, 운영 데이터 조회 구간은 2026-04-16 ~ 2026-05-25이다. 광고 리포트 전환과 앱 가입 정의가 다를 수 있어 정확한 광고효과 판단은 날짜별 광고비와 가입 source/utm 매칭이 필요하다.
         </div>
       </article>
 
@@ -221,7 +221,7 @@
           <p>Google Ads 날짜별 비용과 전환수를 같은 축에서 비교한다.</p>
         </div>
         <div class="chart-panel"><canvas id="googleAdsTrendChart"></canvas></div>
-        <div class="data-scroll"><table><thead><tr><th>일자</th><th class="num">비용</th><th class="num">전환수</th><th class="num">노출수</th><th class="num">CPA</th></tr></thead><tbody><tr><td style="font-weight:700;white-space:nowrap">2026-05-18</td><td class="num">₩53,951</td><td class="num">118</td><td class="num">21,669</td><td class="num">₩457</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-17</td><td class="num">₩55,725</td><td class="num">131</td><td class="num">18,359</td><td class="num">₩425</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-16</td><td class="num">₩51,668</td><td class="num">117</td><td class="num">19,497</td><td class="num">₩442</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-15</td><td class="num">₩50,981</td><td class="num">136</td><td class="num">18,267</td><td class="num">₩375</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-14</td><td class="num">₩54,469</td><td class="num">116</td><td class="num">19,104</td><td class="num">₩470</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-13</td><td class="num">₩57,549</td><td class="num">130</td><td class="num">18,739</td><td class="num">₩443</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-12</td><td class="num">₩51,685</td><td class="num">117</td><td class="num">9,370</td><td class="num">₩442</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-11</td><td class="num">₩51,332</td><td class="num">111</td><td class="num">10,829</td><td class="num">₩462</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-10</td><td class="num">₩50,510</td><td class="num">89</td><td class="num">9,373</td><td class="num">₩568</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-09</td><td class="num">₩50,025</td><td class="num">46</td><td class="num">6,633</td><td class="num">₩1,087</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-08</td><td class="num">₩47,899</td><td class="num">29</td><td class="num">4,369</td><td class="num">₩1,652</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-07</td><td class="num">₩409</td><td class="num">2</td><td class="num">269</td><td class="num">₩204</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-06</td><td class="num">₩9,329</td><td class="num">12</td><td class="num">625</td><td class="num">₩777</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-05</td><td class="num">₩14,674</td><td class="num">26</td><td class="num">947</td><td class="num">₩564</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-04</td><td class="num">₩15,172</td><td class="num">29</td><td class="num">6,115</td><td class="num">₩523</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-03</td><td class="num">₩15,244</td><td class="num">31</td><td class="num">6,994</td><td class="num">₩492</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-02</td><td class="num">₩14,078</td><td class="num">41</td><td class="num">6,620</td><td class="num">₩343</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-01</td><td class="num">₩15,795</td><td class="num">41</td><td class="num">7,821</td><td class="num">₩385</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-30</td><td class="num">₩14,184</td><td class="num">42</td><td class="num">9,323</td><td class="num">₩338</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-29</td><td class="num">₩15,664</td><td class="num">43</td><td class="num">9,851</td><td class="num">₩364</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-28</td><td class="num">₩19,867</td><td class="num">63</td><td class="num">11,107</td><td class="num">₩315</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-27</td><td class="num">₩14,509</td><td class="num">52</td><td class="num">6,683</td><td class="num">₩279</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-26</td><td class="num">₩17,540</td><td class="num">57</td><td class="num">6,281</td><td class="num">₩308</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-25</td><td class="num">₩15,862</td><td class="num">66</td><td class="num">5,910</td><td class="num">₩240</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-24</td><td class="num">₩19,229</td><td class="num">55</td><td class="num">9,999</td><td class="num">₩350</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-23</td><td class="num">₩19,943</td><td class="num">55</td><td class="num">7,014</td><td class="num">₩363</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-22</td><td class="num">₩18,303</td><td class="num">56</td><td class="num">4,955</td><td class="num">₩327</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-21</td><td class="num">₩13,237</td><td class="num">33</td><td class="num">3,135</td><td class="num">₩401</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-20</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-19</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-18</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr></tbody></table></div>
+        <div class="data-scroll"><table><thead><tr><th>일자</th><th class="num">비용</th><th class="num">전환수</th><th class="num">노출수</th><th class="num">CPA</th></tr></thead><tbody><tr><td style="font-weight:700;white-space:nowrap">2026-05-25</td><td class="num">₩208,027</td><td class="num">223</td><td class="num">71,273</td><td class="num">₩933</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-24</td><td class="num">₩52,259</td><td class="num">83</td><td class="num">20,365</td><td class="num">₩630</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-23</td><td class="num">₩50,695</td><td class="num">86</td><td class="num">13,865</td><td class="num">₩589</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-22</td><td class="num">₩52,906</td><td class="num">77</td><td class="num">16,248</td><td class="num">₩687</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-21</td><td class="num">₩47,671</td><td class="num">99</td><td class="num">15,015</td><td class="num">₩482</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-20</td><td class="num">₩49,104</td><td class="num">74</td><td class="num">15,542</td><td class="num">₩664</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-19</td><td class="num">₩51,875</td><td class="num">96</td><td class="num">21,777</td><td class="num">₩540</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-18</td><td class="num">₩51,318</td><td class="num">114</td><td class="num">21,422</td><td class="num">₩450</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-17</td><td class="num">₩53,652</td><td class="num">123</td><td class="num">18,173</td><td class="num">₩436</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-16</td><td class="num">₩50,676</td><td class="num">117</td><td class="num">19,348</td><td class="num">₩433</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-15</td><td class="num">₩50,475</td><td class="num">136</td><td class="num">18,126</td><td class="num">₩371</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-14</td><td class="num">₩53,518</td><td class="num">112</td><td class="num">18,888</td><td class="num">₩478</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-13</td><td class="num">₩55,868</td><td class="num">127</td><td class="num">18,541</td><td class="num">₩440</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-12</td><td class="num">₩50,991</td><td class="num">116</td><td class="num">9,241</td><td class="num">₩440</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-11</td><td class="num">₩50,467</td><td class="num">107</td><td class="num">10,704</td><td class="num">₩472</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-10</td><td class="num">₩49,237</td><td class="num">86</td><td class="num">9,299</td><td class="num">₩573</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-09</td><td class="num">₩49,872</td><td class="num">46</td><td class="num">6,625</td><td class="num">₩1,084</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-08</td><td class="num">₩47,896</td><td class="num">29</td><td class="num">4,367</td><td class="num">₩1,652</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-07</td><td class="num">₩389</td><td class="num">2</td><td class="num">256</td><td class="num">₩194</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-06</td><td class="num">₩9,329</td><td class="num">13</td><td class="num">617</td><td class="num">₩718</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-05</td><td class="num">₩14,662</td><td class="num">27</td><td class="num">932</td><td class="num">₩543</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-04</td><td class="num">₩15,160</td><td class="num">29</td><td class="num">6,106</td><td class="num">₩523</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-03</td><td class="num">₩15,188</td><td class="num">31</td><td class="num">6,988</td><td class="num">₩490</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-02</td><td class="num">₩14,078</td><td class="num">41</td><td class="num">6,615</td><td class="num">₩343</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-05-01</td><td class="num">₩15,582</td><td class="num">41</td><td class="num">7,801</td><td class="num">₩380</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-30</td><td class="num">₩14,057</td><td class="num">42</td><td class="num">9,223</td><td class="num">₩335</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-29</td><td class="num">₩15,133</td><td class="num">43</td><td class="num">9,598</td><td class="num">₩352</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-28</td><td class="num">₩18,389</td><td class="num">63</td><td class="num">10,435</td><td class="num">₩292</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-27</td><td class="num">₩13,306</td><td class="num">52</td><td class="num">6,226</td><td class="num">₩256</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-26</td><td class="num">₩15,294</td><td class="num">57</td><td class="num">5,356</td><td class="num">₩268</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-25</td><td class="num">₩13,899</td><td class="num">66</td><td class="num">5,403</td><td class="num">₩211</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-24</td><td class="num">₩16,069</td><td class="num">55</td><td class="num">9,189</td><td class="num">₩292</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-23</td><td class="num">₩15,583</td><td class="num">55</td><td class="num">6,126</td><td class="num">₩283</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-22</td><td class="num">₩15,028</td><td class="num">56</td><td class="num">4,294</td><td class="num">₩268</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-21</td><td class="num">₩13,203</td><td class="num">33</td><td class="num">3,114</td><td class="num">₩400</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-20</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-19</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-18</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-17</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-16</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-15</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-14</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-13</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-12</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-11</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-10</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-09</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-08</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-07</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-06</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr><tr><td style="font-weight:700;white-space:nowrap">2026-04-05</td><td class="num">₩0</td><td class="num">0</td><td class="num">0</td><td class="num">₩0</td></tr></tbody></table></div>
       </article>
 
       <article class="card span-12">
@@ -248,27 +248,27 @@
         <div style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:14px; margin-bottom:14px;">
           <div style="padding:14px; border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,0.72);">
             <div class="kpi-name">구간 신규 참여자</div>
-            <div style="font-size:24px; font-weight:800; margin-top:6px;">1,711</div>
+            <div style="font-size:24px; font-weight:800; margin-top:6px;">2,094</div>
             <div class="kpi-note">첫 광고 참여 기준</div>
           </div>
           <div style="padding:14px; border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,0.72);">
             <div class="kpi-name">일평균 신규 참여자</div>
-            <div style="font-size:24px; font-weight:800; margin-top:6px;">42.8</div>
+            <div style="font-size:24px; font-weight:800; margin-top:6px;">52.4</div>
             <div class="kpi-note">2026-04-16 ~ 2026-05-25</div>
           </div>
           <div style="padding:14px; border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,0.72);">
             <div class="kpi-name">가입 대비 신규 참여</div>
-            <div style="font-size:24px; font-weight:800; margin-top:6px;">68.9%</div>
+            <div style="font-size:24px; font-weight:800; margin-top:6px;">84.3%</div>
             <div class="kpi-note">구간 신규 가입 2,485명 기준</div>
           </div>
         </div>
         <div class="chart-panel"><canvas id="newParticipantsChart"></canvas></div>
-        <div class="data-scroll"><table><thead><tr><th>일자</th><th class="num">신규 참여자</th><th class="num">신규 가입자</th><th class="num">가입 대비</th><th class="num">순수 참여자 중 비중</th></tr></thead><tbody><tr><td>2026-05-25</td><td class="num">0</td><td class="num">147</td><td class="num">0.0%</td><td class="num">0.0%</td></tr>
-<tr><td>2026-05-24</td><td class="num">0</td><td class="num">68</td><td class="num">0.0%</td><td class="num">0.0%</td></tr>
-<tr><td>2026-05-23</td><td class="num">0</td><td class="num">66</td><td class="num">0.0%</td><td class="num">0.0%</td></tr>
-<tr><td>2026-05-22</td><td class="num">0</td><td class="num">63</td><td class="num">0.0%</td><td class="num">0.0%</td></tr>
-<tr><td>2026-05-21</td><td class="num">0</td><td class="num">80</td><td class="num">0.0%</td><td class="num">0.0%</td></tr>
-<tr><td>2026-05-20</td><td class="num">0</td><td class="num">66</td><td class="num">0.0%</td><td class="num">0.0%</td></tr>
+        <div class="data-scroll"><table><thead><tr><th>일자</th><th class="num">신규 참여자</th><th class="num">신규 가입자</th><th class="num">가입 대비</th><th class="num">순수 참여자 중 비중</th></tr></thead><tbody><tr><td>2026-05-25</td><td class="num">113</td><td class="num">147</td><td class="num">76.9%</td><td class="num">11.3%</td></tr>
+<tr><td>2026-05-24</td><td class="num">51</td><td class="num">68</td><td class="num">75.0%</td><td class="num">5.4%</td></tr>
+<tr><td>2026-05-23</td><td class="num">50</td><td class="num">66</td><td class="num">75.8%</td><td class="num">5.5%</td></tr>
+<tr><td>2026-05-22</td><td class="num">52</td><td class="num">63</td><td class="num">82.5%</td><td class="num">5.5%</td></tr>
+<tr><td>2026-05-21</td><td class="num">62</td><td class="num">80</td><td class="num">77.5%</td><td class="num">6.3%</td></tr>
+<tr><td>2026-05-20</td><td class="num">55</td><td class="num">66</td><td class="num">83.3%</td><td class="num">5.6%</td></tr>
 <tr><td>2026-05-19</td><td class="num">67</td><td class="num">78</td><td class="num">85.9%</td><td class="num">6.8%</td></tr>
 <tr><td>2026-05-18</td><td class="num">65</td><td class="num">92</td><td class="num">70.7%</td><td class="num">6.6%</td></tr>
 <tr><td>2026-05-17</td><td class="num">97</td><td class="num">95</td><td class="num">102.1%</td><td class="num">9.8%</td></tr>
@@ -596,7 +596,7 @@
         datasets: [{
           type: "bar",
           label: "신규 참여자",
-          data: [29, 22, 21, 16, 20, 49, 71, 51, 68, 65, 72, 61, 45, 28, 48, 46, 39, 47, 27, 28, 20, 10, 42, 46, 65, 58, 73, 75, 81, 93, 66, 97, 65, 67, 0, 0, 0, 0, 0, 0],
+          data: [29, 22, 21, 16, 20, 49, 71, 51, 68, 65, 72, 61, 45, 28, 48, 46, 39, 47, 27, 28, 20, 10, 42, 46, 65, 58, 73, 75, 81, 93, 66, 97, 65, 67, 55, 62, 52, 50, 51, 113],
           yAxisID: "y",
           backgroundColor: "rgba(180, 106, 31, 0.72)",
           borderColor: "#b46a1f",
@@ -620,11 +620,11 @@
 
     new Chart(document.getElementById("googleAdsTrendChart"), {
       data: {
-        labels: ["04-18", "04-19", "04-20", "04-21", "04-22", "04-23", "04-24", "04-25", "04-26", "04-27", "04-28", "04-29", "04-30", "05-01", "05-02", "05-03", "05-04", "05-05", "05-06", "05-07", "05-08", "05-09", "05-10", "05-11", "05-12", "05-13", "05-14", "05-15", "05-16", "05-17", "05-18"],
+        labels: ["04-05", "04-06", "04-07", "04-08", "04-09", "04-10", "04-11", "04-12", "04-13", "04-14", "04-15", "04-16", "04-17", "04-18", "04-19", "04-20", "04-21", "04-22", "04-23", "04-24", "04-25", "04-26", "04-27", "04-28", "04-29", "04-30", "05-01", "05-02", "05-03", "05-04", "05-05", "05-06", "05-07", "05-08", "05-09", "05-10", "05-11", "05-12", "05-13", "05-14", "05-15", "05-16", "05-17", "05-18", "05-19", "05-20", "05-21", "05-22", "05-23", "05-24", "05-25"],
         datasets: [{
           type: "bar",
           label: "비용 (KRW)",
-          data: [0, 0, 0, 13237, 18303, 19943, 19229, 15862, 17540, 14509, 19867, 15664, 14184, 15795, 14078, 15244, 15172, 14674, 9329, 409, 47899, 50025, 50510, 51332, 51685, 57549, 54469, 50981, 51668, 55725, 53951],
+          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13203, 15028, 15583, 16069, 13899, 15294, 13306, 18389, 15133, 14057, 15582, 14078, 15188, 15160, 14662, 9329, 389, 47896, 49872, 49237, 50467, 50991, 55868, 53518, 50475, 50676, 53652, 51318, 51875, 49104, 47671, 52906, 50695, 52259, 208027],
           yAxisID: "y",
           backgroundColor: "rgba(180, 106, 31, 0.72)",
           borderColor: "#b46a1f",
@@ -633,7 +633,7 @@
         }, {
           type: "line",
           label: "전환수",
-          data: [0.0, 0.0, 0.0, 33.0, 56.0, 55.0, 55.0, 66.0, 57.0, 52.0, 63.0, 43.0, 42.0, 41.0, 41.0, 31.0, 29.0, 26.0, 12.0, 2.0, 29.0, 46.0, 89.0, 111.0, 117.0, 130.0, 116.0, 136.0, 117.0, 131.0, 118.0],
+          data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 33.0, 56.0, 55.0, 55.0, 66.0, 57.0, 52.0, 63.0, 43.0, 42.0, 41.0, 41.0, 31.0, 29.0, 27.0, 13.0, 2.0, 29.0, 46.0, 86.0, 107.0, 116.0, 127.0, 112.0, 136.0, 117.0, 123.0, 114.0, 96.0, 74.0, 99.0, 77.0, 86.0, 83.0, 223.0],
           yAxisID: "y1",
           backgroundColor: "rgba(64, 104, 178, 0.14)",
           borderColor: "#4068b2",
@@ -763,7 +763,7 @@
 
     (function() {
       const NET_PROFIT = -114489;
-      const AD_COST_STORAGE_KEY = "gg_ad_cost_v5_2026-04-18_2026-05-18_828833";
+      const AD_COST_STORAGE_KEY = "gg_ad_cost_v5_2026-04-05_2026-05-25_1310856";
       const adInput = document.getElementById("adCostInput");
       const srvInput = document.getElementById("serverCostInput");
       const totalEl = document.getElementById("extraCostTotal");
