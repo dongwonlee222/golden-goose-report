@@ -28,6 +28,7 @@ media_key,media_name,media_status,platform,placement_id,placement_name,placement
 152630613,황금거위(AOS),10,,ocWq4BIL3gI3OCy,MAX_황금거위_미니게임1_IV_Android,10,6,전면,-
 152630613,황금거위(AOS),10,,PVGyV8tCnyhjQYl,MAX_황금거위_미니게임2_IV_Android,10,6,전면,-
 152630613,황금거위(AOS),10,,KpMxhFwuLYTlZmO,MAX_황금거위_출석체크_IV_Android,10,6,전면,-
+152630613,황금거위(AOS),10,,c9GSLTanKZxuhrd,MAX_황금거위_황금알열기_320x100_Android,10,1,배너,320x100
 271751708,(미사용)TEST,10,,pqkmNHmyud9V070,(미사용)_지면6,10,1,배너,320x50
 880605234,황금거위(iOS),10,,2E3gg5MX5MaT2VC,(미사용)_지면5,10,1,배너,320x50
 880605234,황금거위(iOS),10,,K7ycD8gltcncKGp,BANNER_320x50_iOS,10,1,배너,320x50
@@ -58,3 +59,4 @@ media_key,media_name,media_status,platform,placement_id,placement_name,placement
 880605234,황금거위(iOS),10,,9Qt5VizyQQNmI2Z,MAX_황금거위_미니게임1_IV_iOS,10,6,전면,-
 880605234,황금거위(iOS),10,,1bIBqwzrF1inFMw,MAX_황금거위_미니게임2_IV_iOS,10,6,전면,-
 880605234,황금거위(iOS),10,,CSMxdI6A1upTRet,MAX_황금거위_출석체크_IV_iOS,10,6,전면,-
+880605234,황금거위(iOS),10,,1uU80yPpKp3BF6U,MAX_황금거위_황금알열기_320x100_iOS,10,1,배너,320x100
