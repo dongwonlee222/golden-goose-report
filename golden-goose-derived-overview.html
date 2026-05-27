@@ -178,6 +178,16 @@
             </div>
             <div class="kpi-note" style="margin-top:6px;">Supabase + 호스팅 · $35 × 환율 = ₩47,250</div>
           </div>
+          <div style="flex:1; min-width:200px; padding:8px 20px; border-right:1px solid var(--line);">
+            <div class="kpi-name">친구초대 보상비용</div>
+            <div style="display:flex; align-items:center; gap:6px; margin-top:6px;">
+              <span style="font-size:20px; font-weight:700;">₩</span>
+              <input id="referralCostInput" type="number" min="0" step="100"
+                style="font-size:22px; font-weight:700; width:100%; border:none; border-bottom:2px solid var(--line); background:transparent; color:var(--ink); outline:none; padding:2px 0;"
+                placeholder="0" value="647100">
+            </div>
+            <div class="kpi-note" style="margin-top:6px;">보상 지급일 기준 · 2026-05-26까지 누적</div>
+          </div>
           <div style="flex:1; min-width:200px; padding:8px 0 8px 20px;">
             <div class="kpi-name">추가 비용 합계</div>
             <div style="font-size:26px; font-weight:700; letter-spacing:-0.03em; margin-top:6px; color:#dc2626;" id="extraCostTotal">₩0</div>
@@ -1002,6 +1012,7 @@
       const AD_COST_STORAGE_KEY = "gg_ad_cost_v5_2026-04-20_2026-05-25_1310856";
       const adInput = document.getElementById("adCostInput");
       const srvInput = document.getElementById("serverCostInput");
+      const refInput = document.getElementById("referralCostInput");
       const totalEl = document.getElementById("extraCostTotal");
       const finalEl = document.getElementById("finalProfit");
 
@@ -1009,7 +1020,8 @@
       function update() {
         const ad = Number(adInput.value) || 0;
         const srv = Number(srvInput.value) || 0;
-        const total = ad + srv;
+        const referral = Number(refInput.value) || 0;
+        const total = ad + srv + referral;
         const final = NET_PROFIT - total;
         totalEl.textContent = fmt(total);
         totalEl.style.color = total > 0 ? "#dc2626" : "var(--muted)";
@@ -1017,16 +1029,20 @@
         finalEl.style.color = final >= 0 ? "#2d7a69" : "#dc2626";
         localStorage.setItem(AD_COST_STORAGE_KEY, ad);
         localStorage.setItem("gg_srv_cost_v2", srv);
+        localStorage.setItem("gg_referral_cost_v1", referral);
       }
 
       const savedAd = localStorage.getItem(AD_COST_STORAGE_KEY);
       const savedSrv = localStorage.getItem("gg_srv_cost_v2");
+      const savedReferral = localStorage.getItem("gg_referral_cost_v1");
       if (savedAd !== null) adInput.value = savedAd;
       if (savedSrv !== null) srvInput.value = savedSrv;
+      if (savedReferral !== null) refInput.value = savedReferral;
       update();
 
       adInput.addEventListener("input", update);
       srvInput.addEventListener("input", update);
+      refInput.addEventListener("input", update);
     })();
 
     (function() {
