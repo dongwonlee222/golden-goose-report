@@ -174,9 +174,9 @@
               <span style="font-size:20px; font-weight:700;">₩</span>
               <input id="serverCostInput" type="number" min="0" step="1000"
                 style="font-size:22px; font-weight:700; width:100%; border:none; border-bottom:2px solid var(--line); background:transparent; color:var(--ink); outline:none; padding:2px 0;"
-                placeholder="0" value="47250">
+                placeholder="0" value="52712">
             </div>
-            <div class="kpi-note" style="margin-top:6px;">Supabase + 호스팅 · $35 × 환율 = ₩47,250</div>
+            <div class="kpi-note" style="margin-top:6px;">2026-05-19 Supabase 실비 ₩52,712</div>
           </div>
           <div style="flex:1; min-width:200px; padding:8px 20px; border-right:1px solid var(--line);">
             <div class="kpi-name">친구초대 보상비용</div>
@@ -1028,12 +1028,12 @@
         finalEl.textContent = "= " + fmt(final);
         finalEl.style.color = final >= 0 ? "#2d7a69" : "#dc2626";
         localStorage.setItem(AD_COST_STORAGE_KEY, ad);
-        localStorage.setItem("gg_srv_cost_v2", srv);
+        localStorage.setItem("gg_srv_cost_v3", srv);
         localStorage.setItem("gg_referral_cost_v1", referral);
       }
 
       const savedAd = localStorage.getItem(AD_COST_STORAGE_KEY);
-      const savedSrv = localStorage.getItem("gg_srv_cost_v2");
+      const savedSrv = localStorage.getItem("gg_srv_cost_v3");
       const savedReferral = localStorage.getItem("gg_referral_cost_v1");
       if (savedAd !== null) adInput.value = savedAd;
       if (savedSrv !== null) srvInput.value = savedSrv;
