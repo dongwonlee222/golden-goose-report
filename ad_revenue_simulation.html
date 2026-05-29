@@ -772,38 +772,39 @@
       </div>
 
       <section class="highlight-note">
-        <strong>최근 7일 실측 기준 손익분기</strong>
-        현재 기준값은 DAU 1,200명, Google Ads 최근 7일 설치 1,129건, CPI 860원, Adpopcorn 최근 7일 eCPM과 수수료 20%를 반영한 값입니다.
-        현재 광고 세팅 그대로라면 광고 수수료와 보상비를 뺀 운영 마진은 하루 약 12,900원, 월 약 38.6만원입니다.
+        <strong>2026-05-28 실측 기준 손익분기</strong>
+        현재 기준값은 DAU 1,200명, Google Ads 5/28 설치 200건, 신규 참여 132명, CPI 1,017원, RV eCPM US$7.22, 전면 eCPM US$4.60, 수수료 20%를 반영한 값입니다.
+        어제 광고 세팅 그대로라면 광고 수수료와 보상비를 뺀 운영 마진은 하루 약 4.0만원, 월 약 119만원입니다.
       </section>
 
       <div class="grid" style="margin-bottom:18px;">
         <section class="card emphasis-card">
           <div class="label">현재 DAU 기준 운영 마진</div>
-          <div class="value good">월 38.6만원</div>
+          <div class="value good">월 119만원</div>
           <div class="sub">DAU 1,200 · 수수료 20% · 보상비 차감 후</div>
         </section>
         <section class="card">
-          <div class="label">최근 광고 집행비</div>
-          <div class="value bad">월 416만원</div>
-          <div class="sub">최근 7일 일평균 13.9만원 × 30일</div>
+          <div class="label">어제 기준 광고 집행비</div>
+          <div class="value bad">월 610만원</div>
+          <div class="sub">5/28 집행비 20.3만원 × 30일</div>
         </section>
         <section class="card">
           <div class="label">마케팅비 포함 손익</div>
-          <div class="value bad">월 -377만원</div>
+          <div class="value bad">월 -491만원</div>
           <div class="sub">현재 광고비 페이스를 계속 쓸 경우</div>
         </section>
         <section class="card">
           <div class="label">당일 회수 손익분기 DAU</div>
-          <div class="value warn">약 1.29만명</div>
-          <div class="sub">현재 1인당 일 마진 약 10.7원 기준</div>
+          <div class="value warn">약 6,200명</div>
+          <div class="sub">현재 1인당 일 마진 약 33.1원 기준</div>
         </section>
       </div>
 
       <div class="note" style="margin-bottom:18px;">
         <strong>정리</strong><br />
-        지금은 광고 매출 볼륨이 v1 후반 수준까지 올라왔지만, 유료 광고비를 당일 또는 30일 안에 회수하는 구조는 아직 아닙니다.
-        우선은 1) Google Ads CPI를 낮추고, 2) 설치 후 신규 참여율을 높이고, 3) 전면 eCPM을 개선하고, 4) RV 볼륨은 유지하는 쪽이 손익분기 단축에 가장 직접적입니다.
+        어제 기준으로 RV와 전면 eCPM이 좋아지면서 광고 매출 체력은 v1 후반 수준에 거의 근접했습니다.
+        다만 CPI 1,017원은 30일 기준 유저가치 약 992원보다 조금 높아 유료 광고만으로는 아직 소폭 적자입니다.
+        우선은 1) CPI를 900원 이하로 낮추고, 2) 설치 후 신규 참여율 66%를 70% 이상으로 올리고, 3) 전면 노출과 eCPM을 유지하고, 4) AppLovin 단일 의존도를 낮추는 쪽이 손익분기 단축에 가장 직접적입니다.
       </div>
 
       <div class="layout">
@@ -833,17 +834,17 @@
             <div class="field">
               <div class="field-head">
                 <span>월 목표 다운로드 수 <span class="mini-pill">핵심</span></span>
-                <span id="monthlyDownloads-value">4,840명</span>
+                <span id="monthlyDownloads-value">6,000명</span>
               </div>
-              <input id="monthlyDownloads" type="range" min="100" max="100000" step="10" value="4840" />
+              <input id="monthlyDownloads" type="range" min="100" max="100000" step="10" value="6000" />
             </div>
 
             <div class="field">
               <div class="field-head">
                 <span>회원가입 전환율 <span class="mini-pill">핵심</span></span>
-                <span id="signupRate-value">56.0%</span>
+                <span id="signupRate-value">66.0%</span>
               </div>
-              <input id="signupRate" type="range" min="1" max="100" step="1" value="56" />
+              <input id="signupRate" type="range" min="1" max="100" step="1" value="66" />
             </div>
 
             <div class="field-note">현재 운영 베이스는 `현재 DAU` 입력값을 사용합니다. 이번 달 추가 유입은 `월 목표 다운로드 수 × 회원가입 전환율`로 계산한 뒤, 그중 실제로 다시 들어와 광고를 보기 시작하는 비율을 반영합니다.</div>
@@ -867,7 +868,7 @@
                 <span id="retentionFactor-value">100.0%</span>
               </div>
               <input id="retentionFactor" type="range" min="1" max="100" step="1" value="100" />
-              <div id="retentionDirectSummary" class="field-note">최근 Google Ads 설치 대비 신규 참여율 55.6%를 회원가입 전환율로 반영하고, 전환된 신규 참여자는 당월 광고 참여자로 보는 기준입니다.</div>
+              <div id="retentionDirectSummary" class="field-note">5/28 Google Ads 설치 200건 대비 신규 참여 132명, 즉 66.0%를 회원가입 전환율로 반영하고, 전환된 신규 참여자는 당월 광고 참여자로 보는 기준입니다.</div>
             </div>
 
             <div id="retentionFormulaField" class="field hidden">
@@ -938,17 +939,17 @@
             <div class="field">
               <div class="field-head">
                 <span>Rewarded eCPM <span class="mini-pill">핵심</span></span>
-                <span id="rewardedEcpm-value">US$4.63</span>
+                <span id="rewardedEcpm-value">US$7.22</span>
               </div>
-              <input id="rewardedEcpm" type="range" min="1" max="10" step="0.01" value="4.63" />
+              <input id="rewardedEcpm" type="range" min="1" max="10" step="0.01" value="7.22" />
             </div>
 
             <div class="field">
               <div class="field-head">
                 <span>Interstitial eCPM <span class="mini-pill">핵심</span></span>
-                <span id="interstitialEcpm-value">US$3.29</span>
+                <span id="interstitialEcpm-value">US$4.60</span>
               </div>
-              <input id="interstitialEcpm" type="range" min="1" max="10" step="0.01" value="3.29" />
+              <input id="interstitialEcpm" type="range" min="1" max="10" step="0.01" value="4.60" />
             </div>
 
             <div class="field">
@@ -962,25 +963,25 @@
             <div class="field">
               <div class="field-head">
                 <span>유저당 일 평균 Rewarded 시청 수 <span class="mini-pill">핵심</span></span>
-                <span id="rewardedViews-value">6.4회</span>
+                <span id="rewardedViews-value">3.9회</span>
               </div>
-              <input id="rewardedViews" type="range" min="0" max="10" step="0.1" value="6.4" />
+              <input id="rewardedViews" type="range" min="0" max="10" step="0.1" value="3.9" />
             </div>
 
             <div class="field">
               <div class="field-head">
                 <span>유저당 일 평균 Interstitial 노출 수 <span class="mini-pill">핵심</span></span>
-                <span id="interstitialViews-value">6.0회</span>
+                <span id="interstitialViews-value">8.4회</span>
               </div>
-              <input id="interstitialViews" type="range" min="0" max="20" step="0.1" value="6.0" />
+              <input id="interstitialViews" type="range" min="0" max="20" step="0.1" value="8.4" />
             </div>
 
             <div class="field">
               <div class="field-head">
                 <span>유저당 일 평균 Banner 노출 수</span>
-                <span id="bannerViews-value">8.1회</span>
+                <span id="bannerViews-value">7.7회</span>
               </div>
-              <input id="bannerViews" type="range" min="0" max="25" step="0.1" value="8.1" />
+              <input id="bannerViews" type="range" min="0" max="25" step="0.1" value="7.7" />
             </div>
 
             <div class="field">
@@ -1058,9 +1059,9 @@
             <div class="field">
               <div class="field-head">
                 <span>회원가입 1명당 획득비용 <span class="mini-pill">핵심</span></span>
-                <span id="cac-value">860원</span>
+                <span id="cac-value">1,017원</span>
               </div>
-              <input id="cac" type="range" min="100" max="3000" step="10" value="860" />
+              <input id="cac" type="range" min="100" max="3000" step="10" value="1017" />
             </div>
 
             <div class="field">
@@ -1476,8 +1477,8 @@
       base: {
         downloads: 3215,
         currentDau: 1200,
-        monthlyDownloads: 4840,
-        signupRate: 56,
+        monthlyDownloads: 6000,
+        signupRate: 66,
         retentionModeToggle: 0,
         retentionFactor: 100,
         retentionL1: 48,
@@ -1487,12 +1488,12 @@
         interstitialUserRate: 100,
         bannerUserRate: 100,
         offerwallUserRate: 10,
-        rewardedEcpm: 4.63,
-        interstitialEcpm: 3.29,
+        rewardedEcpm: 7.22,
+        interstitialEcpm: 4.60,
         bannerEcpm: 0.07,
-        rewardedViews: 6.4,
-        interstitialViews: 6.0,
-        bannerViews: 8.1,
+        rewardedViews: 3.9,
+        interstitialViews: 8.4,
+        bannerViews: 7.7,
         offerwallCompletions: 0.2,
         offerwallRevenuePerCompletion: 18,
         pointsPerAd: 4.5,
@@ -1500,7 +1501,7 @@
         pointBreakageRate: 0,
         mediationFeeRate: 20,
         offerwallFeeRate: 30,
-        cac: 860,
+        cac: 1017,
         weeklyPrizeCost: 0,
         usdKrw: 1350,
         serverCost: 50000,
