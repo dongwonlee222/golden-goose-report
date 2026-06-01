@@ -1,0 +1,10 @@
+metric,value
+avg_point_amount,2361
+median_point_amount,2000
+top_point_amount,2000
+top_point_amount_count,56
+top_point_amount_share,36.6
+second_point_amount,1500
+second_point_amount_count,35
+third_point_amount,3000
+third_point_amount_count,27
