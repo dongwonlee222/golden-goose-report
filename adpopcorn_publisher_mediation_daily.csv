@@ -2391,7 +2391,6 @@ date,media_key,media_name,platform,placement_id,placement_name,placement_type,th
 2026-06-02,880605234,황금거위(iOS),,B7YvZYzXe8jNBGY,MAX_황금거위_출석체크_RV_iOS,RV,0,Adpopcorn SSP,1,67,0,0,0,0.000000,0.00,0.00,0.0000
 2026-06-02,880605234,황금거위(iOS),,B7YvZYzXe8jNBGY,MAX_황금거위_출석체크_RV_iOS,RV,23,AppLovin Bidding,4,0,0,31,0,0.078779,0.00,0.00,2.5413
 2026-06-02,152630613,황금거위(AOS),,TcKzRUNsjYIQFJs,황금거위_미니게임1_RV_Android,RV,7,Unity,4,0,0,1,0,0.000000,0.00,0.00,0.0000
-2026-06-02,152630613,황금거위(AOS),,DECp68UA1uOBhfu,황금거위_미니게임2_RV_Android,RV,18,Pangle,4,0,0,0,0,0.000000,0.00,0.00,0.0000
 2026-06-02,152630613,황금거위(AOS),,DECp68UA1uOBhfu,황금거위_미니게임2_RV_Android,RV,7,Unity,4,0,0,1,0,0.000000,0.00,0.00,0.0000
 2026-06-02,152630613,황금거위(AOS),,AIeWRQ2R5CbBNyO,황금거위_보너스캐시_RV_Android,RV,7,Unity,4,0,0,1,0,0.000000,0.00,0.00,0.0000
 2026-06-02,152630613,황금거위(AOS),,nrbMhFxX4AEcFxq,황금거위_출석체크_RV_Android,RV,7,Unity,4,0,0,1,0,0.000000,0.00,0.00,0.0000
@@ -2418,17 +2417,33 @@ date,media_key,media_name,platform,placement_id,placement_name,placement_type,th
 2026-06-02,152630613,황금거위(AOS),,4zLAQUTzDGMz2Oi,황금거위_황금알_IV_Android,전면,18,Pangle,4,1,0,0,0,0.000000,0.00,0.00,0.0000
 2026-06-02,152630613,황금거위(AOS),,4zLAQUTzDGMz2Oi,황금거위_황금알_IV_Android,전면,7,Unity,4,0,0,1,0,0.000000,0.00,0.00,0.0000
 2026-06-03,152630613,황금거위(AOS),,cTbhY0TbWBWJhio,MAX_황금거위_미니게임1_RV_Android,RV,0,Adpopcorn SSP,1,2854,0,0,0,0.000000,0.00,0.00,0.0000
+2026-06-03,152630613,황금거위(AOS),,cTbhY0TbWBWJhio,MAX_황금거위_미니게임1_RV_Android,RV,23,AppLovin Bidding,4,0,0,1910,0,12.162219,0.00,0.00,6.3677
 2026-06-03,880605234,황금거위(iOS),,s8ClX6oeda97PEK,MAX_황금거위_미니게임1_RV_iOS,RV,0,Adpopcorn SSP,1,140,0,0,0,0.000000,0.00,0.00,0.0000
+2026-06-03,880605234,황금거위(iOS),,s8ClX6oeda97PEK,MAX_황금거위_미니게임1_RV_iOS,RV,23,AppLovin Bidding,4,0,0,92,0,0.591604,0.00,0.00,6.4305
 2026-06-03,152630613,황금거위(AOS),,8KcXMLumUGBxt0R,MAX_황금거위_미니게임2_RV_Android,RV,0,Adpopcorn SSP,1,1689,0,0,0,0.000000,0.00,0.00,0.0000
+2026-06-03,152630613,황금거위(AOS),,8KcXMLumUGBxt0R,MAX_황금거위_미니게임2_RV_Android,RV,23,AppLovin Bidding,4,0,0,1181,0,4.969059,0.00,0.00,4.2075
 2026-06-03,880605234,황금거위(iOS),,QSxAQyfPWHuV6ZT,MAX_황금거위_미니게임2_RV_iOS,RV,0,Adpopcorn SSP,1,70,0,0,0,0.000000,0.00,0.00,0.0000
+2026-06-03,880605234,황금거위(iOS),,QSxAQyfPWHuV6ZT,MAX_황금거위_미니게임2_RV_iOS,RV,23,AppLovin Bidding,4,0,0,55,0,0.098091,0.00,0.00,1.7835
 2026-06-03,152630613,황금거위(AOS),,oH0uEdYZw8uMahW,MAX_황금거위_보너스캐시_RV_Android,RV,0,Adpopcorn SSP,1,2158,0,0,0,0.000000,0.00,0.00,0.0000
+2026-06-03,152630613,황금거위(AOS),,oH0uEdYZw8uMahW,MAX_황금거위_보너스캐시_RV_Android,RV,23,AppLovin Bidding,4,0,0,1119,0,3.791403,0.00,0.00,3.3882
 2026-06-03,880605234,황금거위(iOS),,7giUHyvhclCpJsh,MAX_황금거위_보너스캐시_RV_iOS,RV,0,Adpopcorn SSP,1,137,0,0,0,0.000000,0.00,0.00,0.0000
+2026-06-03,880605234,황금거위(iOS),,7giUHyvhclCpJsh,MAX_황금거위_보너스캐시_RV_iOS,RV,23,AppLovin Bidding,4,0,0,72,0,0.268011,0.00,0.00,3.7224
 2026-06-03,152630613,황금거위(AOS),,UMQG3ThfjgYizHB,MAX_황금거위_출석체크_RV_Android,RV,0,Adpopcorn SSP,1,915,0,0,0,0.000000,0.00,0.00,0.0000
+2026-06-03,152630613,황금거위(AOS),,UMQG3ThfjgYizHB,MAX_황금거위_출석체크_RV_Android,RV,23,AppLovin Bidding,4,0,0,464,0,1.778748,0.00,0.00,3.8335
 2026-06-03,880605234,황금거위(iOS),,B7YvZYzXe8jNBGY,MAX_황금거위_출석체크_RV_iOS,RV,0,Adpopcorn SSP,1,53,0,0,0,0.000000,0.00,0.00,0.0000
+2026-06-03,880605234,황금거위(iOS),,B7YvZYzXe8jNBGY,MAX_황금거위_출석체크_RV_iOS,RV,23,AppLovin Bidding,4,0,0,31,0,0.113688,0.00,0.00,3.6674
 2026-06-03,152630613,황금거위(AOS),,VGaLBMjmpkJ0Axd,MAX_황금거위_황금알_RV_Android,RV,0,Adpopcorn SSP,1,2,0,0,0,0.000000,0.00,0.00,0.0000
+2026-06-03,152630613,황금거위(AOS),,VGaLBMjmpkJ0Axd,MAX_황금거위_황금알_RV_Android,RV,23,AppLovin Bidding,4,0,0,1,0,0.003174,0.00,0.00,3.1740
+2026-06-03,152630613,황금거위(AOS),,TcKzRUNsjYIQFJs,황금거위_미니게임1_RV_Android,RV,18,Pangle,4,0,0,0,0,0.000000,0.00,0.00,0.0000
+2026-06-03,152630613,황금거위(AOS),,DECp68UA1uOBhfu,황금거위_미니게임2_RV_Android,RV,18,Pangle,4,0,0,0,0,0.000000,0.00,0.00,0.0000
 2026-06-03,152630613,황금거위(AOS),,C3mnch5tzeN2ekh,MAX_황금거위_BANNER_320x50_Android,배너,0,Adpopcorn SSP,1,10677,0,0,0,0.000000,0.00,0.00,0.0000
+2026-06-03,152630613,황금거위(AOS),,C3mnch5tzeN2ekh,MAX_황금거위_BANNER_320x50_Android,배너,23,AppLovin Bidding,4,0,0,18191,0,2.760922,0.00,0.00,0.1518
 2026-06-03,880605234,황금거위(iOS),,vwkQHnVjazlBLGT,MAX_황금거위_BANNER_320x50_iOS,배너,0,Adpopcorn SSP,1,658,0,0,0,0.000000,0.00,0.00,0.0000
+2026-06-03,880605234,황금거위(iOS),,vwkQHnVjazlBLGT,MAX_황금거위_BANNER_320x50_iOS,배너,23,AppLovin Bidding,4,0,0,1356,0,0.154125,0.00,0.00,0.1137
 2026-06-03,152630613,황금거위(AOS),,c9GSLTanKZxuhrd,MAX_황금거위_황금알열기_320x100_Android,배너,0,Adpopcorn SSP,1,2016,0,0,0,0.000000,0.00,0.00,0.0000
 2026-06-03,880605234,황금거위(iOS),,1uU80yPpKp3BF6U,MAX_황금거위_황금알열기_320x100_iOS,배너,0,Adpopcorn SSP,1,121,0,0,0,0.000000,0.00,0.00,0.0000
 2026-06-03,152630613,황금거위(AOS),,3xIqvUw5WOsbcjB,MAX_황금거위_황금알_IV_Android,전면,0,Adpopcorn SSP,1,11497,0,0,0,0.000000,0.00,0.00,0.0000
+2026-06-03,152630613,황금거위(AOS),,3xIqvUw5WOsbcjB,MAX_황금거위_황금알_IV_Android,전면,23,AppLovin Bidding,4,0,0,8352,0,32.917123,0.00,0.00,3.9412
 2026-06-03,880605234,황금거위(iOS),,Fx2IKZezhiusQf5,MAX_황금거위_황금알_IV_iOS,전면,0,Adpopcorn SSP,1,872,0,0,0,0.000000,0.00,0.00,0.0000
+2026-06-03,880605234,황금거위(iOS),,Fx2IKZezhiusQf5,MAX_황금거위_황금알_IV_iOS,전면,23,AppLovin Bidding,4,0,0,607,0,2.610440,0.00,0.00,4.3006
+2026-06-03,152630613,황금거위(AOS),,4zLAQUTzDGMz2Oi,황금거위_황금알_IV_Android,전면,18,Pangle,4,0,0,0,0,0.000000,0.00,0.00,0.0000
