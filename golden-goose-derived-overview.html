@@ -199,7 +199,7 @@
           <div style="flex:1; min-width:200px; padding:8px 0 8px 20px;">
             <div class="kpi-name">추가 비용 합계</div>
             <div style="font-size:26px; font-weight:700; letter-spacing:-0.03em; margin-top:6px; color:#dc2626;" id="extraCostTotal">₩0</div>
-            <div class="kpi-note" style="margin-top:6px;">포인트 발생 기준 순손익 ₩299,081 에서 차감 시<br><span style="font-size:13px; font-weight:700;" id="finalProfit">= ₩299,081</span></div>
+            <div class="kpi-note" style="margin-top:6px;">현금 기준 잔액 ₩1,385,533 에서 차감 시<br><span style="font-size:13px; font-weight:700;" id="finalProfit">= ₩1,385,533</span></div>
           </div>
         </div>
       </article>
@@ -224,8 +224,8 @@
           </div>
           <div style="padding:14px; border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,0.72);">
             <div class="kpi-name">순매출 회수율</div>
-            <div style="font-size:24px; font-weight:800; margin-top:6px; color:#dc2626;">5%</div>
-            <div class="kpi-note">Google Ads 기간 기준 · 광고수익 ₩2,277,038 − 포인트 ₩1,977,952 = 순매출 ₩299,086<br>순매출 − 광고비 = ₩-5,513,735</div>
+            <div style="font-size:24px; font-weight:800; margin-top:6px; color:#dc2626;">24%</div>
+            <div class="kpi-note">Google Ads 기간 기준 · 광고수익 ₩2,277,038 − 실제 현금 유출 ₩891,500 = 현금 기준 잔액 ₩1,385,538<br>현금 기준 잔액 − 광고비 = ₩-4,427,283</div>
           </div>
         </div>
         <div class="callout" style="margin-top:12px;">
@@ -1272,7 +1272,7 @@
     })();
 
     (function() {
-      const NET_PROFIT = 299081;
+      const CASH_BALANCE = 1385533;
       const AD_COST_STORAGE_KEY = "gg_ad_cost_v5_2026-04-16_2026-06-04_5812821";
       const adInput = document.getElementById("adCostInput");
       const srvInput = document.getElementById("serverCostInput");
@@ -1286,7 +1286,7 @@
         const srv = Number(srvInput.value) || 0;
         const referral = Number(refInput.value) || 0;
         const total = ad + srv + referral;
-        const final = NET_PROFIT - total;
+        const final = CASH_BALANCE - total;
         totalEl.textContent = total > 0 ? "-" + fmt(total) : fmt(total);
         totalEl.style.color = total > 0 ? "#dc2626" : "var(--muted)";
         finalEl.textContent = "= " + fmt(final);
