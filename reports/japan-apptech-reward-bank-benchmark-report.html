@@ -107,10 +107,10 @@
       <div><b>서비스 판단</b>은행송금은 가능하지만 본인명의 계좌, 명의カナ(계좌명의 가나 표기), ゆうちょ銀行(우체국은행) 예외, 계좌오류/반려 CS가 있어 MVP는 포인트/기프트 교환 우선이 안전.</div>
     </div>
     <div class="note">
-      톡방 공유용 결론: <b>일본에서 은행송금을 제공하려면 은행명과 지점명/지점코드를 같이 선택받는 형태가 맞다.</b> 계좌유형은 화면에 명확히 표시하되 기본은 普通預金(일반/보통예금)으로 두고, 当座預金(당좌/수표성 계좌), 貯蓄預金(저축예금)은 필요 시 선택 옵션으로 제공하는 것이 좋다. 다만 초기 앱테크 리워드는 은행송금보다 PayPay/Amazonギフト/주요 포인트 교환을 먼저 제공하는 사례가 더 많다.
+      핵심 결론: <b>일본에서 은행송금을 제공하려면 은행명과 지점명/지점코드를 같이 선택받는 형태가 맞다.</b> 계좌유형은 화면에 명확히 표시하되 기본은 普通預金(일반/보통예금)으로 두고, 当座預金(당좌/수표성 계좌), 貯蓄預金(저축예금)은 필요 시 선택 옵션으로 제공하는 것이 좋다. 다만 초기 앱테크 리워드는 은행송금보다 PayPay/Amazonギフト(Amazon 기프트)/주요 포인트 교환을 먼저 제공하는 사례가 더 많다.
     </div>
     <div class="note">
-      조사 근거: Zengin-Net 통계는 2026년 3월 기준 금융기관 1,086개, 지점 29,010개를 집계하고 있으며, 예를 들어 みずほ銀行도 400개 이상 지점이 확인된다. 따라서 정적 목록보다 은행/지점 검색 API 또는 송금대행사의 금융기관 마스터를 붙이는 설계가 필요하다.
+      조사 근거: Zengin-Net 통계는 2026년 3월 기준 금융기관 1,086개, 지점 29,010개를 집계하고 있으며, 예를 들어 みずほ銀行(미즈호은행)도 400개 이상 지점이 확인된다. 따라서 정적 목록보다 은행/지점 검색 API 또는 송금대행사의 금융기관 마스터를 붙이는 설계가 필요하다.
     </div>
   </section>
 
@@ -148,15 +148,15 @@
         <h3>Moneywalk JP</h3>
         <span class="tag">DotMoney</span><span class="tag orange">외부 경유</span>
         <p>Moneywalk는 앱 화면에서 Cash & Gift cards 교환을 전면에 둔다. 은행송금은 앱이 계좌를 직접 받기보다 DotMoney 경유 구조이며, DotMoney 도움말에서 Shop → 포인트/특전 교환 → ID 연동 흐름이 확인된다.</p>
-        <div class="flow">Shop -> ポイントと特典を交換 -> 포인트 선택 -> DotMoney 연동 -> 본인확인 -> 외부 교환처 지급</div>
+        <div class="flow">Shop -> ポイントと特典を交換(포인트와 특전 교환) -> 포인트 선택 -> DotMoney 연동 -> 본인확인 -> 외부 교환처 지급</div>
       </article>
 
       <article class="case">
         <img src="../output/playwright/reward-kurashiru-exchange-options-mobile.png" alt="クラシルリワード 교환처 화면">
         <h3>クラシルリワード</h3>
         <span class="tag">선택형 특전</span><span class="tag orange">PayPay/Amazon/포인트</span>
-        <p>PayPay, Amazonギフト, dポイント, Ponta, 楽天ポイント, Vポイント, 쿠폰형 상품이 함께 보인다. PayPay Money Light 출금 불가 안내도 포함된다.</p>
-        <div class="flow">코인 적립 -> コイン交換 -> 교환처 선택 -> 로그인/회원가입 -> 교환 신청 -> 각 교환처 지급</div>
+        <p>PayPay, Amazonギフト(Amazon 기프트), dポイント(d포인트), Ponta, 楽天ポイント(라쿠텐 포인트), Vポイント(V포인트), 쿠폰형 상품이 함께 보인다. PayPay Money Light 출금 불가 안내도 포함된다.</p>
+        <div class="flow">코인 적립 -> コイン交換(코인 교환) -> 교환처 선택 -> 로그인/회원가입 -> 교환 신청 -> 각 교환처 지급</div>
       </article>
 
       <article class="case">
@@ -164,22 +164,22 @@
         <h3>Powl</h3>
         <span class="tag">PayPay 연동</span><span class="tag orange">Money Light</span>
         <p>Powl 포인트를 PayPay 잔액으로 충전하는 공식 연동 사례. 일본에서는 PayPay 사용처가 넓어 현금보다 체감 가치가 빠르다.</p>
-        <div class="flow">Powl 포인트 -> 交換する -> PayPay残高 선택 -> 교환 신청 -> PayPay Money Light 지급</div>
+        <div class="flow">Powl 포인트 -> 交換する(교환하기) -> PayPay残高(PayPay 잔액) 선택 -> 교환 신청 -> PayPay Money Light 지급</div>
       </article>
 
       <article class="case">
         <img src="../output/playwright/reward-tiktok-lite-paypay-official-mobile.png" alt="TikTok Lite PayPay 포인트 안내">
         <h3>TikTok Lite</h3>
         <span class="tag">대형 성공 앱</span><span class="tag orange">PayPay/えらべるPay</span>
-        <p>동영상 시청으로 포인트를 모아 PayPayポイント 등으로 교환하는 구조. 리워드 UX가 앱 체류와 결합된 사례다.</p>
-        <div class="flow">영상 시청/체크인 -> 포인트 적립 -> ギフト/交換 -> PayPay 또는 えらべるPay -> 지급</div>
+        <p>동영상 시청으로 포인트를 모아 PayPayポイント(PayPay 포인트) 등으로 교환하는 구조. 리워드 UX가 앱 체류와 결합된 사례다.</p>
+        <div class="flow">영상 시청/체크인 -> 포인트 적립 -> ギフト/交換(기프트/교환) -> PayPay 또는 えらべるPay(선택형 Pay) -> 지급</div>
       </article>
 
       <article class="case">
         <img src="../output/playwright/reward-hapitas-bank-exchange-official-mobile.png" alt="ハピタス 현금 직접 계좌입금 화면">
         <h3>ハピタス</h3>
         <span class="tag">직접 은행송금</span><span class="tag orange">수수료/완료일 안내</span>
-        <p>現金（直接口座振込） 상품이 있고, 최소 교환 포인트·수수료·완료일이 표로 안내된다. 로그인 뒤 계좌 등록으로 이어진다.</p>
+        <p>現金（直接口座振込, 현금/직접 계좌입금） 상품이 있고, 최소 교환 포인트·수수료·완료일이 표로 안내된다. 로그인 뒤 계좌 등록으로 이어진다.</p>
         <div class="flow">현금 교환 -> 조건 확인 -> 로그인 -> 은행/지점/계좌 입력 -> 포인트 입력 -> 인증 -> 은행 입금</div>
       </article>
 
@@ -188,15 +188,15 @@
         <h3>ポイントタウン</h3>
         <span class="tag">은행별 교환</span><span class="tag orange">계좌 정책 필요</span>
         <p>은행별 현금 교환 페이지를 제공한다. 본인명의, 1계좌 제한, 계좌 변경 제한 같은 정책이 UI/약관에 필요하다.</p>
-        <div class="flow">ポイント交換 -> 은행 선택 -> 로그인 -> 계좌정보 등록/확인 -> 교환 신청 -> 입금 상태 안내</div>
+        <div class="flow">ポイント交換(포인트 교환) -> 은행 선택 -> 로그인 -> 계좌정보 등록/확인 -> 교환 신청 -> 입금 상태 안내</div>
       </article>
 
       <article class="case">
         <img src="../output/playwright/actual-gmo-poikatsu-bank-instructions-element.png" alt="GMOポイ活 현금 교환 사용자 안내">
         <h3>GMOポイ活</h3>
         <span class="tag">은행/지점 검색</span><span class="tag orange">직접 계좌입력</span>
-        <p>공개 도움말에서 주요 은행 버튼, 기타 은행 검색, 支店名 검색 흐름을 안내한다. 실제 입력 폼은 로그인 뒤 화면이다.</p>
-        <div class="flow">現金 선택 -> 주요 은행/검색 -> 금융기관 선택 -> 支店名 검색 -> 계좌명/명의カナ/포인트 입력 -> 신청</div>
+        <p>공개 도움말에서 주요 은행 버튼, 기타 은행 검색, 支店名(지점명) 검색 흐름을 안내한다. 실제 입력 폼은 로그인 뒤 화면이다.</p>
+        <div class="flow">現金(현금) 선택 -> 주요 은행/검색 -> 금융기관 선택 -> 支店名(지점명) 검색 -> 계좌명/명의カナ(명의 가나)/포인트 입력 -> 신청</div>
       </article>
     </div>
   </section>
@@ -222,7 +222,7 @@
     <div class="diagram">
       <pre class="mermaid">
 flowchart TD
-  A["포인트 적립<br/>걸음·미션·레시트·설문"] --> B["交換する 탭 진입"]
+  A["포인트 적립<br/>걸음·미션·레시트·설문"] --> B["交換する(교환하기) 탭 진입"]
   B --> C["교환처 선택<br/>PayPay / Amazon / dポイント / Ponta"]
   C --> D{"최소 포인트·한도 충족?"}
   D -- "부족/제한" --> F["부족 포인트·쿨다운 안내"]
@@ -232,7 +232,7 @@ flowchart TD
   I -- "필요<br/>PayPay/d/Ponta 등" --> K["앱 비밀번호·SMS·메일 인증<br/>또는 외부 계정 ID 연동"]
   K --> J
   J --> G["기프트 URL·코드·포인트 지급"]
-  G --> H["交換履歴 / Myギフト 보관"]
+  G --> H["交換履歴(교환내역) / Myギフト(My기프트) 보관"]
       </pre>
     </div>
     <h3>외부 교환 플랫폼 경유 흐름</h3>
@@ -253,11 +253,11 @@ flowchart TD
     <div class="diagram">
       <pre class="mermaid">
 flowchart TD
-  A["現金に交換 선택"] --> B["본인명의 계좌 안내"]
+  A["現金に交換(현금으로 교환) 선택"] --> B["본인명의 계좌 안내"]
   B --> C["사용자 본인확인<br/>로그인·SMS·2FA·비밀번호"]
   C --> D["은행 검색/선택<br/>주요 은행 버튼 + 기타 은행 검색"]
   D --> E["지점명 또는 지점코드 검색"]
-  E --> F["계좌종류 선택<br/>普通預金 / 当座預金"]
+  E --> F["계좌종류 선택<br/>普通預金(일반/보통예금) / 当座預金(당좌/수표성 계좌)"]
   F --> G["계좌번호 입력<br/>은행별 자리수 검증"]
   G --> H["계좌명의カナ 입력<br/>회원명과 일치 확인"]
   H --> I["교환 포인트·수수료·완료일 확인"]
@@ -266,12 +266,12 @@ flowchart TD
   K -- "실패" --> L["입력 오류 안내<br/>은행/지점/명의/계좌번호 재입력"]
   K -- "성공" --> M["송금대행/은행 API 송금 요청"]
   M --> N{"입금 결과"}
-  N -- "완료" --> O["交換履歴 완료 처리"]
+  N -- "완료" --> O["交換履歴(교환내역) 완료 처리"]
   N -- "실패/반려" --> P["재신청·조합·반려 수수료·CS 안내"]
       </pre>
     </div>
     <div class="note warn">
-      워크플로우는 출시 단계를 1차/2차/3차로 고정하기보다 기능 선택지로 봐야 한다. 초기 화면은 기본 포인트/기프트 교환만 단순하게 제공하고, DotMoney/デジコ/giftee 같은 외부 교환 플랫폼이나 은행송금은 운영·법무·CS 준비가 된 뒤 붙이는 옵션으로 두는 것이 좋다. 은행송금은 본인명의, 동일 계좌 다계정 제한, 계좌 변경 재인증, ゆうちょ銀行 변환 안내, 실패/반려 수수료 안내가 필수다.
+      워크플로우는 출시 단계를 1차/2차/3차로 고정하기보다 기능 선택지로 봐야 한다. 초기 화면은 기본 포인트/기프트 교환만 단순하게 제공하고, DotMoney/デジコ(디지털 기프트)/giftee 같은 외부 교환 플랫폼이나 은행송금은 운영·법무·CS 준비가 된 뒤 붙이는 옵션으로 두는 것이 좋다. 은행송금은 본인명의, 동일 계좌 다계정 제한, 계좌 변경 재인증, ゆうちょ銀行(우체국은행) 변환 안내, 실패/반려 수수료 안내가 필수다.
     </div>
   </section>
 
@@ -280,11 +280,11 @@ flowchart TD
     <table>
       <thead><tr><th>항목</th><th>한국 앱테크 관성</th><th>일본 포이활/앱테크 관성</th><th>설계 시사점</th></tr></thead>
       <tbody>
-        <tr><td>리워드 체감</td><td>현금, 네이버페이, 카카오페이, 모바일상품권이 직관적</td><td>PayPay, Amazonギフト, dポイント, Ponta, 楽天ポイント, Vポイント 등 생활권 포인트 체감이 큼</td><td>1차 MVP는 현금보다 즉시 쓸 수 있는 교환처를 앞에 배치</td></tr>
+        <tr><td>리워드 체감</td><td>현금, 네이버페이, 카카오페이, 모바일상품권이 직관적</td><td>PayPay, Amazonギフト(Amazon 기프트), dポイント(d포인트), Ponta, 楽天ポイント(라쿠텐 포인트), Vポイント(V포인트) 등 생활권 포인트 체감이 큼</td><td>1차 MVP는 현금보다 즉시 쓸 수 있는 교환처를 앞에 배치</td></tr>
         <tr><td>교환처 구조</td><td>앱이 직접 쿠폰/상품권을 지급하거나 국내 포인트로 전환</td><td>DotMoney, デジコ, giftee Box, えらべるPay 같은 중간 교환 플랫폼 경유가 많음</td><td>직접 제휴보다 플랫폼 제휴로 교환처를 빠르게 넓히는 전략 유리</td></tr>
         <tr><td>PayPay 성격</td><td>간편결제 포인트는 현금성으로 오해되기 쉬움</td><td>PayPay Money Light는 사용처는 넓지만 출금 불가 조건이 중요</td><td>“현금 출금 불가/가맹점 사용”을 교환 전 명확히 표시</td></tr>
         <tr><td>계좌 입력</td><td>은행 선택 + 계좌번호 + 예금주 정도가 익숙하고 지점명 입력은 드묾</td><td>은행명/금융기관코드 + 지점명/지점코드 + 계좌종류 + 계좌번호 + 명의カナ가 필요</td><td>은행 검색, 지점 검색, カナ 입력, 계좌종류 선택 UI가 필요</td></tr>
-        <tr><td>ゆうちょ銀行</td><td>우체국 계좌도 일반 은행 계좌와 유사하게 처리</td><td>ゆうちょ銀行은 기호/번호와 송금용 店名/預金種目/口座番号 변환 이슈가 있음</td><td>ゆうちょ 선택 시 별도 안내와 변환 도움말을 보여줘야 함</td></tr>
+        <tr><td>ゆうちょ銀行(우체국은행)</td><td>우체국 계좌도 일반 은행 계좌와 유사하게 처리</td><td>ゆうちょ銀行(우체국은행)은 기호/번호와 송금용 店名(점명/지점명), 預金種目(예금종류), 口座番号(계좌번호) 변환 이슈가 있음</td><td>ゆうちょ(우체국은행) 선택 시 별도 안내와 변환 도움말을 보여줘야 함</td></tr>
         <tr><td>본인확인</td><td>휴대폰 본인인증/CI 기반 흐름이 익숙</td><td>SMS, 메일, 외부 포인트 계정, eKYC, 계좌명의カナ 일치 확인을 조합</td><td>기프트 MVP는 낮은 인증, 은행송금은 본인명의/eKYC 강화로 단계화</td></tr>
         <tr><td>계좌 인증</td><td>계좌실명조회/간편인증 경험을 기대하기 쉬움</td><td>은행/지점 마스터 검증과 실제 명의/계좌 유효성 검증은 별도 솔루션 영역</td><td>Bankcode류는 검색용, 계좌 검증/송금 결과는 송금대행 API로 분리</td></tr>
         <tr><td>수수료/완료일</td><td>즉시 지급/무료 교환 기대가 큼</td><td>교환처별 최소 포인트, 수수료, 영업일 지급, 반려 수수료가 흔함</td><td>교환 리스트와 확인 화면에 수수료/완료 예정일을 항상 노출</td></tr>
@@ -317,7 +317,7 @@ flowchart TD
               <small>本日交換可能: 3回まで · 오늘 3회 교환 가능</small>
             </div>
             <div class="section-label">
-              <b>交換先を選択</b>
+              <b>交換先を選択 <span class="kr">교환처 선택</span></b>
               <small>1차 MVP는 포인트/기프트 교환만 제공</small>
             </div>
             <div class="reward-list">
@@ -357,17 +357,17 @@ flowchart TD
               <b>現金に交換 <span class="kr">현금으로 교환</span></b>
               <span class="icon-btn">?</span>
             </div>
-            <div class="notice">本人名義の銀行口座のみ利用できます。ゆうちょ銀行は振込用の店名・口座番号を入力してください。</div>
+            <div class="notice">本人名義の銀行口座のみ利用できます。<br><span class="kr">본인명의 은행계좌만 사용할 수 있습니다.</span>ゆうちょ銀行は振込用の店名・口座番号を入力してください。<span class="kr">우체국은행은 송금용 지점명과 계좌번호를 입력해 주세요.</span></div>
             <div class="form">
               <div>
                 <label>銀行を選択 · 은행 선택</label>
                 <div class="bank-row">
-                  <div class="bank-chip">楽天</div>
-                  <div class="bank-chip">PayPay銀行</div>
-                  <div class="bank-chip">ゆうちょ</div>
-                  <div class="bank-chip">三菱UFJ</div>
-                  <div class="bank-chip">三井住友</div>
-                  <div class="bank-chip">みずほ</div>
+                  <div class="bank-chip">楽天<br><span class="kr">라쿠텐</span></div>
+                  <div class="bank-chip">PayPay銀行<br><span class="kr">PayPay은행</span></div>
+                  <div class="bank-chip">ゆうちょ<br><span class="kr">우체국</span></div>
+                  <div class="bank-chip">三菱UFJ<br><span class="kr">미쓰비시UFJ</span></div>
+                  <div class="bank-chip">三井住友<br><span class="kr">미쓰이스미토모</span></div>
+                  <div class="bank-chip">みずほ<br><span class="kr">미즈호</span></div>
                 </div>
               </div>
               <div>
@@ -380,7 +380,7 @@ flowchart TD
               </div>
               <div>
                 <label>口座種別 · 계좌종류</label>
-                <div class="input">普通預金（一般/보통예금）<small>대부분 개인 계좌는 普通. 当座/貯蓄은 필요 시 선택</small></div>
+                <div class="input">普通預金（一般/보통예금）<small>대부분 개인 계좌는 普通(보통예금). 当座(당좌)/貯蓄(저축)은 필요 시 선택</small></div>
               </div>
               <div>
                 <label>口座番号 · 계좌번호</label>
@@ -400,8 +400,8 @@ flowchart TD
               <ul>
                 <li>은행명 / 금융기관코드</li>
                 <li>지점명 또는 지점코드</li>
-                <li>계좌종류(기본 普通預金), 계좌번호</li>
-                <li>계좌명의カナ, 본인명의 확인</li>
+                <li>계좌종류(기본 普通預金/일반·보통예금), 계좌번호</li>
+                <li>계좌명의カナ(계좌명의 가나), 본인명의 확인</li>
                 <li>교환 포인트, 수수료, 완료 예정일</li>
               </ul>
             </div>
@@ -414,23 +414,16 @@ flowchart TD
   </section>
 
   <section>
-    <h2>8. 톡방 공유용 요약</h2>
-    <div class="note">
-      일본 앱테크는 처음부터 은행계좌 입력을 넣기보다 PayPay, Amazonギフト, dポイント, Ponta, 楽天ポイント, Vポイント 같은 생활권 리워드를 먼저 제공하는 쪽이 자연스럽습니다. Cashwalk/Moneywalk뿐 아니라 トリマ, クラシルリワード, Powl, TikTok Lite, Uvoice 등도 기프트/포인트 교환 또는 DotMoney/디지털기프트 경유가 많습니다. 은행송금은 ハピタス, モッピー, ポイントタウン, GMOポイ活처럼 현금화 중심 서비스에서 쓰지만, 은행명+지점명+계좌번호+명의カナ 입력, 본인명의 제한, ゆうちょ例外, 송금 실패/조합 대응까지 필요해 MVP 후순위가 좋아 보입니다.
-    </div>
-  </section>
-
-  <section>
-    <h2>9. 운영/제휴 체크</h2>
+    <h2>8. 운영/제휴 체크</h2>
     <table>
       <thead><tr><th>질문</th><th>답변</th><th>설계 반영</th></tr></thead>
       <tbody>
-        <tr><td>은행 선택이 6개뿐인가?</td><td>아니다. 6개는 주요 은행 빠른 선택 예시다. 실제로는 `その他銀行を検索`에서 은행명/금융기관코드로 검색해야 한다.</td><td>주요 은행 버튼 + 전체 은행 검색을 함께 제공</td></tr>
-        <tr><td>PayPal인가?</td><td>목업의 은행 버튼은 PayPal이 아니라 `PayPay銀行`이다. PayPay는 일본 간편결제/포인트 생태계, PayPay銀行은 은행이다. PayPal은 별도 글로벌 결제 서비스다.</td><td>은행 버튼은 `PayPay銀行`로 표기</td></tr>
-        <tr><td>계좌종류가 필요한가?</td><td>필요하다. 일본 송금은 `普通預金`, `当座預金` 등 계좌종류/預金種目을 요구하는 경우가 있다. 포인트사이트는 보통 普通預金만 허용하기도 한다.</td><td>계좌종류 필드 노출, 기본값은 普通預金</td></tr>
+        <tr><td>은행 선택이 6개뿐인가?</td><td>아니다. 6개는 주요 은행 빠른 선택 예시다. 실제로는 `その他銀行を検索(기타 은행 검색)`에서 은행명/금융기관코드로 검색해야 한다.</td><td>주요 은행 버튼 + 전체 은행 검색을 함께 제공</td></tr>
+        <tr><td>PayPal인가?</td><td>목업의 은행 버튼은 PayPal이 아니라 `PayPay銀行(PayPay은행)`이다. PayPay는 일본 간편결제/포인트 생태계, PayPay銀行(PayPay은행)은 은행이다. PayPal은 별도 글로벌 결제 서비스다.</td><td>은행 버튼은 `PayPay銀行(PayPay은행)`로 표기</td></tr>
+        <tr><td>계좌종류가 필요한가?</td><td>필요하다. 일본 송금은 `普通預金(일반/보통예금)`, `当座預金(당좌/수표성 계좌)` 등 계좌종류/預金種目(예금종목)을 요구하는 경우가 있다. 포인트사이트는 보통 普通預金(일반/보통예금)만 허용하기도 한다.</td><td>계좌종류 필드 노출, 기본값은 普通預金(일반/보통예금)</td></tr>
         <tr><td>수수료가 있나?</td><td>있을 수 있다. ハピタス처럼 직접 계좌입금에 교환 수수료를 명시하는 사례가 있고, 은행/교환처/대행사별로 다르다.</td><td>교환 전 수수료와 완료 예정일을 확인 화면에 표시</td></tr>
-        <tr><td>본인확인은 어떻게 하나?</td><td>서비스 로그인, SMS/메일 인증, 비밀번호/2FA, 외부 교환 플랫폼의 본인확인, 계좌명의カナ와 회원명 비교를 조합한다. PayPay 은행계좌 등록은 사전 本人確認이 필요하다고 안내한다.</td><td>교환 신청 전 인증 단계와 명의 불일치 오류 처리 필요</td></tr>
-        <tr><td>계좌 인증은 어떻게 하나?</td><td>은행/지점코드 유효성, 계좌번호 자리수, 명의カナ 형식, 계좌체크 API/송금대행사 검증, 실제 송금 결과를 단계적으로 확인한다. 모든 은행에서 실시간 명의조회가 되는 전제로 보면 위험하다.</td><td>검증 실패/송금 실패/반려 상태를 별도 상태값으로 운영</td></tr>
+        <tr><td>본인확인은 어떻게 하나?</td><td>서비스 로그인, SMS/메일 인증, 비밀번호/2FA, 외부 교환 플랫폼의 본인확인, 계좌명의カナ(계좌명의 가나)와 회원명 비교를 조합한다. PayPay 은행계좌 등록은 사전 本人確認(본인확인)이 필요하다고 안내한다.</td><td>교환 신청 전 인증 단계와 명의 불일치 오류 처리 필요</td></tr>
+        <tr><td>계좌 인증은 어떻게 하나?</td><td>은행/지점코드 유효성, 계좌번호 자리수, 명의カナ(명의 가나) 형식, 계좌체크 API/송금대행사 검증, 실제 송금 결과를 단계적으로 확인한다. 모든 은행에서 실시간 명의조회가 되는 전제로 보면 위험하다.</td><td>검증 실패/송금 실패/반려 상태를 별도 상태값으로 운영</td></tr>
         <tr><td>기프트 제휴는 어떻게 하나?</td><td>개별 브랜드와 직접 계약하거나, デジコ/giftee Box/えらべるPay/DotMoney 같은 교환 플랫폼을 붙인다. MVP는 개별 제휴보다 플랫폼 연동이 빠르다.</td><td>1차는 디지털기프트/교환 플랫폼 계약 우선</td></tr>
         <tr><td>은행송금도 제휴가 필요한가?</td><td>직접 은행별 제휴를 맺기보다 송금대행/결제대행/은행 API/자금이동업자 구조를 검토하는 게 일반적이다. 자체 송금은 정산, AML, 계좌오류 CS 부담이 크다.</td><td>은행송금은 대행 솔루션 또는 DotMoney 경유를 우선 검토</td></tr>
       </tbody>
@@ -438,7 +431,7 @@ flowchart TD
   </section>
 
   <section>
-    <h2>10. API/법무 검토 포인트</h2>
+    <h2>9. API/법무 검토 포인트</h2>
     <h3>1차 MVP: 기프트/포인트 교환</h3>
     <table>
       <thead><tr><th>선택지</th><th>검토 링크</th><th>앱에서 필요한 것</th><th>주의점</th></tr></thead>
@@ -455,7 +448,7 @@ flowchart TD
       <tbody>
         <tr><td>Amazonギフトカード</td><td>보통 불필요</td><td>앱 비밀번호, 등록 메일 확인, 코드 발급/열람 로그</td><td>코드 오발급/도용 방지, 재발급·CS 추적</td></tr>
         <tr><td>PayPay Money Light</td><td>필요할 수 있음</td><td>PayPay 계정 확인, SMS/외부 링크/API 연동</td><td>잘못된 계정 지급 방지, 지급 결과 확인</td></tr>
-        <tr><td>dポイント/Ponta/楽天/Vポイント</td><td>대체로 필요</td><td>외부 포인트 ID, 회원번호, SMS/메일 확인</td><td>외부 포인트 계정 식별 및 지급 실패 대응</td></tr>
+        <tr><td>dポイント(d포인트)/Ponta/楽天(라쿠텐)/Vポイント(V포인트)</td><td>대체로 필요</td><td>외부 포인트 ID, 회원번호, SMS/메일 확인</td><td>외부 포인트 계정 식별 및 지급 실패 대응</td></tr>
         <tr><td>デジコ/giftee/えらべるPay</td><td>앱 내 직접 연동은 낮음</td><td>기프트 URL 발급, URL 열람/사용 상태, 메일/SMS 발송 로그</td><td>외부 선택 링크 전달과 사용 여부 추적</td></tr>
       </tbody>
     </table>
@@ -547,7 +540,7 @@ flowchart TD
   </section>
 
   <section>
-    <h2>11. 참고 링크</h2>
+    <h2>10. 참고 링크</h2>
     <ul>
       <li><a href="https://apps.apple.com/jp/app/cashwalk-%E6%AD%A9%E3%81%84%E3%81%A6%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88/id6748212428">Cashwalk App Store</a></li>
       <li><a href="https://apps.apple.com/jp/app/moneywalk-step-counter-rewards/id1638253339">Moneywalk App Store</a></li>
