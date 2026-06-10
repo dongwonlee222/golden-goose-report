@@ -90,6 +90,12 @@
     .confirm-row { display:flex; justify-content:space-between; gap:10px; border-bottom:1px solid #eef2f7; padding:10px 0; font-size:13px; }
     .confirm-row span:first-child { color:var(--muted); }
     .confirm-row b { text-align:right; }
+    .inline-help { margin-top:4px; color:#667085; font-size:11px; line-height:1.35; }
+    .checkbox-line { display:flex; gap:8px; align-items:flex-start; padding:10px 0; font-size:12px; color:#344054; }
+    .checkbox-line span:first-child { width:18px; height:18px; border-radius:5px; background:#1769d1; color:#fff; display:grid; place-items:center; font-size:12px; flex:0 0 auto; }
+    .selected-bank { display:flex; justify-content:space-between; gap:10px; align-items:center; }
+    .selected-bank b { display:block; font-size:14px; }
+    .selected-bank small { color:#667085; font-size:11px; }
     .bank-flow-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; align-items:start; margin-top:12px; }
     .bank-flow-grid .phone { max-width:300px; padding:10px; border-radius:24px; }
     .bank-flow-grid .screen { min-height:610px; border-radius:19px; }
@@ -335,13 +341,13 @@ flowchart TD
 
   <section>
     <h2>7. 추천 UI</h2>
-    <p>실제 사례에서 확인되는 공통 패턴은 `은행 선택`, `지점 선택`, `계좌 정보 입력`, `확인`을 분리하는 방식이다. GMOポイ活는 주요 은행 버튼과 기타 은행 검색, 지점명 검색 흐름을 안내하고, ゆうちょ銀行(우체국은행)은 기호/번호를 송금용 店名(지점명)·預金種目(예금종류)·口座番号(계좌번호)로 변환하도록 공식 안내한다.</p>
+    <p>실제 사례에서 확인되는 핵심은 은행명만 받지 않고, 은행/금융기관과 지점 정보를 함께 선택하게 만드는 것이다. 다만 사용자 플로우는 단계별 화면으로 나누기보다 <b>출금 신청 한 화면에서 은행·지점·계좌정보를 모두 받고, 은행/지점 필드는 검색 바텀시트로 선택</b>하게 만드는 방식이 더 단순하다.</p>
     <table>
       <thead><tr><th>예시</th><th>확인된 UI/입력 패턴</th><th>우리 UI 반영</th></tr></thead>
       <tbody>
-        <tr><td>GMOポイ活</td><td>주요 은행 버튼, 기타 은행 검색, 支店名(지점명) 검색 안내</td><td>빠른 선택 + 전체 은행 검색 + 지점 검색 화면 분리</td></tr>
-        <tr><td>モッピー / ハピタス</td><td>현금 교환 시 로그인 후 은행 계좌 등록/확인, 수수료·완료일 안내</td><td>입력 전 본인명의 안내, 확인 화면에 수수료/예정일 표시</td></tr>
-        <tr><td>ゆうちょ銀行(우체국은행)</td><td>기호/번호가 아니라 송금용 店名(지점명), 預金種目(예금종류), 口座番号(계좌번호) 확인 필요</td><td>ゆうちょ 선택 시 별도 안내와 변환 도움말 링크 노출</td></tr>
+        <tr><td>GMOポイ活</td><td>주요 은행 버튼, 기타 은행 검색, 支店名(지점명) 검색 안내</td><td>한 화면 폼 안에 은행/지점 선택 필드 배치, 탭하면 검색 바텀시트</td></tr>
+        <tr><td>モッピー / ハピタス</td><td>현금 교환 시 로그인 후 은행 계좌 등록/확인, 수수료·완료일 안내</td><td>신청 버튼 위에 수수료/완료 예정일/본인명의 체크 표시</td></tr>
+        <tr><td>ゆうちょ銀行(우체국은행)</td><td>기호/번호가 아니라 송금용 店名(지점명), 預金種目(예금종류), 口座番号(계좌번호) 확인 필요</td><td>ゆうちょ 선택 시 같은 화면 안에 변환 안내 문구 노출</td></tr>
       </tbody>
     </table>
     <div class="ui-grid">
@@ -392,7 +398,7 @@ flowchart TD
         </div>
       </div>
       <div>
-        <h3>은행송금 추가 시: 단일 폼보다 단계형</h3>
+        <h3>은행송금 추가 시: 한 화면 입력 폼</h3>
         <div class="phone">
           <div class="screen">
             <div class="appbar">
@@ -401,97 +407,44 @@ flowchart TD
               <span class="icon-btn">?</span>
             </div>
             <div class="notice">本人名義の銀行口座のみ利用できます。<br><span class="kr">본인명의 은행계좌만 사용할 수 있습니다.</span>ゆうちょ銀行は振込用の店名・口座番号を入力してください。<span class="kr">우체국은행은 송금용 지점명과 계좌번호를 입력해 주세요.</span></div>
-            <div class="required">
-              <b>필수 입력 항목</b>
-              <ul>
-                <li>은행명 / 금융기관코드</li>
-                <li>지점명 또는 지점코드</li>
-                <li>계좌종류(기본 普通預金/일반·보통예금), 계좌번호</li>
-                <li>계좌명의カナ(계좌명의 가나), 본인명의 확인</li>
-                <li>교환 포인트, 수수료, 완료 예정일</li>
-              </ul>
+            <div class="form">
+              <div>
+                <label>交換ポイント · 교환 포인트</label>
+                <div class="input">5,000P<small>최소 500P부터 신청 가능</small></div>
+              </div>
+              <div>
+                <label>銀行・金融機関 · 은행/금융기관</label>
+                <div class="input selected-bank"><div><b>楽天銀行</b><small>金融機関コード 0036</small></div><span>変更</span></div>
+                <div class="inline-help">탭하면 주요 은행 + 은행명/금융기관코드 검색 바텀시트 표시</div>
+              </div>
+              <div>
+                <label>支店 · 지점</label>
+                <div class="input selected-bank"><div><b>ジャズ支店</b><small>支店コード 201</small></div><span>変更</span></div>
+                <div class="inline-help">선택한 은행의 지점명/지점코드 검색 결과에서 선택</div>
+              </div>
+              <div>
+                <label>口座種別 · 계좌종류</label>
+                <div class="segmented"><span class="selected">普通<br><small>보통</small></span><span>当座<br><small>당좌</small></span><span>貯蓄<br><small>저축</small></span></div>
+                <div class="inline-help">대부분 개인 계좌는 普通預金(보통예금/일반계좌)</div>
+              </div>
+              <div>
+                <label>口座番号 · 계좌번호</label>
+                <div class="input">1234567<small>보통 7자리 숫자, 은행별 형식 검증</small></div>
+              </div>
+              <div>
+                <label>口座名義カナ · 계좌명의 카나</label>
+                <div class="input">ヤマダ タロウ<small>은행 앱/통장에 표시된 カナ(가나)와 동일하게 입력</small></div>
+              </div>
+              <div class="fee">
+                <div><b>手数料 · 수수료</b><br>100P</div>
+                <div><b>完了予定 · 완료 예정</b><br>1-3営業日</div>
+              </div>
+              <div class="checkbox-line"><span>✓</span><div>本人名義の口座です。<span class="kr">본인명의 계좌입니다.</span></div></div>
+              <div class="checkbox-line"><span>✓</span><div>入力内容が銀行登録情報と一致します。<span class="kr">입력 내용이 은행 등록 정보와 일치합니다.</span></div></div>
             </div>
-            <button class="cta">銀行口座を登録 · 은행계좌 등록</button>
+            <button class="cta">入力内容を確認 · 입력내용 확인</button>
             <div class="bottom-nav"><span>ホーム<br>홈</span><b>交換<br>교환</b><span>履歴<br>내역</span><span>マイページ<br>마이</span></div>
           </div>
-        </div>
-      </div>
-    </div>
-    <h3>은행송금 상세 UI 예시</h3>
-    <div class="bank-flow-grid">
-      <div class="phone">
-        <div class="screen">
-          <div class="appbar"><span class="icon-btn">‹</span><b>銀行を選択 <span class="kr">은행 선택</span></b><span class="icon-btn">?</span></div>
-          <div class="step-strip"><span class="step-pill on"></span><span class="step-pill"></span><span class="step-pill"></span><span class="step-pill"></span></div>
-          <div class="search-box">銀行名・金融機関コードを検索<br><span class="kr">은행명 또는 금융기관코드 검색</span></div>
-          <div class="section-label"><b>よく使われる銀行 <span class="kr">자주 쓰는 은행</span></b><small>빠른 선택</small></div>
-          <div class="reward-list">
-            <div class="bank-row">
-              <div class="bank-chip">ゆうちょ<br><span class="kr">우체국</span></div>
-              <div class="bank-chip">三菱UFJ<br><span class="kr">미쓰비시UFJ</span></div>
-              <div class="bank-chip">三井住友<br><span class="kr">미쓰이스미토모</span></div>
-              <div class="bank-chip">みずほ<br><span class="kr">미즈호</span></div>
-              <div class="bank-chip">楽天銀行<br><span class="kr">라쿠텐은행</span></div>
-              <div class="bank-chip">PayPay銀行<br><span class="kr">PayPay은행</span></div>
-            </div>
-          </div>
-          <div class="result-list">
-            <div class="result-row"><div><b>楽天銀行</b><small>金融機関コード 0036</small></div><span>›</span></div>
-            <div class="result-row"><div><b>りそな銀行</b><small>金融機関コード 0010</small></div><span>›</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="phone">
-        <div class="screen">
-          <div class="appbar"><span class="icon-btn">‹</span><b>支店を選択 <span class="kr">지점 선택</span></b><span class="icon-btn">?</span></div>
-          <div class="step-strip"><span class="step-pill on"></span><span class="step-pill on"></span><span class="step-pill"></span><span class="step-pill"></span></div>
-          <div class="notice">選択中: 楽天銀行<br><span class="kr">선택한 은행: 라쿠텐은행</span></div>
-          <div class="search-box">支店名・支店コードを検索<br><span class="kr">지점명 또는 지점코드 검색</span></div>
-          <div class="result-list">
-            <div class="result-row"><div><b>ジャズ支店</b><small>支店コード 201</small></div><span>›</span></div>
-            <div class="result-row"><div><b>ロック支店</b><small>支店コード 202</small></div><span>›</span></div>
-            <div class="result-row"><div><b>サンバ支店</b><small>支店コード 203</small></div><span>›</span></div>
-          </div>
-          <div class="notice">지점코드는 사용자가 직접 외우지 않게 하고, 검색 결과 선택 시 내부에 저장합니다.</div>
-        </div>
-      </div>
-      <div class="phone">
-        <div class="screen">
-          <div class="appbar"><span class="icon-btn">‹</span><b>口座情報 <span class="kr">계좌 정보</span></b><span class="icon-btn">?</span></div>
-          <div class="step-strip"><span class="step-pill on"></span><span class="step-pill on"></span><span class="step-pill on"></span><span class="step-pill"></span></div>
-          <div class="form">
-            <div>
-              <label>口座種別 · 계좌종류</label>
-              <div class="segmented"><span class="selected">普通<br><small>보통</small></span><span>当座<br><small>당좌</small></span><span>貯蓄<br><small>저축</small></span></div>
-            </div>
-            <div>
-              <label>口座番号 · 계좌번호</label>
-              <div class="input">1234567<small>보통 7자리 숫자, 은행별 형식 검증</small></div>
-            </div>
-            <div>
-              <label>口座名義カナ · 계좌명의 카나</label>
-              <div class="input">ヤマダ タロウ<small>통장/은행 앱의 カナ 표기와 동일하게 입력</small></div>
-            </div>
-            <div class="notice">本人名義の口座のみ登録できます。<br><span class="kr">본인명의 계좌만 등록 가능합니다.</span></div>
-          </div>
-          <button class="cta">次へ · 다음</button>
-        </div>
-      </div>
-      <div class="phone">
-        <div class="screen">
-          <div class="appbar"><span class="icon-btn">‹</span><b>確認 <span class="kr">확인</span></b><span class="icon-btn">?</span></div>
-          <div class="step-strip"><span class="step-pill on"></span><span class="step-pill on"></span><span class="step-pill on"></span><span class="step-pill on"></span></div>
-          <div class="confirm-list">
-            <div class="confirm-row"><span>銀行 · 은행</span><b>楽天銀行</b></div>
-            <div class="confirm-row"><span>支店 · 지점</span><b>ジャズ支店<br><small>201</small></b></div>
-            <div class="confirm-row"><span>口座種別 · 계좌종류</span><b>普通預金<br><small>보통예금</small></b></div>
-            <div class="confirm-row"><span>口座番号 · 계좌번호</span><b>***4567</b></div>
-            <div class="confirm-row"><span>名義カナ · 명의 카나</span><b>ヤマダ タロウ</b></div>
-            <div class="confirm-row"><span>手数料 · 수수료</span><b>100P</b></div>
-            <div class="confirm-row"><span>完了予定 · 완료 예정</span><b>1-3営業日</b></div>
-          </div>
-          <div class="notice">名義や支店情報が異なる場合、振込失敗・返戻になることがあります。<span class="kr">명의/지점 정보가 다르면 송금 실패 또는 반려될 수 있습니다.</span></div>
-          <button class="cta">この内容で申請 · 이 내용으로 신청</button>
         </div>
       </div>
     </div>
