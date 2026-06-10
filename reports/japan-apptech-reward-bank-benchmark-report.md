@@ -75,19 +75,34 @@
 
 - 일본판 Cashwalk는 현금 송금 화면이 아니라 기프트카드 교환 흐름이 핵심이다.
 - App Store 설명 기준 현금 환전은 비대응이며, 교환 탭에서 기프트카드/기프트코드를 지급한다.
+- 공식 FAQ 기준 무료로 모은 코인은 타사 포인트나 기프트카드로 교환할 수 있고, 예시로 Amazonギフト券(Amazon 기프트권), dポイント(d포인트), スターバックスギフト券(스타벅스 기프트권), Pontaポイント(Ponta 포인트)가 언급된다.
+- 교환/응모로 획득한 기프트카드는 앱 내 `Myギフトカード(My기프트카드)`에서 확인한다. 접근 위치는 `交換(교환)` 탭 우측 상단 티켓 아이콘 또는 홈 좌측 메뉴의 Myギフトカード다.
+- 교환 실패 시 보안 장치가 일시적으로 교환을 제한할 수 있고, 연속 탭/반복 조작을 피하고 몇 시간 뒤 재시도하라고 안내한다.
 
 **Workflow**
 
 ```mermaid
 flowchart TD
-  A["걷기/미션 수행"] --> B["코인 적립"]
-  B --> C["교환/기프트 영역 진입"]
-  C --> D["기프트카드 선택"]
-  D --> E{"교환 가능 포인트/한도 충족?"}
-  E -- "예" --> F["기프트코드 또는 바코드 발급"]
-  E -- "아니오" --> G["부족 포인트/제한 안내"]
-  F --> H["Myギフトカード에서 확인"]
+  A["걷기"] --> B["100보마다 코인BOX 적립"]
+  B --> C["사용자가 코인BOX 탭"]
+  C --> D["코인 수령: 일 최대 100코인/1만보"]
+  D --> E["交換(교환) 탭 진입"]
+  E --> F["기프트카드/타사 포인트 선택"]
+  F --> G{"필요 코인/교환 한도 충족?"}
+  G -- "예" --> H["기프트 코드/바코드/URL 발급"]
+  G -- "아니오" --> I["부족 코인/제한 안내"]
+  H --> J["Myギフトカード(My기프트카드)에서 확인"]
 ```
+
+**전환 구조**
+
+| 단계 | 사용자 행동 | 시스템/운영 처리 |
+|---|---|---|
+| 적립 | 걷고 코인BOX를 탭 | 걸음수 기반 무료 코인 적립, 일 최대치 관리 |
+| 교환 신청 | 交換(교환) 탭에서 기프트/포인트 선택 | 필요 코인, 재고, 교환횟수 제한, 부정사용 여부 확인 |
+| 지급 | 조건 충족 시 코드/바코드/URL 발급 | 기프트 코드 발급, 지급 상태 저장, Myギフトカード 노출 |
+| 사용 | 사용자가 각 서비스에 코드 입력 또는 바코드 사용 | Amazon/d/Ponta 등 외부 서비스 계정에서 사용. Cashwalk는 외부 계정 비밀번호를 보관하지 않음 |
+| CS | 미수신/교환 실패/기기변경 문의 | Myギフトカード, 계정 로그인 정보, 등록 메일/전화번호 인증 여부로 추적 |
 
 ### 3.2 Moneywalk JP: Shop → DotMoney 경유
 
@@ -504,6 +519,7 @@ flowchart TD
 
 - Cashwalk App Store: https://apps.apple.com/jp/app/cashwalk-%E6%AD%A9%E3%81%84%E3%81%A6%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88/id6748212428
 - Cashwalk 공식: https://cashwalk.jp/
+- Cashwalk JP 공식 FAQ: https://sites.google.com/cashwalk.io/cashwalk-faq/faq
 - Moneywalk App Store: https://apps.apple.com/jp/app/moneywalk-step-counter-rewards/id1638253339
 - Moneywalk DotMoney: https://d-money.jp/earn/exchange/detail/1242
 - TikTok Lite PayPay 공식: https://paypay.ne.jp/article/tiktoklite/
