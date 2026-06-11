@@ -1,0 +1,32 @@
+{
+  "schema": "golden_goose_public_datasets.v1",
+  "generated_at": "2026-06-11T04:17:26+00:00",
+  "basis": "Public-safe aggregate datasets generated from data/derived/daily.",
+  "latest_date": "2026-06-10",
+  "datasets": [
+    {
+      "path": "golden_goose_daily_public.csv",
+      "rows": 58,
+      "latest_date": "2026-06-10"
+    },
+    {
+      "path": "reward_cost_public.csv",
+      "rows": 289,
+      "latest_date": "2026-06-10"
+    },
+    {
+      "path": "ad_revenue_public.csv",
+      "rows": 168,
+      "latest_date": "2026-06-10"
+    }
+  ],
+  "excluded": [
+    "raw JSON/API responses",
+    "user-level rows",
+    "media_key",
+    "placement_id",
+    "thirdparty_id",
+    "tokens and credentials",
+    "internal notes"
+  ]
+}
