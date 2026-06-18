@@ -763,6 +763,41 @@
       word-break: keep-all;
     }
 
+    .monthly-table-wrap {
+      margin-top: 14px;
+      overflow-x: auto;
+    }
+
+    .monthly-timeline-table {
+      min-width: 680px;
+      margin-top: 0;
+    }
+
+    .monthly-timeline-table th,
+    .monthly-timeline-table td {
+      padding: 9px 10px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .monthly-timeline-table td:first-child {
+      white-space: normal;
+      min-width: 120px;
+    }
+
+    .monthly-timeline-table .num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .monthly-timeline-table .actual-row td {
+      background: #fffdf8;
+    }
+
+    .monthly-timeline-table .forecast-row td {
+      background: #fff;
+    }
+
     .mau-profit {
       display: block;
       margin-top: 8px;
@@ -823,9 +858,9 @@
           <div class="sub">마케팅비 제외 · 환율 1,450원 기준</div>
         </section>
         <section class="card">
-          <div class="label">최근 광고 집행비</div>
+          <div class="label">월 예상 광고 집행비</div>
           <div class="value bad">월 772만원</div>
-          <div class="sub">최근 7일 일평균 25.7만원 × 30일</div>
+          <div class="sub">월 목표 가입자 7,577명 × CAC 1,018원</div>
         </section>
         <section class="card">
           <div class="label">1개월차 총손익</div>
@@ -833,16 +868,16 @@
           <div class="sub">마케팅비 포함 기준</div>
         </section>
         <section class="card">
-          <div class="label">최대 총 누적 적자</div>
-          <div class="value warn">약 926만원</div>
-          <div class="sub">8월 예상 · 서비스 시작 누적</div>
+          <div class="label">현재 누적 손익</div>
+          <div class="value warn">약 -622만원</div>
+          <div class="sub">4/16~6/16 실측 · 수수료/소멸률 반영</div>
         </section>
       </div>
 
       <div class="note" style="margin-bottom:18px;">
         <strong>볼 것</strong><br />
         CAC 1,018원, D+1~D+3 재참여율, RV/전면 eCPM 유지가 핵심입니다.
-        광고비는 월 약 771만원 필요합니다. 현재 이후 투자분만 보면 초반 2개월 누적 손실은 약 381만원이고, 서비스 시작일부터의 전체 누적 손실은 8월 약 926만원까지 커진 뒤 11월 전후 회복되는 구조입니다.
+        광고비는 월 약 771만원 필요합니다. 현재까지 서비스 시작 누적 손익은 약 -622만원이고, 현재 이후 투자분만 보면 초반 2개월 누적 손실은 약 381만원입니다.
       </div>
 
       <div class="layout">
@@ -896,6 +931,15 @@
               </div>
               <input id="monthlyDownloads" type="range" min="100" max="100000" step="1" value="7577" />
               <div class="field-note">최근 7일 신규 가입 평균 252.6명/일 × 30일 기준입니다. 설치 데이터가 없어 가입자 기준으로 계산합니다.</div>
+            </div>
+
+            <div class="field">
+              <div class="field-head">
+                <span>회원가입 1명당 획득비용 <span class="mini-pill">핵심</span></span>
+                <span id="cac-value">1,018원</span>
+              </div>
+              <input id="cac" type="range" min="100" max="3000" step="1" value="1018" />
+              <div class="field-note">월 광고 집행비는 `월 목표 신규 가입자 × CAC`로 계산합니다. 현재 기준 약 772만원입니다.</div>
             </div>
 
             <div class="field hidden">
@@ -1160,14 +1204,6 @@
 
             <div class="field">
               <div class="field-head">
-                <span>회원가입 1명당 획득비용 <span class="mini-pill">핵심</span></span>
-                <span id="cac-value">1,018원</span>
-              </div>
-              <input id="cac" type="range" min="100" max="3000" step="1" value="1018" />
-            </div>
-
-            <div class="field">
-              <div class="field-head">
                 <span>주간 경품 비용</span>
                 <span id="weeklyPrizeCost-value">0원</span>
               </div>
@@ -1232,36 +1268,21 @@
             <div class="chart-frame">
               <svg id="profitTimelineChart" viewBox="0 0 900 320" width="100%" height="320" aria-label="서비스 시작 이후 월별 순수익 및 누적 손익 그래프"></svg>
             </div>
-            <div class="chart-caption">막대는 마케팅비 포함 누적 손익, 선은 각 월의 마케팅비 포함 순수익입니다. 4월~6월은 실측, 이후는 현재 입력값 기준 예측입니다.</div>
-            <div class="mau-row">
-              <div class="mau-card">
-                <strong>1개월 예상 일 참여자</strong>
-                <span id="mauMonth1">0명</span>
-                <small>현재 일 참여자 + 1개월 신규 반영 기준</small>
-                <div id="profitMonth1" class="mau-profit">순수익 0원</div>
-                <div id="adCostMonth1" class="sub">해당 월 외부 광고비 0원</div>
-              </div>
-              <div class="mau-card">
-                <strong>3개월 예상 일 참여자</strong>
-                <span id="mauMonth3">0명</span>
-                <small>현재 일 참여자 + 3개월 신규 반영 기준</small>
-                <div id="profitMonth3" class="mau-profit">순수익 0원</div>
-                <div id="adCostMonth3" class="sub">해당 월 외부 광고비 0원</div>
-              </div>
-              <div class="mau-card">
-                <strong>6개월 예상 일 참여자</strong>
-                <span id="mauMonth6">0명</span>
-                <small>현재 일 참여자 + 6개월 신규 반영 기준</small>
-                <div id="profitMonth6" class="mau-profit">순수익 0원</div>
-                <div id="adCostMonth6" class="sub">해당 월 외부 광고비 0원</div>
-              </div>
-              <div class="mau-card">
-                <strong>12개월 예상 일 참여자</strong>
-                <span id="mauMonth12">0명</span>
-                <small>현재 일 참여자 + 12개월 신규 반영 기준</small>
-                <div id="profitMonth12" class="mau-profit">순수익 0원</div>
-                <div id="adCostMonth12" class="sub">해당 월 외부 광고비 0원</div>
-              </div>
+            <div class="chart-caption">막대는 마케팅비 포함 누적 손익, 선은 각 월의 마케팅비 포함 순수익입니다. 4월~6월은 포인트 소멸률 50%와 애드팝콘 수수료 20%를 반영한 실측, 이후는 현재 입력값 기준 예측입니다.</div>
+            <div class="monthly-table-wrap">
+              <table class="monthly-timeline-table">
+                <thead>
+                  <tr>
+                    <th>월</th>
+                    <th>구분</th>
+                    <th class="num">예상 일 참여자</th>
+                    <th class="num">월 순손익</th>
+                    <th class="num">누적 손익</th>
+                    <th class="num">월 광고비</th>
+                  </tr>
+                </thead>
+                <tbody id="monthlyTimelineRows"></tbody>
+              </table>
             </div>
           </section>
 
@@ -1417,17 +1438,17 @@
               <div id="retentionSummarySub" class="sub">D+1~D+3 평균을 D+0 광고 시청률로 나눠 계산한 반복 참여 전환율입니다.</div>
             </section>
             <section class="card full-width-card">
-              <div class="label">손익분기 CAC</div>
-              <div id="breakevenCac" class="value">손익분기 CAC 0원 &lt; 실제 CAC 0원</div>
-              <div id="breakevenCacSub" class="sub">현재 매출 구조를 기준으로, 회원가입 1명을 데려오는 데 최대 얼마까지 써야 적자가 아닌지 보는 값입니다.</div>
-              <div id="breakevenCacDrivers" class="sub">월 매출, 보상비, 경품비, 운영비, 월 목표 회원가입 수가 바뀌면 함께 달라집니다.</div>
+              <div class="label">CAC 기준선</div>
+              <div id="breakevenCac" class="value">신규 기준 0원 &lt; 실제 CAC 0원</div>
+              <div id="breakevenCacSub" class="sub">신규 가입자 1명이 이번 달 벌어온 매출에서 수수료, 보상비, 운영비를 뺀 뒤 감당 가능한 CAC입니다.</div>
+              <div id="breakevenCacDrivers" class="sub">기존 참여자의 운영 이익까지 보태면 전체 월 손익 기준 허용 CAC도 함께 봅니다.</div>
             </section>
             <section class="card full-width-card emphasis-card">
-              <div class="label">광고 LTV vs 실제 CAC</div>
-              <div id="ltvCvcCompare" class="value">광고 LTV 401원 &gt; 실제 CAC 0원</div>
-              <div id="ltvCvcSub" class="sub">광고 LTV는 신규 유저 1명이 이번 달 기준으로 벌어오는 평균 광고 가치이고, 실제 CAC는 유저 1명을 데려오는 실제 비용입니다.</div>
-              <div id="netLtvCompare" class="highlight-sub">비용 차감 후 신규 1명당 순기여(LTV) 0원</div>
-              <div id="netLtvCostBreakdown" class="sub">차감 비용: 수수료 0원 · 보상비 0원 · 경품비 0원 · 운영비 0원</div>
+              <div class="label">신규 1명당 광고매출 vs CAC</div>
+              <div id="ltvCvcCompare" class="value">월 광고매출 0원 &lt; 실제 CAC 0원</div>
+              <div id="ltvCvcSub" class="sub">신규 가입자 1명이 이번 달 추가로 만드는 광고매출입니다. 아직 장기 LTV가 아니라 1개월 기준입니다.</div>
+              <div id="netLtvCompare" class="highlight-sub">수수료/보상/운영비 차감 후 신규 1명당 기여 0원</div>
+              <div id="netLtvCostBreakdown" class="sub">1명당 차감 비용: 수수료 0원 · 보상비 0원 · 경품비 0원 · 운영비 0원</div>
             </section>
           </div>
 
@@ -1613,11 +1634,11 @@
       "serverCost", "resourceCost", "personnelCost", "personnelStepCost"
     ];
     const serviceActualMonthly = [
-      { label: "4월", detail: "4/16~4/30 실측", profit: 131712 },
-      { label: "5월", detail: "5월 실측", profit: -1239100 },
-      { label: "6월", detail: "6/1~6/16 실측", profit: -4349972 }
+      { label: "4월", detail: "4/16~4/30 실측", profit: 17369, marketingCost: 149961 },
+      { label: "5월", detail: "5월 실측", profit: -1587099, marketingCost: 2368621 },
+      { label: "6월", detail: "6/1~6/16 실측", profit: -4654129, marketingCost: 5491191 }
     ];
-    const forecastMonthLabels = ["7월", "8월", "9월", "10월", "11월", "12월", "1월", "2월", "3월", "4월", "5월", "6월"];
+    const forecastMonthLabels = ["7월", "8월", "9월", "10월", "11월", "12월", "1월", "2월", "3월", "4월"];
 
     const formatNumber = (value) => Math.round(value).toLocaleString("ko-KR");
     const formatMoney = (value) => `${Math.round(value).toLocaleString("ko-KR")}원`;
@@ -1877,8 +1898,8 @@
         totalParticipantsSummary: "누적 광고 시청 회원과 월 목표 광고 시청 회원을 합친 값입니다.",
         dauCount: "현재 일 광고 참여자와 신규 반복 참여자를 더한 값입니다. 광고 노출수와 매출 계산의 기준이 됩니다.",
         retentionSummary: "월 목표 신규 가입자 중 D+0 광고 시청 이후 실제로 다시 들어와 광고를 보기 시작하는 비율입니다.",
-        breakevenCac: "현재 구조에서 회원가입 1명당 감당 가능한 최대 획득비용입니다. 광고 매출에서 보상비, 수수료, 경품비, 운영비를 제외하고 남는 금액을 월 목표 회원가입 수로 나눈 값입니다.",
-        ltvCvcCompare: "광고 LTV는 신규 유저 1명이 이번 달 기준으로 추가로 벌어오는 평균 광고 가치입니다. 실제 CAC는 유저 1명을 데려오는 실제 비용입니다."
+        breakevenCac: "신규 가입자 1명이 이번 달 벌어온 매출에서 수수료, 보상비, 운영비를 뺀 뒤 감당 가능한 CAC입니다.",
+        ltvCvcCompare: "신규 가입자 1명이 이번 달 기준으로 추가로 벌어오는 평균 광고매출입니다. 장기 LTV와는 다른 1개월 기준 값입니다."
       };
 
       Object.entries(resultHelp).forEach(([valueId, text]) => {
@@ -1889,10 +1910,10 @@
     }
     function renderProfitTimeline(monthlyTargetSignups, monthlyTargetParticipants, values) {
       const svg = document.getElementById("profitTimelineChart");
-      const months = Array.from({ length: 12 }, (_, index) => index + 1);
+      const months = Array.from({ length: forecastMonthLabels.length }, (_, index) => index + 1);
       const currentDauBase = values.currentDau;
       const activationRate = getActivationRatePercent(values) / 100;
-      const monthlyProfits = months.map((month) => {
+      const monthlyForecasts = months.map((month) => {
         const targetDau = (monthlyTargetParticipants * month) * activationRate;
         const dauCount = currentDauBase + targetDau;
         const rewardedUsers = dauCount * (values.rewardedUserRate / 100);
@@ -1924,20 +1945,28 @@
         const scaledPersonnelCost = values.personnelCost + (personnelStepUnits * values.personnelStepCost);
         const fixedCost = scaledServerCost + scaledResourceCost + scaledPersonnelCost;
         const totalCost = mediationCost + rewardedPointsCost + interstitialPointsCost + goldCost + marketingCost + fixedCost;
-        return totalRevenue - totalCost;
+        return {
+          month,
+          dauCount,
+          marketingCost,
+          profit: totalRevenue - totalCost
+        };
       });
-      const monthlyAdCosts = months.map(() => monthlyTargetSignups * values.cac);
+      const monthlyProfits = monthlyForecasts.map((item) => item.profit);
       let serviceCumulative = 0;
       const actualItems = serviceActualMonthly.map((item) => {
         serviceCumulative += item.profit;
-        return { ...item, cumulative: serviceCumulative, kind: "actual" };
+        return { ...item, dauCount: null, cumulative: serviceCumulative, kind: "actual" };
       });
-      const forecastItems = monthlyProfits.map((profit, index) => {
+      const forecastItems = monthlyForecasts.map((forecast, index) => {
+        const profit = forecast.profit;
         serviceCumulative += profit;
         return {
           label: forecastMonthLabels[index] || `${index + 1}M`,
           detail: `${index + 1}개월차 예측`,
           profit,
+          dauCount: forecast.dauCount,
+          marketingCost: forecast.marketingCost,
           cumulative: serviceCumulative,
           kind: "forecast"
         };
@@ -1992,8 +2021,7 @@
       const monthLabels = timelineItems.map((item, index) => {
         const x = left + index * stepX + stepX / 2;
         return `
-          <text x="${x.toFixed(1)}" y="${height - 24}" text-anchor="middle" font-size="12" fill="#6b7280">${item.label}</text>
-          <text x="${x.toFixed(1)}" y="${height - 8}" text-anchor="middle" font-size="10" fill="#9ca3af">${formatCompactMoney(item.profit)}</text>
+          <text x="${x.toFixed(1)}" y="${height - 15}" text-anchor="middle" font-size="13" font-weight="700" fill="#4b5563">${item.label}</text>
         `;
       }).join("");
 
@@ -2015,18 +2043,19 @@
         : "12개월 내 미도달";
       setText("breakevenMonthPill", `누적 손익분기: ${breakEvenText}`);
       setText("simulationBasePill", `계산 기준: 2026-04-16 시작 + 현재 이후 예측`);
-      setText("mauMonth1", `${formatNumber(currentDauBase + (monthlyTargetParticipants * 1 * activationRate))}명`);
-      setText("mauMonth3", `${formatNumber(currentDauBase + (monthlyTargetParticipants * 3 * activationRate))}명`);
-      setText("mauMonth6", `${formatNumber(currentDauBase + (monthlyTargetParticipants * 6 * activationRate))}명`);
-      setText("mauMonth12", `${formatNumber(currentDauBase + (monthlyTargetParticipants * 12 * activationRate))}명`);
-      setText("profitMonth1", `순수익 ${formatMoney(monthlyProfits[0])}`);
-      setText("profitMonth3", `순수익 ${formatMoney(monthlyProfits[2])}`);
-      setText("profitMonth6", `순수익 ${formatMoney(monthlyProfits[5])}`);
-      setText("profitMonth12", `순수익 ${formatMoney(monthlyProfits[11])}`);
-      setText("adCostMonth1", `해당 월 외부 광고비 ${formatMoney(monthlyAdCosts[0])}`);
-      setText("adCostMonth3", `해당 월 외부 광고비 ${formatMoney(monthlyAdCosts[2])}`);
-      setText("adCostMonth6", `해당 월 외부 광고비 ${formatMoney(monthlyAdCosts[5])}`);
-      setText("adCostMonth12", `해당 월 외부 광고비 ${formatMoney(monthlyAdCosts[11])}`);
+      const monthlyRows = document.getElementById("monthlyTimelineRows");
+      if (monthlyRows) {
+        monthlyRows.innerHTML = timelineItems.map((item) => `
+          <tr class="${item.kind === "actual" ? "actual-row" : "forecast-row"}">
+            <td><strong>${item.label}</strong><br /><span class="sub">${item.detail}</span></td>
+            <td>${item.kind === "actual" ? "실측" : "예측"}</td>
+            <td class="num">${item.dauCount ? `${formatNumber(item.dauCount)}명` : "-"}</td>
+            <td class="num">${formatMoney(item.profit)}</td>
+            <td class="num">${formatMoney(item.cumulative)}</td>
+            <td class="num">${formatMoney(item.marketingCost || 0)}</td>
+          </tr>
+        `).join("");
+      }
 
       let breakMarker = "";
       if (breakEvenIndex >= 0) {
@@ -2182,15 +2211,21 @@
       const incrementalPersonnelCost = Math.max(personnelCost - basePersonnelCost, 0);
       const incrementalGoldCost = targetSignups > 0 ? goldCost : 0;
       const netLtv = targetSignups > 0 ? (incrementalRevenue - incrementalMediationCost - incrementalPointsCost - incrementalInterstitialPointsCost - goldCost - incrementalServerCost - incrementalResourceCost - incrementalPersonnelCost) / targetSignups : 0;
+      const clampedNetLtv = Math.max(netLtv, 0);
       const totalCost = mediationCost + pointsCost + interstitialPointsCost + goldCost + marketingCost + serverCost + resourceCost + personnelCost;
       const operatingCost = totalCost - marketingCost;
       const operatingProfit = totalRevenue - operatingCost;
       const profit = totalRevenue - totalCost;
-      const breakevenCac = targetSignups > 0 ? (totalRevenue - mediationCost - pointsCost - interstitialPointsCost - goldCost - serverCost - resourceCost - personnelCost) / targetSignups : 0;
-      const clampedBreakevenCac = Math.max(breakevenCac, 0);
-      const breakevenComparator = clampedBreakevenCac === actualCac ? "=" : (clampedBreakevenCac < actualCac ? "<" : ">");
+      const totalMonthlyBreakevenCac = targetSignups > 0 ? (totalRevenue - mediationCost - pointsCost - interstitialPointsCost - goldCost - serverCost - resourceCost - personnelCost) / targetSignups : 0;
+      const clampedTotalMonthlyBreakevenCac = Math.max(totalMonthlyBreakevenCac, 0);
+      const breakevenComparator = clampedNetLtv === actualCac ? "=" : (clampedNetLtv < actualCac ? "<" : ">");
       const adLtv = targetSignups > 0 ? incrementalRevenue / targetSignups : 0;
       const ltvComparator = adLtv === actualCac ? "=" : (adLtv < actualCac ? "<" : ">");
+      const netAfterCac = netLtv - actualCac;
+      const perSignupMediationCost = targetSignups > 0 ? incrementalMediationCost / targetSignups : 0;
+      const perSignupRewardCost = targetSignups > 0 ? (incrementalPointsCost + incrementalInterstitialPointsCost) / targetSignups : 0;
+      const perSignupGoldCost = targetSignups > 0 ? incrementalGoldCost / targetSignups : 0;
+      const perSignupOperatingCost = targetSignups > 0 ? (incrementalServerCost + incrementalResourceCost + incrementalPersonnelCost) / targetSignups : 0;
 
       setText("monthlyRevenue", formatMoney(totalRevenue));
       setText("monthlyOperatingCost", formatMoney(operatingCost));
@@ -2202,18 +2237,19 @@
       setText("monthlyProfit", formatMoney(profit));
       setText("monthlyProfitSub", profit >= 0 ? "마케팅비 포함 기준 흑자" : "마케팅비 포함 기준 적자");
       document.getElementById("monthlyProfit").className = `value ${profit >= 0 ? "good" : "bad"}`;
-      setText("breakevenCac", `손익분기 CAC ${formatMoney(clampedBreakevenCac)} ${breakevenComparator} 실제 CAC ${formatMoney(actualCac)}`);
-      if (breakevenCac <= 0) {
+      setText("breakevenCac", `신규 기준 ${formatMoney(clampedNetLtv)} ${breakevenComparator} 실제 CAC ${formatMoney(actualCac)}`);
+      if (netLtv <= 0) {
         setText("breakevenCacSub", "현재는 광고 매출보다 비용이 더 커서 유료 획득비를 감당하기 어려운 상태입니다.");
       } else {
-        setText("breakevenCacSub", `현재 구조에서는 회원가입 1명당 ${formatMoney(breakevenCac)} 이하로 유입시키면 적자가 아닐 가능성이 높습니다.`);
+        setText("breakevenCacSub", `신규 가입자 1명만 놓고 보면 CAC가 ${formatMoney(netLtv)} 이하일 때 이번 달 기준 적자가 아닙니다. 현재는 1명당 ${formatMoney(Math.abs(netAfterCac))} ${netAfterCac >= 0 ? "남는" : "부족한"} 구조입니다.`);
       }
-      setText("ltvCvcCompare", `광고 LTV ${formatMoney(adLtv)} ${ltvComparator} 실제 CAC ${formatMoney(actualCac)}`);
-      setText("ltvCvcSub", adLtv >= actualCac ? "현재 기준으로는 신규 유저 1명이 벌어오는 광고 가치가 획득비용보다 커서, 장기적으로는 회수 가능성이 있는 구조입니다." : "현재 기준으로는 신규 유저 1명이 벌어오는 광고 가치보다 획득비용이 더 커서, 장기적으로도 회수가 어려운 구조입니다.");
-      setText("netLtvCompare", `비용 차감 후 신규 1명당 순기여 ${formatMoney(netLtv)}`);
+      setText("breakevenCacDrivers", `기존 참여자의 운영 이익까지 보태면 전체 월 손익 기준 허용 CAC는 ${formatMoney(clampedTotalMonthlyBreakevenCac)}입니다. 이 값도 실제 CAC ${formatMoney(actualCac)}보다 낮습니다.`);
+      setText("ltvCvcCompare", `월 광고매출 ${formatMoney(adLtv)} ${ltvComparator} 실제 CAC ${formatMoney(actualCac)}`);
+      setText("ltvCvcSub", adLtv >= actualCac ? "신규 가입자가 이번 달 만드는 광고매출만 봐도 획득비용을 넘는 상태입니다." : "신규 가입자가 이번 달 만드는 광고매출만으로는 획득비용을 회수하지 못합니다.");
+      setText("netLtvCompare", `수수료/보상/운영비 차감 후 신규 1명당 기여 ${formatMoney(netLtv)}`);
       document.getElementById("netLtvCompare").classList.remove("good", "bad");
-      document.getElementById("netLtvCompare").classList.add(netLtv >= 0 ? "good" : "bad");
-      setText("netLtvCostBreakdown", `차감 비용: 수수료 ${formatMoney(incrementalMediationCost)} · 보상비 ${formatMoney(incrementalPointsCost + incrementalInterstitialPointsCost)} · 경품비 ${formatMoney(incrementalGoldCost)} · 운영비 ${formatMoney(incrementalServerCost + incrementalResourceCost + incrementalPersonnelCost)}`);
+      document.getElementById("netLtvCompare").classList.add(netAfterCac >= 0 ? "good" : "bad");
+      setText("netLtvCostBreakdown", `1명당 차감 비용: 수수료 ${formatMoney(perSignupMediationCost)} · 보상비 ${formatMoney(perSignupRewardCost)} · 경품비 ${formatMoney(perSignupGoldCost)} · 운영비 ${formatMoney(perSignupOperatingCost)}`);
       setText("totalDownloadsSummary", `${formatNumber(totalDownloads)}명`);
       setText("totalSignupsSummary", `${formatNumber(totalSignups)}명`);
       setText("totalParticipantsSummary", `${formatNumber(totalParticipants)}명`);
@@ -2332,7 +2368,7 @@
       setText("profitStatusText", profit >= 0 ? `현재 입력값 기준 월 ${formatMoney(profit)} 흑자입니다.` : `현재 입력값 기준 월 ${formatMoney(Math.abs(profit))} 적자입니다.`);
 
       let actionText = "";
-      if (profit < 0 && values.cac > breakevenCac) {
+      if (profit < 0 && values.cac > clampedNetLtv) {
         actionText = "우선 목표 회원가입 수 대비 CAC를 낮추거나 Rewarded/Interstitial eCPM을 높이는 쪽이 가장 효과적입니다.";
       } else if (profit < 0) {
         actionText = "광고 유형별 노출 유저 비율과 노출 수를 함께 늘려 월 매출 볼륨을 키우는 것이 좋습니다.";
