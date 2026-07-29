@@ -1,6 +1,6 @@
 {
   "schema": "golden_goose_public_datasets.v1",
-  "generated_at": "2026-07-29T01:54:41+00:00",
+  "generated_at": "2026-07-29T02:03:16+00:00",
   "basis": "Public-safe aggregate datasets generated from data/derived/daily.",
   "latest_date": "2026-07-28",
   "datasets": [
