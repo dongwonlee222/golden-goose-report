@@ -379,7 +379,7 @@
                 style="font-size:22px; font-weight:700; width:100%; border:none; border-bottom:2px solid var(--line); background:transparent; color:var(--ink); outline:none; padding:2px 0;"
                 placeholder="0" value="652900">
             </div>
-            <div class="kpi-note" style="margin-top:6px;">보상 지급일 기준 · 2026-06-01까지 누적</div>
+            <div class="kpi-note" style="margin-top:6px;">보상 지급일 기준 · 2026-08-18까지 누적</div>
           </div>
           <div style="flex:1; min-width:200px; padding:8px 0 8px 20px;">
             <div class="kpi-name">추가 비용 합계</div>
@@ -2499,6 +2499,7 @@
       const CASH_BALANCE = 20344989;
       const AD_COST_STORAGE_KEY = "gg_ad_cost_v5_2026-04-16_2026-08-18_27028718";
       const OFFERWALL_COST_STORAGE_KEY = "gg_offerwall_cost_v1_2026-06-18 ~ 2026-08-03_42801840";
+      const REFERRAL_COST_STORAGE_KEY = "gg_referral_cost_v2_2026-08-18_652900";
       const adInput = document.getElementById("adCostInput");
       const offerwallInput = document.getElementById("offerwallCostInput");
       const srvInput = document.getElementById("serverCostInput");
@@ -2522,13 +2523,13 @@
         localStorage.setItem(AD_COST_STORAGE_KEY, ad);
         localStorage.setItem(OFFERWALL_COST_STORAGE_KEY, offerwall);
         localStorage.setItem("gg_srv_cost_v3", srv);
-        localStorage.setItem("gg_referral_cost_v1", referral);
+        localStorage.setItem(REFERRAL_COST_STORAGE_KEY, referral);
       }
 
       const savedAd = localStorage.getItem(AD_COST_STORAGE_KEY);
       const savedOfferwall = localStorage.getItem(OFFERWALL_COST_STORAGE_KEY);
       const savedSrv = localStorage.getItem("gg_srv_cost_v3");
-      const savedReferral = localStorage.getItem("gg_referral_cost_v1");
+      const savedReferral = localStorage.getItem(REFERRAL_COST_STORAGE_KEY);
       if (savedAd !== null) adInput.value = savedAd;
       if (savedOfferwall !== null) offerwallInput.value = savedOfferwall;
       if (savedSrv !== null) srvInput.value = savedSrv;
