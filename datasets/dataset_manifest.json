@@ -1,32 +1,47 @@
 {
-  "schema": "golden_goose_public_datasets.v1",
-  "generated_at": "2026-08-24T01:54:43+00:00",
+  "schema": "golden_goose_public_datasets.v2",
+  "compatible_schemas": [
+    "golden_goose_public_datasets.v1"
+  ],
+  "generated_at": "2026-08-24T08:46:18+00:00",
   "basis": "Public-safe aggregate datasets generated from data/derived/daily.",
   "latest_date": "2026-08-23",
   "datasets": [
     {
       "path": "golden_goose_daily_public.csv",
-      "rows": 132,
-      "latest_date": "2026-08-23"
+      "rows": 127,
+      "latest_date": "2026-08-18"
     },
     {
       "path": "reward_cost_public.csv",
-      "rows": 649,
-      "latest_date": "2026-08-23"
+      "rows": 634,
+      "latest_date": "2026-08-18"
     },
     {
       "path": "ad_revenue_public.csv",
-      "rows": 393,
-      "latest_date": "2026-08-22"
+      "rows": 381,
+      "latest_date": "2026-08-18"
+    },
+    {
+      "path": "golden_goose_country_daily_public.csv",
+      "rows": 185,
+      "latest_date": "2026-08-23"
     }
   ],
+  "quality": {
+    "country_attribution": {
+      "unknown_rows": 0
+    }
+  },
   "excluded": [
     "raw JSON/API responses",
     "user-level rows",
+    "campaign_id",
     "media_key",
     "placement_id",
     "thirdparty_id",
     "tokens and credentials",
-    "internal notes"
+    "internal notes",
+    "UNKNOWN country rows"
   ]
 }
