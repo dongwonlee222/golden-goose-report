@@ -1,0 +1,4 @@
+country,registered_member_count,survey_users,survey_clicks,users_with_any_outcome,users_with_complete,users_with_screenout,users_with_rating,users_with_cpx_revenue,rewarded_users,member_to_survey_rate,survey_to_outcome_rate,survey_to_complete_rate,survey_to_reward_rate
+KR,45238,328,1523,193,55,176,39,92,91,0.007251,0.588415,0.167683,0.277439
+JP,91,10,32,7,1,7,0,2,2,0.109890,0.700000,0.100000,0.200000
+TOTAL,45329,338,1555,200,56,183,39,94,93,0.007457,0.591716,0.165680,0.275148

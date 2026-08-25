@@ -1,0 +1,5 @@
+result_type,transaction_prefix,reward_events,rewarded_users,gross_revenue_usd,points_awarded,reversal_events,points_deducted,net_points
+완료,100,111,54,94.27,28281,5,1566,26715
+스크린아웃,101,220,61,6.08,6080,0,0,6080
+평가 보너스,121,16,10,0.16,160,0,0,160
+TOTAL,,347,93,100.51,34521,5,1566,32955
