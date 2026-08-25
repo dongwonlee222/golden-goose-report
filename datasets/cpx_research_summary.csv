@@ -1,3 +1,3 @@
-country,period_start,period_end,member_count,unique_rewarded_users,member_participation_rate,clicks,active_user_days,average_daily_active_users,complete_count,canceled_count,portal_net_revenue_usd,exchange_rate_krw_per_usd,revenue_krw,reward_events,reversal_events,points_awarded,points_deducted,net_points,contribution_profit_krw,contribution_margin_rate
-KR,2026-07-13,2026-08-24,43270,91,0.002103,1476,606,14.093,112,5,95.88,1450,139026,337,5,33177,1566,31611,107415,0.772625
-JP,2026-07-13,2026-08-24,91,2,0.021978,30,15,0.349,3,0,4.13,1450,5989,10,0,1344,0,1344,4645,0.775570
+country,period_start,period_end,total_account_count,registered_member_count,guest_account_count,unique_rewarded_users,member_participation_rate,total_account_participation_rate,clicks,active_user_days,average_daily_active_users,complete_count,canceled_count,portal_net_revenue_usd,exchange_rate_krw_per_usd,revenue_krw,reward_events,reversal_events,points_awarded,points_deducted,net_points,contribution_profit_krw,contribution_margin_rate
+KR,2026-07-13,2026-08-24,55723,45238,10485,91,0.002012,0.001633,1476,606,14.093,112,5,95.88,1450,139026,337,5,33177,1566,31611,107415,0.772625
+JP,2026-07-13,2026-08-24,220,91,129,2,0.021978,0.009091,30,15,0.349,3,0,4.13,1450,5989,10,0,1344,0,1344,4645,0.775570
