@@ -1,0 +1,4 @@
+country,period_start,period_end,unique_egg_participants,survey_users,survey_vs_egg_rate,survey_vs_egg_rate_pct,average_daily_egg_participants,average_daily_survey_users,daily_survey_vs_egg_rate,daily_survey_vs_egg_rate_pct
+TOTAL,2026-07-13,2026-08-24,20419,338,0.016553,1.6553,2500.7,14.442,0.005775,0.5775
+KR,2026-07-13,2026-08-24,20264,328,0.016186,1.6186,,,,
+JP,2026-07-13,2026-08-24,155,10,0.064516,6.4516,,,,
