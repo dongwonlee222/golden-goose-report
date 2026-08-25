@@ -1,0 +1,2 @@
+payment_id,period_start_cpx,period_end_cpx,payment_created_at_cpx,payment_sent_at_cpx,amount_usd,status,country,app_id,app_name,gross_revenue_usd,reversed_revenue_usd,net_revenue_usd,payment_method,bank_name,beneficiary,source
+191567,2026-07-14 02:06:43,2026-07-31 23:59:59,2026-08-01 01:21:04,2026-08-04 11:58:58,26.93,paid,KR,34001,황금거위 KR,28.34,1.41,26.93,SWIFT,Industrial Bank of Korea,Scala Data Inc.,CPX credit note 34007-191567
