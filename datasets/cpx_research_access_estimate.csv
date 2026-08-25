@@ -1,0 +1,2 @@
+period_start,period_end,reward_ad_average_dau,assumed_ad_participation_rate,estimated_app_access_dau,cpx_average_daily_users,estimated_access_to_cpx_rate,estimated_access_to_cpx_rate_pct,confidence,method
+2026-07-13,2026-08-24,2500.7,0.25,10002.8,14.442,0.001444,0.1444,low,reward_ad_average_dau / assumed_ad_participation_rate
