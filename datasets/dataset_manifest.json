@@ -3,9 +3,9 @@
   "compatible_schemas": [
     "golden_goose_public_datasets.v1"
   ],
-  "generated_at": "2026-08-25T05:40:00+00:00",
+  "generated_at": "2026-08-26T02:46:17+00:00",
   "basis": "Public-safe aggregate datasets generated from data/derived/daily.",
-  "latest_date": "2026-08-24",
+  "latest_date": "2026-08-25",
   "datasets": [
     {
       "path": "golden_goose_daily_public.csv",
@@ -24,28 +24,8 @@
     },
     {
       "path": "golden_goose_country_daily_public.csv",
-      "rows": 185,
-      "latest_date": "2026-08-23"
-    },
-    {
-      "path": "cpx_research_portal_daily.csv",
-      "rows": 86,
-      "latest_date": "2026-08-24"
-    },
-    {
-      "path": "cpx_research_reward_daily.csv",
-      "rows": 86,
-      "latest_date": "2026-08-24"
-    },
-    {
-      "path": "cpx_research_settlements.csv",
-      "rows": 1,
-      "latest_date": "2026-08-04"
-    },
-    {
-      "path": "cpx_research_summary.csv",
-      "rows": 2,
-      "latest_date": "2026-08-24"
+      "rows": 189,
+      "latest_date": "2026-08-25"
     }
   ],
   "quality": {
