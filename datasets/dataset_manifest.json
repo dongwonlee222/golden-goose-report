@@ -3,24 +3,24 @@
   "compatible_schemas": [
     "golden_goose_public_datasets.v1"
   ],
-  "generated_at": "2026-08-26T05:21:09+00:00",
+  "generated_at": "2026-09-02T01:25:23+00:00",
   "basis": "Public-safe aggregate datasets generated from data/derived/daily.",
-  "latest_date": "2026-08-25",
+  "latest_date": "2026-08-31",
   "datasets": [
     {
       "path": "golden_goose_daily_public.csv",
-      "rows": 127,
-      "latest_date": "2026-08-18"
+      "rows": 140,
+      "latest_date": "2026-08-31"
     },
     {
       "path": "reward_cost_public.csv",
-      "rows": 634,
-      "latest_date": "2026-08-18"
+      "rows": 699,
+      "latest_date": "2026-08-31"
     },
     {
       "path": "ad_revenue_public.csv",
-      "rows": 381,
-      "latest_date": "2026-08-18"
+      "rows": 420,
+      "latest_date": "2026-08-31"
     },
     {
       "path": "golden_goose_country_daily_public.csv",
