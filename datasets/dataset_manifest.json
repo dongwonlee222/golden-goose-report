@@ -1,6 +1,6 @@
 {
   "schema": "golden_goose_public_datasets.v2",
-  "generated_at": "2026-09-03T03:05:44+00:00",
+  "generated_at": "2026-09-03T04:00:52.191095+00:00",
   "basis": "Public-safe aggregate datasets generated from data/derived/daily.",
   "latest_date": "2026-09-02",
   "datasets": [
@@ -39,15 +39,15 @@
   "source_freshness": {
     "operations": "2026-09-02",
     "adpopcorn": "2026-09-02",
-    "google_ads": "2026-08-31",
+    "google_ads": "2026-09-01",
     "cpx_portal": "2026-08-31",
     "cpx_rewards": "2026-09-02",
     "adjoe_rewards_kst": "2026-09-02",
     "adjoe_portal": "2026-09-02"
   },
-  "complete_ad_cost_through": "2026-08-31",
+  "complete_ad_cost_through": "2026-09-01",
   "warnings": [
-    "Google Ads for 2026-09-01 and 2026-09-02 is not yet retrieved; blank costs must not be read as zero. CPX and adjoe are separate datasets and are not included in legacy ad revenue totals."
+    "Google Ads for 2026-09-02 is not yet retrieved; blank costs must not be read as zero. CPX and adjoe are separate datasets and are not included in legacy ad revenue totals."
   ],
   "compatible_schemas": [
     "golden_goose_public_datasets.v1"
