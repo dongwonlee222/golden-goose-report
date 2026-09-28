@@ -52049,11 +52049,11 @@
               "cashFlowKrw": null,
               "cumulativeProfitKrw": null,
               "date": "2026-09-23",
-              "knownCumulativeProfitKrw": -69545100.4,
-              "knownOperatingMarginPct": -44.27,
-              "knownOperatingProfitKrw": -52588.4,
+              "knownCumulativeProfitKrw": -69539192.4,
+              "knownOperatingMarginPct": -37.43,
+              "knownOperatingProfitKrw": -46680.4,
               "knownOperatingSpendKrw": 171384,
-              "knownRevenueKrw": 118795.6,
+              "knownRevenueKrw": 124703.6,
               "metrics": {
                 "active_users": 2228,
                 "actual_new_member_count": 18,
@@ -52124,8 +52124,8 @@
                 "reward_points_vault_game": 19706,
                 "signup_count": 111,
                 "supabase_ad_event_count": 0,
-                "tnk_completion_count": null,
-                "tnk_revenue_krw": null,
+                "tnk_completion_count": 323,
+                "tnk_revenue_krw": 5908,
                 "total_entry_account_count": 111,
                 "withdrawal_count_completed": 0,
                 "withdrawal_count_pending": 20,
@@ -52146,11 +52146,11 @@
               "cashFlowKrw": null,
               "cumulativeProfitKrw": null,
               "date": "2026-09-24",
-              "knownCumulativeProfitKrw": -69609311,
-              "knownOperatingMarginPct": -65.74,
-              "knownOperatingProfitKrw": -64210.6,
+              "knownCumulativeProfitKrw": -69598489,
+              "knownOperatingMarginPct": -57.8,
+              "knownOperatingProfitKrw": -59296.6,
               "knownOperatingSpendKrw": 161878,
-              "knownRevenueKrw": 97667.4,
+              "knownRevenueKrw": 102581.4,
               "metrics": {
                 "active_users": 2169,
                 "actual_new_member_count": 23,
@@ -52221,8 +52221,8 @@
                 "reward_points_vault_game": 18053,
                 "signup_count": 127,
                 "supabase_ad_event_count": 0,
-                "tnk_completion_count": null,
-                "tnk_revenue_krw": null,
+                "tnk_completion_count": 302,
+                "tnk_revenue_krw": 4914,
                 "total_entry_account_count": 127,
                 "withdrawal_count_completed": 0,
                 "withdrawal_count_pending": 16,
@@ -52243,11 +52243,11 @@
               "cashFlowKrw": null,
               "cumulativeProfitKrw": null,
               "date": "2026-09-25",
-              "knownCumulativeProfitKrw": -69654339.2,
-              "knownOperatingMarginPct": -37.32,
-              "knownOperatingProfitKrw": -45028.2,
+              "knownCumulativeProfitKrw": -69639400.2,
+              "knownOperatingMarginPct": -32.79,
+              "knownOperatingProfitKrw": -40911.2,
               "knownOperatingSpendKrw": 165689,
-              "knownRevenueKrw": 120660.8,
+              "knownRevenueKrw": 124777.8,
               "metrics": {
                 "active_users": 2193,
                 "actual_new_member_count": 22,
@@ -52318,8 +52318,8 @@
                 "reward_points_vault_game": 18011,
                 "signup_count": 203,
                 "supabase_ad_event_count": 0,
-                "tnk_completion_count": null,
-                "tnk_revenue_krw": null,
+                "tnk_completion_count": 290,
+                "tnk_revenue_krw": 4117,
                 "total_entry_account_count": 203,
                 "withdrawal_count_completed": 0,
                 "withdrawal_count_pending": 21,
@@ -52340,11 +52340,11 @@
               "cashFlowKrw": null,
               "cumulativeProfitKrw": null,
               "date": "2026-09-26",
-              "knownCumulativeProfitKrw": -69707092.6,
-              "knownOperatingMarginPct": -44.54,
-              "knownOperatingProfitKrw": -52753.4,
+              "knownCumulativeProfitKrw": -69676675.6,
+              "knownOperatingMarginPct": -27.84,
+              "knownOperatingProfitKrw": -37275.4,
               "knownOperatingSpendKrw": 171181,
-              "knownRevenueKrw": 118427.6,
+              "knownRevenueKrw": 133905.6,
               "metrics": {
                 "active_users": 2249,
                 "actual_new_member_count": 35,
@@ -52415,8 +52415,8 @@
                 "reward_points_vault_game": 18671,
                 "signup_count": 194,
                 "supabase_ad_event_count": 0,
-                "tnk_completion_count": null,
-                "tnk_revenue_krw": null,
+                "tnk_completion_count": 369,
+                "tnk_revenue_krw": 15478,
                 "total_entry_account_count": 194,
                 "withdrawal_count_completed": 0,
                 "withdrawal_count_pending": 27,
@@ -52437,11 +52437,11 @@
               "cashFlowKrw": null,
               "cumulativeProfitKrw": null,
               "date": "2026-09-27",
-              "knownCumulativeProfitKrw": -69772380,
-              "knownOperatingMarginPct": -62.15,
-              "knownOperatingProfitKrw": -65287.4,
+              "knownCumulativeProfitKrw": -69738089,
+              "knownOperatingMarginPct": -56.38,
+              "knownOperatingProfitKrw": -61413.4,
               "knownOperatingSpendKrw": 170335,
-              "knownRevenueKrw": 105047.6,
+              "knownRevenueKrw": 108921.6,
               "metrics": {
                 "active_users": 2255,
                 "actual_new_member_count": 22,
@@ -52512,8 +52512,8 @@
                 "reward_points_vault_game": 18524,
                 "signup_count": 68,
                 "supabase_ad_event_count": 0,
-                "tnk_completion_count": null,
-                "tnk_revenue_krw": null,
+                "tnk_completion_count": 304,
+                "tnk_revenue_krw": 3874,
                 "total_entry_account_count": 68,
                 "withdrawal_count_completed": 0,
                 "withdrawal_count_pending": 28,
@@ -52675,9 +52675,9 @@
               "tnkCompletions": {
                 "comparisonPct": null,
                 "comparisonValue": null,
-                "sourceThrough": "2026-09-22",
-                "status": "partial",
-                "value": 11174
+                "sourceThrough": "2026-09-27",
+                "status": "latest",
+                "value": 12762
               }
             },
             "partnerRevenue": {
@@ -52698,16 +52698,16 @@
               "tnk": {
                 "comparisonPct": null,
                 "comparisonValue": null,
-                "sourceThrough": "2026-09-22",
-                "status": "partial",
-                "value": 1097616
+                "sourceThrough": "2026-09-27",
+                "status": "latest",
+                "value": 1131907
               },
               "total": {
                 "comparisonPct": null,
                 "comparisonValue": null,
                 "sourceThrough": "2026-09-22",
                 "status": "partial",
-                "value": 1881701
+                "value": 1915992
               }
             },
             "referral": {
@@ -52760,7 +52760,7 @@
                 "comparisonValue": null,
                 "sourceThrough": "2026-09-22",
                 "status": "partial",
-                "value": 8758173
+                "value": 8792464
               },
               "cpx": {
                 "comparisonPct": null,
@@ -52779,9 +52779,9 @@
               "tnk": {
                 "comparisonPct": null,
                 "comparisonValue": null,
-                "sourceThrough": "2026-09-22",
-                "status": "partial",
-                "value": 1097616
+                "sourceThrough": "2026-09-27",
+                "status": "latest",
+                "value": 1131907
               }
             },
             "spend": {
@@ -57557,18 +57557,18 @@
             },
             "tnk": {
               "expectedThrough": "2026-09-27",
-              "latestDate": "2026-09-22",
-              "status": "delayed"
+              "latestDate": "2026-09-27",
+              "status": "latest"
             }
           },
           "summary": {
             "cashFlowKrw": null,
             "cumulativeProfitKrw": null,
-            "knownCumulativeProfitKrw": -69772380,
-            "knownOperatingMarginPct": 36.89,
-            "knownOperatingProfitKrw": 3230696,
+            "knownCumulativeProfitKrw": -69738089,
+            "knownOperatingMarginPct": 37.13,
+            "knownOperatingProfitKrw": 3264987,
             "knownOperatingSpendKrw": 5527477,
-            "knownRevenueKrw": 8758173,
+            "knownRevenueKrw": 8792464,
             "operatingMarginPct": null,
             "operatingProfitKrw": null,
             "operatingSpendKrw": null,
@@ -57621,8 +57621,8 @@
         },
         "tnk": {
           "expectedThrough": "2026-09-27",
-          "latestDate": "2026-09-22",
-          "status": "delayed"
+          "latestDate": "2026-09-27",
+          "status": "latest"
         }
       }
     }
