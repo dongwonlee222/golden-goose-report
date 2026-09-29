@@ -21,12 +21,12 @@ function statusText(metric) {
 }
 
 export function buildCardModels(cards) {
-  return cards.map(({ key, label, metric, format }) => ({
+  return cards.map(({ key, label, metric, format, comparisonFormat }) => ({
     key,
     label,
     valueText: !metric || metric.status === "not_connected" ? "연결 대기" : format(metric.value),
     statusText: statusText(metric),
-    comparisonText: comparisonText(metric, format),
+    comparisonText: comparisonText(metric, comparisonFormat || format),
   }));
 }
 

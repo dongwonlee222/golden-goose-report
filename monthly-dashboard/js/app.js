@@ -1,5 +1,5 @@
 import { createSelectionState } from "./state.js?v=20260907-3";
-import { renderDashboard } from "./sections.js?v=20260909-1";
+import { renderDashboard } from "./sections.js?v=20260929-2";
 
 const status = document.querySelector("#page-status");
 const monthSelect = document.querySelector("#month-select");

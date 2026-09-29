@@ -35,7 +35,7 @@ export function renderDailyTable(container, { rows, columns, caption = "일별 �
     tr.append(dateCell);
     columns.forEach((column) => {
       const td = document.createElement("td");
-      td.textContent = column.format(row[column.key]);
+      td.textContent = column.format(row[column.key], row);
       tr.append(td);
     });
     tbody.append(tr);

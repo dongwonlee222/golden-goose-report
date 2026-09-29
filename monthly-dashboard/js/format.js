@@ -1,5 +1,6 @@
 const KRW = new Intl.NumberFormat("ko-KR", { maximumFractionDigits: 0 });
 const COUNT = new Intl.NumberFormat("ko-KR", { maximumFractionDigits: 1 });
+const USD = new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 function missing(value) {
   return value === null || value === undefined || Number.isNaN(Number(value));
@@ -7,6 +8,15 @@ function missing(value) {
 
 export function formatKrw(value) {
   return missing(value) ? "—" : `${KRW.format(Number(value))}원`;
+}
+
+export function formatUsd(value) {
+  return missing(value) ? "—" : `US$${USD.format(Number(value))}`;
+}
+
+export function formatDualEcpm(usd, krw) {
+  if (missing(usd) && missing(krw)) return "—";
+  return `${missing(usd) ? "US$—" : formatUsd(usd)} (${missing(krw) ? "원화 미확정" : `약 ${formatKrw(krw)}`})`;
 }
 
 export function formatCount(value, suffix = "") {

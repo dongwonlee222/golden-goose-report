@@ -22,7 +22,7 @@ function emptyChart(container) {
   container.append(empty);
 }
 
-function chartOptions(valueFormatter) {
+function chartOptions(valueFormatter, tooltipDetail, rows, zeroLine) {
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -36,7 +36,7 @@ function chartOptions(valueFormatter) {
         bodyFont: { family: FONT_FAMILY, size: 12 },
         callbacks: {
           title: (items) => formatDate(items[0]?.label),
-          label: (item) => `${item.dataset.label}: ${valueFormatter(item.raw)}`,
+          label: (item) => `${item.dataset.label}: ${valueFormatter(item.raw)}${tooltipDetail?.(rows[item.dataIndex], item) || ""}`,
         },
       },
     },
@@ -48,7 +48,9 @@ function chartOptions(valueFormatter) {
       },
       y: {
         beginAtZero: true,
-        grid: { color: "rgba(104, 93, 80, 0.10)" },
+        grid: { color: zeroLine
+          ? (context) => context.tick?.value === 0 ? "#685d50" : "rgba(104, 93, 80, 0.10)"
+          : "rgba(104, 93, 80, 0.10)" },
         ticks: { color: "#685d50", font: { family: FONT_FAMILY, size: 12 } },
         border: { display: false },
       },
@@ -77,7 +79,7 @@ function renderAccessiblePoints(container, chart, rows, series, valueFormatter) 
   container.append(controls);
 }
 
-function renderChart(container, { rows, series, valueFormatter, label, type }) {
+function renderChart(container, { rows, series, valueFormatter, label, type, tooltipDetail, zeroLine }) {
   container.__chart?.destroy();
   container.replaceChildren();
   const hasValues = rows.some((row) => series.some((item) => finite(row[item.key])));
@@ -106,11 +108,12 @@ function renderChart(container, { rows, series, valueFormatter, label, type }) {
         pointRadius: 3,
         pointHoverRadius: 6,
         borderWidth: 2,
+        borderDash: item.borderDash || [],
         spanGaps: false,
         tension: .22,
       })),
     },
-    options: chartOptions(valueFormatter),
+    options: chartOptions(valueFormatter, tooltipDetail, rows, zeroLine),
   });
   container.__chart = chart;
   renderAccessiblePoints(container, chart, rows, series, valueFormatter);

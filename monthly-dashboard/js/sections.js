@@ -1,10 +1,10 @@
-import { renderBarChart, renderLineChart } from "./chart.js?v=20260907-2";
-import { formatCount, formatKrw, formatPercent } from "./format.js?v=20260907-2";
-import { renderDailyTable } from "./table.js?v=20260907-2";
+import { renderBarChart, renderLineChart } from "./chart.js?v=20260929-1";
+import { formatCount, formatKrw, formatUsd, formatDualEcpm, formatPercent, formatDate, formatMonth } from "./format.js?v=20260929-2";
+import { renderDailyTable } from "./table.js?v=20260929-2";
 import { renderRetention } from "./retention.js?v=20260908-1";
-import { renderForecastControls, renderForecastTable, selectForecastChartRows } from "./forecast.js?v=20260908-3";
+import { buildCumulativeTimeline, summarizeBreakEven, renderCumulativeHistoryTable, renderForecastControls, renderForecastTable, selectForecastChartRows } from "./forecast.js?v=20260929-1";
 import { createSeriesSelection } from "./series-state.js?v=20260908-2";
-import { renderMonthlyBreakdown, renderMonthlyKpiCards } from "./kpis.js?v=20260908-3";
+import { renderMonthlyBreakdown, renderMonthlyKpiCards } from "./kpis.js?v=20260929-2";
 
 export { renderMonthlyBreakdown, renderMonthlyKpiCards };
 
@@ -41,10 +41,10 @@ const SECTION_CARD_CONFIG = {
   adEfficiency: [
     ["settlementRevenue", "앱 광고 정산 매출", "headline", formatKrw, ["app_ad_revenue_krw"]],
     ["impressions", "총 노출", "headline", formatCount, ["adpopcorn_impression_count"]],
-    ["weightedNetEcpmKrw", "가중평균 eCPM", "headline", formatKrw, ["app_ad_net_ecpm_krw"]],
-    ["interstitialNetEcpmKrw", "전면 eCPM", "detail", formatKrw, ["app_ad_net_ecpm_iv_krw"]],
-    ["rewardedNetEcpmKrw", "보상형 eCPM", "detail", formatKrw, ["app_ad_net_ecpm_rv_krw"]],
-    ["bannerNetEcpmKrw", "배너 eCPM", "detail", formatKrw, ["app_ad_net_ecpm_banner_krw"]],
+    ["weightedNetEcpmUsd", "가중평균 eCPM", "headline", formatUsd, ["app_ad_net_ecpm_usd"]],
+    ["interstitialNetEcpmUsd", "전면 eCPM", "detail", formatUsd, ["app_ad_net_ecpm_iv_usd"]],
+    ["rewardedNetEcpmUsd", "보상형 eCPM", "detail", formatUsd, ["app_ad_net_ecpm_rv_usd"]],
+    ["bannerNetEcpmUsd", "배너 eCPM", "detail", formatUsd, ["app_ad_net_ecpm_banner_usd"]],
   ],
   partnerRevenue: [
     ["total", "제휴 매출 합계", "headline", formatKrw, PARTNER_KEYS],
@@ -74,9 +74,20 @@ const SECTION_CARD_CONFIG = {
 };
 
 export function sectionCardSpecs(section, monthlyKpis) {
-  return (SECTION_CARD_CONFIG[section] || []).map(([key, label, role, format, seriesKeys]) => ({
-    key, label, role, format, seriesKeys, metric: monthlyKpis?.[section]?.[key],
-  }));
+  return (SECTION_CARD_CONFIG[section] || []).map(([key, label, role, format, seriesKeys]) => {
+    const paired = section === "adEfficiency" && key.endsWith("EcpmUsd")
+      ? monthlyKpis?.[section]?.[key.replace(/Usd$/, "Krw")]
+      : null;
+    return {
+      key, label, role, seriesKeys, metric: monthlyKpis?.[section]?.[key],
+      format: section === "adEfficiency" && key.endsWith("EcpmUsd")
+        ? (value) => formatDualEcpm(value, paired?.value)
+        : format,
+      comparisonFormat: section === "adEfficiency" && key.endsWith("EcpmUsd")
+        ? (value) => formatDualEcpm(value, paired?.comparisonValue)
+        : format,
+    };
+  });
 }
 
 function renderSectionSummary(container, section, month) {
@@ -156,7 +167,7 @@ function renderLegend(container, series, selection, onChange) {
   }
 }
 
-function renderTrend(container, { rows, series, format = formatCount, chart = "line", caption, showTable = true, summary = [], tableContainer = container }) {
+function renderTrend(container, { rows, series, format = formatCount, tableFormat = format, chart = "line", caption, showTable = true, summary = [], tableContainer = container, tooltipDetail, zeroLine = false }) {
   const defined = series.map((item, index) => ({ ...item, color: item.color || COLORS[index % COLORS.length] }));
   const selection = createSeriesSelection(defined.map((item) => item.key));
   const legend = element("div", "chart-legend");
@@ -174,14 +185,14 @@ function renderTrend(container, { rows, series, format = formatCount, chart = "l
       selection.isIsolated && seriesKeys.length === visibleKeys.length && seriesKeys.every(key => visibleKeys.includes(key)),
     )));
     (chart === "bar" ? renderBarChart : renderLineChart)(chartNode, {
-      rows, series: visible, valueFormatter: format, label: caption,
+      rows, series: visible, valueFormatter: format, label: caption, tooltipDetail, zeroLine,
     });
     if (tableNode) {
       const open = tableNode.querySelector("details")?.open || false;
       renderDailyTable(tableNode, {
         rows,
         caption,
-        columns: visible.map((item) => ({ key: item.key, label: item.label, format })),
+        columns: visible.map((item) => ({ key: item.key, label: item.label, format: (value, row) => tableFormat(value, row, item) })),
       });
       tableNode.querySelector("details").open = open;
     }
@@ -288,36 +299,59 @@ function renderForecast(container, { country }) {
       onViewSelect: (next) => { view = next; paint(); },
     });
     const projected = forecastMeta.currentMonthProjection?.scenarios?.[scenario] || {};
+    const timeline = buildCumulativeTimeline(
+      country?.months, forecastMeta.currentMonthProjection, forecastRows, scenario,
+    );
+    const breakEven = summarizeBreakEven(timeline, forecastMeta.currentMonthProjection, scenario);
+    const breakEvenLabel = breakEven.alreadyProfitable
+      ? "이미 누적 흑자"
+      : breakEven.recoveryMonth
+        ? formatMonth(breakEven.recoveryMonth)
+        : breakEven.target12Krw === null ? "산정 불가" : "6개월 내 미도달";
     renderFacts(container, [
+      { label: "누적 흑자 전환 예상 월", value: breakEvenLabel, format: (value) => value },
+      { label: "12개월 흑자 목표 월 손익", value: breakEven.target12Krw, format: formatKrw },
+      { label: "24개월 흑자 목표 월 손익", value: breakEven.target24Krw, format: formatKrw },
       { label: "이번 달 예상 매출", value: projected.revenueKrw, format: formatKrw },
       { label: "이번 달 예상 지출", value: projected.operatingSpendKrw, format: formatKrw },
       { label: "이번 달 예상 손익", value: projected.operatingProfitKrw, format: formatKrw },
       { label: "예상 영업이익률", value: projected.operatingMarginPct, format: formatPercent },
       { label: "이번 달 말 누적 손익", value: projected.cumulativeProfitKrw, format: formatKrw },
     ]);
+    if (country?.openingBalanceKrw !== null && country?.openingBalanceKrw !== undefined) {
+      container.append(element("p", "forecast-note", `${formatMonth(Object.keys(country.months || {}).sort()[0])}부터 누적 · ${formatDate(country.openingBalanceDate)} 이월 ${formatKrw(country.openingBalanceKrw)} 포함`));
+    }
+    if (forecastMeta.sourceThrough && country?.latestCompleteDate && forecastMeta.sourceThrough < country.latestCompleteDate) {
+      container.append(element("p", "forecast-note", `원천 지연으로 현재 예측은 참고용 · ${formatDate(forecastMeta.sourceThrough)}까지 확인된 원천 기준, 이후 데이터 미반영`));
+    }
     const cumulative = view === "cumulative";
     renderTrend(container, {
-      rows: selectForecastChartRows(
+      rows: cumulative ? timeline : selectForecastChartRows(
         forecastRows,
         scenario,
         forecastMeta.currentMonthProjection,
         view,
       ),
       series: cumulative
-        ? [{ key: "cumulativeProfitKrw", label: "누적 손익" }]
+        ? [
+          { key: "actualCumulativeKrw", label: "집계 누적 손익", color: "#c78619" },
+          { key: "forecastCumulativeKrw", label: "예측 누적 손익", color: "#c78619", borderDash: [6, 4] },
+        ]
         : [
           { key: "revenueKrw", label: "예측 매출" },
           { key: "operatingSpendKrw", label: "예측 지출" },
           { key: "operatingProfitKrw", label: "예측 손익" },
         ],
       format: formatKrw,
-      caption: cumulative ? "이번 달 말부터 향후 6개월 누적 손익" : "이번 달부터 향후 6개월 월별 예측",
+      caption: cumulative ? "4월부터 집계한 누적 손익과 향후 6개월 예측" : "이번 달부터 향후 6개월 월별 예측",
       showTable: false,
+      zeroLine: cumulative,
     });
+    if (cumulative) renderCumulativeHistoryTable(container, timeline);
     renderForecastTable(container, {
       rows: forecastRows,
       scenario,
-      recoveryMonth: forecastMeta.recoveryMonthByScenario?.[scenario],
+      recoveryMonth: breakEven.recoveryMonth,
     });
   };
   paint();
@@ -385,13 +419,19 @@ function renderAdEfficiency(container, { rows, month }) {
   renderTrend(container, {
     rows, summary, tableContainer: dailyLists,
     series: [
-      { key: "app_ad_net_ecpm_krw", label: "전체 eCPM" },
-      { key: "app_ad_net_ecpm_iv_krw", label: "전면 eCPM" },
-      { key: "app_ad_net_ecpm_rv_krw", label: "보상형 eCPM" },
-      { key: "app_ad_net_ecpm_banner_krw", label: "배너 eCPM" },
+      { key: "app_ad_net_ecpm_usd", label: "전체 eCPM" },
+      { key: "app_ad_net_ecpm_iv_usd", label: "전면 eCPM" },
+      { key: "app_ad_net_ecpm_rv_usd", label: "보상형 eCPM" },
+      { key: "app_ad_net_ecpm_banner_usd", label: "배너 eCPM" },
     ],
-    format: formatKrw,
-    caption: "앱 광고 형식별 eCPM · 수수료 차감 후, 노출 1,000회당",
+    format: formatUsd,
+    tableFormat: (value, row, item) => formatDualEcpm(value, row[item.key.replace(/_usd$/, "_krw")]),
+    tooltipDetail: (row, item) => {
+      const pairedKey = ({ "전체 eCPM": "app_ad_net_ecpm_krw", "전면 eCPM": "app_ad_net_ecpm_iv_krw", "보상형 eCPM": "app_ad_net_ecpm_rv_krw", "배너 eCPM": "app_ad_net_ecpm_banner_krw" })[item.dataset.label];
+      const krw = row?.[pairedKey];
+      return krw === null || krw === undefined ? " · 원화 미확정" : ` (약 ${formatKrw(krw)})`;
+    },
+    caption: "앱 광고 형식별 eCPM (US$) · 수수료 차감 후, 노출 1,000회당",
   });
   renderTrend(container, {
     rows, summary, tableContainer: dailyLists,
@@ -405,6 +445,56 @@ function renderAdEfficiency(container, { rows, month }) {
     chart: "bar",
     caption: "앱 광고 형식별 노출",
   });
+  const fillRows = rows.map((row) => {
+    const request = Number(row.adpopcorn_request_count);
+    const impression = Number(row.adpopcorn_impression_count);
+    const overallValid = row.adpopcorn_request_count !== null && row.adpopcorn_request_count !== undefined
+      && Number.isFinite(request) && Number.isFinite(impression)
+      && request > 0 && impression >= 0 && impression <= request;
+    const validPlacement = (value) => value !== null && value !== undefined
+      && Number.isFinite(Number(value)) && Number(value) > 0 && Number(value) <= 100;
+    return {
+      ...row,
+      adpopcorn_fill_rate: overallValid ? Math.round(impression / request * 10000) / 100 : null,
+      adpopcorn_fill_rate_iv: validPlacement(row.adpopcorn_fill_rate_iv) ? row.adpopcorn_fill_rate_iv : null,
+      adpopcorn_fill_rate_rv: validPlacement(row.adpopcorn_fill_rate_rv) ? row.adpopcorn_fill_rate_rv : null,
+      adpopcorn_fill_rate_banner: validPlacement(row.adpopcorn_fill_rate_banner) ? row.adpopcorn_fill_rate_banner : null,
+    };
+  });
+  const formatFillRate = (value) => value === null || value === undefined
+    ? "집계 확인 필요"
+    : `${new Intl.NumberFormat("ko-KR", { maximumFractionDigits: 2 }).format(Number(value))}%`;
+  container.append(element("h3", null, "일별 요청 대비 노출률"));
+  container.append(element("p", "forecast-note", "노출수 ÷ 광고 요청수 · AdMob 일치율과 다른 지표입니다."));
+  renderTrend(container, {
+    rows: fillRows,
+    series: [
+      { key: "adpopcorn_fill_rate", label: "전체" },
+      { key: "adpopcorn_fill_rate_iv", label: "전면" },
+      { key: "adpopcorn_fill_rate_rv", label: "보상형" },
+      { key: "adpopcorn_fill_rate_banner", label: "배너" },
+    ],
+    format: formatFillRate,
+    caption: "앱 광고 일별 요청 대비 노출률",
+    showTable: false,
+    tooltipDetail: (row, item) => item.dataset.label === "전체" && row
+      ? ` · 요청 ${formatCount(row.adpopcorn_request_count, "건")} · 노출 ${formatCount(row.adpopcorn_impression_count, "회")}`
+      : "",
+  });
+  const fillTable = element("div", "trend-table");
+  renderDailyTable(fillTable, {
+    rows: fillRows,
+    caption: "앱 광고 요청·노출·비율 일별 목록",
+    columns: [
+      { key: "adpopcorn_request_count", label: "요청", format: (value) => formatCount(value, "건") },
+      { key: "adpopcorn_impression_count", label: "노출", format: (value) => formatCount(value, "회") },
+      { key: "adpopcorn_fill_rate", label: "전체", format: formatFillRate },
+      { key: "adpopcorn_fill_rate_iv", label: "전면", format: formatFillRate },
+      { key: "adpopcorn_fill_rate_rv", label: "보상형", format: formatFillRate },
+      { key: "adpopcorn_fill_rate_banner", label: "배너", format: formatFillRate },
+    ],
+  });
+  dailyLists.append(fillTable);
   container.append(dailyLists);
 }
 

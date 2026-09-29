@@ -1,4 +1,4 @@
-import { formatDate, formatKrw, formatPercent } from "./format.js?v=20260907-2";
+import { formatDate, formatKrw, formatPercent, formatMonth } from "./format.js?v=20260907-2";
 
 export const FORECAST_SCENARIOS = {
   conservative: "보수적",
@@ -41,6 +41,86 @@ export function selectForecastChartRows(rows, scenario, currentProjection, view 
     month: row.month,
     cumulativeProfitKrw: row.cumulativeProfitKrw,
   }));
+}
+
+export function buildCumulativeTimeline(months, currentProjection, forecastRows, scenario) {
+  const currentMonth = currentProjection?.month;
+  const historical = Object.entries(months || {})
+    .filter(([month]) => !currentMonth || month < currentMonth)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([month, value]) => ({
+      date: `${month}-01`,
+      month,
+      stage: "집계",
+      actualCumulativeKrw: value?.summary?.cumulativeProfitKrw ?? null,
+      forecastCumulativeKrw: null,
+    }));
+  const lastActual = historical.at(-1);
+  if (lastActual?.actualCumulativeKrw !== null && lastActual?.actualCumulativeKrw !== undefined) {
+    lastActual.forecastCumulativeKrw = lastActual.actualCumulativeKrw;
+  }
+  const currentValue = currentProjection?.scenarios?.[scenario]?.cumulativeProfitKrw;
+  if (currentMonth) {
+    historical.push({
+      date: `${currentMonth}-01`, month: currentMonth, stage: "예측",
+      actualCumulativeKrw: null,
+      forecastCumulativeKrw: currentValue ?? null,
+    });
+  }
+  for (const row of selectForecastRows(forecastRows, scenario)) {
+    historical.push({
+      date: row.date, month: row.month, stage: "예측",
+      actualCumulativeKrw: null,
+      forecastCumulativeKrw: row.cumulativeProfitKrw ?? null,
+    });
+  }
+  return historical;
+}
+
+export function summarizeBreakEven(timeline, currentProjection, scenario) {
+  const current = currentProjection?.scenarios?.[scenario]?.cumulativeProfitKrw;
+  const known = current !== null && current !== undefined && Number.isFinite(Number(current));
+  const cumulative = known ? Number(current) : null;
+  const alreadyProfitable = cumulative !== null && cumulative >= 0;
+  const recovery = (timeline || []).find((row) =>
+    row.stage === "예측" && row.forecastCumulativeKrw !== null
+    && row.forecastCumulativeKrw !== undefined && Number(row.forecastCumulativeKrw) >= 0);
+  return {
+    recoveryMonth: recovery?.month || null,
+    alreadyProfitable,
+    target12Krw: cumulative === null ? null : Math.ceil(Math.max(0, -cumulative) / 12),
+    target24Krw: cumulative === null ? null : Math.ceil(Math.max(0, -cumulative) / 24),
+  };
+}
+
+export function renderCumulativeHistoryTable(container, timeline) {
+  const details = document.createElement("details");
+  details.className = "daily-details forecast-details";
+  const summary = element("summary", null, "4월부터 누적 손익 목록");
+  const scroller = element("div", "table-scroll");
+  const table = element("table", "daily-table forecast-table");
+  const head = document.createElement("thead");
+  const header = element("tr");
+  ["월", "구분", "누적 손익"].forEach((label) => {
+    const cell = element("th", null, label);
+    cell.scope = "col";
+    header.append(cell);
+  });
+  head.append(header);
+  const body = document.createElement("tbody");
+  (timeline || []).forEach((row) => {
+    const tr = element("tr");
+    const monthCell = element("th", null, formatMonth(row.month));
+    monthCell.scope = "row";
+    tr.append(monthCell);
+    tr.append(element("td", null, row.stage));
+    tr.append(element("td", null, formatKrw(row.stage === "집계" ? row.actualCumulativeKrw : row.forecastCumulativeKrw)));
+    body.append(tr);
+  });
+  table.append(head, body);
+  scroller.append(table);
+  details.append(summary, scroller);
+  container.append(details);
 }
 
 export function forecastBasisLines(meta, scenario) {
