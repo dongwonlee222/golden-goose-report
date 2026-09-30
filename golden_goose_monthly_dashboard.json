@@ -15,7 +15,7 @@
           "ratePct": 20,
           "status": "configured"
         },
-        "baseOperatingSpendKrw": 1110508,
+        "baseOperatingSpendKrw": 1111572,
         "baseRevenueKrw": 0,
         "cappedGrowthPct": 0,
         "currentMonthProjection": {
@@ -24,22 +24,22 @@
             "base": {
               "cumulativeProfitKrw": null,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -1110508,
-              "operatingSpendKrw": 1110508,
+              "operatingProfitKrw": -1111572,
+              "operatingSpendKrw": 1111572,
               "revenueKrw": 0
             },
             "conservative": {
               "cumulativeProfitKrw": null,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -1221559,
-              "operatingSpendKrw": 1221559,
+              "operatingProfitKrw": -1222729,
+              "operatingSpendKrw": 1222729,
               "revenueKrw": 0
             },
             "growth": {
               "cumulativeProfitKrw": null,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -999457,
-              "operatingSpendKrw": 999457,
+              "operatingProfitKrw": -1000415,
+              "operatingSpendKrw": 1000415,
               "revenueKrw": 0
             }
           }
@@ -54,13 +54,13 @@
         "observedGrowthPct": null,
         "priorWindow": {
           "days": 7,
-          "end": "2026-09-15",
-          "start": "2026-09-09"
+          "end": "2026-09-22",
+          "start": "2026-09-16"
         },
         "recentWindow": {
           "days": 7,
-          "end": "2026-09-22",
-          "start": "2026-09-16"
+          "end": "2026-09-29",
+          "start": "2026-09-23"
         },
         "recoveryMonthByScenario": {
           "base": null,
@@ -83,7 +83,7 @@
             "spend": "0.90"
           }
         },
-        "sourceThrough": "2026-09-22",
+        "sourceThrough": "2026-09-29",
         "status": "ready",
         "structuralStartDate": "2026-08-01"
       },
@@ -96,24 +96,24 @@
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -1110508,
-              "operatingSpendKrw": 1110508,
+              "operatingProfitKrw": -1111572,
+              "operatingSpendKrw": 1111572,
               "revenueKrw": 0
             },
             "conservative": {
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -1221559,
-              "operatingSpendKrw": 1221559,
+              "operatingProfitKrw": -1222729,
+              "operatingSpendKrw": 1222729,
               "revenueKrw": 0
             },
             "growth": {
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -999457,
-              "operatingSpendKrw": 999457,
+              "operatingProfitKrw": -1000415,
+              "operatingSpendKrw": 1000415,
               "revenueKrw": 0
             }
           }
@@ -126,24 +126,24 @@
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -1110508,
-              "operatingSpendKrw": 1110508,
+              "operatingProfitKrw": -1111572,
+              "operatingSpendKrw": 1111572,
               "revenueKrw": 0
             },
             "conservative": {
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -1221559,
-              "operatingSpendKrw": 1221559,
+              "operatingProfitKrw": -1222729,
+              "operatingSpendKrw": 1222729,
               "revenueKrw": 0
             },
             "growth": {
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -999457,
-              "operatingSpendKrw": 999457,
+              "operatingProfitKrw": -1000415,
+              "operatingSpendKrw": 1000415,
               "revenueKrw": 0
             }
           }
@@ -156,24 +156,24 @@
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -1110508,
-              "operatingSpendKrw": 1110508,
+              "operatingProfitKrw": -1111572,
+              "operatingSpendKrw": 1111572,
               "revenueKrw": 0
             },
             "conservative": {
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -1221559,
-              "operatingSpendKrw": 1221559,
+              "operatingProfitKrw": -1222729,
+              "operatingSpendKrw": 1222729,
               "revenueKrw": 0
             },
             "growth": {
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -999457,
-              "operatingSpendKrw": 999457,
+              "operatingProfitKrw": -1000415,
+              "operatingSpendKrw": 1000415,
               "revenueKrw": 0
             }
           }
@@ -186,24 +186,24 @@
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -1110508,
-              "operatingSpendKrw": 1110508,
+              "operatingProfitKrw": -1111572,
+              "operatingSpendKrw": 1111572,
               "revenueKrw": 0
             },
             "conservative": {
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -1221559,
-              "operatingSpendKrw": 1221559,
+              "operatingProfitKrw": -1222729,
+              "operatingSpendKrw": 1222729,
               "revenueKrw": 0
             },
             "growth": {
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -999457,
-              "operatingSpendKrw": 999457,
+              "operatingProfitKrw": -1000415,
+              "operatingSpendKrw": 1000415,
               "revenueKrw": 0
             }
           }
@@ -216,24 +216,24 @@
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -1110508,
-              "operatingSpendKrw": 1110508,
+              "operatingProfitKrw": -1111572,
+              "operatingSpendKrw": 1111572,
               "revenueKrw": 0
             },
             "conservative": {
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -1221559,
-              "operatingSpendKrw": 1221559,
+              "operatingProfitKrw": -1222729,
+              "operatingSpendKrw": 1222729,
               "revenueKrw": 0
             },
             "growth": {
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -999457,
-              "operatingSpendKrw": 999457,
+              "operatingProfitKrw": -1000415,
+              "operatingSpendKrw": 1000415,
               "revenueKrw": 0
             }
           }
@@ -246,24 +246,24 @@
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -1110508,
-              "operatingSpendKrw": 1110508,
+              "operatingProfitKrw": -1111572,
+              "operatingSpendKrw": 1111572,
               "revenueKrw": 0
             },
             "conservative": {
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -1221559,
-              "operatingSpendKrw": 1221559,
+              "operatingProfitKrw": -1222729,
+              "operatingSpendKrw": 1222729,
               "revenueKrw": 0
             },
             "growth": {
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
               "operatingMarginPct": null,
-              "operatingProfitKrw": -999457,
-              "operatingSpendKrw": 999457,
+              "operatingProfitKrw": -1000415,
+              "operatingSpendKrw": 1000415,
               "revenueKrw": 0
             }
           }
@@ -13262,9 +13262,9 @@
                 "app_ad_revenue_rv_krw": null,
                 "app_ad_revenue_rv_usd": null,
                 "app_ad_revenue_usd": null,
-                "cpx_active_users": null,
-                "cpx_completion_count": null,
-                "cpx_revenue_krw": null,
+                "cpx_active_users": 0,
+                "cpx_completion_count": 0,
+                "cpx_revenue_krw": 0,
                 "direct_signup_count": 0,
                 "finance_reconciliation_krw": null,
                 "giftcard_margin_krw": 0,
@@ -13366,9 +13366,9 @@
                 "app_ad_revenue_rv_krw": null,
                 "app_ad_revenue_rv_usd": null,
                 "app_ad_revenue_usd": null,
-                "cpx_active_users": null,
-                "cpx_completion_count": null,
-                "cpx_revenue_krw": null,
+                "cpx_active_users": 0,
+                "cpx_completion_count": 0,
+                "cpx_revenue_krw": 0,
                 "direct_signup_count": 0,
                 "finance_reconciliation_krw": null,
                 "giftcard_margin_krw": 0,
@@ -13470,9 +13470,9 @@
                 "app_ad_revenue_rv_krw": null,
                 "app_ad_revenue_rv_usd": null,
                 "app_ad_revenue_usd": null,
-                "cpx_active_users": null,
-                "cpx_completion_count": null,
-                "cpx_revenue_krw": null,
+                "cpx_active_users": 0,
+                "cpx_completion_count": 0,
+                "cpx_revenue_krw": 0,
                 "direct_signup_count": 0,
                 "finance_reconciliation_krw": null,
                 "giftcard_margin_krw": 0,
@@ -13574,9 +13574,9 @@
                 "app_ad_revenue_rv_krw": null,
                 "app_ad_revenue_rv_usd": null,
                 "app_ad_revenue_usd": null,
-                "cpx_active_users": null,
-                "cpx_completion_count": null,
-                "cpx_revenue_krw": null,
+                "cpx_active_users": 0,
+                "cpx_completion_count": 0,
+                "cpx_revenue_krw": 0,
                 "direct_signup_count": 0,
                 "finance_reconciliation_krw": null,
                 "giftcard_margin_krw": 0,
@@ -13678,9 +13678,9 @@
                 "app_ad_revenue_rv_krw": null,
                 "app_ad_revenue_rv_usd": null,
                 "app_ad_revenue_usd": null,
-                "cpx_active_users": null,
-                "cpx_completion_count": null,
-                "cpx_revenue_krw": null,
+                "cpx_active_users": 0,
+                "cpx_completion_count": 0,
+                "cpx_revenue_krw": 0,
                 "direct_signup_count": 0,
                 "finance_reconciliation_krw": null,
                 "giftcard_margin_krw": 0,
@@ -13782,9 +13782,9 @@
                 "app_ad_revenue_rv_krw": null,
                 "app_ad_revenue_rv_usd": null,
                 "app_ad_revenue_usd": null,
-                "cpx_active_users": null,
-                "cpx_completion_count": null,
-                "cpx_revenue_krw": null,
+                "cpx_active_users": 0,
+                "cpx_completion_count": 0,
+                "cpx_revenue_krw": 0,
                 "direct_signup_count": 0,
                 "finance_reconciliation_krw": null,
                 "giftcard_margin_krw": 0,
@@ -13886,9 +13886,9 @@
                 "app_ad_revenue_rv_krw": null,
                 "app_ad_revenue_rv_usd": null,
                 "app_ad_revenue_usd": null,
-                "cpx_active_users": null,
-                "cpx_completion_count": null,
-                "cpx_revenue_krw": null,
+                "cpx_active_users": 0,
+                "cpx_completion_count": 0,
+                "cpx_revenue_krw": 0,
                 "direct_signup_count": 0,
                 "finance_reconciliation_krw": null,
                 "giftcard_margin_krw": 0,
@@ -14112,10 +14112,10 @@
                 "value": null
               },
               "cpxCompletions": {
-                "comparisonPct": null,
-                "comparisonValue": null,
-                "sourceThrough": "2026-09-22",
-                "status": "partial",
+                "comparisonPct": -100,
+                "comparisonValue": 3,
+                "sourceThrough": "2026-09-29",
+                "status": "latest",
                 "value": 0
               },
               "tnkCompletions": {
@@ -14135,10 +14135,10 @@
                 "value": null
               },
               "cpx": {
-                "comparisonPct": null,
-                "comparisonValue": null,
-                "sourceThrough": "2026-09-22",
-                "status": "partial",
+                "comparisonPct": -100,
+                "comparisonValue": 5991,
+                "sourceThrough": "2026-09-29",
+                "status": "latest",
                 "value": 0
               },
               "tnk": {
@@ -14209,10 +14209,10 @@
                 "value": 0
               },
               "cpx": {
-                "comparisonPct": null,
-                "comparisonValue": null,
-                "sourceThrough": "2026-09-22",
-                "status": "partial",
+                "comparisonPct": -100,
+                "comparisonValue": 5991,
+                "sourceThrough": "2026-09-29",
+                "status": "latest",
                 "value": 0
               },
               "giftcardSavingReference": {
@@ -16865,8 +16865,8 @@
             },
             "cpx": {
               "expectedThrough": "2026-09-29",
-              "latestDate": "2026-09-22",
-              "status": "delayed"
+              "latestDate": "2026-09-29",
+              "status": "latest"
             },
             "finance_close": {
               "expectedThrough": "2026-09-29",
@@ -16929,7 +16929,7 @@
         },
         "cpx": {
           "expectedThrough": "2026-09-29",
-          "latestDate": "2026-09-22",
+          "latestDate": "2026-09-29",
           "status": "not_connected"
         },
         "finance_close": {
@@ -54691,11 +54691,11 @@
               "cashFlowKrw": null,
               "cumulativeProfitKrw": null,
               "date": "2026-09-23",
-              "knownCumulativeProfitKrw": -69550521.2,
-              "knownOperatingMarginPct": -37.59,
-              "knownOperatingProfitKrw": -46824.4,
+              "knownCumulativeProfitKrw": -69550361.2,
+              "knownOperatingMarginPct": -37.42,
+              "knownOperatingProfitKrw": -46664.4,
               "knownOperatingSpendKrw": 171384,
-              "knownRevenueKrw": 124559.6,
+              "knownRevenueKrw": 124719.6,
               "metrics": {
                 "active_users": 2228,
                 "actual_new_member_count": 18,
@@ -54730,9 +54730,9 @@
                 "app_ad_revenue_rv_krw": 33193.6,
                 "app_ad_revenue_rv_usd": 24.5211232,
                 "app_ad_revenue_usd": 61.1292304,
-                "cpx_active_users": null,
-                "cpx_completion_count": null,
-                "cpx_revenue_krw": null,
+                "cpx_active_users": 5,
+                "cpx_completion_count": 0,
+                "cpx_revenue_krw": 160,
                 "direct_signup_count": 1,
                 "finance_reconciliation_krw": null,
                 "giftcard_margin_krw": 0,
@@ -54790,17 +54790,17 @@
               "operatingMarginPct": null,
               "operatingProfitKrw": null,
               "operatingSpendKrw": null,
-              "revenueKrw": null
+              "revenueKrw": 124719.6
             },
             {
               "cashFlowKrw": null,
               "cumulativeProfitKrw": null,
               "date": "2026-09-24",
-              "knownCumulativeProfitKrw": -69609970.6,
-              "knownOperatingMarginPct": -58.04,
-              "knownOperatingProfitKrw": -59449.4,
+              "knownCumulativeProfitKrw": -69608911.6,
+              "knownOperatingMarginPct": -56.66,
+              "knownOperatingProfitKrw": -58550.4,
               "knownOperatingSpendKrw": 161878,
-              "knownRevenueKrw": 102428.6,
+              "knownRevenueKrw": 103327.6,
               "metrics": {
                 "active_users": 2169,
                 "actual_new_member_count": 23,
@@ -54835,9 +54835,9 @@
                 "app_ad_revenue_rv_krw": 29260,
                 "app_ad_revenue_rv_usd": 21.6150704,
                 "app_ad_revenue_usd": 64.4743736,
-                "cpx_active_users": null,
-                "cpx_completion_count": null,
-                "cpx_revenue_krw": null,
+                "cpx_active_users": 7,
+                "cpx_completion_count": 1,
+                "cpx_revenue_krw": 899,
                 "direct_signup_count": 0,
                 "finance_reconciliation_krw": null,
                 "giftcard_margin_krw": 0,
@@ -54895,17 +54895,17 @@
               "operatingMarginPct": null,
               "operatingProfitKrw": null,
               "operatingSpendKrw": null,
-              "revenueKrw": null
+              "revenueKrw": 103327.6
             },
             {
               "cashFlowKrw": null,
               "cumulativeProfitKrw": null,
               "date": "2026-09-25",
-              "knownCumulativeProfitKrw": -69651050.6,
-              "knownOperatingMarginPct": -32.97,
-              "knownOperatingProfitKrw": -41080,
+              "knownCumulativeProfitKrw": -69630749.6,
+              "knownOperatingMarginPct": -15.18,
+              "knownOperatingProfitKrw": -21838,
               "knownOperatingSpendKrw": 165689,
-              "knownRevenueKrw": 124609,
+              "knownRevenueKrw": 143851,
               "metrics": {
                 "active_users": 2193,
                 "actual_new_member_count": 22,
@@ -54940,9 +54940,9 @@
                 "app_ad_revenue_rv_krw": 35380.8,
                 "app_ad_revenue_rv_usd": 26.1367864,
                 "app_ad_revenue_usd": 71.5292632,
-                "cpx_active_users": null,
-                "cpx_completion_count": null,
-                "cpx_revenue_krw": null,
+                "cpx_active_users": 13,
+                "cpx_completion_count": 12,
+                "cpx_revenue_krw": 19242,
                 "direct_signup_count": 0,
                 "finance_reconciliation_krw": null,
                 "giftcard_margin_krw": 0,
@@ -55000,17 +55000,17 @@
               "operatingMarginPct": null,
               "operatingProfitKrw": null,
               "operatingSpendKrw": null,
-              "revenueKrw": null
+              "revenueKrw": 143851
             },
             {
               "cashFlowKrw": null,
               "cumulativeProfitKrw": null,
               "date": "2026-09-26",
-              "knownCumulativeProfitKrw": -69688494,
-              "knownOperatingMarginPct": -28,
-              "knownOperatingProfitKrw": -37443.4,
+              "knownCumulativeProfitKrw": -69659130,
+              "knownOperatingMarginPct": -19.87,
+              "knownOperatingProfitKrw": -28380.4,
               "knownOperatingSpendKrw": 171181,
-              "knownRevenueKrw": 133737.6,
+              "knownRevenueKrw": 142800.6,
               "metrics": {
                 "active_users": 2249,
                 "actual_new_member_count": 35,
@@ -55045,9 +55045,9 @@
                 "app_ad_revenue_rv_krw": 34294.4,
                 "app_ad_revenue_rv_usd": 25.3343688,
                 "app_ad_revenue_usd": 71.208304,
-                "cpx_active_users": null,
-                "cpx_completion_count": null,
-                "cpx_revenue_krw": null,
+                "cpx_active_users": 16,
+                "cpx_completion_count": 7,
+                "cpx_revenue_krw": 9063,
                 "direct_signup_count": 0,
                 "finance_reconciliation_krw": null,
                 "giftcard_margin_krw": 0,
@@ -55105,17 +55105,17 @@
               "operatingMarginPct": null,
               "operatingProfitKrw": null,
               "operatingSpendKrw": null,
-              "revenueKrw": null
+              "revenueKrw": 142800.6
             },
             {
               "cashFlowKrw": null,
               "cumulativeProfitKrw": null,
               "date": "2026-09-27",
-              "knownCumulativeProfitKrw": -69750069,
-              "knownOperatingMarginPct": -56.62,
-              "knownOperatingProfitKrw": -61575,
+              "knownCumulativeProfitKrw": -69719922,
+              "knownOperatingMarginPct": -55.5,
+              "knownOperatingProfitKrw": -60792,
               "knownOperatingSpendKrw": 170335,
-              "knownRevenueKrw": 108760,
+              "knownRevenueKrw": 109543,
               "metrics": {
                 "active_users": 2255,
                 "actual_new_member_count": 22,
@@ -55150,9 +55150,9 @@
                 "app_ad_revenue_rv_krw": 36724,
                 "app_ad_revenue_rv_usd": 27.1288712,
                 "app_ad_revenue_usd": 68.5271704,
-                "cpx_active_users": null,
-                "cpx_completion_count": null,
-                "cpx_revenue_krw": null,
+                "cpx_active_users": 9,
+                "cpx_completion_count": 1,
+                "cpx_revenue_krw": 783,
                 "direct_signup_count": 0,
                 "finance_reconciliation_krw": null,
                 "giftcard_margin_krw": 0,
@@ -55210,22 +55210,22 @@
               "operatingMarginPct": null,
               "operatingProfitKrw": null,
               "operatingSpendKrw": null,
-              "revenueKrw": null
+              "revenueKrw": 109543
             },
             {
               "cashFlowKrw": null,
               "cumulativeProfitKrw": null,
               "date": "2026-09-28",
-              "knownCumulativeProfitKrw": -69805669.6,
-              "knownOperatingMarginPct": -47.29,
-              "knownOperatingProfitKrw": -55600.6,
+              "knownCumulativeProfitKrw": -69764443.6,
+              "knownOperatingMarginPct": -34.61,
+              "knownOperatingProfitKrw": -44521.6,
               "knownOperatingSpendKrw": 173175,
-              "knownRevenueKrw": 117574.4,
+              "knownRevenueKrw": 128653.4,
               "metrics": {
                 "active_users": 2304,
                 "actual_new_member_count": 9,
                 "adjoe_active_users": null,
-                "adjoe_revenue_krw": null,
+                "adjoe_revenue_krw": 10107,
                 "adpopcorn_click_count": 0,
                 "adpopcorn_commission_krw": 29393.6,
                 "adpopcorn_fill_rate": 89.2,
@@ -55255,9 +55255,9 @@
                 "app_ad_revenue_rv_krw": 45525.6,
                 "app_ad_revenue_rv_usd": 33.6308288,
                 "app_ad_revenue_usd": 86.855216,
-                "cpx_active_users": null,
-                "cpx_completion_count": null,
-                "cpx_revenue_krw": null,
+                "cpx_active_users": 8,
+                "cpx_completion_count": 1,
+                "cpx_revenue_krw": 972,
                 "direct_signup_count": 0,
                 "finance_reconciliation_krw": null,
                 "giftcard_margin_krw": 0,
@@ -55321,16 +55321,16 @@
               "cashFlowKrw": null,
               "cumulativeProfitKrw": null,
               "date": "2026-09-29",
-              "knownCumulativeProfitKrw": -69864777,
-              "knownOperatingMarginPct": -50.81,
-              "knownOperatingProfitKrw": -59107.4,
+              "knownCumulativeProfitKrw": -69809152,
+              "knownOperatingMarginPct": -34.2,
+              "knownOperatingProfitKrw": -44708.4,
               "knownOperatingSpendKrw": 175449,
-              "knownRevenueKrw": 116341.6,
+              "knownRevenueKrw": 130740.6,
               "metrics": {
                 "active_users": 2302,
                 "actual_new_member_count": 32,
                 "adjoe_active_users": null,
-                "adjoe_revenue_krw": null,
+                "adjoe_revenue_krw": 8483,
                 "adpopcorn_click_count": 0,
                 "adpopcorn_commission_krw": 29085.4,
                 "adpopcorn_fill_rate": 87.13,
@@ -55360,9 +55360,9 @@
                 "app_ad_revenue_rv_krw": 45224.8,
                 "app_ad_revenue_rv_usd": 33.4087008,
                 "app_ad_revenue_usd": 85.9443472,
-                "cpx_active_users": null,
-                "cpx_completion_count": null,
-                "cpx_revenue_krw": null,
+                "cpx_active_users": 3,
+                "cpx_completion_count": 6,
+                "cpx_revenue_krw": 5916,
                 "direct_signup_count": 0,
                 "finance_reconciliation_krw": null,
                 "giftcard_margin_krw": 0,
@@ -55586,11 +55586,11 @@
                 "value": null
               },
               "cpxCompletions": {
-                "comparisonPct": null,
-                "comparisonValue": null,
-                "sourceThrough": "2026-09-22",
-                "status": "partial",
-                "value": 69
+                "comparisonPct": -1,
+                "comparisonValue": 98,
+                "sourceThrough": "2026-09-29",
+                "status": "latest",
+                "value": 97
               },
               "tnkCompletions": {
                 "comparisonPct": null,
@@ -55604,16 +55604,16 @@
               "adjoe": {
                 "comparisonPct": null,
                 "comparisonValue": null,
-                "sourceThrough": "2026-09-27",
-                "status": "partial",
-                "value": 704576
+                "sourceThrough": "2026-09-29",
+                "status": "latest",
+                "value": 723166
               },
               "cpx": {
                 "comparisonPct": null,
                 "comparisonValue": null,
-                "sourceThrough": "2026-09-22",
-                "status": "partial",
-                "value": 79509
+                "sourceThrough": "2026-09-29",
+                "status": "latest",
+                "value": 116544
               },
               "tnk": {
                 "comparisonPct": null,
@@ -55625,9 +55625,9 @@
               "total": {
                 "comparisonPct": null,
                 "comparisonValue": null,
-                "sourceThrough": "2026-09-22",
+                "sourceThrough": "2026-09-27",
                 "status": "partial",
-                "value": 1915992
+                "value": 1971617
               }
             },
             "referral": {
@@ -55664,9 +55664,9 @@
               "adjoe": {
                 "comparisonPct": null,
                 "comparisonValue": null,
-                "sourceThrough": "2026-09-27",
-                "status": "partial",
-                "value": 704576
+                "sourceThrough": "2026-09-29",
+                "status": "latest",
+                "value": 723166
               },
               "appAd": {
                 "comparisonPct": null,
@@ -55678,16 +55678,16 @@
               "confirmedTotal": {
                 "comparisonPct": null,
                 "comparisonValue": null,
-                "sourceThrough": "2026-09-22",
+                "sourceThrough": "2026-09-27",
                 "status": "partial",
-                "value": 9014400
+                "value": 9070025
               },
               "cpx": {
                 "comparisonPct": null,
                 "comparisonValue": null,
-                "sourceThrough": "2026-09-22",
-                "status": "partial",
-                "value": 79509
+                "sourceThrough": "2026-09-29",
+                "status": "latest",
+                "value": 116544
               },
               "giftcardSavingReference": {
                 "comparisonPct": -13.4,
@@ -60697,8 +60697,8 @@
           "sourceStates": {
             "adjoe": {
               "expectedThrough": "2026-09-29",
-              "latestDate": "2026-09-27",
-              "status": "delayed"
+              "latestDate": "2026-09-29",
+              "status": "latest"
             },
             "adpopcorn": {
               "expectedThrough": "2026-09-29",
@@ -60707,8 +60707,8 @@
             },
             "cpx": {
               "expectedThrough": "2026-09-29",
-              "latestDate": "2026-09-22",
-              "status": "delayed"
+              "latestDate": "2026-09-29",
+              "status": "latest"
             },
             "finance_close": {
               "expectedThrough": "2026-09-29",
@@ -60744,11 +60744,11 @@
           "summary": {
             "cashFlowKrw": null,
             "cumulativeProfitKrw": null,
-            "knownCumulativeProfitKrw": -69864777,
-            "knownOperatingMarginPct": 34.81,
-            "knownOperatingProfitKrw": 3138299,
+            "knownCumulativeProfitKrw": -69809152,
+            "knownOperatingMarginPct": 35.21,
+            "knownOperatingProfitKrw": 3193924,
             "knownOperatingSpendKrw": 5876101,
-            "knownRevenueKrw": 9014400,
+            "knownRevenueKrw": 9070025,
             "operatingMarginPct": null,
             "operatingProfitKrw": null,
             "operatingSpendKrw": null,
@@ -60761,8 +60761,8 @@
       "sourceStates": {
         "adjoe": {
           "expectedThrough": "2026-09-29",
-          "latestDate": "2026-09-27",
-          "status": "delayed"
+          "latestDate": "2026-09-29",
+          "status": "latest"
         },
         "adpopcorn": {
           "expectedThrough": "2026-09-29",
@@ -60771,8 +60771,8 @@
         },
         "cpx": {
           "expectedThrough": "2026-09-29",
-          "latestDate": "2026-09-22",
-          "status": "delayed"
+          "latestDate": "2026-09-29",
+          "status": "latest"
         },
         "finance_close": {
           "expectedThrough": "2026-09-29",
