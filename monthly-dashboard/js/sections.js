@@ -41,10 +41,10 @@ const SECTION_CARD_CONFIG = {
   adEfficiency: [
     ["settlementRevenue", "앱 광고 정산 매출", "headline", formatKrw, ["app_ad_revenue_krw"]],
     ["impressions", "총 노출", "headline", formatCount, ["adpopcorn_impression_count"]],
-    ["weightedNetEcpmUsd", "가중평균 eCPM", "headline", formatUsd, ["app_ad_net_ecpm_usd"]],
-    ["interstitialNetEcpmUsd", "전면 eCPM", "detail", formatUsd, ["app_ad_net_ecpm_iv_usd"]],
-    ["rewardedNetEcpmUsd", "보상형 eCPM", "detail", formatUsd, ["app_ad_net_ecpm_rv_usd"]],
-    ["bannerNetEcpmUsd", "배너 eCPM", "detail", formatUsd, ["app_ad_net_ecpm_banner_usd"]],
+    ["weightedNetEcpmKrw", "가중평균 eCPM", "headline", formatKrw, ["app_ad_net_ecpm_krw"]],
+    ["interstitialNetEcpmKrw", "전면 eCPM", "detail", formatKrw, ["app_ad_net_ecpm_iv_krw"]],
+    ["rewardedNetEcpmKrw", "보상형 eCPM", "detail", formatKrw, ["app_ad_net_ecpm_rv_krw"]],
+    ["bannerNetEcpmKrw", "배너 eCPM", "detail", formatKrw, ["app_ad_net_ecpm_banner_krw"]],
   ],
   partnerRevenue: [
     ["total", "제휴 매출 합계", "headline", formatKrw, PARTNER_KEYS],
@@ -419,19 +419,13 @@ function renderAdEfficiency(container, { rows, month }) {
   renderTrend(container, {
     rows, summary, tableContainer: dailyLists,
     series: [
-      { key: "app_ad_net_ecpm_usd", label: "전체 eCPM" },
-      { key: "app_ad_net_ecpm_iv_usd", label: "전면 eCPM" },
-      { key: "app_ad_net_ecpm_rv_usd", label: "보상형 eCPM" },
-      { key: "app_ad_net_ecpm_banner_usd", label: "배너 eCPM" },
+      { key: "app_ad_net_ecpm_krw", label: "전체 eCPM" },
+      { key: "app_ad_net_ecpm_iv_krw", label: "전면 eCPM" },
+      { key: "app_ad_net_ecpm_rv_krw", label: "보상형 eCPM" },
+      { key: "app_ad_net_ecpm_banner_krw", label: "배너 eCPM" },
     ],
-    format: formatUsd,
-    tableFormat: (value, row, item) => formatDualEcpm(value, row[item.key.replace(/_usd$/, "_krw")]),
-    tooltipDetail: (row, item) => {
-      const pairedKey = ({ "전체 eCPM": "app_ad_net_ecpm_krw", "전면 eCPM": "app_ad_net_ecpm_iv_krw", "보상형 eCPM": "app_ad_net_ecpm_rv_krw", "배너 eCPM": "app_ad_net_ecpm_banner_krw" })[item.dataset.label];
-      const krw = row?.[pairedKey];
-      return krw === null || krw === undefined ? " · 원화 미확정" : ` (약 ${formatKrw(krw)})`;
-    },
-    caption: "앱 광고 형식별 eCPM (US$) · 수수료 차감 후, 노출 1,000회당",
+    format: formatKrw,
+    caption: "앱 광고 형식별 eCPM (원) · 수수료 차감 후, 노출 1,000회당",
   });
   renderTrend(container, {
     rows, summary, tableContainer: dailyLists,
