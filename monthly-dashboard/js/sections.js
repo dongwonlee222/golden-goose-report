@@ -41,10 +41,10 @@ const SECTION_CARD_CONFIG = {
   adEfficiency: [
     ["settlementRevenue", "앱 광고 정산 매출", "headline", formatKrw, ["app_ad_revenue_krw"]],
     ["impressions", "총 노출", "headline", formatCount, ["adpopcorn_impression_count"]],
-    ["weightedNetEcpmUsd", "가중평균 eCPM", "headline", formatUsd, ["app_ad_net_ecpm_usd"]],
-    ["interstitialNetEcpmUsd", "전면 eCPM", "detail", formatUsd, ["app_ad_net_ecpm_iv_usd"]],
-    ["rewardedNetEcpmUsd", "보상형 eCPM", "detail", formatUsd, ["app_ad_net_ecpm_rv_usd"]],
-    ["bannerNetEcpmUsd", "배너 eCPM", "detail", formatUsd, ["app_ad_net_ecpm_banner_usd"]],
+    ["weightedGrossEcpmUsd", "가중평균 eCPM", "headline", formatUsd, ["app_ad_gross_ecpm_usd"]],
+    ["interstitialGrossEcpmUsd", "전면 eCPM", "detail", formatUsd, ["app_ad_gross_ecpm_iv_usd"]],
+    ["rewardedGrossEcpmUsd", "보상형 eCPM", "detail", formatUsd, ["app_ad_gross_ecpm_rv_usd"]],
+    ["bannerGrossEcpmUsd", "배너 eCPM", "detail", formatUsd, ["app_ad_gross_ecpm_banner_usd"]],
   ],
   partnerRevenue: [
     ["total", "제휴 매출 합계", "headline", formatKrw, PARTNER_KEYS],
@@ -411,14 +411,14 @@ function renderAdEfficiency(container, { rows, month }) {
   renderTrend(container, {
     rows, summary, tableContainer: dailyLists,
     series: [
-      { key: "app_ad_net_ecpm_usd", label: "전체 eCPM" },
-      { key: "app_ad_net_ecpm_iv_usd", label: "전면 eCPM" },
-      { key: "app_ad_net_ecpm_rv_usd", label: "보상형 eCPM" },
-      { key: "app_ad_net_ecpm_banner_usd", label: "배너 eCPM" },
+      { key: "app_ad_gross_ecpm_usd", label: "전체 eCPM" },
+      { key: "app_ad_gross_ecpm_iv_usd", label: "전면 eCPM" },
+      { key: "app_ad_gross_ecpm_rv_usd", label: "보상형 eCPM" },
+      { key: "app_ad_gross_ecpm_banner_usd", label: "배너 eCPM" },
     ],
     format: formatUsd,
     tableFormat: formatUsd,
-    caption: "앱 광고 형식별 eCPM (US$) · 수수료 차감 후, 노출 1,000회당",
+    caption: "앱 광고 형식별 eCPM (US$) · 수수료 차감 전, 노출 1,000회당",
   });
   renderTrend(container, {
     rows, summary, tableContainer: dailyLists,
