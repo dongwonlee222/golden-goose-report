@@ -2,7 +2,7 @@ import { renderBarChart, renderLineChart } from "./chart.js?v=20260929-1";
 import { formatCount, formatKrw, formatUsd, formatDualEcpm, formatPercent, formatDate, formatMonth } from "./format.js?v=20260929-2";
 import { renderDailyTable } from "./table.js?v=20260929-2";
 import { renderRetention } from "./retention.js?v=20260908-1";
-import { buildCumulativeTimeline, summarizeBreakEven, renderCumulativeHistoryTable, renderForecastControls, renderForecastTable, selectForecastChartRows } from "./forecast.js?v=20260929-1";
+import { buildCumulativeTimeline, summarizeBreakEven, renderCumulativeHistoryTable, renderForecastControls, renderForecastTable, selectForecastChartRows } from "./forecast.js?v=20261014-admob";
 import { createSeriesSelection } from "./series-state.js?v=20260908-2";
 import { renderMonthlyBreakdown, renderMonthlyKpiCards } from "./kpis.js?v=20260929-2";
 
@@ -14,7 +14,7 @@ const PARTNER_KEYS = ["tnk_revenue_krw", "cpx_revenue_krw", "adjoe_revenue_krw"]
 const SECTION_CARD_CONFIG = {
   revenue: [
     ["confirmedTotal", "확인된 매출 합계", "headline", formatKrw, REVENUE_KEYS],
-    ["appAd", "앱 광고 정산 매출", "included", formatKrw, ["app_ad_revenue_krw"]],
+    ["appAd", "앱 광고 수익", "included", formatKrw, ["app_ad_revenue_krw"]],
     ["tnk", "TNK 매출", "included", formatKrw, ["tnk_revenue_krw"]],
     ["cpx", "CPX 매출", "included", formatKrw, ["cpx_revenue_krw"]],
     ["adjoe", "Adjoe 매출", "included", formatKrw, ["adjoe_revenue_krw"]],
@@ -22,7 +22,7 @@ const SECTION_CARD_CONFIG = {
   ],
   spend: [
     ["confirmedTotal", "확인된 지출 합계", "headline", formatKrw, SPEND_KEYS],
-    ["adpopcornCommission", "AdPopcorn 운영수수료 20%", "deducted", formatKrw],
+    ["adpopcornCommission", "기존 위탁 운영수수료 (전환 전)", "deducted", formatKrw],
     ["netRewardPoints", "순지급 포인트", "included", formatKrw, ["net_reward_points_krw"]],
     ["googleAds", "Google Ads 회원 유입비", "included", formatKrw, ["google_ads_cost_krw"]],
     ["paidTnkCampaign", "TNK 유료 참여 캠페인비", "included", formatKrw, ["paid_offerwall_cost_krw"]],
@@ -39,7 +39,7 @@ const SECTION_CARD_CONFIG = {
     ["repeat60Pct", "60일 반복 참여율", "headline", formatPercent],
   ],
   adEfficiency: [
-    ["settlementRevenue", "앱 광고 정산 매출", "headline", formatKrw, ["app_ad_revenue_krw"]],
+    ["settlementRevenue", "앱 광고 수익", "headline", formatKrw, ["app_ad_revenue_krw"]],
     ["impressions", "총 노출", "headline", formatCount, ["adpopcorn_impression_count"]],
     ["weightedGrossEcpmUsd", "가중평균 eCPM", "headline", formatUsd, ["app_ad_gross_ecpm_usd"]],
     ["interstitialGrossEcpmUsd", "전면 eCPM", "detail", formatUsd, ["app_ad_gross_ecpm_iv_usd"]],
@@ -98,7 +98,8 @@ function renderSectionSummary(container, section, month) {
 const COLORS = ["#c78619", "#232621", "#78816d", "#a74434", "#6d768a"];
 const SOURCE_LABELS = {
   finance_close: "월 손익 원장",
-  adpopcorn: "앱 광고",
+  adpopcorn: "앱 광고 (기존 위탁)",
+  admob: "앱 광고 (직접 AdMob)",
   google_ads: "Google Ads",
   offerwall: "유료 오퍼월",
   supabase: "서비스 DB",
@@ -354,7 +355,7 @@ function renderRevenue(container, { rows, month }) {
   renderTrend(container, {
     rows, summary,
     series: [
-      { key: "app_ad_revenue_krw", label: "앱 광고 정산 매출(수수료 차감 후)" },
+      { key: "app_ad_revenue_krw", label: "앱 광고 수익 (전환 전 위탁 수수료 반영)" },
       { key: "tnk_revenue_krw", label: "TNK 오퍼월 매출" },
       { key: "cpx_revenue_krw", label: "CPX 설문 매출" },
       { key: "adjoe_revenue_krw", label: "Adjoe 게임 매출" },
@@ -404,9 +405,9 @@ function renderAdEfficiency(container, { rows, month }) {
   const dailyLists = element("div", "daily-lists");
   renderTrend(container, {
     rows, summary, tableContainer: dailyLists,
-    series: [{ key: "app_ad_revenue_krw", label: "앱 광고 정산 매출" }],
+    series: [{ key: "app_ad_revenue_krw", label: "앱 광고 수익" }],
     format: formatKrw,
-    caption: "앱 광고 일별 정산 매출",
+    caption: "앱 광고 일별 수익",
   });
   renderTrend(container, {
     rows, summary, tableContainer: dailyLists,

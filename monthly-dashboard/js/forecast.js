@@ -143,7 +143,7 @@ export function forecastBasisLines(meta, scenario) {
     lines.push(`금 경품비 월 ${formatKrw(meta.goldPrize.monthlyCostKrw)}${weekly} · ${meta.goldPrize.monthlyGrams}g 기준`);
   }
   if (meta?.adpopcornFee?.ratePct !== null && meta?.adpopcornFee?.ratePct !== undefined) {
-    lines.push(`AdPopcorn 수수료 ${formatPercent(meta.adpopcornFee.ratePct)} 차감 후 매출 기준`);
+    lines.push(`기존 위탁 기간 수수료 ${formatPercent(meta.adpopcornFee.ratePct)} 반영 · 10/12 이후 직접 운영분 미차감`);
   }
   if (meta?.structuralStartDate) {
     lines.push(`현재 운영 구조 기준 ${formatDate(meta.structuralStartDate)} 이후`);
