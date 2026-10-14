@@ -2,6 +2,7 @@ import { renderBarChart, renderLineChart } from "./chart.js?v=20260929-1";
 import { formatCount, formatKrw, formatUsd, formatDualEcpm, formatPercent, formatDate, formatMonth } from "./format.js?v=20260929-2";
 import { renderDailyTable } from "./table.js?v=20260929-2";
 import { renderRetention } from "./retention.js?v=20260908-1";
+import { renderNetworks } from "./networks.js?v=20261014-network-detail";
 import { buildCumulativeTimeline, summarizeBreakEven, renderCumulativeHistoryTable, renderForecastControls, renderForecastTable, selectForecastChartRows } from "./forecast.js?v=20261014-admob";
 import { createSeriesSelection } from "./series-state.js?v=20260908-2";
 import { renderMonthlyBreakdown, renderMonthlyKpiCards } from "./kpis.js?v=20260929-2";
@@ -400,8 +401,10 @@ function renderMembers(container, { rows, month }) {
   renderRetention(container, month.retention);
 }
 
-function renderAdEfficiency(container, { rows, month }) {
+function renderAdEfficiency(container, context) {
+  const { rows, month } = context;
   const summary = renderSectionSummary(container, "adEfficiency", month);
+  renderNetworks(container, context);
   const dailyLists = element("div", "daily-lists");
   renderTrend(container, {
     rows, summary, tableContainer: dailyLists,

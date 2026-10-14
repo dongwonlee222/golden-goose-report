@@ -225,3 +225,14 @@ button.monthly-kpi-card { border: 0; border-right: 1px solid var(--line); border
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* Direct network monitoring: shared metric scales, separate network attempts. */
+.network-detail{margin:24px 0 32px}
+.network-detail label{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.network-row{display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;gap:20px;margin:22px 0;align-items:start}
+.network-metric,.network-name{display:grid;gap:6px;min-width:0}
+.network-metric strong{font-variant-numeric:tabular-nums}
+.network-metric small,.network-name small,.network-metric-label{color:var(--muted,#64748b)}
+.network-track{height:8px;background:rgba(120,130,140,.12);overflow:hidden}
+.network-bar{height:100%;background:var(--accent,#2563eb)}
+@media(max-width:680px){.network-row{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.network-name{grid-column:1/-1}.network-metric strong{overflow-wrap:anywhere}}
