@@ -23,32 +23,32 @@
           "ratePct": 20,
           "status": "configured"
         },
-        "baseOperatingSpendKrw": 1116655,
-        "baseRevenueKrw": 8339,
-        "cappedGrowthPct": 0,
+        "baseOperatingSpendKrw": 1116937,
+        "baseRevenueKrw": 4334,
+        "cappedGrowthPct": -10,
         "currentMonthProjection": {
           "month": "2026-10",
           "scenarios": {
             "base": {
               "cumulativeProfitKrw": null,
-              "operatingMarginPct": -13290.75,
-              "operatingProfitKrw": -1108316,
-              "operatingSpendKrw": 1116655,
-              "revenueKrw": 8339
+              "operatingMarginPct": -25671.5,
+              "operatingProfitKrw": -1112603,
+              "operatingSpendKrw": 1116937,
+              "revenueKrw": 4334
             },
             "conservative": {
               "cumulativeProfitKrw": null,
-              "operatingMarginPct": -16266.7,
-              "operatingProfitKrw": -1220816,
-              "operatingSpendKrw": 1228321,
-              "revenueKrw": 7505
+              "operatingMarginPct": -31395.28,
+              "operatingProfitKrw": -1224730,
+              "operatingSpendKrw": 1228631,
+              "revenueKrw": 3901
             },
             "growth": {
               "cumulativeProfitKrw": null,
-              "operatingMarginPct": -10855.96,
-              "operatingProfitKrw": -995817,
-              "operatingSpendKrw": 1004990,
-              "revenueKrw": 9173
+              "operatingMarginPct": -20987.54,
+              "operatingProfitKrw": -1000476,
+              "operatingSpendKrw": 1005243,
+              "revenueKrw": 4767
             }
           }
         },
@@ -59,16 +59,16 @@
           "status": "configured",
           "weeklyCostKrw": 250000
         },
-        "observedGrowthPct": null,
+        "observedGrowthPct": -46.01,
         "priorWindow": {
           "days": 7,
-          "end": "2026-10-04",
-          "start": "2026-09-28"
+          "end": "2026-10-06",
+          "start": "2026-09-30"
         },
         "recentWindow": {
           "days": 7,
-          "end": "2026-10-11",
-          "start": "2026-10-05"
+          "end": "2026-10-13",
+          "start": "2026-10-07"
         },
         "recoveryMonthByScenario": {
           "base": null,
@@ -91,7 +91,7 @@
             "spend": "0.90"
           }
         },
-        "sourceThrough": "2026-10-11",
+        "sourceThrough": "2026-10-13",
         "status": "ready",
         "structuralStartDate": "2026-08-01"
       },
@@ -102,27 +102,27 @@
           "scenarios": {
             "base": {
               "cumulativeProfitKrw": null,
-              "growthRatePct": 0,
-              "operatingMarginPct": -13290.75,
-              "operatingProfitKrw": -1108316,
-              "operatingSpendKrw": 1116655,
-              "revenueKrw": 8339
+              "growthRatePct": -5,
+              "operatingMarginPct": -27029.88,
+              "operatingProfitKrw": -1112820,
+              "operatingSpendKrw": 1116937,
+              "revenueKrw": 4117
             },
             "conservative": {
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
-              "operatingMarginPct": -16266.7,
-              "operatingProfitKrw": -1220816,
-              "operatingSpendKrw": 1228321,
-              "revenueKrw": 7505
+              "operatingMarginPct": -31395.28,
+              "operatingProfitKrw": -1224730,
+              "operatingSpendKrw": 1228631,
+              "revenueKrw": 3901
             },
             "growth": {
               "cumulativeProfitKrw": null,
-              "growthRatePct": 0,
-              "operatingMarginPct": -10855.96,
-              "operatingProfitKrw": -995817,
-              "operatingSpendKrw": 1004990,
-              "revenueKrw": 9173
+              "growthRatePct": -10,
+              "operatingMarginPct": -23332.24,
+              "operatingProfitKrw": -1000953,
+              "operatingSpendKrw": 1005243,
+              "revenueKrw": 4290
             }
           }
         },
@@ -132,27 +132,27 @@
           "scenarios": {
             "base": {
               "cumulativeProfitKrw": null,
-              "growthRatePct": 0,
-              "operatingMarginPct": -13290.75,
-              "operatingProfitKrw": -1108316,
-              "operatingSpendKrw": 1116655,
-              "revenueKrw": 8339
+              "growthRatePct": -2.5,
+              "operatingMarginPct": -27726.03,
+              "operatingProfitKrw": -1112923,
+              "operatingSpendKrw": 1116937,
+              "revenueKrw": 4014
             },
             "conservative": {
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
-              "operatingMarginPct": -16266.7,
-              "operatingProfitKrw": -1220816,
-              "operatingSpendKrw": 1228321,
-              "revenueKrw": 7505
+              "operatingMarginPct": -31395.28,
+              "operatingProfitKrw": -1224730,
+              "operatingSpendKrw": 1228631,
+              "revenueKrw": 3901
             },
             "growth": {
               "cumulativeProfitKrw": null,
-              "growthRatePct": 0,
-              "operatingMarginPct": -10855.96,
-              "operatingProfitKrw": -995817,
-              "operatingSpendKrw": 1004990,
-              "revenueKrw": 9173
+              "growthRatePct": -5,
+              "operatingMarginPct": -24562.49,
+              "operatingProfitKrw": -1001167,
+              "operatingSpendKrw": 1005243,
+              "revenueKrw": 4076
             }
           }
         },
@@ -162,27 +162,27 @@
           "scenarios": {
             "base": {
               "cumulativeProfitKrw": null,
-              "growthRatePct": 0,
-              "operatingMarginPct": -13290.75,
-              "operatingProfitKrw": -1108316,
-              "operatingSpendKrw": 1116655,
-              "revenueKrw": 8339
+              "growthRatePct": -1.25,
+              "operatingMarginPct": -28077.02,
+              "operatingProfitKrw": -1112973,
+              "operatingSpendKrw": 1116937,
+              "revenueKrw": 3964
             },
             "conservative": {
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
-              "operatingMarginPct": -16266.7,
-              "operatingProfitKrw": -1220816,
-              "operatingSpendKrw": 1228321,
-              "revenueKrw": 7505
+              "operatingMarginPct": -31395.28,
+              "operatingProfitKrw": -1224730,
+              "operatingSpendKrw": 1228631,
+              "revenueKrw": 3901
             },
             "growth": {
               "cumulativeProfitKrw": null,
-              "growthRatePct": 0,
-              "operatingMarginPct": -10855.96,
-              "operatingProfitKrw": -995817,
-              "operatingSpendKrw": 1004990,
-              "revenueKrw": 9173
+              "growthRatePct": -2.5,
+              "operatingMarginPct": -25195.5,
+              "operatingProfitKrw": -1001269,
+              "operatingSpendKrw": 1005243,
+              "revenueKrw": 3974
             }
           }
         },
@@ -192,27 +192,27 @@
           "scenarios": {
             "base": {
               "cumulativeProfitKrw": null,
-              "growthRatePct": 0,
-              "operatingMarginPct": -13290.75,
-              "operatingProfitKrw": -1108316,
-              "operatingSpendKrw": 1116655,
-              "revenueKrw": 8339
+              "growthRatePct": -0.63,
+              "operatingMarginPct": -28255.85,
+              "operatingProfitKrw": -1112998,
+              "operatingSpendKrw": 1116937,
+              "revenueKrw": 3939
             },
             "conservative": {
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
-              "operatingMarginPct": -16266.7,
-              "operatingProfitKrw": -1220816,
-              "operatingSpendKrw": 1228321,
-              "revenueKrw": 7505
+              "operatingMarginPct": -31395.28,
+              "operatingProfitKrw": -1224730,
+              "operatingSpendKrw": 1228631,
+              "revenueKrw": 3901
             },
             "growth": {
               "cumulativeProfitKrw": null,
-              "growthRatePct": 0,
-              "operatingMarginPct": -10855.96,
-              "operatingProfitKrw": -995817,
-              "operatingSpendKrw": 1004990,
-              "revenueKrw": 9173
+              "growthRatePct": -1.25,
+              "operatingMarginPct": -25517.81,
+              "operatingProfitKrw": -1001319,
+              "operatingSpendKrw": 1005243,
+              "revenueKrw": 3924
             }
           }
         },
@@ -222,27 +222,27 @@
           "scenarios": {
             "base": {
               "cumulativeProfitKrw": null,
-              "growthRatePct": 0,
-              "operatingMarginPct": -13290.75,
-              "operatingProfitKrw": -1108316,
-              "operatingSpendKrw": 1116655,
-              "revenueKrw": 8339
+              "growthRatePct": -0.31,
+              "operatingMarginPct": -28342.5,
+              "operatingProfitKrw": -1113010,
+              "operatingSpendKrw": 1116937,
+              "revenueKrw": 3927
             },
             "conservative": {
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
-              "operatingMarginPct": -16266.7,
-              "operatingProfitKrw": -1220816,
-              "operatingSpendKrw": 1228321,
-              "revenueKrw": 7505
+              "operatingMarginPct": -31395.28,
+              "operatingProfitKrw": -1224730,
+              "operatingSpendKrw": 1228631,
+              "revenueKrw": 3901
             },
             "growth": {
               "cumulativeProfitKrw": null,
-              "growthRatePct": 0,
-              "operatingMarginPct": -10855.96,
-              "operatingProfitKrw": -995817,
-              "operatingSpendKrw": 1004990,
-              "revenueKrw": 9173
+              "growthRatePct": -0.63,
+              "operatingMarginPct": -25682.07,
+              "operatingProfitKrw": -1001344,
+              "operatingSpendKrw": 1005243,
+              "revenueKrw": 3899
             }
           }
         },
@@ -252,27 +252,27 @@
           "scenarios": {
             "base": {
               "cumulativeProfitKrw": null,
-              "growthRatePct": 0,
-              "operatingMarginPct": -13290.75,
-              "operatingProfitKrw": -1108316,
-              "operatingSpendKrw": 1116655,
-              "revenueKrw": 8339
+              "growthRatePct": -0.16,
+              "operatingMarginPct": -28386.02,
+              "operatingProfitKrw": -1113016,
+              "operatingSpendKrw": 1116937,
+              "revenueKrw": 3921
             },
             "conservative": {
               "cumulativeProfitKrw": null,
               "growthRatePct": 0,
-              "operatingMarginPct": -16266.7,
-              "operatingProfitKrw": -1220816,
-              "operatingSpendKrw": 1228321,
-              "revenueKrw": 7505
+              "operatingMarginPct": -31395.28,
+              "operatingProfitKrw": -1224730,
+              "operatingSpendKrw": 1228631,
+              "revenueKrw": 3901
             },
             "growth": {
               "cumulativeProfitKrw": null,
-              "growthRatePct": 0,
-              "operatingMarginPct": -10855.96,
-              "operatingProfitKrw": -995817,
-              "operatingSpendKrw": 1004990,
-              "revenueKrw": 9173
+              "growthRatePct": -0.31,
+              "operatingMarginPct": -25761.67,
+              "operatingProfitKrw": -1001356,
+              "operatingSpendKrw": 1005243,
+              "revenueKrw": 3887
             }
           }
         }
@@ -19120,10 +19120,10 @@
               "cumulativeProfitKrw": null,
               "date": "2026-10-12",
               "knownCumulativeProfitKrw": null,
-              "knownOperatingMarginPct": null,
-              "knownOperatingProfitKrw": -1244,
+              "knownOperatingMarginPct": -8193.33,
+              "knownOperatingProfitKrw": -1229,
               "knownOperatingSpendKrw": 1244,
-              "knownRevenueKrw": 0,
+              "knownRevenueKrw": 15,
               "metrics": {
                 "active_users": 22,
                 "actual_new_member_count": 3,
@@ -19165,9 +19165,9 @@
                 "app_ad_revenue_rv_krw": null,
                 "app_ad_revenue_rv_usd": null,
                 "app_ad_revenue_usd": null,
-                "cpx_active_users": null,
-                "cpx_completion_count": null,
-                "cpx_revenue_krw": null,
+                "cpx_active_users": 1,
+                "cpx_completion_count": 0,
+                "cpx_revenue_krw": 15,
                 "direct_signup_count": 0,
                 "finance_reconciliation_krw": null,
                 "giftcard_margin_krw": 0,
@@ -19232,10 +19232,10 @@
               "cumulativeProfitKrw": null,
               "date": "2026-10-13",
               "knownCumulativeProfitKrw": null,
-              "knownOperatingMarginPct": null,
-              "knownOperatingProfitKrw": -1321,
+              "knownOperatingMarginPct": -1195.1,
+              "knownOperatingProfitKrw": -1219,
               "knownOperatingSpendKrw": 1321,
-              "knownRevenueKrw": 0,
+              "knownRevenueKrw": 102,
               "metrics": {
                 "active_users": 21,
                 "actual_new_member_count": 2,
@@ -19277,9 +19277,9 @@
                 "app_ad_revenue_rv_krw": null,
                 "app_ad_revenue_rv_usd": null,
                 "app_ad_revenue_usd": null,
-                "cpx_active_users": null,
-                "cpx_completion_count": null,
-                "cpx_revenue_krw": null,
+                "cpx_active_users": 1,
+                "cpx_completion_count": 0,
+                "cpx_revenue_krw": 102,
                 "direct_signup_count": 0,
                 "finance_reconciliation_krw": null,
                 "giftcard_margin_krw": 0,
@@ -19532,9 +19532,9 @@
               },
               "cpxCompletions": {
                 "comparisonPct": null,
-                "comparisonValue": null,
-                "sourceThrough": "2026-10-11",
-                "status": "partial",
+                "comparisonValue": 0,
+                "sourceThrough": "2026-10-13",
+                "status": "latest",
                 "value": 2
               },
               "tnkCompletions": {
@@ -19555,10 +19555,10 @@
               },
               "cpx": {
                 "comparisonPct": null,
-                "comparisonValue": null,
-                "sourceThrough": "2026-10-11",
-                "status": "partial",
-                "value": 2162
+                "comparisonValue": 0,
+                "sourceThrough": "2026-10-13",
+                "status": "latest",
+                "value": 2279
               },
               "tnk": {
                 "comparisonPct": null,
@@ -19572,7 +19572,7 @@
                 "comparisonValue": null,
                 "sourceThrough": null,
                 "status": "partial",
-                "value": 2162
+                "value": 2279
               }
             },
             "referral": {
@@ -19625,14 +19625,14 @@
                 "comparisonValue": null,
                 "sourceThrough": null,
                 "status": "partial",
-                "value": 2162
+                "value": 2279
               },
               "cpx": {
                 "comparisonPct": null,
-                "comparisonValue": null,
-                "sourceThrough": "2026-10-11",
-                "status": "partial",
-                "value": 2162
+                "comparisonValue": 0,
+                "sourceThrough": "2026-10-13",
+                "status": "latest",
+                "value": 2279
               },
               "giftcardSavingReference": {
                 "comparisonPct": null,
@@ -22570,8 +22570,8 @@
             },
             "cpx": {
               "expectedThrough": "2026-10-13",
-              "latestDate": "2026-10-11",
-              "status": "delayed"
+              "latestDate": "2026-10-13",
+              "status": "latest"
             },
             "finance_close": {
               "expectedThrough": "2026-10-13",
@@ -22608,10 +22608,10 @@
             "cashFlowKrw": null,
             "cumulativeProfitKrw": null,
             "knownCumulativeProfitKrw": null,
-            "knownOperatingMarginPct": -566.65,
-            "knownOperatingProfitKrw": -12251,
+            "knownOperatingMarginPct": -532.43,
+            "knownOperatingProfitKrw": -12134,
             "knownOperatingSpendKrw": 14413,
-            "knownRevenueKrw": 2162,
+            "knownRevenueKrw": 2279,
             "operatingMarginPct": null,
             "operatingProfitKrw": null,
             "operatingSpendKrw": null,
@@ -22634,7 +22634,7 @@
         },
         "cpx": {
           "expectedThrough": "2026-10-13",
-          "latestDate": "2026-10-11",
+          "latestDate": "2026-10-13",
           "status": "not_connected"
         },
         "finance_close": {
@@ -22686,7 +22686,7 @@
           "ratePct": 20,
           "status": "configured"
         },
-        "baseOperatingSpendKrw": 16717365,
+        "baseOperatingSpendKrw": 17214655,
         "baseRevenueKrw": 7949174,
         "baselineMonth": "2026-08",
         "baselineNonRecurringRevenueKrw": 13763965,
@@ -22695,24 +22695,24 @@
           "month": "2026-10",
           "scenarios": {
             "base": {
-              "cumulativeProfitKrw": -68007302,
-              "operatingMarginPct": -110.3,
-              "operatingProfitKrw": -8768191,
-              "operatingSpendKrw": 16717365,
+              "cumulativeProfitKrw": -68504592,
+              "operatingMarginPct": -116.56,
+              "operatingProfitKrw": -9265481,
+              "operatingSpendKrw": 17214655,
               "revenueKrw": 7949174
             },
             "conservative": {
-              "cumulativeProfitKrw": -70473956,
-              "operatingMarginPct": -157.04,
-              "operatingProfitKrw": -11234845,
-              "operatingSpendKrw": 18389102,
+              "cumulativeProfitKrw": -71020975,
+              "operatingMarginPct": -164.68,
+              "operatingProfitKrw": -11781864,
+              "operatingSpendKrw": 18936121,
               "revenueKrw": 7154257
             },
             "growth": {
-              "cumulativeProfitKrw": -65540649,
-              "operatingMarginPct": -72.07,
-              "operatingProfitKrw": -6301538,
-              "operatingSpendKrw": 15045629,
+              "cumulativeProfitKrw": -65988210,
+              "operatingMarginPct": -77.18,
+              "operatingProfitKrw": -6749099,
+              "operatingSpendKrw": 15493190,
               "revenueKrw": 8744091
             }
           }
@@ -22756,7 +22756,7 @@
             "spend": "0.90"
           }
         },
-        "sourceThrough": "2026-10-11",
+        "sourceThrough": "2026-10-13",
         "status": "ready",
         "structuralStartDate": "2026-08-01"
       },
@@ -22766,27 +22766,27 @@
           "month": "2026-11",
           "scenarios": {
             "base": {
-              "cumulativeProfitKrw": -76545960,
+              "cumulativeProfitKrw": -77540540,
               "growthRatePct": 2.89,
-              "operatingMarginPct": -104.4,
-              "operatingProfitKrw": -8538658,
-              "operatingSpendKrw": 16717365,
+              "operatingMarginPct": -110.48,
+              "operatingProfitKrw": -9035948,
+              "operatingSpendKrw": 17214655,
               "revenueKrw": 8178707
             },
             "conservative": {
-              "cumulativeProfitKrw": -81708801,
+              "cumulativeProfitKrw": -82802839,
               "growthRatePct": 0,
-              "operatingMarginPct": -157.04,
-              "operatingProfitKrw": -11234845,
-              "operatingSpendKrw": 18389102,
+              "operatingMarginPct": -164.68,
+              "operatingProfitKrw": -11781864,
+              "operatingSpendKrw": 18936121,
               "revenueKrw": 7154257
             },
             "growth": {
-              "cumulativeProfitKrw": -71337214,
+              "cumulativeProfitKrw": -72232336,
               "growthRatePct": 5.78,
-              "operatingMarginPct": -62.67,
-              "operatingProfitKrw": -5796565,
-              "operatingSpendKrw": 15045629,
+              "operatingMarginPct": -67.51,
+              "operatingProfitKrw": -6244126,
+              "operatingSpendKrw": 15493190,
               "revenueKrw": 9249064
             }
           }
@@ -22796,27 +22796,27 @@
           "month": "2026-12",
           "scenarios": {
             "base": {
-              "cumulativeProfitKrw": -84966537,
+              "cumulativeProfitKrw": -86458407,
               "growthRatePct": 1.44,
-              "operatingMarginPct": -101.49,
-              "operatingProfitKrw": -8420577,
-              "operatingSpendKrw": 16717365,
+              "operatingMarginPct": -107.49,
+              "operatingProfitKrw": -8917867,
+              "operatingSpendKrw": 17214655,
               "revenueKrw": 8296788
             },
             "conservative": {
-              "cumulativeProfitKrw": -92943646,
+              "cumulativeProfitKrw": -94584703,
               "growthRatePct": 0,
-              "operatingMarginPct": -157.04,
-              "operatingProfitKrw": -11234845,
-              "operatingSpendKrw": 18389102,
+              "operatingMarginPct": -164.68,
+              "operatingProfitKrw": -11781864,
+              "operatingSpendKrw": 18936121,
               "revenueKrw": 7154257
             },
             "growth": {
-              "cumulativeProfitKrw": -76866711,
+              "cumulativeProfitKrw": -78209394,
               "growthRatePct": 2.89,
-              "operatingMarginPct": -58.11,
-              "operatingProfitKrw": -5529497,
-              "operatingSpendKrw": 15045629,
+              "operatingMarginPct": -62.81,
+              "operatingProfitKrw": -5977058,
+              "operatingSpendKrw": 15493190,
               "revenueKrw": 9516132
             }
           }
@@ -22826,27 +22826,27 @@
           "month": "2027-01",
           "scenarios": {
             "base": {
-              "cumulativeProfitKrw": -93327221,
+              "cumulativeProfitKrw": -95316381,
               "growthRatePct": 0.72,
-              "operatingMarginPct": -100.05,
-              "operatingProfitKrw": -8360684,
-              "operatingSpendKrw": 16717365,
+              "operatingMarginPct": -106,
+              "operatingProfitKrw": -8857974,
+              "operatingSpendKrw": 17214655,
               "revenueKrw": 8356681
             },
             "conservative": {
-              "cumulativeProfitKrw": -104178491,
+              "cumulativeProfitKrw": -106366567,
               "growthRatePct": 0,
-              "operatingMarginPct": -157.04,
-              "operatingProfitKrw": -11234845,
-              "operatingSpendKrw": 18389102,
+              "operatingMarginPct": -164.68,
+              "operatingProfitKrw": -11781864,
+              "operatingSpendKrw": 18936121,
               "revenueKrw": 7154257
             },
             "growth": {
-              "cumulativeProfitKrw": -82258818,
+              "cumulativeProfitKrw": -84049062,
               "growthRatePct": 1.44,
-              "operatingMarginPct": -55.86,
-              "operatingProfitKrw": -5392107,
-              "operatingSpendKrw": 15045629,
+              "operatingMarginPct": -60.49,
+              "operatingProfitKrw": -5839668,
+              "operatingSpendKrw": 15493190,
               "revenueKrw": 9653522
             }
           }
@@ -22856,27 +22856,27 @@
           "month": "2027-02",
           "scenarios": {
             "base": {
-              "cumulativeProfitKrw": -101657742,
+              "cumulativeProfitKrw": -104144192,
               "growthRatePct": 0.36,
-              "operatingMarginPct": -99.33,
-              "operatingProfitKrw": -8330521,
-              "operatingSpendKrw": 16717365,
+              "operatingMarginPct": -105.26,
+              "operatingProfitKrw": -8827811,
+              "operatingSpendKrw": 17214655,
               "revenueKrw": 8386844
             },
             "conservative": {
-              "cumulativeProfitKrw": -115413336,
+              "cumulativeProfitKrw": -118148431,
               "growthRatePct": 0,
-              "operatingMarginPct": -157.04,
-              "operatingProfitKrw": -11234845,
-              "operatingSpendKrw": 18389102,
+              "operatingMarginPct": -164.68,
+              "operatingProfitKrw": -11781864,
+              "operatingSpendKrw": 18936121,
               "revenueKrw": 7154257
             },
             "growth": {
-              "cumulativeProfitKrw": -87581238,
+              "cumulativeProfitKrw": -89819043,
               "growthRatePct": 0.72,
-              "operatingMarginPct": -54.74,
-              "operatingProfitKrw": -5322420,
-              "operatingSpendKrw": 15045629,
+              "operatingMarginPct": -59.34,
+              "operatingProfitKrw": -5769981,
+              "operatingSpendKrw": 15493190,
               "revenueKrw": 9723209
             }
           }
@@ -22886,27 +22886,27 @@
           "month": "2027-03",
           "scenarios": {
             "base": {
-              "cumulativeProfitKrw": -109973127,
+              "cumulativeProfitKrw": -112956867,
               "growthRatePct": 0.18,
-              "operatingMarginPct": -98.97,
-              "operatingProfitKrw": -8315385,
-              "operatingSpendKrw": 16717365,
+              "operatingMarginPct": -104.89,
+              "operatingProfitKrw": -8812675,
+              "operatingSpendKrw": 17214655,
               "revenueKrw": 8401980
             },
             "conservative": {
-              "cumulativeProfitKrw": -126648181,
+              "cumulativeProfitKrw": -129930295,
               "growthRatePct": 0,
-              "operatingMarginPct": -157.04,
-              "operatingProfitKrw": -11234845,
-              "operatingSpendKrw": 18389102,
+              "operatingMarginPct": -164.68,
+              "operatingProfitKrw": -11781864,
+              "operatingSpendKrw": 18936121,
               "revenueKrw": 7154257
             },
             "growth": {
-              "cumulativeProfitKrw": -92868563,
+              "cumulativeProfitKrw": -95553929,
               "growthRatePct": 0.36,
-              "operatingMarginPct": -54.18,
-              "operatingProfitKrw": -5287325,
-              "operatingSpendKrw": 15045629,
+              "operatingMarginPct": -58.77,
+              "operatingProfitKrw": -5734886,
+              "operatingSpendKrw": 15493190,
               "revenueKrw": 9758304
             }
           }
@@ -22916,27 +22916,27 @@
           "month": "2027-04",
           "scenarios": {
             "base": {
-              "cumulativeProfitKrw": -118280930,
+              "cumulativeProfitKrw": -121761960,
               "growthRatePct": 0.09,
-              "operatingMarginPct": -98.79,
-              "operatingProfitKrw": -8307803,
-              "operatingSpendKrw": 16717365,
+              "operatingMarginPct": -104.7,
+              "operatingProfitKrw": -8805093,
+              "operatingSpendKrw": 17214655,
               "revenueKrw": 8409562
             },
             "conservative": {
-              "cumulativeProfitKrw": -137883026,
+              "cumulativeProfitKrw": -141712159,
               "growthRatePct": 0,
-              "operatingMarginPct": -157.04,
-              "operatingProfitKrw": -11234845,
-              "operatingSpendKrw": 18389102,
+              "operatingMarginPct": -164.68,
+              "operatingProfitKrw": -11781864,
+              "operatingSpendKrw": 18936121,
               "revenueKrw": 7154257
             },
             "growth": {
-              "cumulativeProfitKrw": -98138277,
+              "cumulativeProfitKrw": -101271204,
               "growthRatePct": 0.18,
-              "operatingMarginPct": -53.91,
-              "operatingProfitKrw": -5269714,
-              "operatingSpendKrw": 15045629,
+              "operatingMarginPct": -58.48,
+              "operatingProfitKrw": -5717275,
+              "operatingSpendKrw": 15493190,
               "revenueKrw": 9775915
             }
           }
@@ -68184,7 +68184,7 @@
                 "offerwall_conversion_rate": null,
                 "offerwall_cost_per_completion_krw": null,
                 "other_ad_cost_krw": null,
-                "paid_offerwall_cost_krw": null,
+                "paid_offerwall_cost_krw": 0,
                 "referral_reward_events": 3,
                 "referral_reward_points_total": 1500,
                 "referral_rewarded_customers": 3,
@@ -68297,7 +68297,7 @@
                 "offerwall_conversion_rate": null,
                 "offerwall_cost_per_completion_krw": null,
                 "other_ad_cost_krw": null,
-                "paid_offerwall_cost_krw": null,
+                "paid_offerwall_cost_krw": 0,
                 "referral_reward_events": 2,
                 "referral_reward_points_total": 1000,
                 "referral_rewarded_customers": 2,
@@ -68410,7 +68410,7 @@
                 "offerwall_conversion_rate": null,
                 "offerwall_cost_per_completion_krw": null,
                 "other_ad_cost_krw": null,
-                "paid_offerwall_cost_krw": null,
+                "paid_offerwall_cost_krw": 0,
                 "referral_reward_events": 11,
                 "referral_reward_points_total": 5500,
                 "referral_rewarded_customers": 11,
@@ -68523,7 +68523,7 @@
                 "offerwall_conversion_rate": null,
                 "offerwall_cost_per_completion_krw": null,
                 "other_ad_cost_krw": null,
-                "paid_offerwall_cost_krw": null,
+                "paid_offerwall_cost_krw": 0,
                 "referral_reward_events": 10,
                 "referral_reward_points_total": 5000,
                 "referral_rewarded_customers": 10,
@@ -68636,7 +68636,7 @@
                 "offerwall_conversion_rate": null,
                 "offerwall_cost_per_completion_krw": null,
                 "other_ad_cost_krw": null,
-                "paid_offerwall_cost_krw": null,
+                "paid_offerwall_cost_krw": 0,
                 "referral_reward_events": 3,
                 "referral_reward_points_total": 1500,
                 "referral_rewarded_customers": 3,
@@ -68749,7 +68749,7 @@
                 "offerwall_conversion_rate": null,
                 "offerwall_cost_per_completion_krw": null,
                 "other_ad_cost_krw": null,
-                "paid_offerwall_cost_krw": null,
+                "paid_offerwall_cost_krw": 0,
                 "referral_reward_events": 3,
                 "referral_reward_points_total": 1500,
                 "referral_rewarded_customers": 3,
@@ -68862,7 +68862,7 @@
                 "offerwall_conversion_rate": null,
                 "offerwall_cost_per_completion_krw": null,
                 "other_ad_cost_krw": null,
-                "paid_offerwall_cost_krw": null,
+                "paid_offerwall_cost_krw": 0,
                 "referral_reward_events": 6,
                 "referral_reward_points_total": 3500,
                 "referral_rewarded_customers": 6,
@@ -68975,7 +68975,7 @@
                 "offerwall_conversion_rate": null,
                 "offerwall_cost_per_completion_krw": null,
                 "other_ad_cost_krw": null,
-                "paid_offerwall_cost_krw": null,
+                "paid_offerwall_cost_krw": 0,
                 "referral_reward_events": 4,
                 "referral_reward_points_total": 2000,
                 "referral_rewarded_customers": 4,
@@ -69088,7 +69088,7 @@
                 "offerwall_conversion_rate": null,
                 "offerwall_cost_per_completion_krw": null,
                 "other_ad_cost_krw": null,
-                "paid_offerwall_cost_krw": null,
+                "paid_offerwall_cost_krw": 0,
                 "referral_reward_events": 6,
                 "referral_reward_points_total": 3000,
                 "referral_rewarded_customers": 6,
@@ -69201,7 +69201,7 @@
                 "offerwall_conversion_rate": null,
                 "offerwall_cost_per_completion_krw": null,
                 "other_ad_cost_krw": null,
-                "paid_offerwall_cost_krw": null,
+                "paid_offerwall_cost_krw": 0,
                 "referral_reward_events": 8,
                 "referral_reward_points_total": 4000,
                 "referral_rewarded_customers": 8,
@@ -69314,7 +69314,7 @@
                 "offerwall_conversion_rate": null,
                 "offerwall_cost_per_completion_krw": null,
                 "other_ad_cost_krw": null,
-                "paid_offerwall_cost_krw": null,
+                "paid_offerwall_cost_krw": 0,
                 "referral_reward_events": 16,
                 "referral_reward_points_total": 8000,
                 "referral_rewarded_customers": 16,
@@ -69354,16 +69354,16 @@
               "cashFlowKrw": null,
               "cumulativeProfitKrw": null,
               "date": "2026-10-12",
-              "knownCumulativeProfitKrw": -61364510,
-              "knownOperatingMarginPct": -447.78,
-              "knownOperatingProfitKrw": -150046,
-              "knownOperatingSpendKrw": 183555,
-              "knownRevenueKrw": 33509,
+              "knownCumulativeProfitKrw": -61743213,
+              "knownOperatingMarginPct": -641.69,
+              "knownOperatingProfitKrw": -528749,
+              "knownOperatingSpendKrw": 611148,
+              "knownRevenueKrw": 82399,
               "metrics": {
                 "active_users": 2392,
                 "actual_new_member_count": 19,
-                "adjoe_active_users": null,
-                "adjoe_revenue_krw": null,
+                "adjoe_active_users": 91,
+                "adjoe_revenue_krw": 39571,
                 "adpopcorn_click_count": null,
                 "adpopcorn_commission_krw": 0,
                 "adpopcorn_fill_rate": 65.3588,
@@ -69401,9 +69401,9 @@
                 "app_ad_revenue_rv_krw": 10070,
                 "app_ad_revenue_rv_usd": 7.51,
                 "app_ad_revenue_usd": 24.99,
-                "cpx_active_users": null,
-                "cpx_completion_count": null,
-                "cpx_revenue_krw": null,
+                "cpx_active_users": 9,
+                "cpx_completion_count": 5,
+                "cpx_revenue_krw": 5873,
                 "direct_signup_count": 0,
                 "finance_reconciliation_krw": null,
                 "giftcard_margin_krw": 0,
@@ -69412,10 +69412,10 @@
                 "giftcard_point_amount_total": 29400,
                 "giftcard_purchase_krw": 28680,
                 "giftcard_sales_krw": 29400,
-                "google_ads_conversions": null,
-                "google_ads_cost_krw": null,
-                "google_ads_cpa_krw": null,
-                "google_ads_impressions": null,
+                "google_ads_conversions": 574,
+                "google_ads_cost_krw": 427593,
+                "google_ads_cpa_krw": 745,
+                "google_ads_impressions": 71665,
                 "guest_created_count": 262,
                 "guest_merge_count": 17,
                 "guest_succession_count": 19,
@@ -69427,7 +69427,7 @@
                 "offerwall_conversion_rate": null,
                 "offerwall_cost_per_completion_krw": null,
                 "other_ad_cost_krw": null,
-                "paid_offerwall_cost_krw": null,
+                "paid_offerwall_cost_krw": 0,
                 "referral_reward_events": 5,
                 "referral_reward_points_total": 2500,
                 "referral_rewarded_customers": 5,
@@ -69445,8 +69445,8 @@
                 "reward_points_vault_game": 19989,
                 "signup_count": 262,
                 "supabase_ad_event_count": 0,
-                "tnk_completion_count": null,
-                "tnk_revenue_krw": null,
+                "tnk_completion_count": 312,
+                "tnk_revenue_krw": 3446,
                 "total_entry_account_count": 262,
                 "withdrawal_count_completed": 0,
                 "withdrawal_count_pending": 24,
@@ -69461,22 +69461,22 @@
               "operatingMarginPct": null,
               "operatingProfitKrw": null,
               "operatingSpendKrw": null,
-              "revenueKrw": null
+              "revenueKrw": 82399
             },
             {
               "cashFlowKrw": null,
               "cumulativeProfitKrw": null,
               "date": "2026-10-13",
-              "knownCumulativeProfitKrw": -61440255,
-              "knownOperatingMarginPct": -70.23,
-              "knownOperatingProfitKrw": -75745,
-              "knownOperatingSpendKrw": 183605,
-              "knownRevenueKrw": 107860,
+              "knownCumulativeProfitKrw": -62166613,
+              "knownOperatingMarginPct": -331.38,
+              "knownOperatingProfitKrw": -423400,
+              "knownOperatingSpendKrw": 551167,
+              "knownRevenueKrw": 127767,
               "metrics": {
                 "active_users": 2375,
                 "actual_new_member_count": 27,
-                "adjoe_active_users": null,
-                "adjoe_revenue_krw": null,
+                "adjoe_active_users": 81,
+                "adjoe_revenue_krw": 9875,
                 "adpopcorn_click_count": null,
                 "adpopcorn_commission_krw": 0,
                 "adpopcorn_fill_rate": 71.5306,
@@ -69514,9 +69514,9 @@
                 "app_ad_revenue_rv_krw": 34273,
                 "app_ad_revenue_rv_usd": 25.56,
                 "app_ad_revenue_usd": 80.44,
-                "cpx_active_users": null,
-                "cpx_completion_count": null,
-                "cpx_revenue_krw": null,
+                "cpx_active_users": 5,
+                "cpx_completion_count": 7,
+                "cpx_revenue_krw": 6960,
                 "direct_signup_count": 1,
                 "finance_reconciliation_krw": null,
                 "giftcard_margin_krw": 0,
@@ -69525,10 +69525,10 @@
                 "giftcard_point_amount_total": 38500,
                 "giftcard_purchase_krw": 37360,
                 "giftcard_sales_krw": 38200,
-                "google_ads_conversions": null,
-                "google_ads_cost_krw": null,
-                "google_ads_cpa_krw": null,
-                "google_ads_impressions": null,
+                "google_ads_conversions": 498,
+                "google_ads_cost_krw": 367562,
+                "google_ads_cpa_krw": 738,
+                "google_ads_impressions": 66521,
                 "guest_created_count": 259,
                 "guest_merge_count": 29,
                 "guest_succession_count": 26,
@@ -69540,7 +69540,7 @@
                 "offerwall_conversion_rate": null,
                 "offerwall_cost_per_completion_krw": null,
                 "other_ad_cost_krw": null,
-                "paid_offerwall_cost_krw": null,
+                "paid_offerwall_cost_krw": 0,
                 "referral_reward_events": 3,
                 "referral_reward_points_total": 1500,
                 "referral_rewarded_customers": 3,
@@ -69558,8 +69558,8 @@
                 "reward_points_vault_game": 19515,
                 "signup_count": 260,
                 "supabase_ad_event_count": 0,
-                "tnk_completion_count": null,
-                "tnk_revenue_krw": null,
+                "tnk_completion_count": 282,
+                "tnk_revenue_krw": 3072,
                 "total_entry_account_count": 260,
                 "withdrawal_count_completed": 0,
                 "withdrawal_count_pending": 44,
@@ -69574,7 +69574,7 @@
               "operatingMarginPct": null,
               "operatingProfitKrw": null,
               "operatingSpendKrw": null,
-              "revenueKrw": null
+              "revenueKrw": 127767
             }
           ],
           "monthlyKpis": {
@@ -69768,48 +69768,48 @@
                 "value": null
               },
               "cpxCompletions": {
-                "comparisonPct": null,
-                "comparisonValue": null,
-                "sourceThrough": "2026-10-11",
-                "status": "partial",
-                "value": 35
+                "comparisonPct": -4.1,
+                "comparisonValue": 49,
+                "sourceThrough": "2026-10-13",
+                "status": "latest",
+                "value": 47
               },
               "tnkCompletions": {
-                "comparisonPct": null,
-                "comparisonValue": null,
-                "sourceThrough": "2026-10-11",
-                "status": "partial",
-                "value": 3722
+                "comparisonPct": -25.7,
+                "comparisonValue": 5808,
+                "sourceThrough": "2026-10-13",
+                "status": "latest",
+                "value": 4316
               }
             },
             "partnerRevenue": {
               "adjoe": {
-                "comparisonPct": null,
-                "comparisonValue": null,
-                "sourceThrough": "2026-10-11",
-                "status": "partial",
-                "value": 219939
+                "comparisonPct": -25.6,
+                "comparisonValue": 362257,
+                "sourceThrough": "2026-10-13",
+                "status": "latest",
+                "value": 269385
               },
               "cpx": {
-                "comparisonPct": null,
-                "comparisonValue": null,
-                "sourceThrough": "2026-10-11",
-                "status": "partial",
-                "value": 35425
+                "comparisonPct": -21.9,
+                "comparisonValue": 61817,
+                "sourceThrough": "2026-10-13",
+                "status": "latest",
+                "value": 48258
               },
               "tnk": {
-                "comparisonPct": null,
-                "comparisonValue": null,
-                "sourceThrough": "2026-10-11",
-                "status": "partial",
-                "value": 76965
+                "comparisonPct": -91.4,
+                "comparisonValue": 968752,
+                "sourceThrough": "2026-10-13",
+                "status": "latest",
+                "value": 83483
               },
               "total": {
-                "comparisonPct": null,
-                "comparisonValue": null,
-                "sourceThrough": "2026-10-11",
-                "status": "partial",
-                "value": 332329
+                "comparisonPct": -71.2,
+                "comparisonValue": 1392826,
+                "sourceThrough": "2026-10-13",
+                "status": "latest",
+                "value": 401126
               }
             },
             "referral": {
@@ -69844,11 +69844,11 @@
             },
             "revenue": {
               "adjoe": {
-                "comparisonPct": null,
-                "comparisonValue": null,
-                "sourceThrough": "2026-10-11",
-                "status": "partial",
-                "value": 219939
+                "comparisonPct": -25.6,
+                "comparisonValue": 362257,
+                "sourceThrough": "2026-10-13",
+                "status": "latest",
+                "value": 269385
               },
               "appAd": {
                 "comparisonPct": -63.9,
@@ -69858,18 +69858,18 @@
                 "value": 1953259.4
               },
               "confirmedTotal": {
-                "comparisonPct": null,
-                "comparisonValue": null,
-                "sourceThrough": "2026-10-11",
-                "status": "partial",
-                "value": 2285588.4
+                "comparisonPct": -65.4,
+                "comparisonValue": 6810194,
+                "sourceThrough": "2026-10-13",
+                "status": "latest",
+                "value": 2354385.4
               },
               "cpx": {
-                "comparisonPct": null,
-                "comparisonValue": null,
-                "sourceThrough": "2026-10-11",
-                "status": "partial",
-                "value": 35425
+                "comparisonPct": -21.9,
+                "comparisonValue": 61817,
+                "sourceThrough": "2026-10-13",
+                "status": "latest",
+                "value": 48258
               },
               "giftcardSavingReference": {
                 "comparisonPct": 6.1,
@@ -69879,11 +69879,11 @@
                 "value": 20590
               },
               "tnk": {
-                "comparisonPct": null,
-                "comparisonValue": null,
-                "sourceThrough": "2026-10-11",
-                "status": "partial",
-                "value": 76965
+                "comparisonPct": -91.4,
+                "comparisonValue": 968752,
+                "sourceThrough": "2026-10-13",
+                "status": "latest",
+                "value": 83483
               }
             },
             "spend": {
@@ -69906,7 +69906,7 @@
                 "comparisonValue": null,
                 "sourceThrough": null,
                 "status": "partial",
-                "value": 5967941
+                "value": 6763096
               },
               "forecastGoldPrize": {
                 "comparisonPct": null,
@@ -69916,11 +69916,11 @@
                 "value": 1083333
               },
               "googleAds": {
-                "comparisonPct": null,
-                "comparisonValue": null,
-                "sourceThrough": "2026-10-11",
-                "status": "partial",
-                "value": 3639092
+                "comparisonPct": 596.7,
+                "comparisonValue": 636494,
+                "sourceThrough": "2026-10-13",
+                "status": "latest",
+                "value": 4434247
               },
               "infrastructure": {
                 "comparisonPct": null,
@@ -69946,9 +69946,9 @@
               "paidTnkCampaign": {
                 "comparisonPct": null,
                 "comparisonValue": null,
-                "sourceThrough": null,
-                "status": "partial",
-                "value": null
+                "sourceThrough": "2026-10-13",
+                "status": "latest",
+                "value": 0
               }
             }
           },
@@ -74307,8 +74307,8 @@
           "sourceStates": {
             "adjoe": {
               "expectedThrough": "2026-10-13",
-              "latestDate": "2026-10-11",
-              "status": "delayed"
+              "latestDate": "2026-10-13",
+              "status": "latest"
             },
             "admob": {
               "expectedThrough": "2026-10-13",
@@ -74322,8 +74322,8 @@
             },
             "cpx": {
               "expectedThrough": "2026-10-13",
-              "latestDate": "2026-10-11",
-              "status": "delayed"
+              "latestDate": "2026-10-13",
+              "status": "latest"
             },
             "finance_close": {
               "expectedThrough": "2026-10-13",
@@ -74337,13 +74337,13 @@
             },
             "google_ads": {
               "expectedThrough": "2026-10-13",
-              "latestDate": "2026-10-11",
-              "status": "delayed"
+              "latestDate": "2026-10-13",
+              "status": "latest"
             },
             "offerwall": {
               "expectedThrough": "2026-10-13",
-              "latestDate": null,
-              "status": "delayed"
+              "latestDate": "2026-10-13",
+              "status": "latest"
             },
             "supabase": {
               "expectedThrough": "2026-10-13",
@@ -74352,22 +74352,22 @@
             },
             "tnk": {
               "expectedThrough": "2026-10-13",
-              "latestDate": "2026-10-11",
-              "status": "delayed"
+              "latestDate": "2026-10-13",
+              "status": "latest"
             }
           },
           "summary": {
             "cashFlowKrw": null,
             "cumulativeProfitKrw": null,
-            "knownCumulativeProfitKrw": -61440255,
-            "knownOperatingMarginPct": -161.11,
-            "knownOperatingProfitKrw": -3682352.6,
-            "knownOperatingSpendKrw": 5967941,
-            "knownRevenueKrw": 2285588.4,
+            "knownCumulativeProfitKrw": -62166613,
+            "knownOperatingMarginPct": -187.26,
+            "knownOperatingProfitKrw": -4408710.6,
+            "knownOperatingSpendKrw": 6763096,
+            "knownRevenueKrw": 2354385.4,
             "operatingMarginPct": null,
             "operatingProfitKrw": null,
             "operatingSpendKrw": null,
-            "revenueKrw": null
+            "revenueKrw": 2354385.4
           }
         }
       },
@@ -74376,7 +74376,7 @@
       "sourceStates": {
         "adjoe": {
           "expectedThrough": "2026-10-13",
-          "latestDate": "2026-10-11",
+          "latestDate": "2026-10-13",
           "status": "delayed"
         },
         "admob": {
@@ -74391,7 +74391,7 @@
         },
         "cpx": {
           "expectedThrough": "2026-10-13",
-          "latestDate": "2026-10-11",
+          "latestDate": "2026-10-13",
           "status": "delayed"
         },
         "finance_close": {
@@ -74406,12 +74406,12 @@
         },
         "google_ads": {
           "expectedThrough": "2026-10-13",
-          "latestDate": "2026-10-11",
-          "status": "delayed"
+          "latestDate": "2026-10-13",
+          "status": "latest"
         },
         "offerwall": {
           "expectedThrough": "2026-10-13",
-          "latestDate": "2026-08-31",
+          "latestDate": "2026-10-13",
           "status": "delayed"
         },
         "supabase": {
@@ -74421,7 +74421,7 @@
         },
         "tnk": {
           "expectedThrough": "2026-10-13",
-          "latestDate": "2026-10-11",
+          "latestDate": "2026-10-13",
           "status": "delayed"
         }
       }
