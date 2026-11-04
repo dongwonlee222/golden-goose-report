@@ -352,6 +352,12 @@ function renderForecast(container, { country }) {
 }
 
 function renderRevenue(container, { rows, month }) {
+  if (rows[0]?.date?.startsWith("2026-09") && rows.some(row => row.metrics?.app_ad_revenue_krw > 0)) {
+    const note = document.createElement("p");
+    note.className = "muted";
+    note.textContent = "9월 광고 매출은 보전금·정산 원천 차이가 있어 일반 반복 수익과 구분해야 합니다. 10월과의 단순 매출 증감은 운영 개선·악화 효과를 뜻하지 않습니다.";
+    container.appendChild(note);
+  }
   const summary = renderSectionSummary(container, "revenue", month);
   renderTrend(container, {
     rows, summary,
@@ -368,6 +374,12 @@ function renderRevenue(container, { rows, month }) {
 }
 
 function renderSpend(container, { rows, month }) {
+  if (rows.some(row => row.metrics?.point_ledger_earned != null)) {
+    const note = document.createElement("p");
+    note.className = "muted";
+    note.textContent = "포인트 비용은 전체 원장 지급에서 만료·탈퇴 회수·기프티콘 원가 차액을 뺀 잠정값입니다. 실제 현금 지출과 다르며, 환불·승계·취소 분류와 최종 정산 확인이 남아 있습니다.";
+    container.appendChild(note);
+  }
   const summary = renderSectionSummary(container, "spend", month);
   renderTrend(container, {
     rows, summary,
