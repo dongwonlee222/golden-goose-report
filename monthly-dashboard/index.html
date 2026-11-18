@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="light">
   <title>황금거위 월간 운영</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23171815'/%3E%3Ctext x='16' y='20' text-anchor='middle' font-size='10' fill='white'%3EGG%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="./styles.css?v=20261118-weekly-layout">
+  <link rel="stylesheet" href="./styles.css?v=20261118-finance-overview">
 </head>
 <body>
   <header class="topbar">
@@ -49,6 +49,8 @@
 
     <div id="page-status" class="page-status" aria-live="polite">데이터를 준비하고 있습니다.</div>
 
+    <section id="finance-overview" class="finance-overview" aria-label="손익 원인과 정산 일정"></section>
+
     <section id="profit" class="dashboard-section" aria-labelledby="profit-title"><div class="section-heading"><p>01</p><h2 id="profit-title">손익</h2></div><div data-section-body></div></section>
     <section id="forecast" class="dashboard-section" aria-labelledby="forecast-title"><div class="section-heading"><p>02</p><h2 id="forecast-title">6개월 예측</h2></div><div data-section-body></div></section>
     <section id="revenue" class="dashboard-section" aria-labelledby="revenue-title"><div class="section-heading"><p>03</p><h2 id="revenue-title">매출</h2></div><div data-section-body></div></section>
@@ -61,6 +63,6 @@
     <section id="daily-ledger" class="dashboard-section" aria-labelledby="ledger-title"><div class="section-heading"><p>10</p><h2 id="ledger-title">일별 전체 원장</h2></div><div data-section-body></div></section>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script type="module" src="./js/app.js?v=20261118-weekly"></script>
+  <script type="module" src="./js/app.js?v=20261118-finance-overview"></script>
 </body>
 </html>

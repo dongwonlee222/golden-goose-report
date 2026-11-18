@@ -315,6 +315,9 @@ function renderForecast(container, { country }) {
     if (country?.openingBalanceKrw !== null && country?.openingBalanceKrw !== undefined) {
       container.append(element("p", "forecast-note", `${formatMonth(Object.keys(country.months || {}).sort()[0])}부터 누적 · ${formatDate(country.openingBalanceDate)} 이월 ${formatKrw(country.openingBalanceKrw)} 포함`));
     }
+    if (forecastMeta.dataStatus === "conditional") {
+      container.append(element("p", "review-note", "최신 확인 실적을 연장한 조건부 예측입니다. TNK 미수집 수익·일부 실제 비용이 미확정이며 입금 예정액이 아닙니다."));
+    }
     if (forecastMeta.sourceThrough && country?.latestCompleteDate && forecastMeta.sourceThrough < country.latestCompleteDate) {
       container.append(element("p", "forecast-note", `원천 지연으로 현재 예측은 참고용 · ${formatDate(forecastMeta.sourceThrough)}까지 확인된 원천 기준, 이후 데이터 미반영`));
     }

@@ -27,6 +27,7 @@
         "baseOperatingSpendKrw": 1107698,
         "baseRevenueKrw": 0,
         "cappedGrowthPct": 0,
+        "completeSourceThrough": "2026-11-17",
         "currentMonthProjection": {
           "month": "2026-11",
           "scenarios": {
@@ -53,6 +54,7 @@
             }
           }
         },
+        "dataStatus": "conditional",
         "goldPrize": {
           "basis": "주 250,000원 × 52주 ÷ 12개월",
           "monthlyCostKrw": 1083333,
@@ -60,6 +62,16 @@
           "status": "configured",
           "weeklyCostKrw": 250000
         },
+        "incompleteComponents": [
+          "app_ad_revenue_krw",
+          "tnk_revenue_krw",
+          "adjoe_revenue_krw",
+          "google_ads_cost_krw",
+          "paid_offerwall_cost_krw",
+          "other_ad_cost_krw",
+          "infra_cost_krw",
+          "gold_prize_cost_krw"
+        ],
         "observedGrowthPct": null,
         "priorWindow": {
           "days": 7,
@@ -76,7 +88,7 @@
           "conservative": null,
           "growth": null
         },
-        "revenueBaselineMode": "latest_closed_month",
+        "revenueBaselineMode": "current_month_run_rate",
         "runRateApplied": true,
         "scenarioMultipliers": {
           "base": {
@@ -30817,37 +30829,37 @@
           "ratePct": 20,
           "status": "configured"
         },
-        "baseOperatingSpendKrw": 8859933,
-        "baseRevenueKrw": 7949174,
-        "baselineMonth": "2026-08",
-        "baselineNonRecurringRevenueKrw": 13763965,
-        "cappedGrowthPct": 5.78,
+        "baseOperatingSpendKrw": 9007644,
+        "baseRevenueKrw": 4874385,
+        "cappedGrowthPct": 0.2,
+        "completeSourceThrough": "2026-11-03",
         "currentMonthProjection": {
           "month": "2026-11",
           "scenarios": {
             "base": {
-              "cumulativeProfitKrw": -60149870,
-              "operatingMarginPct": -11.46,
-              "operatingProfitKrw": -910759,
-              "operatingSpendKrw": 8859933,
-              "revenueKrw": 7949174
+              "cumulativeProfitKrw": -68487912.4,
+              "operatingMarginPct": -84.8,
+              "operatingProfitKrw": -4133259,
+              "operatingSpendKrw": 9007644,
+              "revenueKrw": 4874385
             },
             "conservative": {
-              "cumulativeProfitKrw": -61830780,
-              "operatingMarginPct": -36.23,
-              "operatingProfitKrw": -2591669,
-              "operatingSpendKrw": 9745926,
-              "revenueKrw": 7154257
+              "cumulativeProfitKrw": -69876114.4,
+              "operatingMarginPct": -125.86,
+              "operatingProfitKrw": -5521461,
+              "operatingSpendKrw": 9908408,
+              "revenueKrw": 4386947
             },
             "growth": {
-              "cumulativeProfitKrw": -58468960,
-              "operatingMarginPct": 8.81,
-              "operatingProfitKrw": 770151,
-              "operatingSpendKrw": 7973940,
-              "revenueKrw": 8744091
+              "cumulativeProfitKrw": -67099709.4,
+              "operatingMarginPct": -51.2,
+              "operatingProfitKrw": -2745056,
+              "operatingSpendKrw": 8106880,
+              "revenueKrw": 5361824
             }
           }
         },
+        "dataStatus": "conditional",
         "goldPrize": {
           "basis": "주 250,000원 × 52주 ÷ 12개월",
           "monthlyCostKrw": 1083333,
@@ -30855,23 +30867,30 @@
           "status": "configured",
           "weeklyCostKrw": 250000
         },
-        "observedGrowthPct": 5.78,
+        "incompleteComponents": [
+          "tnk_revenue_krw",
+          "paid_offerwall_cost_krw",
+          "other_ad_cost_krw",
+          "infra_cost_krw",
+          "gold_prize_cost_krw"
+        ],
+        "observedGrowthPct": 0.2,
         "priorWindow": {
-          "days": 31,
-          "end": "2026-07-31",
-          "start": "2026-07-01"
+          "days": 7,
+          "end": "2026-11-10",
+          "start": "2026-11-04"
         },
         "recentWindow": {
-          "days": 31,
-          "end": "2026-08-31",
-          "start": "2026-08-01"
+          "days": 7,
+          "end": "2026-11-17",
+          "start": "2026-11-11"
         },
         "recoveryMonthByScenario": {
           "base": null,
           "conservative": null,
           "growth": null
         },
-        "revenueBaselineMode": "latest_closed_month",
+        "revenueBaselineMode": "current_month_run_rate",
         "runRateApplied": true,
         "scenarioMultipliers": {
           "base": {
@@ -30887,7 +30906,7 @@
             "spend": "0.90"
           }
         },
-        "sourceThrough": "2026-11-03",
+        "sourceThrough": "2026-11-17",
         "status": "ready",
         "structuralStartDate": "2026-08-01"
       },
@@ -30897,28 +30916,28 @@
           "month": "2026-12",
           "scenarios": {
             "base": {
-              "cumulativeProfitKrw": -60831096,
-              "growthRatePct": 2.89,
-              "operatingMarginPct": -8.33,
-              "operatingProfitKrw": -681226,
-              "operatingSpendKrw": 8859933,
-              "revenueKrw": 8178707
+              "cumulativeProfitKrw": -72616187.4,
+              "growthRatePct": 0.1,
+              "operatingMarginPct": -84.61,
+              "operatingProfitKrw": -4128275,
+              "operatingSpendKrw": 9007644,
+              "revenueKrw": 4879369
             },
             "conservative": {
-              "cumulativeProfitKrw": -64422449,
+              "cumulativeProfitKrw": -75397575.4,
               "growthRatePct": 0,
-              "operatingMarginPct": -36.23,
-              "operatingProfitKrw": -2591669,
-              "operatingSpendKrw": 9745926,
-              "revenueKrw": 7154257
+              "operatingMarginPct": -125.86,
+              "operatingProfitKrw": -5521461,
+              "operatingSpendKrw": 9908408,
+              "revenueKrw": 4386947
             },
             "growth": {
-              "cumulativeProfitKrw": -57193836,
-              "growthRatePct": 5.78,
-              "operatingMarginPct": 13.79,
-              "operatingProfitKrw": 1275124,
-              "operatingSpendKrw": 7973940,
-              "revenueKrw": 9249064
+              "cumulativeProfitKrw": -69833800.4,
+              "growthRatePct": 0.2,
+              "operatingMarginPct": -50.89,
+              "operatingProfitKrw": -2734091,
+              "operatingSpendKrw": 8106880,
+              "revenueKrw": 5372789
             }
           }
         },
@@ -30927,28 +30946,28 @@
           "month": "2027-01",
           "scenarios": {
             "base": {
-              "cumulativeProfitKrw": -61394241,
-              "growthRatePct": 1.44,
-              "operatingMarginPct": -6.79,
-              "operatingProfitKrw": -563145,
-              "operatingSpendKrw": 8859933,
-              "revenueKrw": 8296788
+              "cumulativeProfitKrw": -76741967.4,
+              "growthRatePct": 0.05,
+              "operatingMarginPct": -84.51,
+              "operatingProfitKrw": -4125780,
+              "operatingSpendKrw": 9007644,
+              "revenueKrw": 4881864
             },
             "conservative": {
-              "cumulativeProfitKrw": -67014118,
+              "cumulativeProfitKrw": -80919036.4,
               "growthRatePct": 0,
-              "operatingMarginPct": -36.23,
-              "operatingProfitKrw": -2591669,
-              "operatingSpendKrw": 9745926,
-              "revenueKrw": 7154257
+              "operatingMarginPct": -125.86,
+              "operatingProfitKrw": -5521461,
+              "operatingSpendKrw": 9908408,
+              "revenueKrw": 4386947
             },
             "growth": {
-              "cumulativeProfitKrw": -55651644,
-              "growthRatePct": 2.89,
-              "operatingMarginPct": 16.21,
-              "operatingProfitKrw": 1542192,
-              "operatingSpendKrw": 7973940,
-              "revenueKrw": 9516132
+              "cumulativeProfitKrw": -72562397.4,
+              "growthRatePct": 0.1,
+              "operatingMarginPct": -50.73,
+              "operatingProfitKrw": -2728597,
+              "operatingSpendKrw": 8106880,
+              "revenueKrw": 5378283
             }
           }
         },
@@ -30957,28 +30976,28 @@
           "month": "2027-02",
           "scenarios": {
             "base": {
-              "cumulativeProfitKrw": -61897493,
-              "growthRatePct": 0.72,
-              "operatingMarginPct": -6.02,
-              "operatingProfitKrw": -503252,
-              "operatingSpendKrw": 8859933,
-              "revenueKrw": 8356681
+              "cumulativeProfitKrw": -80866499.4,
+              "growthRatePct": 0.03,
+              "operatingMarginPct": -84.47,
+              "operatingProfitKrw": -4124532,
+              "operatingSpendKrw": 9007644,
+              "revenueKrw": 4883112
             },
             "conservative": {
-              "cumulativeProfitKrw": -69605787,
+              "cumulativeProfitKrw": -86440497.4,
               "growthRatePct": 0,
-              "operatingMarginPct": -36.23,
-              "operatingProfitKrw": -2591669,
-              "operatingSpendKrw": 9745926,
-              "revenueKrw": 7154257
+              "operatingMarginPct": -125.86,
+              "operatingProfitKrw": -5521461,
+              "operatingSpendKrw": 9908408,
+              "revenueKrw": 4386947
             },
             "growth": {
-              "cumulativeProfitKrw": -53972062,
-              "growthRatePct": 1.44,
-              "operatingMarginPct": 17.4,
-              "operatingProfitKrw": 1679582,
-              "operatingSpendKrw": 7973940,
-              "revenueKrw": 9653522
+              "cumulativeProfitKrw": -75288244.4,
+              "growthRatePct": 0.05,
+              "operatingMarginPct": -50.66,
+              "operatingProfitKrw": -2725847,
+              "operatingSpendKrw": 8106880,
+              "revenueKrw": 5381033
             }
           }
         },
@@ -30987,28 +31006,28 @@
           "month": "2027-03",
           "scenarios": {
             "base": {
-              "cumulativeProfitKrw": -62370582,
-              "growthRatePct": 0.36,
-              "operatingMarginPct": -5.64,
-              "operatingProfitKrw": -473089,
-              "operatingSpendKrw": 8859933,
-              "revenueKrw": 8386844
+              "cumulativeProfitKrw": -84990407.4,
+              "growthRatePct": 0.01,
+              "operatingMarginPct": -84.44,
+              "operatingProfitKrw": -4123908,
+              "operatingSpendKrw": 9007644,
+              "revenueKrw": 4883736
             },
             "conservative": {
-              "cumulativeProfitKrw": -72197456,
+              "cumulativeProfitKrw": -91961958.4,
               "growthRatePct": 0,
-              "operatingMarginPct": -36.23,
-              "operatingProfitKrw": -2591669,
-              "operatingSpendKrw": 9745926,
-              "revenueKrw": 7154257
+              "operatingMarginPct": -125.86,
+              "operatingProfitKrw": -5521461,
+              "operatingSpendKrw": 9908408,
+              "revenueKrw": 4386947
             },
             "growth": {
-              "cumulativeProfitKrw": -52222793,
-              "growthRatePct": 0.72,
-              "operatingMarginPct": 17.99,
-              "operatingProfitKrw": 1749269,
-              "operatingSpendKrw": 7973940,
-              "revenueKrw": 9723209
+              "cumulativeProfitKrw": -78012716.4,
+              "growthRatePct": 0.03,
+              "operatingMarginPct": -50.62,
+              "operatingProfitKrw": -2724472,
+              "operatingSpendKrw": 8106880,
+              "revenueKrw": 5382408
             }
           }
         },
@@ -31017,28 +31036,28 @@
           "month": "2027-04",
           "scenarios": {
             "base": {
-              "cumulativeProfitKrw": -62828535,
-              "growthRatePct": 0.18,
-              "operatingMarginPct": -5.45,
-              "operatingProfitKrw": -457953,
-              "operatingSpendKrw": 8859933,
-              "revenueKrw": 8401980
+              "cumulativeProfitKrw": -89114003.4,
+              "growthRatePct": 0.01,
+              "operatingMarginPct": -84.43,
+              "operatingProfitKrw": -4123596,
+              "operatingSpendKrw": 9007644,
+              "revenueKrw": 4884048
             },
             "conservative": {
-              "cumulativeProfitKrw": -74789125,
+              "cumulativeProfitKrw": -97483419.4,
               "growthRatePct": 0,
-              "operatingMarginPct": -36.23,
-              "operatingProfitKrw": -2591669,
-              "operatingSpendKrw": 9745926,
-              "revenueKrw": 7154257
+              "operatingMarginPct": -125.86,
+              "operatingProfitKrw": -5521461,
+              "operatingSpendKrw": 9908408,
+              "revenueKrw": 4386947
             },
             "growth": {
-              "cumulativeProfitKrw": -50438429,
-              "growthRatePct": 0.36,
-              "operatingMarginPct": 18.29,
-              "operatingProfitKrw": 1784364,
-              "operatingSpendKrw": 7973940,
-              "revenueKrw": 9758304
+              "cumulativeProfitKrw": -80736500.4,
+              "growthRatePct": 0.01,
+              "operatingMarginPct": -50.6,
+              "operatingProfitKrw": -2723784,
+              "operatingSpendKrw": 8106880,
+              "revenueKrw": 5383096
             }
           }
         },
@@ -31047,28 +31066,28 @@
           "month": "2027-05",
           "scenarios": {
             "base": {
-              "cumulativeProfitKrw": -63278906,
-              "growthRatePct": 0.09,
-              "operatingMarginPct": -5.36,
-              "operatingProfitKrw": -450371,
-              "operatingSpendKrw": 8859933,
-              "revenueKrw": 8409562
+              "cumulativeProfitKrw": -93237443.4,
+              "growthRatePct": 0,
+              "operatingMarginPct": -84.42,
+              "operatingProfitKrw": -4123440,
+              "operatingSpendKrw": 9007644,
+              "revenueKrw": 4884204
             },
             "conservative": {
-              "cumulativeProfitKrw": -77380794,
+              "cumulativeProfitKrw": -103004880.4,
               "growthRatePct": 0,
-              "operatingMarginPct": -36.23,
-              "operatingProfitKrw": -2591669,
-              "operatingSpendKrw": 9745926,
-              "revenueKrw": 7154257
+              "operatingMarginPct": -125.86,
+              "operatingProfitKrw": -5521461,
+              "operatingSpendKrw": 9908408,
+              "revenueKrw": 4386947
             },
             "growth": {
-              "cumulativeProfitKrw": -48636454,
-              "growthRatePct": 0.18,
-              "operatingMarginPct": 18.43,
-              "operatingProfitKrw": 1801975,
-              "operatingSpendKrw": 7973940,
-              "revenueKrw": 9775915
+              "cumulativeProfitKrw": -83459940.4,
+              "growthRatePct": 0.01,
+              "operatingMarginPct": -50.59,
+              "operatingProfitKrw": -2723440,
+              "operatingSpendKrw": 8106880,
+              "revenueKrw": 5383440
             }
           }
         }
@@ -96285,5 +96304,50 @@
     }
   ],
   "schema": "golden-goose.monthly-dashboard.v1",
-  "schemaVersion": "1.0"
+  "schemaVersion": "1.0",
+  "settlementTracking": {
+    "asOfDate": "2026-11-18",
+    "records": [
+      {
+        "expectedDate": "2026-11-23",
+        "expectedLabel": "11/23 전후 송금 개시 예상 · 착금은 이후",
+        "nextAction": "지급 기준액·보류 여부 및 송금 처리 확인",
+        "period": "2026-10",
+        "provider": "Google AdMob",
+        "status": "지급 주기 대기"
+      },
+      {
+        "expectedDate": null,
+        "expectedLabel": "11/12 송금 완료 표시 · 착금일 미확정",
+        "nextAction": "외화송금 도착·증빙 대기 여부 확인",
+        "period": "2026-10",
+        "provider": "CPX",
+        "status": "은행 도착 확인 중"
+      },
+      {
+        "expectedDate": "2026-11-30",
+        "expectedLabel": "11/30 예상 · 정상 세금계산서 처리 조건",
+        "nextAction": "두 신청 건의 계산서 접수·확정 지급일 확인",
+        "period": "2026-09 / 2026-10",
+        "provider": "TNK",
+        "status": "미지급 표시 · 지급일 확인 필요"
+      },
+      {
+        "expectedDate": "2026-11-30",
+        "expectedLabel": "11/30 예상 · 발행일·접수 조건 확인 필요",
+        "nextAction": "계산서 발행 및 월말 지급 여부 확인",
+        "period": "2026-10",
+        "provider": "애드팝콘",
+        "status": "발행·입금 확인 대기"
+      },
+      {
+        "expectedDate": "2026-12-01",
+        "expectedLabel": "12/1 정산서 지급기한",
+        "nextAction": "기한 전후 송금·수취 상태 확인",
+        "period": "2026-10",
+        "provider": "애드조",
+        "status": "지급기한 전"
+      }
+    ]
+  }
 }

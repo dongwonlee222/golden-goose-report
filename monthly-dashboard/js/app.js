@@ -1,6 +1,7 @@
+import { renderFinanceOverview } from "./finance-overview.js?v=20261118";
 import { renderWeeklyEcpm } from "./weekly.js?v=20261118";
 import { createSelectionState } from "./state.js?v=20260907-3";
-import { renderDashboard } from "./sections.js?v=20261104-point-ledger";
+import { renderDashboard } from "./sections.js?v=20261118-finance";
 
 const status = document.querySelector("#page-status");
 const monthSelect = document.querySelector("#month-select");
@@ -32,8 +33,9 @@ function bind(payload) {
     document.querySelector("#next-month").disabled = selection.months.indexOf(selection.month) >= selection.months.length - 1;
     const country = payload.countries?.[selection.country];
     renderWeeklyEcpm(payload, selection.country);
+    renderFinanceOverview(payload, selection);
     const databaseThrough = country?.latestCompleteDate;
-    const sourceThrough = country?.forecastMeta?.sourceThrough;
+    const sourceThrough = country?.forecastMeta?.completeSourceThrough || country?.forecastMeta?.sourceThrough;
     document.querySelector("#freshness").textContent = databaseThrough
       ? `갱신 ${payload.asOfDate} · 운영 DB ${databaseThrough}${sourceThrough && sourceThrough < databaseThrough ? ` · 일부 수익원 ${sourceThrough}` : ""}`
       : "연결 대기";
