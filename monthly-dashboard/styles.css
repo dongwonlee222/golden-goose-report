@@ -236,3 +236,17 @@ button.monthly-kpi-card { border: 0; border-right: 1px solid var(--line); border
 .network-track{height:8px;background:rgba(120,130,140,.12);overflow:hidden}
 .network-bar{height:100%;background:var(--accent,#2563eb)}
 @media(max-width:680px){.network-row{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.network-name{grid-column:1/-1}.network-metric strong{overflow-wrap:anywhere}}
+
+/* Weekly report shares the dashboard spacing and keeps narrow screens scrollable. */
+.weekly-summary { min-width: 0; margin: 18px 0 28px; padding: 18px 20px; border: 1px solid var(--line); border-radius: var(--radius); }
+.weekly-summary summary { cursor: pointer; font-size: 15px; line-height: 1.6; }
+.weekly-summary p { margin: 12px 0; font-size: 13px; line-height: 1.7; }
+.weekly-summary table { width: 100%; min-width: 540px; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+.weekly-summary caption { padding: 6px 0 12px; text-align: left; color: var(--muted); font-size: 12px; }
+.weekly-summary th, .weekly-summary td { padding: 12px 14px; border-bottom: 1px solid var(--line-soft); text-align: right; white-space: nowrap; }
+.weekly-summary th:first-child { text-align: left; }
+.weekly-summary thead th { color: var(--muted); background: #faf8f4; }
+.weekly-summary .source-note { margin-bottom: 0; color: var(--muted); font-size: 12px; }
+@media (max-width: 600px) { .weekly-summary { padding: 14px 12px; } }
+
+.weekly-table-scroll { max-width: 100%; overflow-x: auto; }
