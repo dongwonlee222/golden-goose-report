@@ -363,14 +363,15 @@ function renderRevenue(container, { rows, month, selection }) {
   }
   const summary = renderSectionSummary(container, "revenue", month);
   const japanTraffic = {
-    "2026-10": "10월 12~31일 · 약 17,700원 · 노출 9,147회 · eCPM US$1.45",
-    "2026-11": "11월 1~17일 · 약 10,590원 · 노출 7,668회 · eCPM US$1.03",
+    "2026-10": { total: "10월 12~31일 · 약 17,700원 · 노출 9,147회 · eCPM US$1.45", ecpm: "전면 US$3.26 · 보상형 US$4.79 · 배너 US$0.14" },
+    "2026-11": { total: "11월 1~17일 · 약 10,590원 · 노출 7,668회 · eCPM US$1.03", ecpm: "전면 US$2.67 · 보상형 US$2.40 · 배너 US$0.12" },
   }[selection.month];
   if (selection.country === "JP" && japanTraffic) {
     const reference = element("section", "review-note");
     reference.append(
       element("h3", null, "일본 노출 기준 AdMob 예상수입"),
-      element("p", null, japanTraffic),
+      element("p", null, japanTraffic.total),
+      element("p", null, `형식별 eCPM (노출 1,000회당) · ${japanTraffic.ecpm}`),
       element("p", null, "운영 광고 지면 6개의 일본 노출 기준입니다. 이 수익은 한국 탭에 이미 포함되어 있고 일본판 매출·손익 합계에는 미반영입니다."),
     );
     if (selection.month === "2026-10") {
