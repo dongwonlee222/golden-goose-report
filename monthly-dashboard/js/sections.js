@@ -362,13 +362,20 @@ function renderRevenue(container, { rows, month, selection }) {
     container.appendChild(note);
   }
   const summary = renderSectionSummary(container, "revenue", month);
-  if (selection.country === "JP" && selection.month === "2026-10") {
+  const japanTraffic = {
+    "2026-10": "10월 12~31일 · 약 17,700원 · 노출 9,147회 · eCPM US$1.45",
+    "2026-11": "11월 1~17일 · 약 10,590원 · 노출 7,668회 · eCPM US$1.03",
+  }[selection.month];
+  if (selection.country === "JP" && japanTraffic) {
     const reference = element("section", "review-note");
     reference.append(
       element("h3", null, "일본 노출 기준 AdMob 예상수입"),
-      element("p", null, "10월 12~31일 · 약 17,700원 · 노출 9,147회 · eCPM US$1.45"),
+      element("p", null, japanTraffic),
       element("p", null, "운영 광고 지면 6개의 일본 노출 기준입니다. 이 수익은 한국 탭에 이미 포함되어 있고 일본판 매출·손익 합계에는 미반영입니다."),
     );
+    if (selection.month === "2026-10") {
+      reference.append(element("p", null, "10월 1~11일 · 이전 계정 AdMob 네트워크 일본 노출 0회, 예상수입 0원. 당시 MAX·애드팝콘의 일본 노출과 수익은 미확인입니다."));
+    }
     container.append(reference);
   }
 
