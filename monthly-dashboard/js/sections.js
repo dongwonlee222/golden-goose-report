@@ -5,7 +5,7 @@ import { renderRetention } from "./retention.js?v=20260908-1";
 import { renderNetworks } from "./networks.js?v=20261014-network-detail";
 import { buildCumulativeTimeline, summarizeBreakEven, renderCumulativeHistoryTable, renderForecastControls, renderForecastTable, selectForecastChartRows } from "./forecast.js?v=20261014-admob";
 import { createSeriesSelection } from "./series-state.js?v=20260908-2";
-import { renderMonthlyBreakdown, renderMonthlyKpiCards } from "./kpis.js?v=20260929-2";
+import { renderMonthlyBreakdown, renderMonthlyKpiCards } from "./kpis.js?v=20261119-coverage";
 
 export { renderMonthlyBreakdown, renderMonthlyKpiCards };
 
@@ -91,7 +91,7 @@ function renderSectionSummary(container, section, month) {
   const cards = renderMonthlyKpiCards(container, specs.filter(({ role }) => role === "headline"));
   const breakdown = renderMonthlyBreakdown(container, specs.filter(({ role }) => role !== "headline").map(item => ({
     ...item,
-    roleLabel: { included: "합계 포함", deducted: "매출에서 이미 차감 · 지출 합계 미포함", detail: "세부 지표", reference: "합계 미포함", actual: "실제", forecast: "예측" }[item.role],
+    roleLabel: { included: item.metric?.value == null ? "합계 미반영" : "합계 포함", deducted: "매출에서 이미 차감 · 지출 합계 미포함", detail: "세부 지표", reference: "합계 미포함", actual: "실제", forecast: "예측" }[item.role],
   })));
   return specs.map(item => ({ ...item, control: cards.get(item.key) || breakdown.get(item.key) }));
 }

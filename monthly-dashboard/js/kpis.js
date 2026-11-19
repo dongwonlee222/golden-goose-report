@@ -16,6 +16,7 @@ export function comparisonText(metric, format) {
 function statusText(metric) {
   if (!metric || metric.status === "not_connected") return "연결 대기";
   const through = metric.sourceThrough ? `${formatDate(metric.sourceThrough)}까지` : "";
+  if (metric.status === "partial" && metric.value == null) return "미집계";
   if (metric.status === "partial") return ["일부 데이터", through].filter(Boolean).join(" · ");
   return through || "기준일 확인 대기";
 }
