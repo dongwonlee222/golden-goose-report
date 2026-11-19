@@ -1,7 +1,7 @@
 import { renderFinanceOverview } from "./finance-overview.js?v=20261119-jp-estimate";
 import { renderWeeklyEcpm } from "./weekly.js?v=20261118";
 import { createSelectionState } from "./state.js?v=20260907-3";
-import { renderDashboard } from "./sections.js?v=20261119-revenue-estimate";
+import { renderDashboard } from "./sections.js?v=20261119-japan-profit";
 
 const status = document.querySelector("#page-status");
 const monthSelect = document.querySelector("#month-select");

@@ -234,7 +234,70 @@ function renderFinanceBasis(container, month) {
   container.append(note);
 }
 
-function renderProfit(container, { month, rows, country }) {
+const JAPAN_AD_ESTIMATE_BY_DAY = {
+  "2026-10": {
+    "2026-10-12": 481,
+    "2026-10-13": 1876,
+    "2026-10-14": 1042,
+    "2026-10-15": 708,
+    "2026-10-16": 1496,
+    "2026-10-17": 668,
+    "2026-10-18": 1322,
+    "2026-10-19": 1616,
+    "2026-10-20": 574,
+    "2026-10-21": 988,
+    "2026-10-22": 614,
+    "2026-10-23": 427,
+    "2026-10-24": 1188,
+    "2026-10-25": 775,
+    "2026-10-26": 267,
+    "2026-10-27": 681,
+    "2026-10-28": 694,
+    "2026-10-29": 1042,
+    "2026-10-30": 734,
+    "2026-10-31": 507
+  },
+  "2026-11": {
+    "2026-11-01": 775,
+    "2026-11-02": 601,
+    "2026-11-03": 1202,
+    "2026-11-04": 334,
+    "2026-11-05": 601,
+    "2026-11-06": 668,
+    "2026-11-07": 668,
+    "2026-11-08": 294,
+    "2026-11-09": 881,
+    "2026-11-10": 414,
+    "2026-11-11": 427,
+    "2026-11-12": 761,
+    "2026-11-13": 521,
+    "2026-11-14": 614,
+    "2026-11-15": 574,
+    "2026-11-16": 427,
+    "2026-11-17": 828
+  }
+};
+
+function japanEstimatedProfit(month, rows, selection) {
+  const estimates = selection.country === "JP" && JAPAN_AD_ESTIMATE_BY_DAY[selection.month];
+  if (!estimates || rows.some(row => row.app_ad_revenue_krw != null)) return null;
+  if (!rows.length || Object.keys(estimates).some(date => !rows.some(row => row.date === date))) return null;
+  let cumulative = 0;
+  const dailyRows = rows.map(row => {
+    const adRevenue = estimates[row.date] ?? 0;
+    const revenueKrw = (row.knownRevenueKrw ?? 0) + adRevenue;
+    const operatingSpendKrw = row.knownOperatingSpendKrw ?? 0;
+    const operatingProfitKrw = (row.knownOperatingProfitKrw ?? 0) + adRevenue;
+    cumulative += operatingProfitKrw;
+    return { ...row, revenueKrw, operatingSpendKrw, operatingProfitKrw, cumulativeProfitKrw: cumulative };
+  });
+  const addedRevenue = Object.values(estimates).reduce((total, value) => total + value, 0);
+  const revenueKrw = month.summary.knownRevenueKrw + addedRevenue;
+  const operatingProfitKrw = month.summary.knownOperatingProfitKrw + addedRevenue;
+  return { dailyRows, revenueKrw, operatingProfitKrw };
+}
+
+function renderProfit(container, { month, rows, country, estimatedProfit }) {
   const summary = month.summary;
   const closed = month?.sourceStates?.finance_close?.status === "latest";
   const displayed = closed ? summary : {
@@ -250,23 +313,31 @@ function renderProfit(container, { month, rows, country }) {
     operatingSpendKrw: row.operatingSpendKrw ?? row.knownOperatingSpendKrw,
     operatingProfitKrw: row.operatingProfitKrw ?? row.knownOperatingProfitKrw,
   }));
-  renderFinanceBasis(container, month);
+  if (estimatedProfit) {
+    displayed.revenueKrw = estimatedProfit.revenueKrw;
+    displayed.operatingProfitKrw = estimatedProfit.operatingProfitKrw;
+    displayed.operatingMarginPct = displayed.revenueKrw ? displayed.operatingProfitKrw / displayed.revenueKrw * 100 : null;
+    displayed.cumulativeProfitKrw = estimatedProfit.operatingProfitKrw;
+    container.append(element("p", "review-note", "일본 노출 AdMob 예상수입 전액을 일본판에 배정한 가정입니다. 일별 매출·손익과 월 누적에 반영했으며, 광고 원본이 확인된 날짜의 수익만 포함합니다. 한국 탭에 이미 포함된 금액입니다."));
+  } else {
+    renderFinanceBasis(container, month);
+  }
   renderFacts(container, [
-    { label: "이번 달 매출", value: displayed.revenueKrw, format: formatKrw },
+    { label: estimatedProfit ? "이번 달 예상 매출" : "이번 달 매출", value: displayed.revenueKrw, format: formatKrw },
     { label: "이번 달 지출", value: displayed.operatingSpendKrw, format: formatKrw },
-    { label: "이번 달 손익", value: displayed.operatingProfitKrw, format: formatKrw },
-    { label: "영업이익률", value: displayed.operatingMarginPct, format: formatPercent },
-    { label: "현재 누적 손익", value: displayed.cumulativeProfitKrw, format: formatKrw },
+    { label: estimatedProfit ? "이번 달 예상 손익" : "이번 달 손익", value: displayed.operatingProfitKrw, format: formatKrw },
+    { label: estimatedProfit ? "예상 영업이익률" : "영업이익률", value: displayed.operatingMarginPct, format: formatPercent },
+    { label: estimatedProfit ? "이번 달 누적 예상 손익" : "현재 누적 손익", value: displayed.cumulativeProfitKrw, format: formatKrw },
   ]);
   renderTrend(container, {
-    rows: displayedRows,
+    rows: estimatedProfit?.dailyRows ?? displayedRows,
     series: [
       { key: "revenueKrw", label: "매출" },
       { key: "operatingSpendKrw", label: "지출" },
       { key: "operatingProfitKrw", label: "손익" },
     ],
     format: formatKrw,
-    caption: "일별 매출·지출·손익",
+    caption: estimatedProfit ? "일별 예상 매출·지출·손익" : "일별 매출·지출·손익",
   });
   renderSourceStates(container, { sourceStates: month.sourceStates || country?.sourceStates });
 }
@@ -592,15 +663,15 @@ function renderGiftcards(container, { rows, month }) {
   container.append(element("p", "review-note", "반복 주문 신호는 자동 차단이 아니라 운영 검토 대상으로만 표시합니다."));
 }
 
-function renderLedger(container, { rows }) {
+function renderLedger(container, { rows, estimatedProfit }) {
   renderDailyTable(container, {
-    rows,
+    rows: estimatedProfit?.dailyRows ?? rows,
     caption: "손익과 운영 지표 전체 일별 원장",
     columns: [
-      { key: "revenueKrw", label: "매출", format: formatKrw },
+      { key: "revenueKrw", label: estimatedProfit ? "예상 매출" : "매출", format: formatKrw },
       { key: "operatingSpendKrw", label: "지출", format: formatKrw },
-      { key: "operatingProfitKrw", label: "손익", format: formatKrw },
-      { key: "cumulativeProfitKrw", label: "누적 손익", format: formatKrw },
+      { key: "operatingProfitKrw", label: estimatedProfit ? "예상 손익" : "손익", format: formatKrw },
+      { key: "cumulativeProfitKrw", label: estimatedProfit ? "월 누적 예상 손익" : "누적 손익", format: formatKrw },
       { key: "actual_new_member_count", label: "신규 회원", format: (value) => formatCount(value, "명") },
       { key: "new_participants_first_ad", label: "신규 참여자", format: (value) => formatCount(value, "명") },
       { key: "active_users", label: "활성 이용자", format: (value) => formatCount(value, "명") },
@@ -630,7 +701,9 @@ export function renderDashboard({ payload, selection, onPartnerViewChange }) {
     document.querySelectorAll("[data-section-body]").forEach((node) => node.append(element("div", "empty-state", "선택한 월의 데이터가 없습니다.")));
     return;
   }
-  const context = { payload, selection, country, month, rows: flatRows(month), onPartnerViewChange };
+  const rows = flatRows(month);
+  const estimatedProfit = japanEstimatedProfit(month, rows, selection);
+  const context = { payload, selection, country, month, rows, estimatedProfit, onPartnerViewChange };
   Object.entries(SECTION_RENDERERS).forEach(([sectionId, renderer]) => {
     const container = document.querySelector(`#${sectionId} [data-section-body]`);
     if (container) renderer(container, context);
