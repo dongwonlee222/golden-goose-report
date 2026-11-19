@@ -363,8 +363,8 @@ function renderRevenue(container, { rows, month, selection }) {
   }
   const summary = renderSectionSummary(container, "revenue", month);
   const japanTraffic = {
-    "2026-10": { total: "10월 12~31일 · 약 17,700원 · 노출 9,147회 · eCPM US$1.45", ecpm: "전면 US$3.26 · 보상형 US$4.79 · 배너 US$0.14" },
-    "2026-11": { total: "11월 1~17일 · 약 10,590원 · 노출 7,668회 · eCPM US$1.03", ecpm: "전면 US$2.67 · 보상형 US$2.40 · 배너 US$0.12" },
+    "2026-10": { revenueKrw: 17700, total: "10월 12~31일 · 약 17,700원 · 노출 9,147회 · eCPM US$1.45", ecpm: "전면 US$3.26 · 보상형 US$4.79 · 배너 US$0.14" },
+    "2026-11": { revenueKrw: 10590, total: "11월 1~17일 · 약 10,590원 · 노출 7,668회 · eCPM US$1.03", ecpm: "전면 US$2.67 · 보상형 US$2.40 · 배너 US$0.12" },
   }[selection.month];
   if (selection.country === "JP" && japanTraffic) {
     const reference = element("section", "review-note");
@@ -372,10 +372,16 @@ function renderRevenue(container, { rows, month, selection }) {
       element("h3", null, "일본 노출 기준 AdMob 예상수입"),
       element("p", null, japanTraffic.total),
       element("p", null, `형식별 eCPM (노출 1,000회당) · ${japanTraffic.ecpm}`),
-      element("p", null, "운영 광고 지면 6개의 일본 노출 기준입니다. 이 수익은 한국 탭에 이미 포함되어 있고 일본판 매출·손익 합계에는 미반영입니다."),
+      element("p", null, "운영 광고 지면 6개의 일본 노출 기준입니다. 이 수익은 한국 탭에 이미 포함되어 있고 일본판의 확인된 매출·잠정 손익 합계에는 미반영입니다."),
     );
     if (selection.month === "2026-10") {
       reference.append(element("p", null, "10월 1~11일 · 이전 계정 AdMob 네트워크 일본 노출 0회, 예상수입 0원. 당시 MAX·애드팝콘의 일본 노출과 수익은 미확인입니다."));
+    }
+    const { knownRevenueKrw, knownOperatingProfitKrw } = month.summary ?? {};
+    if (Number.isFinite(knownRevenueKrw) && Number.isFinite(knownOperatingProfitKrw)) {
+      reference.append(element("strong", null,
+        `일본 노출 AdMob 수익 전액 반영 가정 · 예상 매출 약 ${formatKrw(knownRevenueKrw + japanTraffic.revenueKrw)} · 예상 손익 약 ${formatKrw(knownOperatingProfitKrw + japanTraffic.revenueKrw)}`,
+      ));
     }
     container.append(reference);
   }
