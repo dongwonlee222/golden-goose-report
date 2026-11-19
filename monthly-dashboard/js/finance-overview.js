@@ -31,16 +31,26 @@ export function renderFinanceOverview(payload, selection) {
   const month=country?.months?.[selection.month];
   const report=buildProfitExplanation(month);
   container.append(node('h2',null,'이번 달 손익과 다음 정산'));
+  const japanAdRevenueMissing = selection.country === 'JP' && month?.days?.length
+    && month.days.every(day => !present(day.metrics?.app_ad_revenue_krw));
+  if (japanAdRevenueMissing) {
+    container.append(node('p','review-note','일본판 앱 광고 매출·eCPM 미집계. 일본판에 귀속할 수 있는 광고 매출과 노출 데이터가 없습니다. 잠정 손익에는 확인된 매출과 비용만 포함됩니다.'));
+  }
+  const directAdBasis = payload.adRevenueBasis;
+  if (report && directAdBasis?.country === 'KR' && selection.country === 'KR'
+      && directAdBasis.directStart && report.end >= directAdBasis.directStart) {
+    container.append(node('p','review-note','한국 탭의 직운영 AdMob 집계에는 운영 광고 지면 6개의 전체 노출 국가가 포함됩니다. 일본에서 노출된 광고도 이 집계에 포함되며, 일본판 귀속은 별도 확인이 필요합니다.'));
+  }
   if(report?.reconciled) {
     const block=node('section','finance-explanation');
-    block.append(node('h3',null,report.profit<0?'왜 적자인가요?':'확인된 수익과 비용'));
+    block.append(node('h3',null,report.profit<0&&!japanAdRevenueMissing?'왜 적자인가요?':'확인된 수익과 비용'));
     block.append(node('p','finance-period',`${selection.country==='KR'?'한국':'일본'} · ${report.start} ~ ${report.end} · 확인된 항목 기준`));
     const facts=node('div','finance-bridge');
-    for(const [label,value] of [['확인된 매출',report.revenue],['포인트 순비용',report.totals.net_reward_points_krw],['회원 유입 광고비',report.totals.google_ads_cost_krw],['잠정 손익',report.profit]]) {
-      const fact=node('div');fact.append(node('span',null,label),node('strong',null,formatKrw(value)));facts.append(fact);
+    for(const [label,value] of [['확인된 매출',report.revenue],['포인트 순비용',report.totals.net_reward_points_krw],['회원 유입 광고비',japanAdRevenueMissing&&report.unknown.includes('회원 유입 광고비')?null:report.totals.google_ads_cost_krw],['잠정 손익',report.profit]]) {
+      const fact=node('div');fact.append(node('span',null,label),node('strong',null,value===null?'미확인':formatKrw(value)));facts.append(fact);
     }
     block.append(facts);
-    block.append(node('p',null,report.beforeAcquisition<0
+    if (!japanAdRevenueMissing) block.append(node('p',null,report.beforeAcquisition<0
       ? `매출만으로 포인트 순비용을 충당하지 못해 ${formatKrw(-report.beforeAcquisition)} 부족합니다. 추가로 회원 유입 광고비 ${formatKrw(report.totals.google_ads_cost_krw)} 및 확인된 기타 비용이 반영됩니다.`
       : `매출에서 포인트 순비용을 빼면 ${formatKrw(report.beforeAcquisition)} 남습니다. 여기에서 회원 유입 광고비 ${formatKrw(report.totals.google_ads_cost_krw)}와 확인된 기타 비용을 차감합니다.`));
     if(report.unknown.length)block.append(node('p','review-note',`미확인·부분 집계: ${report.unknown.join(', ')}. 미확인 항목을 실제 0원으로 확정하지 않았습니다. 포인트 순비용은 현금 출금액과 다르며, 정산 입금은 매출에 다시 더하지 않습니다.`));
