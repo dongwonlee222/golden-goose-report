@@ -50,6 +50,17 @@ export function renderFinanceOverview(payload, selection) {
       const fact=node('div');fact.append(node('span',null,label),node('strong',null,value===null?'미확인':formatKrw(value)));facts.append(fact);
     }
     block.append(facts);
+    const japanAdEstimate = { '2026-10': 17700, '2026-11': 10590 }[selection.month];
+    if (japanAdRevenueMissing && japanAdEstimate) {
+      const estimate = node('section','review-note');
+      estimate.append(
+        node('h4',null,'AdMob 예상수입 반영 시 손익'),
+        node('p',null,`예상 매출 약 ${formatKrw(report.revenue + japanAdEstimate)} · 확인된 비용 ${formatKrw(report.cost)} · 예상 손익 약 ${formatKrw(report.profit + japanAdEstimate)}`),
+        node('p',null,`일본 노출 AdMob 예상수입 약 ${formatKrw(japanAdEstimate)} 전액을 일본판에 배정한 가정입니다. 이 금액은 현재 한국 탭 합계에 포함되어 있습니다.`),
+      );
+      block.append(estimate);
+    }
+
     if (!japanAdRevenueMissing) block.append(node('p',null,report.beforeAcquisition<0
       ? `매출만으로 포인트 순비용을 충당하지 못해 ${formatKrw(-report.beforeAcquisition)} 부족합니다. 추가로 회원 유입 광고비 ${formatKrw(report.totals.google_ads_cost_krw)} 및 확인된 기타 비용이 반영됩니다.`
       : `매출에서 포인트 순비용을 빼면 ${formatKrw(report.beforeAcquisition)} 남습니다. 여기에서 회원 유입 광고비 ${formatKrw(report.totals.google_ads_cost_krw)}와 확인된 기타 비용을 차감합니다.`));
